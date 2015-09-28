@@ -39,6 +39,6 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	
 	<servlet-mapping>
 		<servlet-name>ODataServlet</servlet-name>
-		<url-pattern>/customer.svc/*</url-pattern>
+		<url-pattern>/services/customer.svc/*</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -1,4 +1,4 @@
-sap.ui.jsview("mdm_view.customerlist", {
+sap.ui.jsview("components.customer_overview.customerOverview", {
 
 	/**
 	 * Method getControllerName.
@@ -6,7 +6,7 @@ sap.ui.jsview("mdm_view.customerlist", {
 	 * @returns {String}
 	 */
 	getControllerName : function() {
-		return "mdm_view.customerlist";
+		return "components.customer_overview.customerOverview";
 	},
 
 	/**

@@ -1,4 +1,4 @@
-sap.ui.controller("mdm_view.customerlist", {
+sap.ui.controller("components.customer_overview.customerOverview", {
 
 	/**
 	 * Method onInit.
@@ -9,7 +9,7 @@ sap.ui.controller("mdm_view.customerlist", {
 				+ (window.location.port ? ":" + window.location.port : "");
 
 		var customerListOdataServiceUrl = sOrigin
-				+ "/mdm_view/customer.svc";
+				+ "/mdm_view/services/customer.svc";
 
 		var odataModel = new sap.ui.model.odata.ODataModel(
 				customerListOdataServiceUrl);
