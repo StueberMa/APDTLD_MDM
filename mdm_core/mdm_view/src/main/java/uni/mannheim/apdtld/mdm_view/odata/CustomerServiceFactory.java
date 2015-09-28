@@ -15,7 +15,7 @@ import org.apache.olingo.odata2.jpa.processor.api.exception.ODataJPARuntimeExcep
 public class CustomerServiceFactory extends ODataJPAServiceFactory {
 	
 	// constants
-	private static final String CUSTOMER_MODEL_NAME = "mdm_model";
+	private static final String CUSTOMER_MODEL_NAME = "customer_model";
 
 	/**
 	 * Method to init. OData service.
