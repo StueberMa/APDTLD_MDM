@@ -27,7 +27,7 @@ public class JpaEntityManagerFactory {
 	public static final String DATA_SOURCE_NAME = "java:comp/env/jdbc/DefaultDB";
 
 	// attributes
-	private static HashMap<String, EntityManagerFactory> entityManager = null;
+	private static HashMap<String, EntityManagerFactory> entityManager = new HashMap<String, EntityManagerFactory>();
 
 	/**
 	 * Constructor
@@ -44,7 +44,8 @@ public class JpaEntityManagerFactory {
 	 * @throws NamingException
 	 * @throws SQLException
 	 */
-	public static synchronized EntityManagerFactory getEntityManagerFactory(String modelName) throws NamingException, SQLException {
+	public static synchronized EntityManagerFactory getEntityManagerFactory(String modelName) throws NamingException,
+			SQLException {
 
 		// declaration
 		EntityManagerFactory entity = null;
@@ -58,7 +59,7 @@ public class JpaEntityManagerFactory {
 			ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup(DATA_SOURCE_NAME);
 			properties = new HashMap<String, Object>();
-			
+
 			// create entity & add
 			properties.put(PersistenceUnitProperties.NON_JTA_DATASOURCE, ds);
 			entity = Persistence.createEntityManagerFactory(modelName, properties);
