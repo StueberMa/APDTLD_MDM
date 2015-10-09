@@ -25,7 +25,7 @@ sap.ui.jsview("components.dataset_importer.Uploader", {
 			mimeType: "text",
 			fileType: "xslx,txt",
 			uploadOnChange: false,
-			uploadUrl: "../../../../../upload",
+			uploadUrl: "upload",
 			sendXHR: true,
 			additionalData: "",
 			headerParameters: [

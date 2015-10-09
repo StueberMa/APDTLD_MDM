@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.slf4j.*;
 
 public class Uploader extends HttpServlet {
 
@@ -35,6 +37,9 @@ public class Uploader extends HttpServlet {
 	public void init() {
 		// Get the file location where it would be stored.
 		filePath = getServletContext().getInitParameter("file-upload");
+		ServletContext context = getServletContext();
+		
+		context.log("test " + filePath);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -71,6 +76,10 @@ public class Uploader extends HttpServlet {
 
 			// Process the uploaded file items
 			Iterator<FileItem> i = fileItems.iterator();
+			
+			ServletContext context = getServletContext();
+			
+			context.log("test");
 
 			out.println("<html>");
 			out.println("<head>");
