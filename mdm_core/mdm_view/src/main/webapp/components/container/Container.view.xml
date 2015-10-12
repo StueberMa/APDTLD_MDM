@@ -1,0 +1,24 @@
+<mvc:View
+	controllerName="uni.mannheim.mdm.components.container.Container"
+	xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	class="viewPadding">
+		<u:Shell
+			id="mainShell"
+			icon="./resources/img/logo.png">
+			<u:headEndItems>
+				<u:ShellHeadItem
+					icon="sap-icon://log"
+					tooltip="Logoff"
+					press="onLogout" />
+			</u:headEndItems>
+			<u:user>
+				<u:ShellHeadUserItem
+					image="sap-icon://person-placeholder"
+					username="Max Mustermann"
+					press="onUserItem" />
+			</u:user>
+		</u:Shell>
+</mvc:View>
