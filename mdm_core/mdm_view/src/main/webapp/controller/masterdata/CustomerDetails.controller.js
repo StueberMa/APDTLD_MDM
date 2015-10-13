@@ -1,4 +1,4 @@
-sap.ui.controller("components.customer_details.customerDetails", {
+sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	
 	/**
 	 * Method onInit.
