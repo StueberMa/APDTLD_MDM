@@ -1,0 +1,12 @@
+<mvc:View controllerName="uni.mannheim.mdm.controller.Menu"
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+
+	<Button text="Overview" press="onOverview" ariaDescribedBy="Overview" />
+	<Button text="Marketing" ariaDescribedBy="Marketing" />
+	<Button text="Analysis" ariaDescribedBy="Analysis" />
+	<Button text="Master Data" press="onMasterDataOverview"
+		ariaDescribedBy="Master Data" />
+	<Button text="Data Import" press="onDataImportOverview"
+		ariaDescribedBy="Data Import" />
+
+</mvc:View>

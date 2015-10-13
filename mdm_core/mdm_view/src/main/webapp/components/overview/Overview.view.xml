@@ -1,0 +1,34 @@
+<core:View
+	controllerName="uni.mannheim.mdm.components.overview.Overview"
+	xmlns="sap.suite.ui.commons"
+	xmlns:core="sap.ui.core">
+
+	<GenericTile 
+		header="Marketing"
+		subheader="All Your Campaigns at a Glanze"
+		size="M" 
+		frameType="TwoByOne"
+		press="onClick">
+	</GenericTile>
+	<GenericTile 
+		header="Analytics"
+		subheader="Advanced Analytics with Rich Visualizations"
+		size="M" 
+		frameType="TwoByOne"
+		press="onClick">
+	</GenericTile>
+	<GenericTile 
+		header="Master Data"
+		subheader="Maintain and Search for Master Data"
+		size="M" 
+		frameType="TwoByOne"
+		press="onClick">
+	</GenericTile>
+	<GenericTile 
+		header="Data Import"
+		subheader="Monitor Data Integration and Easily Load New Data"
+		size="M" 
+		frameType="TwoByOne"
+		press="onClick">
+	</GenericTile>
+</core:View>
