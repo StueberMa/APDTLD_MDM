@@ -1,7 +1,16 @@
 package uni.mannheim.apdtld.mdm_model.persistence;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Entity Customer.
@@ -10,16 +19,22 @@ import javax.persistence.*;
  * @version 25.09.2015
  */
 @Entity
-@NamedQuery(name = "AllCustomers", query = "SELECT c FROM Customer c")
 public class Customer implements Serializable {
-
 	// constants
 	private static final long serialVersionUID = 1L;
 	
 	// attributes
-	@Id @GeneratedValue private long id;
+	@Id @GeneratedValue private int id;
+	private String title;
 	private String firstName;
 	private String lastName;
+	private String gender;
+	
+	@Temporal(TemporalType.DATE)
+	private Date birthDate;
+	private Address address;
+	private ContactDetails contactDetails;
+	private PaymentDetails paymentDetails;
 
 	/**
 	 * Constructor
@@ -33,7 +48,7 @@ public class Customer implements Serializable {
 	 * 
 	 * @return
 	 */
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 	
@@ -42,7 +57,7 @@ public class Customer implements Serializable {
 	 * 
 	 * @param id
 	 */
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -80,5 +95,53 @@ public class Customer implements Serializable {
 	 */
 	public void setLastName(String param) {
 		this.lastName = param;
+	}
+
+	public ContactDetails getContactDetails() {
+		return contactDetails;
+	}
+
+	public void setContactDetails(ContactDetails contactDetails) {
+		this.contactDetails = contactDetails;
+	}
+
+	public PaymentDetails getPaymentDetails() {
+		return paymentDetails;
+	}
+
+	public void setPaymentDetails(PaymentDetails paymentDetails) {
+		this.paymentDetails = paymentDetails;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 }
