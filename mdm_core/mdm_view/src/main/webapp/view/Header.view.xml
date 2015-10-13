@@ -1,0 +1,8 @@
+<mvc:View controllerName="uni.mannheim.mdm.controller.Header"
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+
+	<Label text="Welcome: " />
+	<Link text="Max Mustermann" />
+	<Button icon="sap-icon://log" tooltip="Logout" />
+
+</mvc:View>

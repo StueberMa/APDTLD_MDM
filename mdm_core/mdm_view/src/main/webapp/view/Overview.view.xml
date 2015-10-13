@@ -1,0 +1,31 @@
+<mvc:View height="100%" controllerName="uni.mannheim.mdm.controller.Overview"
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+
+	<Page title="SolveIT" class="sapUiContentPadding" showNavButton="false">
+		<!-- Header -->
+		<headerContent>
+			<mvc:XMLView viewName="uni.mannheim.mdm.view.Header"></mvc:XMLView>
+		</headerContent>
+
+		<!-- Content -->
+		<content>
+			<TileContainer id="overviewCont">
+				<StandardTile icon="sap-icon://marketing-campaign"
+					title="Marketing" info="All Your Campaigns at a Glanze" type="Monitor" />
+				<StandardTile icon="sap-icon://bar-chart"
+					title="Analysis" info="Advanced Analysis with Rich Visualizations" type="Monitor" />
+				<StandardTile icon="sap-icon://customer-financial-fact-sheet"
+					title="Master Data" press="onMasterDataOverview" info="Maintain and Search for Master Data" type="Create" />	
+				<StandardTile icon="sap-icon://database"
+					title="Data Import" press="onDataImportOverview" info="Monitor Data Integration and Easily Load New Data" type="Create" />	
+			</TileContainer>
+		</content>
+
+		<!-- Footer -->
+		<footer>
+			<Toolbar>
+				<mvc:XMLView viewName="uni.mannheim.mdm.view.Menu"></mvc:XMLView>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>
