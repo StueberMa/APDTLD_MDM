@@ -60,16 +60,4 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 			c:\temp\
 		</param-value>
 	</context-param>
-
-	<servlet>
-		<servlet-name>Basic</servlet-name>
-		<servlet-class>uni.mannheim.apdtld.mdm_view.services.Basic</servlet-class>
-		<load-on-startup>4</load-on-startup>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>Basic</servlet-name>
-		<url-pattern>/test</url-pattern>
-	</servlet-mapping>
-
 </web-app>
