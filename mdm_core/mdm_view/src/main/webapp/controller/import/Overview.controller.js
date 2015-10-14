@@ -7,7 +7,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Overview", {
 	},
 
 	onBack : function () {
-		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("Overview", false);
+		var sPreviousHash = sap.ui.core.routing.History.getInstance().getPreviousHash();
+		if (sPreviousHash !== undefined) {
+			window.history.go(-1);
+		} else {
+			this.getOwnerComponent().getRouter().navTo("Overview", null, true);
+		}
 	}
 });
