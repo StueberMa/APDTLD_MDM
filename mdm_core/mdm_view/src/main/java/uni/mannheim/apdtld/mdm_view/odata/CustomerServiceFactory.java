@@ -2,6 +2,9 @@ package uni.mannheim.apdtld.mdm_view.odata;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.apache.olingo.odata2.api.ODataService;
+import org.apache.olingo.odata2.api.edm.provider.EdmProvider;
+import org.apache.olingo.odata2.api.processor.ODataSingleProcessor;
 import org.apache.olingo.odata2.jpa.processor.api.ODataJPAContext;
 import org.apache.olingo.odata2.jpa.processor.api.ODataJPAServiceFactory;
 import org.apache.olingo.odata2.jpa.processor.api.exception.ODataJPARuntimeException;
@@ -17,6 +20,12 @@ public class CustomerServiceFactory extends ODataJPAServiceFactory {
 	// constants
 	private static final String CUSTOMER_MODEL_NAME = "customer_model";
 
+	@Override
+	public ODataService createODataSingleProcessorService(EdmProvider provider, ODataSingleProcessor processor) {
+		return null;
+	};
+	
+	
 	/**
 	 * Method to init. OData service.
 	 * 
