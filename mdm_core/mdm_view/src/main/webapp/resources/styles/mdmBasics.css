@@ -1,0 +1,21 @@
+.mdmPageTitle {  
+	padding-left: 10px;
+	font-size: 1.25rem !important;
+	font-weight: bold;
+} 
+
+.mdmPageSlogan {  
+	padding-left: 5px;
+	padding-top: 15px !important;
+	font-size: 0.7rem !important;
+	font-style: italic;
+}
+
+.mdmWelcome {
+	font-size: 0.875rem !important;
+	font-weight: bold;
+}
+
+.mdmCopyright {
+	padding-right: 15px !important;
+}

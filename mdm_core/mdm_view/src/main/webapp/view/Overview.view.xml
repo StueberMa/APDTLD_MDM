@@ -3,9 +3,19 @@
 
 	<Page title="SolveIT" class="sapUiContentPadding" showNavButton="false">
 		<!-- Header -->
-		<headerContent>
-			<mvc:XMLView viewName="uni.mannheim.mdm.view.Header"></mvc:XMLView>
-		</headerContent>
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Text class="mdmPageTitle" text="solveIT" />
+					<Text class="mdmPageSlogan" text="The customer in mind" />
+				</contentLeft>
+				<contentRight>
+					<Text class="mdmWelcome" text="Welcome: " />
+					<Link text="Max Mustermann" />
+					<Button icon="sap-icon://log" tooltip="Logout" />
+				</contentRight>
+			</Bar>
+		</customHeader>
 
 		<!-- Content -->
 		<content>
@@ -23,9 +33,14 @@
 
 		<!-- Footer -->
 		<footer>
-			<Toolbar>
-				<mvc:XMLView viewName="uni.mannheim.mdm.view.Menu"></mvc:XMLView>
-			</Toolbar>
+			<Bar>
+				<contentLeft>
+					<mvc:XMLView viewName="uni.mannheim.mdm.view.Menu"></mvc:XMLView>
+				</contentLeft>
+				<contentRight>
+					<Text class="mdmCopyright" text="© solveIT 2015" />
+				</contentRight>
+			</Bar>
 		</footer>
 	</Page>
 </mvc:View>
