@@ -6,7 +6,7 @@ sap.ui.jsview("uni.mannheim.mdm.view.masterdata.CustomerOverview", {
 	 * @returns {String}
 	 */
 	getControllerName : function() {
-		return "uni.mannheim.mdm.controller.CustomerOverview";
+		return "uni.mannheim.mdm.controller.masterdata.CustomerOverview";
 	},
 
 	/**
