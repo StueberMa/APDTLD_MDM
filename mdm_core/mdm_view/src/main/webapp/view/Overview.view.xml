@@ -1,5 +1,5 @@
 <mvc:View height="100%" controllerName="uni.mannheim.mdm.controller.Overview"
-	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout">
 
 	<Page title="SolveIT" class="sapUiContentPadding" showNavButton="false">
 		<!-- Header -->
@@ -20,14 +20,66 @@
 		<!-- Content -->
 		<content>
 			<TileContainer id="overviewCont">
-				<StandardTile icon="sap-icon://marketing-campaign"
-					title="Marketing" info="All Your Campaigns at a Glanze" type="Monitor" />
-				<StandardTile icon="sap-icon://bar-chart"
-					title="Analysis" info="Advanced Analysis with Rich Visualizations" type="Monitor" />
-				<StandardTile icon="sap-icon://customer-financial-fact-sheet"
-					title="Master Data" press="onMasterDataOverview" info="Maintain and Search for Master Data" type="Create" />	
-				<StandardTile icon="sap-icon://database"
-					title="Data Import" press="onDataImportOverview" info="Monitor Data Integration and Easily Load New Data" type="Create" />	
+				<!-- Marketing -->
+				<CustomTile class="mdmTile">
+					<content>
+						<VBox>
+							 <l:HorizontalLayout> 
+								<core:Icon class="mdmTileIcon" src="sap-icon://marketing-campaign" />
+								<VBox class="mdmTileHeader">
+									<Text class="mdmTileHeaderTitle" text="Marketing" />
+									<Text class="mdmTileHeaderSub" text="All Your Campaigns at a Glanze" />
+								</VBox>
+							</l:HorizontalLayout>
+							<Image src="./resources/img/no_image.png" class="mdmTileImage" densityAware="false"/>
+						</VBox>
+					</content>
+				</CustomTile>
+				<!-- Analysis -->
+				<CustomTile class="mdmTile">
+					<content>
+						<VBox>
+							 <l:HorizontalLayout> 
+								<core:Icon class="mdmTileIcon" src="sap-icon://bar-chart" />
+								<VBox class="mdmTileHeader">
+									<Text class="mdmTileHeaderTitle" text="Analysis" />
+									<Text class="mdmTileHeaderSub" text="Advanced Analysis with Rich Visualizations" />
+								</VBox>
+							</l:HorizontalLayout>
+							<Image src="./resources/img/no_image.png" class="mdmTileImage" densityAware="false"/>
+						</VBox>
+					</content>
+				</CustomTile>
+				<!-- Master Data -->
+				<CustomTile class="mdmTile" press="onMasterDataOverview">
+					<content>
+						<VBox>
+							 <l:HorizontalLayout> 
+								<core:Icon class="mdmTileIcon" src="sap-icon://customer-financial-fact-sheet" />
+								<VBox class="mdmTileHeader">
+									<Text class="mdmTileHeaderTitle" text="Master Data" />
+									<Text class="mdmTileHeaderSub" text="Maintain and Search for Master Data" />
+								</VBox>
+							</l:HorizontalLayout>
+							<Image src="./resources/img/no_image.png" class="mdmTileImage" densityAware="false"/>
+						</VBox>
+					</content>
+				</CustomTile>
+				<!-- Data Import -->
+				<CustomTile class="mdmTile" press="onDataImportOverview">
+					<content>
+						<VBox>
+							 <l:HorizontalLayout> 
+								<core:Icon class="mdmTileIcon" src="sap-icon://database" />
+								<VBox class="mdmTileHeader">
+									<Text class="mdmTileHeaderTitle" text="Data Import" />
+									<Text class="mdmTileHeaderSub" text="Monitor Data Integration and Easily Load New Data" />
+								</VBox>
+							</l:HorizontalLayout>
+							<Image src="./resources/img/no_image.png" class="mdmTileImage" densityAware="false"/>
+						</VBox>
+					</content>
+				</CustomTile>
 			</TileContainer>
 		</content>
 

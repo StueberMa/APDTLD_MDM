@@ -1,10 +1,10 @@
-.mdmPageTitle {  
+.mdmPageTitle {
 	padding-left: 10px;
 	font-size: 1.25rem !important;
 	font-weight: bold;
-} 
+}
 
-.mdmPageSlogan {  
+.mdmPageSlogan {
 	padding-left: 5px;
 	padding-top: 15px !important;
 	font-size: 0.7rem !important;
@@ -18,4 +18,50 @@
 
 .mdmCopyright {
 	padding-right: 15px !important;
+}
+
+.mdmTile {
+	background-color: #ffffff;
+    border: 1px solid #dddddd;
+    box-shadow: 0px 2px 2px #dddddd;
+    display: inline-block;
+    height: 14rem !important;
+    margin: 0.5rem !important;
+    width: 16rem !important;
+	padding: 15px !important;
+}
+
+.mdmTile :onclick {
+	background-color: #ffffff;
+}
+
+.mdmTileHeader {
+	padding-left: 20px !important;
+	width: 11rem !important;
+}
+
+.mdmTileHeaderTitle {
+	font-size: 1.2rem !important;
+	font-weight: bold;
+	color: #666666;
+}
+
+.mdmTileHeaderSub{
+	color: #666666;
+	font-style: italic;
+	font-size: 0.75rem !important;
+}
+
+.mdmTileIcon {
+	font-family: SAP-icons;
+	color: #666666;
+	font-size: 2rem;
+}
+
+.mdmTileImage{
+	width: 6.5rem !important;
+	margin-top: 25px;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
