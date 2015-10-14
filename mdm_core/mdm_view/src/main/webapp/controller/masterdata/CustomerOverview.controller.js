@@ -1,4 +1,4 @@
-sap.ui.controller("components.dataset_importer.Uploader", {
+sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 
 	/**
 	 * Method onInit.
