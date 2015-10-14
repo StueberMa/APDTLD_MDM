@@ -2,6 +2,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.ManualImporter", {
 
 	fileProgesses:{},
 	fileCount:0,
+	lastProgressUpdateCall:0,
 	
 	onChange: function(oEvent) {
 		console.log("change");
@@ -51,6 +52,12 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.ManualImporter", {
 	},
 	
 	onUploadProgress: function(oEvent) {
+		var now = Date.now();
+        if (this.lastProgressUpdateCall + 100 > now) {
+        	return;    
+        }
+        this.lastProgressUpdateCall = now;
+        
 		oUploadProgressIndicator = this.getView().byId("UploadProgressIndicator");
 		
 		var params = oEvent.getParameters();
@@ -67,10 +74,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.ManualImporter", {
 	},
 	
 	onUploadComplete: function(oEvent) {
+		oUploadProgressIndicator = this.getView().byId("UploadProgressIndicator");
+		oUploadProgressIndicator.setPercentValue(100);
+		oUploadProgressIndicator.setDisplayValue("100%");
+		
 		setTimeout($.proxy(function() {
 			sap.m.MessageToast.show("All " + this.fileCount + " files were uploaded.");
 		}, this), 1000);
-		oUploadCollection.removeAllItems();
 	},
 
 	onBack : function () {
