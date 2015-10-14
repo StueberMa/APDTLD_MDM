@@ -25,7 +25,7 @@
 				id="UploadCollection"
 				uploadUrl="upload"
 				maximumFilenameLength="55"
-				maximumFileSize="10"
+				maximumFileSize="10240"
 				multiple="true"
 				sameFilenameAllowed="true"
 				instantUpload="false"

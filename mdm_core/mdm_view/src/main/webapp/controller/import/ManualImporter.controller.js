@@ -1,14 +1,21 @@
 sap.ui.controller("uni.mannheim.mdm.controller.import.ManualImporter", {
 
+	fileProgesses:{},
+	fileCount:0,
+	
 	onChange: function(oEvent) {
-		
+		console.log("change");
+		var oUploadButton = this.getView().byId("UploadButton");
+		oUploadButton.setEnabled(true);
+	},
+
+	onFileDeleted: function(oEvent) {
+		console.log("test");
 		var oUploadCollection = this.getView().byId("UploadCollection");
 		var oUploadButton = this.getView().byId("UploadButton");
 		console.log("on change " + oUploadCollection.getItems().length);
 		console.log(oEvent);
-		if(oUploadCollection.getItems().length>0) {
-			oUploadButton.setEnabled(true);
-		} else {
+		if(oUploadCollection.getItems().length==1) {
 			oUploadButton.setEnabled(false);
 		}
 	},
@@ -18,36 +25,51 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.ManualImporter", {
 		var oUploadCollection = this.getView().byId("UploadCollection");
 		var oUploadButton = this.getView().byId("UploadButton");
 		var oUploadProgressIndicator = this.getView().byId("UploadProgressIndicator");
-		var cUploadCount = oUploadCollection.getItems().length;
+		this.fileCount = oUploadCollection.getItems().length;
 
 		oUploadButton.setText("Abort upload");
-		oUploadButton.setPress("onAbortUpload");
+		oUploadButton.detachPress(this.onStartUpload, this);
+		oUploadButton.attachPress(this.onAbortUpload);
 		
 		oUploadProgressIndicator.setVisible(true);
 		
 		oUploadCollection.getItems().forEach(function(oElement){
 			var oUploader = sap.ui.getCore().byId(oElement.getFileUploader());
 			oUploader.setUseMultipart(true);
-			oUploader.uploadProgress(_this.onUploadProgress);
+			oUploader.attachUploadProgress(_this.onUploadProgress, _this);
 		});
 		
 		oUploadCollection.upload();
 
-		sap.m.MessageToast.show("There are " + cUploadCount + " files uploaded.");
+		sap.m.MessageToast.show("There are " + this.fileCount  + " files uploaded.");
 		
 		
+	},
+	
+	onAbortUpload: function(oEvent) {
+		console.log("abort");
 	},
 	
 	onUploadProgress: function(oEvent) {
+		oUploadProgressIndicator = this.getView().byId("UploadProgressIndicator");
 		
+		var params = oEvent.getParameters();
+		this.fileProgesses[params.id] = params.loaded/params.total;
+		
+		var totalRelativeLoaded = 0;
+		for(var key in this.fileProgesses) {
+			totalRelativeLoaded += this.fileProgesses[key];
+		}
+		
+		var progress = 100 * totalRelativeLoaded / this.fileCount;
+		oUploadProgressIndicator.setPercentValue(progress);
+		oUploadProgressIndicator.setDisplayValue(progress.toFixed(0) + "%");
 	},
 	
 	onUploadComplete: function(oEvent) {
-		var oUploadCollection = this.getView().byId("UploadCollection");
-		var cUploadCount = oUploadCollection.getItems().length;
-		setTimeout(function() {
-			sap.m.MessageToast.show("All " + cUploadCount + " files were uploaded.");
-		}, 1000);
+		setTimeout($.proxy(function() {
+			sap.m.MessageToast.show("All " + this.fileCount + " files were uploaded.");
+		}, this), 1000);
 		oUploadCollection.removeAllItems();
 	},
 

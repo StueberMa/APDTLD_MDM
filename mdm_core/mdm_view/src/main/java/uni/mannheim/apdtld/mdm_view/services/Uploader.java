@@ -31,7 +31,7 @@ public class Uploader extends HttpServlet {
 
 	private boolean isMultipart;
 	private String filePath;
-	private int maxFileSize = 50 * 1024 * 1024;
+	private int maxFileSize = 100 * 1024 * 1024 * 1024;
 	private int maxMemSize = 4 * 1024;
 	private File file;
 
@@ -73,7 +73,7 @@ public class Uploader extends HttpServlet {
 		// Create a new file upload handler
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		// maximum file size to be uploaded.
-		upload.setSizeMax(maxFileSize);
+		//upload.setSizeMax(maxFileSize);
 
 		try {
 			// Parse the request to get file items.
