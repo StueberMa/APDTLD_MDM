@@ -19,6 +19,7 @@ hs_err_pid*
 /.git/
 /.metadata/
 /.settings/
+/.recommenders/
 /RemoteSystemsTempFiles/
 /Servers/
 /target/
