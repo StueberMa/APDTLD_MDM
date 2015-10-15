@@ -1,7 +1,9 @@
 <mvc:View height="100%" controllerName="uni.mannheim.mdm.controller.import.Overview"
-	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout">
 
-	<Page title="SolveIT" class="sapUiContentPadding" showNavButton="true" navButtonPress="onBack">
+	<Page title="SolveIT" class="sapUiContentPadding" showNavButton="true"
+		navButtonPress="onBack">
 		<!-- Header -->
 		<customHeader>
 			<Bar>
@@ -21,12 +23,57 @@
 		<!-- Content -->
 		<content>
 			<TileContainer id="overviewCont">
-				<StandardTile icon="sap-icon://list"
-					title="Work List" type="Monitor" />
-				<StandardTile icon="sap-icon://it-system"
-					title="Data Source" type="Monitor" />
-				<StandardTile icon="sap-icon://upload"
-					title="Manual Import" press="onManualImport" info="Import Data from CSV sheets" type="Create" />	
+				<!-- Monitor -->
+				<CustomTile class="mdmTile">
+					<content>
+						<VBox>
+							<l:HorizontalLayout>
+								<core:Icon class="mdmTileIcon" src="sap-icon://sys-monitor" />
+								<VBox class="mdmTileHeader">
+									<Text class="mdmTileHeaderTitle" text="Monitor" />
+									<Text class="mdmTileHeaderSub" text="Control the System Health and Data Quality" />
+								</VBox>
+							</l:HorizontalLayout>
+							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+								densityAware="false" />
+						</VBox>
+					</content>
+				</CustomTile>
+				
+				<!-- Data Source -->
+				<CustomTile class="mdmTile">
+					<content>
+						<VBox>
+							<l:HorizontalLayout>
+								<core:Icon class="mdmTileIcon" src="sap-icon://it-system" />
+								<VBox class="mdmTileHeader">
+									<Text class="mdmTileHeaderTitle" text="Data Source" />
+									<Text class="mdmTileHeaderSub" text="Guided Data Import from Local Staging Area" />
+								</VBox>
+							</l:HorizontalLayout>
+							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+								densityAware="false" />
+						</VBox>
+					</content>
+				</CustomTile>
+
+				<!-- Manual Import -->
+				<CustomTile id="mdmTile" class="mdmTile" press="onManualImport">
+					<content>
+						<VBox>
+							<l:HorizontalLayout>
+								<core:Icon class="mdmTileIcon"
+									src="sap-icon://upload" />
+								<VBox class="mdmTileHeader">
+									<Text class="mdmTileHeaderTitle" text="Data Import" />
+									<Text class="mdmTileHeaderSub" text="Import Data from CSV Sheets" />
+								</VBox>
+							</l:HorizontalLayout>
+							<Image src="./resources/img/no_image.png" class="mdmTileImage"
+								densityAware="false" />
+						</VBox>
+					</content>
+				</CustomTile>
 			</TileContainer>
 		</content>
 

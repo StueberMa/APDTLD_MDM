@@ -29,6 +29,13 @@
     margin: 0.5rem !important;
     width: 16rem !important;
 	padding: 15px !important;
+	cursor: pointer;
+	color: #666666;
+}
+
+.mdmTile:hover {
+	background:#007cc0;
+	color:#ffffff;
 }
 
 .mdmTile :onclick {
@@ -43,20 +50,27 @@
 .mdmTileHeaderTitle {
 	font-size: 1.2rem !important;
 	font-weight: bold;
-	color: #666666;
+
 }
 
 .mdmTileHeaderSub{
-	color: #666666;
 	font-style: italic;
 	font-size: 0.75rem !important;
 }
 
 .mdmTileIcon {
 	font-family: SAP-icons;
-	color: #666666;
 	font-size: 2rem;
 }
+
+.mdmTileUnderDevImage{
+	width: 6.5rem !important;
+	margin-top: 25px;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 .mdmTileImage{
 	width: 6.5rem !important;

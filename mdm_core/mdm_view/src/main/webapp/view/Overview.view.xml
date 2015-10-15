@@ -20,6 +20,22 @@
 		<!-- Content -->
 		<content>
 			<TileContainer id="overviewCont">
+				<!-- Worklist -->
+				<CustomTile class="mdmTile">
+					<content>
+						<VBox>
+							 <l:HorizontalLayout> 
+								<core:Icon class="mdmTileIcon" src="sap-icon://list" />
+								<VBox class="mdmTileHeader">
+									<Text class="mdmTileHeaderTitle" text="Worklist" />
+									<Text class="mdmTileHeaderSub" text="Easily Manage Your Daily Work Cross Functions" />
+								</VBox>
+							</l:HorizontalLayout>
+							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage" densityAware="false"/>
+						</VBox>
+					</content>
+				</CustomTile>
+				
 				<!-- Marketing -->
 				<CustomTile class="mdmTile">
 					<content>
@@ -31,10 +47,11 @@
 									<Text class="mdmTileHeaderSub" text="All Your Campaigns at a Glanze" />
 								</VBox>
 							</l:HorizontalLayout>
-							<Image src="./resources/img/no_image.png" class="mdmTileImage" densityAware="false"/>
+							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage" densityAware="false"/>
 						</VBox>
 					</content>
 				</CustomTile>
+				
 				<!-- Analysis -->
 				<CustomTile class="mdmTile">
 					<content>
@@ -46,12 +63,13 @@
 									<Text class="mdmTileHeaderSub" text="Advanced Analysis with Rich Visualizations" />
 								</VBox>
 							</l:HorizontalLayout>
-							<Image src="./resources/img/no_image.png" class="mdmTileImage" densityAware="false"/>
+							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage" densityAware="false"/>
 						</VBox>
 					</content>
 				</CustomTile>
+				
 				<!-- Master Data -->
-				<CustomTile class="mdmTile" press="onMasterDataOverview">
+				<CustomTile id="mdmTile" class="mdmTile" press="onMasterDataOverview">
 					<content>
 						<VBox>
 							 <l:HorizontalLayout> 
@@ -65,6 +83,7 @@
 						</VBox>
 					</content>
 				</CustomTile>
+		
 				<!-- Data Import -->
 				<CustomTile class="mdmTile" press="onDataImportOverview">
 					<content>
@@ -77,6 +96,22 @@
 								</VBox>
 							</l:HorizontalLayout>
 							<Image src="./resources/img/no_image.png" class="mdmTileImage" densityAware="false"/>
+						</VBox>
+					</content>
+				</CustomTile>
+				
+				<!-- Settings -->
+				<CustomTile class="mdmTile">
+					<content>
+						<VBox>
+							 <l:HorizontalLayout> 
+								<core:Icon class="mdmTileIcon" src="sap-icon://settings" />
+								<VBox class="mdmTileHeader">
+									<Text class="mdmTileHeaderTitle" text="Settings" />
+									<Text class="mdmTileHeaderSub" text="Change Your Preferences and Manage Authorities" />
+								</VBox>
+							</l:HorizontalLayout>
+							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage" densityAware="false"/>
 						</VBox>
 					</content>
 				</CustomTile>
