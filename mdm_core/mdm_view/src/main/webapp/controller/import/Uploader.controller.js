@@ -1,4 +1,4 @@
-sap.ui.controller("uni.mannheim.mdm.controller.import.ManualImporter", {
+sap.ui.controller("uni.mannheim.mdm.controller.import.Uploader", {
 
 	fileProgesses:{},
 	fileCount:0,
@@ -42,7 +42,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.ManualImporter", {
 		
 		oUploadCollection.upload();
 
-		sap.m.MessageToast.show("There are " + this.fileCount  + " files uploaded.");
+		if(this.fileCount>1) {
+			sap.m.MessageToast.show("There are " + this.fileCount  + " files uploaded.");
+		} else {
+			sap.m.MessageToast.show("There is one file uploaded.");
+		}
 		
 		
 	},
@@ -79,7 +83,15 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.ManualImporter", {
 		oUploadProgressIndicator.setDisplayValue("100%");
 		
 		setTimeout($.proxy(function() {
-			sap.m.MessageToast.show("All " + this.fileCount + " files were uploaded.");
+			if(this.fileCount>1) {
+				sap.m.MessageToast.show("All " + this.fileCount + " files were uploaded.");
+			} else {
+				sap.m.MessageToast.show("The file was uploaded.");
+			}
+			
+			setTimeout($.proxy(function() {
+				this.getOwnerComponent().getRouter().navTo("import.FieldMapper");
+			}, this), 1000);
 		}, this), 1000);
 	},
 

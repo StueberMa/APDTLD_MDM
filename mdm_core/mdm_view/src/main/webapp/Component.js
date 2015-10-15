@@ -34,10 +34,15 @@ sap.ui.core.UIComponent.extend("uni.mannheim.mdm.Component", {
 				view : "import.Overview"
 			},
 			{
-				pattern : "import/ManualImporter",
-				name : "import.ManualImporter",
-				view : "import.ManualImporter"
-			}]
+				pattern : "import/Uploader",
+				name : "import.Uploader",
+				view : "import.Uploader"
+			},
+			{
+				pattern : "import/FieldMapper",
+				name : "import.FieldMapper",
+				view : "import.FieldMapper"
+			},]
 		}
 	}
 });

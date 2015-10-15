@@ -1,4 +1,4 @@
-<mvc:View height="100%" controllerName="uni.mannheim.mdm.controller.import.ManualImporter"
+<mvc:View height="100%" controllerName="uni.mannheim.mdm.controller.import.Uploader"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:u="sap.ui.unified">
 
 	<Page title="SolveIT" class="sapUiContentPadding" showNavButton="false">
