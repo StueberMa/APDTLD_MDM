@@ -52,6 +52,17 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		<servlet-name>Upload</servlet-name>
 		<url-pattern>/upload</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FileAnalyser</servlet-name>
+		<servlet-class>uni.mannheim.apdtld.mdm_view.services.FileAnalyser</servlet-class>
+		<load-on-startup>4</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FileAnalyser</servlet-name>
+		<url-pattern>/fileanalyser</url-pattern>
+	</servlet-mapping>
 
 	<context-param>
 		<description>Location to store uploaded file</description>
