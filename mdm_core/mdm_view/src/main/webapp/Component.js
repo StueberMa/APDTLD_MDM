@@ -31,8 +31,7 @@ sap.ui.core.UIComponent.extend("uni.mannheim.mdm.Component", {
 				pattern : "import/overview",
 				name : "import.Overview",
 				view : "import.Overview"
-			},
-			{
+			}, {
 				pattern : "ManualImport",
 				name : "import.ManualImporter",
 				view : "import.ManualImporter"

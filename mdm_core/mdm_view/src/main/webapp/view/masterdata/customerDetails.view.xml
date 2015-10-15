@@ -23,10 +23,10 @@
 
 		<subHeader>
 			<Toolbar>
-				<ToolbarSpacer/> <!-- Remove for left alignment -->
-				<Button type="Accept" icon="sap-icon://save" text="Save" press="onSave" />
-				<Button type="Reject" icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
+				<Button icon="sap-icon://save" text="Save" press="onSave" />	
 				<ToolbarSpacer/>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
 			</Toolbar>
 		</subHeader>
 

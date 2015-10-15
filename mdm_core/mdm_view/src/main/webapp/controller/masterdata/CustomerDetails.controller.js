@@ -108,6 +108,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	},
 	
 	onCancel : function() {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("masterdata.Overview", false);
+	},
+	
+	onBack : function () {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("masterdata.Overview", false);
 	},
 	
 	/**
