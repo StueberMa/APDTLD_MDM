@@ -57,7 +57,7 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		<description>Location to store uploaded file</description>
 		<param-name>file-upload</param-name>
 		<param-value>
-			c:\temp\
+			./mdm-file-upload-tmp/
 		</param-value>
 	</context-param>
 </web-app>

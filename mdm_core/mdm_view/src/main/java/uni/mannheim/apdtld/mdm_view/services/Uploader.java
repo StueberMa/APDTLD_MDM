@@ -1,15 +1,8 @@
 package uni.mannheim.apdtld.mdm_view.services;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.slf4j.*;
 
 public class Uploader extends HttpServlet {
 
@@ -31,16 +23,13 @@ public class Uploader extends HttpServlet {
 
 	private boolean isMultipart;
 	private String filePath;
-	private int maxFileSize = 100 * 1024 * 1024 * 1024;
 	private int maxMemSize = 4 * 1024;
 	private File file;
 
 	public void init() {
 		// Get the file location where it would be stored.
 		filePath = getServletContext().getInitParameter("file-upload");
-		ServletContext context = getServletContext();
-		
-		context.log("test " + filePath);
+		new File(filePath).mkdirs();
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -68,7 +57,7 @@ public class Uploader extends HttpServlet {
 		// maximum size that will be stored in memory
 		factory.setSizeThreshold(maxMemSize);
 		// Location to save data that is larger than maxMemSize.
-		factory.setRepository(new File("C:\\temp"));
+		factory.setRepository(new File(filePath));
 
 		// Create a new file upload handler
 		ServletFileUpload upload = new ServletFileUpload(factory);

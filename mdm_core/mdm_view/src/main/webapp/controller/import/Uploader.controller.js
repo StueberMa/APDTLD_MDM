@@ -47,8 +47,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Uploader", {
 		} else {
 			sap.m.MessageToast.show("There is one file uploaded.");
 		}
-		
-		
 	},
 	
 	onAbortUpload: function(oEvent) {
