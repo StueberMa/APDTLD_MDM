@@ -19,6 +19,20 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 	},
 	
 	/**
+	 * Method onEditCustomer
+	 */
+	onEditCustomer : function() {
+		
+	},
+	
+	/**
+	 * Method onDisplayCustomer
+	 */
+	onDisplayCustomer : function() {
+		
+	},
+	
+	/**
 	 * Method onBack
 	 */
 	onBack : function () {

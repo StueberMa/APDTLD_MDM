@@ -88,3 +88,11 @@
 	width: 12rem !important;
 	font-weight: bold;
 }
+
+.mdmSmartTable {
+	margin-top:20px !important;
+}
+
+.mdmMarginLeft {
+	margin-left: 25px !important;
+}

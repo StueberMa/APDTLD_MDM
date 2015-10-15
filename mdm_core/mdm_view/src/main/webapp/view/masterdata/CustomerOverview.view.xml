@@ -25,7 +25,7 @@
 		<!-- Content -->
 		<content>
 			<VBox>
-				<smartFilterBar:SmartFilterBar id="smartFilterBar"
+				<smartFilterBar:SmartFilterBar id="customerSmartFilterBar"
 					entityType="Customer" persistencyKey="CustomerSmartFilter">
 					<smartFilterBar:controlConfiguration>
 						<smartFilterBar:ControlConfiguration
@@ -34,11 +34,19 @@
 							key="LastName" />
 					</smartFilterBar:controlConfiguration>
 				</smartFilterBar:SmartFilterBar>
-				<smartTable:SmartTable entitySet="Customers"
-					tableType="ResponsiveTable" useExportToExcel="true"
-					useVariantManagement="false" useTablePersonalisation="true"
-					header="Customer" showRowCount="true" persistencyKey="CustomerSmartTable"
-					enableAutoBinding="true" demandPopin="true" />
+				<smartTable:SmartTable class="mdmSmartTable"
+					entitySet="Customers" tableType="Table" useExportToExcel="true"
+					useVariantManagement="false" useTablePersonalisation="true" header="Customer"
+					showRowCount="true" persistencyKey="CustomerSmartTable"
+					enableAutoBinding="true" smartFilterId="customerSmartFilterBar">
+					<smartTable:customToolbar>
+						<Toolbar class="mdmSmartTableToolbar">
+							<Button class="mdmMarginLeft" icon="sap-icon://display"
+								press="onDisplayCustomer" />
+							<Button icon="sap-icon://edit" press="onEditCustomer" />
+						</Toolbar>
+					</smartTable:customToolbar>
+				</smartTable:SmartTable>
 				<VBox class="mdmNewEntity">
 					<Text text="Customer not found?" />
 					<Button text="Create" icon="sap-icon://create" press="onNewCustomer" />
