@@ -19,12 +19,6 @@ public class CustomerServiceFactory extends ODataJPAServiceFactory {
 	
 	// constants
 	private static final String CUSTOMER_MODEL_NAME = "customer_model";
-
-	@Override
-	public ODataService createODataSingleProcessorService(EdmProvider provider, ODataSingleProcessor processor) {
-		return null;
-	};
-	
 	
 	/**
 	 * Method to init. OData service.
