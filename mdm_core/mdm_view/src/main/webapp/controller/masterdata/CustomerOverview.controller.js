@@ -1,7 +1,7 @@
 sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 
 	/**
-	 * Method onInit.
+	 * Method onInit
 	 */
 	onInit : function() {
 		var sOrigin = window.location.protocol + "//"
@@ -19,31 +19,18 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 	},
 	
 	/**
-	 * Method addNewCustomer.
+	 * Method onBack
 	 */
-	addNewCustomer : function(sFirstName, sLastName, oTable) {
-		var customers = {};
-
-		customers.FirstName = sFirstName;
-		customers.LastName = sLastName;
-
-		this.getView().getModel().create("/Customers", customers, null,
-				this.successMsg, this.errorMsg);
+	onBack : function () {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("masterdata.Overview", false);
 	},
 	
 	/**
-	 * Method successMsg.
+	 * Method onNewCustomer
 	 */
-	successMsg : function() {
-		sap.ui.commons.MessageBox
-				.alert("Customer entity has been successfully created");
-	},
-	
-	/**
-	 * Method errorMsg.
-	 */
-	errorMsg : function() {
-		sap.ui.commons.MessageBox
-				.alert("Error occured when creating customer entity");
+	onNewCustomer : function () {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("masterdata.CustomerDetails", false);
 	}
 });

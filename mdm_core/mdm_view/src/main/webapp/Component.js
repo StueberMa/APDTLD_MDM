@@ -25,8 +25,7 @@ sap.ui.core.UIComponent.extend("uni.mannheim.mdm.Component", {
 			}, {
 				pattern : "masterdata/customer/overview",
 				name : "masterdata.CustomerOverview",
-				view : "masterdata.CustomerOverview",
-				viewType : "JS"
+				view : "masterdata.CustomerOverview"
 			}, {
 				pattern : "import/overview",
 				name : "import.Overview",
