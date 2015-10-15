@@ -2,7 +2,7 @@
 	controllerName="uni.mannheim.mdm.controller.masterdata.CustomerOverview"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-	xmlns:smartTable="sap.ui.comp.smarttable">
+	xmlns:smartTable="sap.ui.comp.smarttable" xmlns:sl="sap.ui.comp.navpopover">
 
 	<Page title="SolveIT" class="sapUiContentPadding" showNavButton="true"
 		navButtonPress="onBack">
@@ -35,17 +35,13 @@
 					</smartFilterBar:controlConfiguration>
 				</smartFilterBar:SmartFilterBar>
 				<smartTable:SmartTable class="mdmSmartTable"
-					entitySet="Customers" tableType="Table" useExportToExcel="true"
+					entitySet="Customers" tableType="ResponsiveTable" useExportToExcel="true"
 					useVariantManagement="false" useTablePersonalisation="true" header="Customer"
 					showRowCount="true" persistencyKey="CustomerSmartTable"
 					enableAutoBinding="true" smartFilterId="customerSmartFilterBar">
-					<smartTable:customToolbar>
-						<Toolbar class="mdmSmartTableToolbar">
-							<Button class="mdmMarginLeft" icon="sap-icon://display"
-								press="onDisplayCustomer" />
-							<Button icon="sap-icon://edit" press="onEditCustomer" />
-						</Toolbar>
-					</smartTable:customToolbar>
+					<smartTable:semanticObjectController>
+						<sl:SemanticObjectController navigationTargetsObtained="onNavTargetsObtained" navigate="onNavigate"/>
+					</smartTable:semanticObjectController>
 				</smartTable:SmartTable>
 				<VBox class="mdmNewEntity">
 					<Text text="Customer not found?" />

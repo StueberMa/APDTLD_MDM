@@ -19,17 +19,17 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 	},
 	
 	/**
-	 * Method onEditCustomer
+	 * Method onNavTargetsObtained
 	 */
-	onEditCustomer : function() {
-		
+	onNavTargetsObtained: function(oEvent){
+		console.log("onNavTargetsObtained");
 	},
 	
 	/**
-	 * Method onDisplayCustomer
+	 * Method onNavigate
 	 */
-	onDisplayCustomer : function() {
-		
+	onNavigate: function(oEvent){
+		console.log("onNavigate");
 	},
 	
 	/**
