@@ -22,7 +22,7 @@
 
 		<!-- Content -->
 		<content>
-			<TileContainer id="overviewCont">
+			<TileContainer>
 				<!-- Monitor -->
 				<CustomTile class="mdmTile">
 					<content>
@@ -58,7 +58,7 @@
 				</CustomTile>
 
 				<!-- Manual Import -->
-				<CustomTile id="mdmTile" class="mdmTile" press="onManualImport">
+				<CustomTile class="mdmTile" press="onManualImport">
 					<content>
 						<VBox>
 							<l:HorizontalLayout>

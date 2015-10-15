@@ -19,7 +19,7 @@
 
 		<!-- Content -->
 		<content>
-			<TileContainer id="overviewCont">
+			<TileContainer>
 				<!-- Worklist -->
 				<CustomTile class="mdmTile">
 					<content>
@@ -28,7 +28,7 @@
 								<core:Icon class="mdmTileIcon" src="sap-icon://list" />
 								<VBox class="mdmTileHeader">
 									<Text class="mdmTileHeaderTitle" text="Worklist" />
-									<Text class="mdmTileHeaderSub" text="Easily Manage Your Daily Work Cross Functions" />
+									<Text class="mdmTileHeaderSub" text="Easily Manage Your Daily Work Across Functions" />
 								</VBox>
 							</l:HorizontalLayout>
 							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage" densityAware="false"/>
@@ -69,7 +69,7 @@
 				</CustomTile>
 				
 				<!-- Master Data -->
-				<CustomTile id="mdmTile" class="mdmTile" press="onMasterDataOverview">
+				<CustomTile class="mdmTile" press="onMasterDataOverview">
 					<content>
 						<VBox>
 							 <l:HorizontalLayout> 
