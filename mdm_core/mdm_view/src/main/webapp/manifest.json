@@ -53,7 +53,7 @@
             "config": {
                 "viewType": "XML",
                 "viewPath": "uni.mannheim.mdm.view",
-                "targetControl": "main",
+                "targetControl": "navContainer",
                 "targetAggregation": "pages",
                 "clearTarget": false
             },

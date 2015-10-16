@@ -1,5 +1,48 @@
 <mvc:View controllerName="uni.mannheim.mdm.controller.App"
 	xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" displayBlock="true">
 
-	<App id="main" />
+	<App>
+		<Page id="main" title="SolveIT" class="sapUiContentPadding">
+			<!-- Header -->
+			<customHeader>
+				<Bar>
+					<contentLeft>
+						<Button id="navBack" type="Back" press="onBack" />
+						<Text class="mdmPageTitle" text="solveIT" />
+						<Text class="mdmPageSlogan" text="The customer in mind" />
+					</contentLeft>
+					<contentRight>
+						<Text class="mdmWelcome" text="Welcome: " />
+						<Link text="Max Mustermann" />
+						<Button icon="sap-icon://log" tooltip="Logout" />
+					</contentRight>
+				</Bar>
+			</customHeader>
+
+			<!-- Content -->
+			<content>
+				<NavContainer id="navContainer" width="100%" class="navContainerControl" />	
+			</content>
+
+			<!-- Footer -->
+			<footer>
+				<Bar>
+					<contentLeft>
+						<Button text="Overview" press="onOverview" ariaDescribedBy="Overview" />
+						<Button text="Worklist" ariaDescribedBy="Worklist" />
+						<Button text="Marketing" ariaDescribedBy="Marketing" />
+						<Button text="Analysis" ariaDescribedBy="Analysis" />
+						<Button text="Master Data" press="onMasterDataOverview"
+							ariaDescribedBy="Master Data" />
+						<Button text="Data Import" press="onDataImportOverview"
+							ariaDescribedBy="Data Import" />
+						<Button text="Settings" ariaDescribedBy="Settings" />
+					</contentLeft>
+					<contentRight>
+						<Text class="mdmCopyright" text="© solveIT 2015" />
+					</contentRight>
+				</Bar>
+			</footer>
+		</Page>
+	</App>
 </mvc:View>

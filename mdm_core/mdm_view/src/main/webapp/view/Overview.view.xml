@@ -1,133 +1,110 @@
 <mvc:View height="100%" controllerName="uni.mannheim.mdm.controller.Overview"
-	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout">
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout">
 
-	<Page title="SolveIT" class="sapUiContentPadding" showNavButton="false">
-		<!-- Header -->
-		<customHeader>
-			<Bar>
-				<contentLeft>
-					<Text class="mdmPageTitle" text="solveIT" />
-					<Text class="mdmPageSlogan" text="The customer in mind" />
-				</contentLeft>
-				<contentRight>
-					<Text class="mdmWelcome" text="Welcome: " />
-					<Link text="Max Mustermann" />
-					<Button icon="sap-icon://log" tooltip="Logout" />
-				</contentRight>
-			</Bar>
-		</customHeader>
+	<TileContainer>
+		<!-- Worklist -->
+		<CustomTile class="mdmTile">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://list" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Worklist" />
+							<Text class="mdmTileHeaderSub" text="Easily Manage Your Daily Work Across Functions" />
+						</VBox>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
 
-		<!-- Content -->
-		<content>
-			<TileContainer>
-				<!-- Worklist -->
-				<CustomTile class="mdmTile">
-					<content>
-						<VBox>
-							 <l:HorizontalLayout> 
-								<core:Icon class="mdmTileIcon" src="sap-icon://list" />
-								<VBox class="mdmTileHeader">
-									<Text class="mdmTileHeaderTitle" text="Worklist" />
-									<Text class="mdmTileHeaderSub" text="Easily Manage Your Daily Work Across Functions" />
-								</VBox>
-							</l:HorizontalLayout>
-							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage" densityAware="false"/>
+		<!-- Marketing -->
+		<CustomTile class="mdmTile">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://marketing-campaign" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Marketing" />
+							<Text class="mdmTileHeaderSub" text="All Your Campaigns at a Glanze" />
 						</VBox>
-					</content>
-				</CustomTile>
-				
-				<!-- Marketing -->
-				<CustomTile class="mdmTile">
-					<content>
-						<VBox>
-							 <l:HorizontalLayout> 
-								<core:Icon class="mdmTileIcon" src="sap-icon://marketing-campaign" />
-								<VBox class="mdmTileHeader">
-									<Text class="mdmTileHeaderTitle" text="Marketing" />
-									<Text class="mdmTileHeaderSub" text="All Your Campaigns at a Glanze" />
-								</VBox>
-							</l:HorizontalLayout>
-							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage" densityAware="false"/>
-						</VBox>
-					</content>
-				</CustomTile>
-				
-				<!-- Analysis -->
-				<CustomTile class="mdmTile">
-					<content>
-						<VBox>
-							 <l:HorizontalLayout> 
-								<core:Icon class="mdmTileIcon" src="sap-icon://bar-chart" />
-								<VBox class="mdmTileHeader">
-									<Text class="mdmTileHeaderTitle" text="Analysis" />
-									<Text class="mdmTileHeaderSub" text="Advanced Analysis with Rich Visualizations" />
-								</VBox>
-							</l:HorizontalLayout>
-							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage" densityAware="false"/>
-						</VBox>
-					</content>
-				</CustomTile>
-				
-				<!-- Master Data -->
-				<CustomTile class="mdmTile" press="onMasterDataOverview">
-					<content>
-						<VBox>
-							 <l:HorizontalLayout> 
-								<core:Icon class="mdmTileIcon" src="sap-icon://customer-financial-fact-sheet" />
-								<VBox class="mdmTileHeader">
-									<Text class="mdmTileHeaderTitle" text="Master Data" />
-									<Text class="mdmTileHeaderSub" text="Maintain and Search for Master Data" />
-								</VBox>
-							</l:HorizontalLayout>
-							<Image src="./resources/img/no_image.png" class="mdmTileImage" densityAware="false"/>
-						</VBox>
-					</content>
-				</CustomTile>
-		
-				<!-- Data Import -->
-				<CustomTile class="mdmTile" press="onDataImportOverview">
-					<content>
-						<VBox>
-							 <l:HorizontalLayout> 
-								<core:Icon class="mdmTileIcon" src="sap-icon://database" />
-								<VBox class="mdmTileHeader">
-									<Text class="mdmTileHeaderTitle" text="Data Import" />
-									<Text class="mdmTileHeaderSub" text="Monitor Data Integration and Easily Load New Data" />
-								</VBox>
-							</l:HorizontalLayout>
-							<Image src="./resources/img/no_image.png" class="mdmTileImage" densityAware="false"/>
-						</VBox>
-					</content>
-				</CustomTile>
-				
-				<!-- Settings -->
-				<CustomTile class="mdmTile">
-					<content>
-						<VBox>
-							 <l:HorizontalLayout> 
-								<core:Icon class="mdmTileIcon" src="sap-icon://settings" />
-								<VBox class="mdmTileHeader">
-									<Text class="mdmTileHeaderTitle" text="Settings" />
-									<Text class="mdmTileHeaderSub" text="Change Your Preferences and Manage Authorities" />
-								</VBox>
-							</l:HorizontalLayout>
-							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage" densityAware="false"/>
-						</VBox>
-					</content>
-				</CustomTile>
-			</TileContainer>
-		</content>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
 
-		<!-- Footer -->
-		<footer>
-			<Bar>
-				<contentLeft>
-					<mvc:XMLView viewName="uni.mannheim.mdm.view.Menu"></mvc:XMLView>
-				</contentLeft>
-				<contentRight>
-					<Text class="mdmCopyright" text="© solveIT 2015" />
-				</contentRight>
-			</Bar>
-		</footer>
-	</Page>
+		<!-- Analysis -->
+		<CustomTile class="mdmTile">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://bar-chart" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Analysis" />
+							<Text class="mdmTileHeaderSub" text="Advanced Analysis with Rich Visualizations" />
+						</VBox>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
+
+		<!-- Master Data -->
+		<CustomTile class="mdmTile" press="onMasterDataOverview">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon"
+							src="sap-icon://customer-financial-fact-sheet" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Master Data" />
+							<Text class="mdmTileHeaderSub" text="Maintain and Search for Master Data" />
+						</VBox>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/no_image.png" class="mdmTileImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
+
+		<!-- Data Import -->
+		<CustomTile class="mdmTile" press="onDataImportOverview">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://database" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Data Import" />
+							<Text class="mdmTileHeaderSub"
+								text="Monitor Data Integration and Easily Load New Data" />
+						</VBox>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/no_image.png" class="mdmTileImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
+
+		<!-- Settings -->
+		<CustomTile class="mdmTile">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://settings" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Settings" />
+							<Text class="mdmTileHeaderSub" text="Change Your Preferences and Manage Authorities" />
+						</VBox>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
+	</TileContainer>
 </mvc:View>

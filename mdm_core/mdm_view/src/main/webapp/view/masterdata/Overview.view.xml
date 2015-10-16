@@ -2,90 +2,56 @@
 	controllerName="uni.mannheim.mdm.controller.masterdata.Overview" xmlns="sap.m"
 	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout">
 
-	<Page title="SolveIT" class="sapUiContentPadding" showNavButton="true"
-		navButtonPress="onBack">
-		<!-- Header -->
-		<customHeader>
-			<Bar>
-				<contentLeft>
-					<Button type="Back" press="onBack" />
-					<Text class="mdmPageTitle" text="solveIT" />
-					<Text class="mdmPageSlogan" text="The customer in mind" />
-				</contentLeft>
-				<contentRight>
-					<Text class="mdmWelcome" text="Welcome: " />
-					<Link text="Max Mustermann" />
-					<Button icon="sap-icon://log" tooltip="Logout" />
-				</contentRight>
-			</Bar>
-		</customHeader>
-
-		<!-- Content -->
-		<content>
-			<TileContainer>
-				<!-- Customer -->
-				<CustomTile class="mdmTile" press="onCustomerOverview">
-					<content>
-						<VBox>
-							<l:HorizontalLayout>
-								<core:Icon class="mdmTileIcon" src="sap-icon://customer" />
-								<VBox class="mdmTileHeader">
-									<Text class="mdmTileHeaderTitle" text="Customer" />
-									<Text class="mdmTileHeaderSub" text="Stay in Control of Your Customers" />
-								</VBox>
-							</l:HorizontalLayout>
-							<Image src="./resources/img/no_image.png" class="mdmTileImage"
-								densityAware="false" />
+	<TileContainer>
+		<!-- Customer -->
+		<CustomTile class="mdmTile" press="onCustomerOverview">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://customer" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Customer" />
+							<Text class="mdmTileHeaderSub" text="Stay in Control of Your Customers" />
 						</VBox>
-					</content>
-				</CustomTile>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/no_image.png" class="mdmTileImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
 
-				<!-- Product -->
-				<CustomTile class="mdmTile">
-					<content>
-						<VBox>
-							<l:HorizontalLayout>
-								<core:Icon class="mdmTileIcon" src="sap-icon://product" />
-								<VBox class="mdmTileHeader">
-									<Text class="mdmTileHeaderTitle" text="Product" />
-									<Text class="mdmTileHeaderSub" text="Examine Your Products" />
-								</VBox>
-							</l:HorizontalLayout>
-							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
-								densityAware="false" />
+		<!-- Product -->
+		<CustomTile class="mdmTile">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://product" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Product" />
+							<Text class="mdmTileHeaderSub" text="Examine Your Products" />
 						</VBox>
-					</content>
-				</CustomTile>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
 
-				<!-- Supplier -->
-				<CustomTile class="mdmTile">
-					<content>
-						<VBox>
-							<l:HorizontalLayout>
-								<core:Icon class="mdmTileIcon" src="sap-icon://cargo-train" />
-								<VBox class="mdmTileHeader">
-									<Text class="mdmTileHeaderTitle" text="Supplier" />
-									<Text class="mdmTileHeaderSub" text="Examine Your Suppliers" />
-								</VBox>
-							</l:HorizontalLayout>
-							<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
-								densityAware="false" />
+		<!-- Supplier -->
+		<CustomTile class="mdmTile">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://cargo-train" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Supplier" />
+							<Text class="mdmTileHeaderSub" text="Examine Your Suppliers" />
 						</VBox>
-					</content>
-				</CustomTile>
-			</TileContainer>
-		</content>
-
-		<!-- Footer -->
-		<footer>
-			<Bar>
-				<contentLeft>
-					<mvc:XMLView viewName="uni.mannheim.mdm.view.Menu"></mvc:XMLView>
-				</contentLeft>
-				<contentRight>
-					<Text class="mdmCopyright" text="© solveIT 2015" />
-				</contentRight>
-			</Bar>
-		</footer>
-	</Page>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
+	</TileContainer>
 </mvc:View>

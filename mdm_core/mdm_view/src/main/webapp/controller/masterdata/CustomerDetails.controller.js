@@ -107,14 +107,20 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		this.getView().getModel("customerModel").create("/Customers", customer, { success: this.successMsg,	error: this.errorMsg });
 	},
 	
+	/**
+	 * Method onCancel
+	 */
 	onCancel : function() {
-		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("masterdata.CustomerOverview", false);
-	},
-	
-	onBack : function () {
-		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("masterdata.CustomerOverview", false);
+		var oHistory = sap.ui.core.routing.History.getInstance();
+		var sPreviousHash = oHistory.getPreviousHash();
+
+		// history: go to prev. page
+		if (sPreviousHash !== undefined) {
+			window.history.go(-1);
+		} else {
+			var router = sap.ui.core.UIComponent.getRouterFor(this);
+			router.navTo("masterdata.CustomerOverview", false);
+		}
 	},
 	
 	/**
