@@ -21,7 +21,7 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	</welcome-file-list>
 
 	<!-- ============================================================== -->
-	<!-- OData Services -->
+	<!-- OData service -->
 	<!-- ============================================================== -->
 	<servlet>
 		<servlet-name>ODataServlet</servlet-name>
@@ -41,7 +41,10 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		<servlet-name>ODataServlet</servlet-name>
 		<url-pattern>/services/data.svc/*</url-pattern>
 	</servlet-mapping>
-
+	
+	<!-- ============================================================== -->
+	<!-- Uploader service -->
+	<!-- ============================================================== -->
 	<servlet>
 		<servlet-name>Upload</servlet-name>
 		<servlet-class>uni.mannheim.apdtld.mdm_view.services.Uploader</servlet-class>

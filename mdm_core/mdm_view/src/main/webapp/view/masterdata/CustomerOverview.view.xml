@@ -1,29 +1,45 @@
 <mvc:View height="100%"
 	controllerName="uni.mannheim.mdm.controller.masterdata.CustomerOverview"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:l="sap.ui.layout" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-	xmlns:smartTable="sap.ui.comp.smarttable" xmlns:sl="sap.ui.comp.navpopover">
+	xmlns:l="sap.ui.layout">
 
 	<VBox>
-		<smartFilterBar:SmartFilterBar id="customerSmartFilterBar"
-			entityType="Customer" persistencyKey="CustomerSmartFilter">
-			<smartFilterBar:controlConfiguration>
-				<smartFilterBar:ControlConfiguration
-					key="FirstName" />
-				<smartFilterBar:ControlConfiguration
-					key="LastName" />
-			</smartFilterBar:controlConfiguration>
-		</smartFilterBar:SmartFilterBar>
-		<smartTable:SmartTable class="mdmSmartTable"
-			entitySet="Customers" tableType="ResponsiveTable" useExportToExcel="true"
-			useVariantManagement="false" useTablePersonalisation="true" header="Customer"
-			showRowCount="true" persistencyKey="CustomerSmartTable"
-			enableAutoBinding="true" smartFilterId="customerSmartFilterBar">
-			<smartTable:semanticObjectController>
-				<sl:SemanticObjectController
-					navigationTargetsObtained="onNavTargetsObtained" navigate="onNavigate" />
-			</smartTable:semanticObjectController>
-		</smartTable:SmartTable>
+		<Table id="customerTable"
+			items="{path: '/Customers', sorter: {
+				path: 'LastName'
+			}}">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="Customer" level="H2" />
+					<ToolbarSpacer></ToolbarSpacer>
+					<Button icon="sap-icon://refresh" press="onRefresh" />
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column>
+					<Text text="Last Name" />
+				</Column>
+				<Column>
+					<Text text="First Name" />
+				</Column>
+				<Column>
+					<Text text="City" />
+				</Column>
+				<Column>
+					<Text text="Country" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{LastName}" />
+						<Text text="{FirstName}" />
+						<Text text="{Address/City}" />
+						<Text text="{Address/Country}" />
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
 		<VBox class="mdmNewEntity">
 			<Text text="Customer not found?" />
 			<Button text="Create" icon="sap-icon://create" press="onNewCustomer" />
