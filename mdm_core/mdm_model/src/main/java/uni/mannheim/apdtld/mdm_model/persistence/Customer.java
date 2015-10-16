@@ -1,14 +1,15 @@
 package uni.mannheim.apdtld.mdm_model.persistence;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,10 +29,10 @@ public class Customer implements Serializable {
 	private String title;
 	private String firstName;
 	private String lastName;
-	private String gender;
+	private int gender;
 	
 	@Temporal(TemporalType.DATE)
-	private Date birthDate;
+	private Calendar birthDate;
 	private Address address;
 	private ContactDetails contactDetails;
 	private PaymentDetails paymentDetails;
@@ -121,11 +122,11 @@ public class Customer implements Serializable {
 		this.title = title;
 	}
 
-	public Date getBirthDate() {
+	public Calendar getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(Calendar birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -137,11 +138,11 @@ public class Customer implements Serializable {
 		this.address = address;
 	}
 
-	public String getGender() {
+	public int getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(int gender) {
 		this.gender = gender;
 	}
 }

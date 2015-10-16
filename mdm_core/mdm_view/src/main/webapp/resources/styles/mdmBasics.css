@@ -22,13 +22,20 @@
 
 .mdmTile {
 	background-color: #ffffff;
-    border: 1px solid #dddddd;
-    box-shadow: 0px 2px 2px #dddddd;
-    display: inline-block;
-    height: 14rem !important;
-    margin: 0.5rem !important;
-    width: 16rem !important;
+	border: 1px solid #dddddd;
+	box-shadow: 0px 2px 2px #dddddd;
+	display: inline-block;
+	height: 14rem !important;
+	margin: 0.5rem !important;
+	width: 16rem !important;
 	padding: 15px !important;
+	cursor: pointer;
+	color: #666666;
+}
+
+.mdmTile:hover {
+	background: #007cc0;
+	color: #ffffff;
 }
 
 .mdmTile :onclick {
@@ -43,25 +50,45 @@
 .mdmTileHeaderTitle {
 	font-size: 1.2rem !important;
 	font-weight: bold;
-	color: #666666;
 }
 
-.mdmTileHeaderSub{
-	color: #666666;
+.mdmTileHeaderSub {
 	font-style: italic;
 	font-size: 0.75rem !important;
 }
 
 .mdmTileIcon {
 	font-family: SAP-icons;
-	color: #666666;
 	font-size: 2rem;
 }
 
-.mdmTileImage{
+.mdmTileUnderDevImage {
 	width: 6.5rem !important;
 	margin-top: 25px;
 	display: block;
-    margin-left: auto;
-    margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.mdmTileImage {
+	width: 6.5rem !important;
+	margin-top: 25px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.mdmNewEntity {
+	padding: 10px !important;
+	background-color: #F8FCFC;
+	border: 1px solid #dddddd;
+	box-shadow: 0px 2px 2px #dddddd;
+	margin-top: 20px !important;
+	display: block;
+	width: 12rem !important;
+	font-weight: bold;
+}
+
+.mdmSmartTable {
+	margin-top:20px !important;
 }

@@ -1,0 +1,65 @@
+<mvc:View height="100%"
+	controllerName="uni.mannheim.mdm.controller.masterdata.CustomerOverview"
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" xmlns:sl="sap.ui.comp.navpopover">
+
+	<Page title="SolveIT" class="sapUiContentPadding" showNavButton="true"
+		navButtonPress="onBack">
+		<!-- Header -->
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button type="Back" press="onBack" />
+					<Text class="mdmPageTitle" text="solveIT" />
+					<Text class="mdmPageSlogan" text="The customer in mind" />
+				</contentLeft>
+				<contentRight>
+					<Text class="mdmWelcome" text="Welcome: " />
+					<Link text="Max Mustermann" />
+					<Button icon="sap-icon://log" tooltip="Logout" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+
+		<!-- Content -->
+		<content>
+			<VBox>
+				<smartFilterBar:SmartFilterBar id="customerSmartFilterBar"
+					entityType="Customer" persistencyKey="CustomerSmartFilter">
+					<smartFilterBar:controlConfiguration>
+						<smartFilterBar:ControlConfiguration
+							key="FirstName" />
+						<smartFilterBar:ControlConfiguration
+							key="LastName" />
+					</smartFilterBar:controlConfiguration>
+				</smartFilterBar:SmartFilterBar>
+				<smartTable:SmartTable class="mdmSmartTable"
+					entitySet="Customers" tableType="ResponsiveTable" useExportToExcel="true"
+					useVariantManagement="false" useTablePersonalisation="true" header="Customer"
+					showRowCount="true" persistencyKey="CustomerSmartTable"
+					enableAutoBinding="true" smartFilterId="customerSmartFilterBar">
+					<smartTable:semanticObjectController>
+						<sl:SemanticObjectController navigationTargetsObtained="onNavTargetsObtained" navigate="onNavigate"/>
+					</smartTable:semanticObjectController>
+				</smartTable:SmartTable>
+				<VBox class="mdmNewEntity">
+					<Text text="Customer not found?" />
+					<Button text="Create" icon="sap-icon://create" press="onNewCustomer" />
+				</VBox>
+			</VBox>
+		</content>
+
+		<!-- Footer -->
+		<footer>
+			<Bar>
+				<contentLeft>
+					<mvc:XMLView viewName="uni.mannheim.mdm.view.Menu"></mvc:XMLView>
+				</contentLeft>
+				<contentRight>
+					<Text class="mdmCopyright" text="© solveIT 2015" />
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

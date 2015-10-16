@@ -2,7 +2,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.Overview", {
 	
 	onCustomerOverview:function(){
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("masterdata.CustomerDetails", false);
+		router.navTo("masterdata.CustomerOverview", false);
 	},
 
 	onBack : function () {

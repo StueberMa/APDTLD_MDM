@@ -17,17 +17,15 @@ sap.ui.core.UIComponent.extend("uni.mannheim.mdm.Component", {
 			}, {
 				pattern : "masterdata/overview",
 				name : "masterdata.Overview",
-				view : "masterdata.Overview",
+				view : "masterdata.Overview"
 			}, {
 				pattern : "masterdata/customer/details",
 				name : "masterdata.CustomerDetails",
-				view : "masterdata.CustomerDetails",
-				viewType : "JS"
+				view : "masterdata.CustomerDetails"
 			}, {
 				pattern : "masterdata/customer/overview",
 				name : "masterdata.CustomerOverview",
-				view : "masterdata.CustomerOverview",
-				viewType : "JS"
+				view : "masterdata.CustomerOverview"
 			}, {
 				pattern : "import/overview",
 				name : "import.Overview",

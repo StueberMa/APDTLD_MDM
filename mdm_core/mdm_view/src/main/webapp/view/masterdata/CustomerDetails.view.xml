@@ -1,0 +1,237 @@
+<core:View 	xmlns:core="sap.ui.core" 
+			xmlns:l="sap.ui.layout"
+			xmlns:f="sap.ui.layout.form"
+			xmlns:mvc="sap.ui.core.mvc" 
+			xmlns="sap.m"
+		controllerName="uni.mannheim.mdm.controller.masterdata.CustomerDetails" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Title">
+		<!-- Header -->
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button type="Back" press="onBack" />
+					<Text class="mdmPageTitle" text="solveIT" />
+					<Text class="mdmPageSlogan" text="The customer in mind" />
+				</contentLeft>
+				<contentRight>
+					<Text class="mdmWelcome" text="Welcome: " />
+					<Link text="Max Mustermann" />
+					<Button icon="sap-icon://log" tooltip="Logout" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+
+		<subHeader>
+			<Toolbar>
+				<Button icon="sap-icon://save" text="Save" press="onSave" />	
+				<ToolbarSpacer/>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
+			</Toolbar>
+		</subHeader>
+
+		<!-- Content -->
+		<content>
+
+			<f:Form id="FormCustomerDetails"
+				minWidth="1024"
+				maxContainerCols="2"
+				editable="true">
+				<f:title>
+					<core:Title text="Customer Details" />
+				</f:title>
+				<f:layout>
+						<f:ResponsiveGridLayout
+						labelSpanL="2"
+						labelSpanM="2"
+						emptySpanL="1"
+						emptySpanM="1"
+						columnsL="1"
+						columnsM="1" />
+					<!-- ALTERNATIVE: Manual layouting with <f:ResponsiveLayout /> -->
+				</f:layout>
+				<f:formContainers>
+				
+					<!--  General user details-->
+					<f:FormContainer title="General data">
+						<f:formElements>
+							<f:FormElement label="Title">
+								<f:fields>
+									<Select id="titleFieldId" 
+												selectedKey="{customerModel>Title}"
+												editable="{controllerModel>/enabled}"
+												width="30%">
+										<items>
+											<core:Item text="Mr." key="Mr."/>
+											<core:Item text="Mrs." key="Mrs."/>
+										</items>
+										<layoutData></layoutData>													
+									</Select>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+						<f:formElements>
+							<f:FormElement label="Name">
+								<f:fields>
+									<Input id="firstNameFieldId"
+											value="{customerModel>FirstName}"
+											editable="{controllerModel>/enabled}"
+											placeholder="First name">
+										<layoutData></layoutData>
+									</Input>
+									<Input id="lastNameFieldId"
+											value="{customerModel>LastName}"
+											editable="{controllerModel>/enabled}"
+											placeholder="Last name">
+										<layoutData></layoutData>
+									</Input>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+						<f:formElements>
+							<f:FormElement label="Date of Birth">
+								<f:fields>
+									<DatePicker id="birthDateFieldId"
+												value="{path:'customerModel>BirthDate'}"
+												editable="{controllerModel>/enabled}"
+												placeholder="Birth date"
+												width="30%">
+<!--													var dateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({pattern : "yyyy-MM-ddTKK:mm:ss" });
+												sap.ui.model.odata.type.DateTime()
+											sap.ui.model.type.Date({ oFormatOptions:{ style: "short", UTC: true} })
+												{path:'{customerModel>BirthDate}',
+														type:'sap.ui.model.odata.type.DateTime',
+														constraints: {displayFormat: 'Date'}}"  -->
+										<layoutData>
+											<!-- <f:GridElementData hCells="3"/> -->
+										</layoutData>
+									</DatePicker>	
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Gender">
+								<f:fields>
+									<RadioButtonGroup  	
+														id="genderFieldId"
+														columns="2" 
+														
+														editable="{controllerModel>/enabled}">
+														<!-- selectedIndex="{customerModel>Gender}" -->
+										<buttons>
+											<RadioButton text="Male"/>
+											<RadioButton text="Female"/>
+										</buttons>
+									</RadioButtonGroup>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+						<f:layoutData>
+							<f:GridContainerData />
+						</f:layoutData>
+					</f:FormContainer>
+					
+					<!--  Address details form  -->
+					<f:FormContainer title="Address details">
+						<f:formElements>
+							<f:FormElement label="Street / Number">
+								<f:fields>
+									<Input id="addressStreetFieldId"
+											value="{customerModel>Address/Street}"
+											editable="{controllerModel>/enabled}"
+											placeholder="Street">
+										<layoutData></layoutData>
+									</Input>
+									<Input id="addressHouseNoFieldId"
+											value="{customerModel>Address/HouseNo}"
+											editable="{controllerModel>/enabled}"
+											placeholder="No"
+											width="20%">
+										<layoutData></layoutData>
+									</Input>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Zip Code / City">
+								<f:fields>
+									<Input id="addressCityFieldId"
+											value="{customerModel>Address/City}"
+											editable="{controllerModel>/enabled}"
+											placeholder="City">
+										<layoutData></layoutData>
+									</Input>
+									<Input id="addressZipCodeFieldId"
+											value="{customerModel>Address/ZipCode}"
+											editable="{controllerModel>/enabled}"
+											placeholder="Zip code"
+											width="40%">
+										<layoutData></layoutData>
+									</Input>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Country">
+								<f:fields>
+									<Input id="addressCountryFieldId"
+											value="{customerModel>Address/Country}"
+											editable="{controllerModel>/enabled}"
+											placeholder="Country">
+										<layoutData></layoutData>
+									</Input>																		
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					
+					
+					<!--  contact details form  -->
+					<f:FormContainer title="Contact Details">
+						<f:formElements>
+							<f:FormElement label="E-Mail Address">
+								<f:fields>
+									<Input id="contactDetailsEmailFieldId"
+											type="Email"
+											value="{customerModel>ContactDetails/Email}"
+											editable="{controllerModel>/enabled}"
+											placeholder="E-Mail address">
+										<layoutData></layoutData>
+									</Input>																		
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Phone">
+								<f:fields>
+									<Input id="contactDetailsPhoneFieldId"
+											type="Tel"
+											value="{customerModel>ContactDetails/Phone}"
+											editable="{controllerModel>/enabled}"
+											placeholder="Phone number">
+										<layoutData></layoutData>
+									</Input>																		
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Mobile">
+								<f:fields>
+									<Input id="contactDetailsMobileFieldId"
+											type="Tel"
+											value="{customerModel>ContactDetails/Mobile}"
+											editable="{controllerModel>/enabled}"
+											placeholder="Mobile number">
+										<layoutData></layoutData>
+									</Input>																		
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		
+		<!-- Footer -->
+		<footer>
+			<Bar>
+				<contentLeft>
+					<mvc:XMLView viewName="uni.mannheim.mdm.view.Menu"></mvc:XMLView>
+				</contentLeft>
+				<contentRight>
+					<Text class="mdmCopyright" text="© solveIT 2015" />
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</core:View>

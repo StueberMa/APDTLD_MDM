@@ -7,7 +7,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		// Definition of a model that contains central variables for controlling the UI
 		var controllerModel = new sap.ui.model.json.JSONModel();
 		controllerModel.setData({
-		    		enabled: false
+		    		enabled: true
 		});
 
 		this.getView().setModel(controllerModel, "controllerModel");
@@ -23,10 +23,18 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		// create customer model and bind the specific customer to the user form
 		var customerListOdataServiceUrl = sOrigin + "/mdm_view/services/customer.svc";
 		var odataModel = new sap.ui.model.odata.ODataModel(customerListOdataServiceUrl);
-		this.getView().setModel(odataModel, "customerModel");
-		this.getView().bindElement("customerModel>/Customers("+ id + ")");
-		
 
+		this.getView().setModel(odataModel, "customerModel");
+		this.getView().bindElement("customerModel>/Customers(" + id + ")");
+		this.getView().byId("birthDateFieldId").bindProperty("value", {
+			path:'customerModel>BirthDate',
+			type: new sap.ui.model.type.Date({source: {pattern: "yyyy-MM-ddTKK:mm:ss"}}),
+		});
+		
+		console.log(this.getView().getElementBinding("customerModel"));
+		
+		
+		
 
 		// make sure to store the current view element
 		_this = this;
@@ -75,26 +83,38 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	/**
 	 * Method addNewCustomer.
 	 */
-	addNewCustomer : function() {
+	onSave : function() {
 		var customer = {};
 		//TODO: Add birthDate conversion
-		customer.FirstName = sap.ui.getCore().getControl("firstNameFieldId").getValue();
-		customer.LastName = sap.ui.getCore().getControl("lastNameFieldId").getValue();
-		customer.Title= sap.ui.getCore().getControl("titleFieldId").getValue();
-//		customer.BirthDate = sap.ui.getCore().getControl("birthDateFieldId").getDateValue();
-		customer.Gender = sap.ui.getCore().getControl("genderFieldId").getSelectedItem().getText();
+		customer.FirstName = this.getView().byId("firstNameFieldId").getValue();
+		customer.LastName = this.getView().byId("lastNameFieldId").getValue();
+		customer.Title= this.getView().byId("titleFieldId").getSelectedKey();
+		customer.BirthDate = this.getView().byId("birthDateFieldId").getDateValue();
+		customer.Gender = this.getView().byId("genderFieldId").getSelectedIndex();
 		customer.Address = {};
-		customer.Address.Street = sap.ui.getCore().getControl("addressStreetFieldId").getValue();
-		customer.Address.HouseNo = sap.ui.getCore().getControl("addressHouseNoFieldId").getValue();
-		customer.Address.ZipCode = sap.ui.getCore().getControl("addressZipCodeFieldId").getValue();
-		customer.Address.City = sap.ui.getCore().getControl("addressCityFieldId").getValue();
-		customer.Address.Country = sap.ui.getCore().getControl("addressCountryFieldId").getValue();
+		customer.Address.Street = this.getView().byId("addressStreetFieldId").getValue();
+		customer.Address.HouseNo = this.getView().byId("addressHouseNoFieldId").getValue();
+		customer.Address.ZipCode = this.getView().byId("addressZipCodeFieldId").getValue();
+		customer.Address.City = this.getView().byId("addressCityFieldId").getValue();
+		customer.Address.Country = this.getView().byId("addressCountryFieldId").getValue();
 		customer.ContactDetails = {};
-		customer.ContactDetails.Phone = sap.ui.getCore().getControl("contactDetailsPhoneFieldId").getValue();
-		customer.ContactDetails.Mobile = sap.ui.getCore().getControl("contactDetailsMobileFieldId").getValue();
-		customer.ContactDetails.Email = sap.ui.getCore().getControl("contactDetailsEmailFieldId").getValue();
+		customer.ContactDetails.Phone = this.getView().byId("contactDetailsPhoneFieldId").getValue();
+		customer.ContactDetails.Mobile = this.getView().byId("contactDetailsMobileFieldId").getValue();
+		customer.ContactDetails.Email = this.getView().byId("contactDetailsEmailFieldId").getValue();
+		
+		this.getView().getModel("customerModel");
 			
 		this.getView().getModel("customerModel").create("/Customers", customer, { success: this.successMsg,	error: this.errorMsg });
+	},
+	
+	onCancel : function() {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("masterdata.CustomerOverview", false);
+	},
+	
+	onBack : function () {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("masterdata.CustomerOverview", false);
 	},
 	
 	/**
