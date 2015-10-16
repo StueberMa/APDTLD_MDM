@@ -32,14 +32,14 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		</init-param>
 		<init-param>
 			<param-name>org.apache.olingo.odata2.service.factory</param-name>
-			<param-value>uni.mannheim.apdtld.mdm_view.odata.CustomerServiceFactory</param-value>
+			<param-value>uni.mannheim.apdtld.mdm_view.odata.ODataServiceFactory</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>ODataServlet</servlet-name>
-		<url-pattern>/services/customer.svc/*</url-pattern>
+		<url-pattern>/services/data.svc/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

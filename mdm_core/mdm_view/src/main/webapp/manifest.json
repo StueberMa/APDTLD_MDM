@@ -4,7 +4,7 @@
         "title": "solveIT",
         "dataSources": {
             "data": {
-                "uri": "/mdm_view/services/customer.svc"
+                "uri": "/mdm_view/services/data.svc"
             }
         }
     },

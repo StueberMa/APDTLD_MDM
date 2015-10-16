@@ -2,9 +2,6 @@ package uni.mannheim.apdtld.mdm_view.odata;
 
 import javax.persistence.EntityManagerFactory;
 
-import org.apache.olingo.odata2.api.ODataService;
-import org.apache.olingo.odata2.api.edm.provider.EdmProvider;
-import org.apache.olingo.odata2.api.processor.ODataSingleProcessor;
 import org.apache.olingo.odata2.jpa.processor.api.ODataJPAContext;
 import org.apache.olingo.odata2.jpa.processor.api.ODataJPAServiceFactory;
 import org.apache.olingo.odata2.jpa.processor.api.exception.ODataJPARuntimeException;
@@ -15,10 +12,10 @@ import org.apache.olingo.odata2.jpa.processor.api.exception.ODataJPARuntimeExcep
  * @author APDTLD_MDM @ Uni Mannheim
  * @version 25.09.2015
  */
-public class CustomerServiceFactory extends ODataJPAServiceFactory {
+public class ODataServiceFactory extends ODataJPAServiceFactory {
 	
 	// constants
-	private static final String CUSTOMER_MODEL_NAME = "customer_model";
+	private static final String DATA_MODEL_NAME = "data_model";
 	
 	/**
 	 * Method to init. OData service.
@@ -38,9 +35,9 @@ public class CustomerServiceFactory extends ODataJPAServiceFactory {
 		
 		// get entity manager
 		try {
-			emf = JpaEntityManagerFactory.getEntityManagerFactory(CUSTOMER_MODEL_NAME);
+			emf = JpaEntityManagerFactory.getEntityManagerFactory(DATA_MODEL_NAME);
 			oDataJPAContext.setEntityManagerFactory(emf);
-			oDataJPAContext.setPersistenceUnitName(CUSTOMER_MODEL_NAME);
+			oDataJPAContext.setPersistenceUnitName(DATA_MODEL_NAME);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

@@ -21,7 +21,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		id = 1;
 		
 		// create customer model and bind the specific customer to the user form
-		var customerListOdataServiceUrl = sOrigin + "/mdm_view/services/customer.svc";
+		var customerListOdataServiceUrl = sOrigin + "/mdm_view/services/data.svc";
 		var odataModel = new sap.ui.model.odata.ODataModel(customerListOdataServiceUrl);
 
 		this.getView().setModel(odataModel, "customerModel");
