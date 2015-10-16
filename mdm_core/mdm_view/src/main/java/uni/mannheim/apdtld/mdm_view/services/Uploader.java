@@ -23,16 +23,13 @@ public class Uploader extends HttpServlet {
 
 	private boolean isMultipart;
 	private String filePath;
-	private int maxFileSize = 50 * 1024 * 1024;
 	private int maxMemSize = 4 * 1024;
 	private File file;
 
 	public void init() {
 		// Get the file location where it would be stored.
 		filePath = getServletContext().getInitParameter("file-upload");
-		ServletContext context = getServletContext();
-		
-		context.log("test " + filePath);
+		new File(filePath).mkdirs();
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -60,12 +57,12 @@ public class Uploader extends HttpServlet {
 		// maximum size that will be stored in memory
 		factory.setSizeThreshold(maxMemSize);
 		// Location to save data that is larger than maxMemSize.
-		factory.setRepository(new File("C:\\temp"));
+		factory.setRepository(new File(filePath));
 
 		// Create a new file upload handler
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		// maximum file size to be uploaded.
-		upload.setSizeMax(maxFileSize);
+		//upload.setSizeMax(maxFileSize);
 
 		try {
 			// Parse the request to get file items.
