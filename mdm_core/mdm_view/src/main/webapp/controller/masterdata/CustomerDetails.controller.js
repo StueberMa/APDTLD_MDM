@@ -4,19 +4,26 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 * Method controllMode
 	 */
 	controllMode : function(oEvent) {
+		
+		// create
 		if (oEvent.getParameter("name") === "masterdata.CustomerCreate") {
 			var context = this.getView().getModel().createEntry("/Customers", {});
 			this.getView().unbindElement();
 			this.getView().setBindingContext(context);
+			
+		// edit
 		} else if (oEvent.getParameter("name") === "masterdata.CustomerDetails") {
 			var id = oEvent.getParameter("arguments").id;
 			this.getView().bindElement("/Customers(" + id + ")");
+			
+		// leave
 		} else {
 			var context = this.getView().getBindingContext();
 
-			if (context !== "undefined") {
-				this.getView().getModel().deleteCreatedEntry(context);
-			}
+			if (context === "undefined")
+				return;
+			
+			this.getView().getModel().deleteCreatedEntry(context);
 		}
 	},
 
@@ -38,7 +45,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		model.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
 		this.getView().setModel(model);
 
-		// init: create || edit || leave
+		// create || edit || leave
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.controllMode, this);
 	},
