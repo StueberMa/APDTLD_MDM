@@ -37,7 +37,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		var model = new sap.ui.model.odata.ODataModel("/mdm_view/services/data.svc");
 		model.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
 		this.getView().setModel(model);
-		
+
 		// init: create || edit || leave
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.controllMode, this);
@@ -48,7 +48,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 */
 	onSave : function() {
 		var model = this.getView().getModel();
-		model.submitChanges(this.successMsg, this.errorMsg);
+		model.submitChanges(this.successMsg(this), this.errorMsg(this));
 	},
 
 	/**
@@ -66,18 +66,60 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			router.navTo("masterdata.CustomerOverview", false);
 		}
 	},
+	
+	/**
+	 * Method onDialogPress
+	 */
+	onDialogPress : function (oEvent) {
+		//dialog.destroy();
+		this.onCancel();
+	},
 
 	/**
 	 * Method successMsg.
 	 */
-	successMsg : function() {
-		sap.ui.commons.MessageBox.alert("Customer entity has been successfully created");
+	successMsg : function(controller) {
+		
+		var dialog = new sap.m.Dialog({
+			title : 'Success',
+			type : 'Message',
+			state : 'Success',
+				content: new sap.m.Text({
+					text: 'Customer successfully saved'
+				}),
+			beginButton: new sap.m.Button({
+				text: 'OK',
+				press: function () {
+					controller.onCancel();
+					dialog.close();
+				}
+			})
+		});
+		
+		dialog.open();
 	},
 
 	/**
 	 * Method errorMsg.
 	 */
-	errorMsg : function() {
-		sap.ui.commons.MessageBox.alert("Error occured when creating customer entity");
+	errorMsg : function(controller) {
+		
+		var dialog = new sap.m.Dialog({
+			title : 'Internal Error',
+			type : 'Message',
+			state : 'Error',
+				content: new sap.m.Text({
+					text: 'Not able to save customer'
+				}),
+			beginButton: new sap.m.Button({
+				text: 'OK',
+				press: function () {
+					controller.onCancel();
+					dialog.close();
+				}
+			})
+		});
+		
+		dialog.open();
 	}
 });
