@@ -1,5 +1,5 @@
 <mvc:View controllerName="uni.mannheim.mdm.controller.App"
-	xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" displayBlock="true">
+	xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout">
 
 	<App>
 		<Page id="main" title="SolveIT" class="sapUiContentPadding">
@@ -7,21 +7,26 @@
 			<customHeader>
 				<Bar>
 					<contentLeft>
-						<Button id="navBack" type="Back" press="onBack" />
-						<Text class="mdmPageTitle" text="solveIT" />
-						<Text class="mdmPageSlogan" text="The customer in mind" />
+						<l:HorizontalLayout>
+							<Button id="navBack" type="Back" press="onBack" />
+							<Text class="mdmPageTitle" text="solveIT" />
+							<Text class="mdmPageSlogan" text="The customer in mind" />
+						</l:HorizontalLayout>
 					</contentLeft>
 					<contentRight>
-						<Text class="mdmWelcome" text="Welcome: " />
-						<Link text="Max Mustermann" />
-						<Button icon="sap-icon://log" tooltip="Logout" />
+						<l:HorizontalLayout>
+							<Text class="mdmWelcome" text="Welcome: " />
+							<Link text="Max Mustermann" />
+							<Button icon="sap-icon://log" tooltip="Logout" />
+						</l:HorizontalLayout>
 					</contentRight>
 				</Bar>
 			</customHeader>
 
 			<!-- Content -->
 			<content>
-				<NavContainer id="navContainer" width="100%" class="navContainerControl" />	
+				<NavContainer id="navContainer" width="100%"
+					class="navContainerControl" />
 			</content>
 
 			<!-- Footer -->
