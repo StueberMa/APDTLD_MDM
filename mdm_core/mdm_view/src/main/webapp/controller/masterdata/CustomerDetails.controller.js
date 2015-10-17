@@ -55,7 +55,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 */
 	onSave : function() {
 		var model = this.getView().getModel();
-		model.submitChanges(this.successMsg(this), this.errorMsg(this));
+		model.submitChanges(this.successMsg, this.errorMsg, {});
 	},
 
 	/**
@@ -73,20 +73,12 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			router.navTo("masterdata.CustomerOverview", false);
 		}
 	},
-	
-	/**
-	 * Method onDialogPress
-	 */
-	onDialogPress : function (oEvent) {
-		//dialog.destroy();
-		this.onCancel();
-	},
 
 	/**
 	 * Method successMsg.
 	 */
-	successMsg : function(controller) {
-		
+	successMsg : function() {
+
 		var dialog = new sap.m.Dialog({
 			title : 'Success',
 			type : 'Message',
@@ -97,10 +89,20 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			beginButton: new sap.m.Button({
 				text: 'OK',
 				press: function () {
-					controller.onCancel();
+					var oHistory = sap.ui.core.routing.History.getInstance();
+					var sPreviousHash = oHistory.getPreviousHash();
+
+					// history: go to prev. page
+					if (sPreviousHash !== undefined) {
+						window.history.go(-1);
+					}
+					
 					dialog.close();
 				}
-			})
+			}),
+			afterClose: function() {
+				dialog.destroy();
+			}
 		});
 		
 		dialog.open();
@@ -109,7 +111,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	/**
 	 * Method errorMsg.
 	 */
-	errorMsg : function(controller) {
+	errorMsg : function() {
 		
 		var dialog = new sap.m.Dialog({
 			title : 'Internal Error',
@@ -121,10 +123,20 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			beginButton: new sap.m.Button({
 				text: 'OK',
 				press: function () {
-					controller.onCancel();
+					var oHistory = sap.ui.core.routing.History.getInstance();
+					var sPreviousHash = oHistory.getPreviousHash();
+
+					// history: go to prev. page
+					if (sPreviousHash !== undefined) {
+						window.history.go(-1);
+					}
+					
 					dialog.close();
 				}
-			})
+			}),
+			afterClose: function() {
+				dialog.destroy();
+			}
 		});
 		
 		dialog.open();
