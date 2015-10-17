@@ -5,10 +5,7 @@
         "dataSources": {
             "data": {
                 "uri": "/mdm_view/services/data.svc",
-                 "type": "OData",
-                 "settings": {
-                     "odataVersion": "2.0"
-                 }
+                 "type": "OData"
             }
         }
     },
@@ -50,7 +47,7 @@
         "models": {
             "": {
                 "dataSource": "data",
-                "settings": { }
+                "settings": { "json": false, "defaultBindingMode" : "TwoWay", "useBatch" : false, "defaultCountMode" : "Both", "loadMetadataAsync" : false }
             }
         },
         "rootView": "uni.mannheim.mdm.view.App",

@@ -4,11 +4,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 	 * Method onInit
 	 */
 	onInit : function() {
-		
-		// To-Do: Use model defined in Component.js
-		var model = new sap.ui.model.odata.ODataModel("/mdm_view/services/data.svc");
-		this.getView().setModel(model);
-		
 		// register event for selection
 		var table = this.getView().byId("customerTable");
 		table.setMode(sap.m.ListMode.SingleSelectMaster);
