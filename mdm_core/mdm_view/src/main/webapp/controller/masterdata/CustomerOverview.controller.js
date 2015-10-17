@@ -5,7 +5,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 	 */
 	onInit : function() {
 		
-		// To-Dd: Use model defined in Component.js
+		// To-Do: Use model defined in Component.js
 		var model = new sap.ui.model.odata.ODataModel("/mdm_view/services/data.svc");
 		this.getView().setModel(model);
 		

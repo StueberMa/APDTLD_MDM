@@ -18,7 +18,6 @@
 		<f:layout>
 			<f:ResponsiveGridLayout labelSpanL="2"
 				labelSpanM="2" emptySpanL="1" emptySpanM="1" columnsL="1" columnsM="1" />
-			<!-- ALTERNATIVE: Manual layouting with <f:ResponsiveLayout /> -->
 		</f:layout>
 		<f:formContainers>
 
@@ -27,8 +26,7 @@
 				<f:formElements>
 					<f:FormElement label="Title">
 						<f:fields>
-							<Select id="titleFieldId" selectedKey="{customerModel>Title}"
-								editable="{controllerModel>/enabled}" width="30%">
+							<Select id="titleFieldId" selectedKey="{Title}" width="30%">
 								<items>
 									<core:Item text="Mr." key="Mr." />
 									<core:Item text="Mrs." key="Mrs." />
@@ -41,12 +39,11 @@
 				<f:formElements>
 					<f:FormElement label="Name">
 						<f:fields>
-							<Input id="firstNameFieldId" value="{customerModel>FirstName}"
-								editable="{controllerModel>/enabled}" placeholder="First name">
+							<Input id="firstNameFieldId" value="{FirstName}"
+								placeholder="First name">
 								<layoutData></layoutData>
 							</Input>
-							<Input id="lastNameFieldId" value="{customerModel>LastName}"
-								editable="{controllerModel>/enabled}" placeholder="Last name">
+							<Input id="lastNameFieldId" value="{LastName}" placeholder="Last name">
 								<layoutData></layoutData>
 							</Input>
 						</f:fields>
@@ -55,24 +52,20 @@
 				<f:formElements>
 					<f:FormElement label="Date of Birth">
 						<f:fields>
-							<DatePicker id="birthDateFieldId" value="{path:'customerModel>BirthDate'}"
-								editable="{controllerModel>/enabled}" placeholder="Birth date"
-								width="30%">
+							<DatePicker id="birthDateFieldId" value="{path:'BirthDate'}"
+								placeholder="Birth date" width="30%">
 								<!-- var dateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({pattern 
 									: "yyyy-MM-ddTKK:mm:ss" }); sap.ui.model.odata.type.DateTime() sap.ui.model.type.Date({ 
 									oFormatOptions:{ style: "short", UTC: true} }) {path:'{customerModel>BirthDate}', 
 									type:'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}" -->
 								<layoutData>
-									<!-- <f:GridElementData hCells="3"/> -->
 								</layoutData>
 							</DatePicker>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="Gender">
 						<f:fields>
-							<RadioButtonGroup id="genderFieldId" columns="2"
-
-								editable="{controllerModel>/enabled}">
+							<RadioButtonGroup id="genderFieldId" columns="2">
 								<!-- selectedIndex="{customerModel>Gender}" -->
 								<buttons>
 									<RadioButton text="Male" />
@@ -92,33 +85,32 @@
 				<f:formElements>
 					<f:FormElement label="Street / Number">
 						<f:fields>
-							<Input id="addressStreetFieldId" value="{customerModel>Address/Street}"
-								editable="{controllerModel>/enabled}" placeholder="Street">
+							<Input id="addressStreetFieldId" value="{Address/Street}"
+								placeholder="Street">
 								<layoutData></layoutData>
 							</Input>
-							<Input id="addressHouseNoFieldId" value="{customerModel>Address/HouseNo}"
-								editable="{controllerModel>/enabled}" placeholder="No" width="20%">
+							<Input id="addressHouseNoFieldId" value="{Address/HouseNo}"
+								placeholder="No" width="20%">
 								<layoutData></layoutData>
 							</Input>
 						</f:fields>
 					</f:FormElement>
-					<f:FormElement label="Zip Code / City">
+					<f:FormElement label="City / Zip Code">
 						<f:fields>
-							<Input id="addressCityFieldId" value="{customerModel>Address/City}"
-								editable="{controllerModel>/enabled}" placeholder="City">
+							<Input id="addressCityFieldId" value="{Address/City}"
+								placeholder="City">
 								<layoutData></layoutData>
 							</Input>
-							<Input id="addressZipCodeFieldId" value="{customerModel>Address/ZipCode}"
-								editable="{controllerModel>/enabled}" placeholder="Zip code"
-								width="40%">
+							<Input id="addressZipCodeFieldId" value="{Address/ZipCode}"
+								placeholder="Zip code" width="40%">
 								<layoutData></layoutData>
 							</Input>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="Country">
 						<f:fields>
-							<Input id="addressCountryFieldId" value="{customerModel>Address/Country}"
-								editable="{controllerModel>/enabled}" placeholder="Country">
+							<Input id="addressCountryFieldId" value="{Address/Country}"
+								placeholder="Country">
 								<layoutData></layoutData>
 							</Input>
 						</f:fields>
@@ -126,15 +118,13 @@
 				</f:formElements>
 			</f:FormContainer>
 
-
 			<!-- contact details form -->
 			<f:FormContainer title="Contact Details">
 				<f:formElements>
 					<f:FormElement label="E-Mail Address">
 						<f:fields>
 							<Input id="contactDetailsEmailFieldId" type="Email"
-								value="{customerModel>ContactDetails/Email}" editable="{controllerModel>/enabled}"
-								placeholder="E-Mail address">
+								value="{ContactDetails/Email}" placeholder="E-Mail address">
 								<layoutData></layoutData>
 							</Input>
 						</f:fields>
@@ -142,8 +132,7 @@
 					<f:FormElement label="Phone">
 						<f:fields>
 							<Input id="contactDetailsPhoneFieldId" type="Tel"
-								value="{customerModel>ContactDetails/Phone}" editable="{controllerModel>/enabled}"
-								placeholder="Phone number">
+								value="{ContactDetails/Phone}" placeholder="Phone number">
 								<layoutData></layoutData>
 							</Input>
 						</f:fields>
@@ -151,8 +140,7 @@
 					<f:FormElement label="Mobile">
 						<f:fields>
 							<Input id="contactDetailsMobileFieldId" type="Tel"
-								value="{customerModel>ContactDetails/Mobile}" editable="{controllerModel>/enabled}"
-								placeholder="Mobile number">
+								value="{ContactDetails/Mobile}" placeholder="Mobile number">
 								<layoutData></layoutData>
 							</Input>
 						</f:fields>
