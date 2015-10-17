@@ -1,7 +1,7 @@
 sap.ui.controller("uni.mannheim.mdm.controller.App", {
 
 	/**
-	 * Method onInit.
+	 * Method onInit
 	 */
 	onInit : function() {
 		var oRouter = this.getOwnerComponent().getRouter();
@@ -17,7 +17,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.App", {
 	},
 
 	/**
-	 * Method onInit.
+	 * Method onBack
 	 */
 	onBack : function() {
 		var oHistory = sap.ui.core.routing.History.getInstance();

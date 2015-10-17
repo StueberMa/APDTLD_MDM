@@ -4,7 +4,11 @@
         "title": "solveIT",
         "dataSources": {
             "data": {
-                "uri": "/mdm_view/services/data.svc"
+                "uri": "/mdm_view/services/data.svc",
+                 "type": "OData",
+                 "settings": {
+                     "odataVersion": "2.0"
+                 }
             }
         }
     },
@@ -45,7 +49,8 @@
         },
         "models": {
             "": {
-                "dataSource": "data"
+                "dataSource": "data",
+                "settings": { }
             }
         },
         "rootView": "uni.mannheim.mdm.view.App",
