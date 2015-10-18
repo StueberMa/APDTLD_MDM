@@ -47,7 +47,13 @@
         "models": {
             "": {
                 "dataSource": "data",
-                "type" : "sap.ui.model.odata.ODataModel"
+                "type" : "sap.ui.model.odata.v2.ODataModel",
+                "settings" : {
+                	"defaultBindingMode" : "TwoWay",
+                	"defaultCountMode" : "Both",
+                	"useBatch" : false
+                	
+                }
             }
         },
         "rootView": "uni.mannheim.mdm.view.App",

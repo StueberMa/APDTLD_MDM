@@ -54,14 +54,8 @@
 					<f:formElements>
 						<f:FormElement label="Date of Birth">
 							<f:fields>
-								<DatePicker id="birthDateFieldId" value="{path:'BirthDate'}"
-									placeholder="Birth date" width="30%">
-									<!-- var dateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({pattern 
-										: "yyyy-MM-ddTKK:mm:ss" }); sap.ui.model.odata.type.DateTime() sap.ui.model.type.Date({ 
-										oFormatOptions:{ style: "short", UTC: true} }) {path:'{customerModel>BirthDate}', 
-										type:'sap.ui.model.odata.type.DateTime', constraints: {displayFormat: 'Date'}}" -->
-									<layoutData>
-									</layoutData>
+								<DatePicker id="birthDateFieldId" value="{path:'BirthDate', type:'sap.ui.model.type.Date',
+									formatOptions: { style: 'medium', strictParsing: true}}" placeholder="Birth date" width="30%">
 								</DatePicker>
 							</f:fields>
 						</f:FormElement>

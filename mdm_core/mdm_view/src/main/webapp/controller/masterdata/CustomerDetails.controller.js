@@ -20,11 +20,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			
 		// leave
 		} else {
-			var context = this.getView().getBindingContext();
-
-			if (context === "undefined")
+			// skip if edit
+			if ( this._mode !== "CREATE")
 				return;
 			
+			var context = this.getView().getBindingContext();
 			this.getView().getModel().deleteCreatedEntry(context);
 		}
 	},
@@ -38,7 +38,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	},
 
 	/**
-	 * Method onInit.
+	 * Method onInit
 	 */
 	onInit : function() {
 		
@@ -48,11 +48,16 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	},
 
 	/**
-	 * Method addNewCustomer.
+	 * Method onSave
 	 */
 	onSave : function() {
 		var model = this.getView().getModel();
-		model.submitChanges(jQuery.proxy(this.onSuccess, this), jQuery.proxy(this.onError, this));
+		
+		var parameters = {};
+		parameters.success = jQuery.proxy(this.onSuccess, this);
+		parameters.error = jQuery.proxy(this.onError, this);
+		
+		model.submitChanges(parameters);
 	},
 
 	/**
@@ -72,7 +77,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	},
 
 	/**
-	 * Method successMsg.
+	 * Method onSuccess
 	 */
 	onSuccess : function(oData) {
 		
@@ -95,9 +100,9 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	},
 
 	/**
-	 * Method errorMsg.
+	 * Method onError
 	 */
-	onError : function() {
+	onError : function(oError) {
 		
 		// set data model
 		var model = new sap.ui.model.json.JSONModel();
