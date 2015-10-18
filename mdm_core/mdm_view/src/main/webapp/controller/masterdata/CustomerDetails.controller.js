@@ -1,20 +1,22 @@
 sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 
 	/**
-	 * Method controllMode
+	 * Method controlMode
 	 */
-	controllMode : function(oEvent) {
+	controlMode : function(oEvent) {
 		
 		// create
 		if (oEvent.getParameter("name") === "masterdata.CustomerCreate") {
 			var context = this.getView().getModel().createEntry("/Customers", {});
 			this.getView().unbindElement();
 			this.getView().setBindingContext(context);
+			this._mode = "CREATE";
 			
 		// edit
 		} else if (oEvent.getParameter("name") === "masterdata.CustomerDetails") {
 			var id = oEvent.getParameter("arguments").id;
 			this.getView().bindElement("/Customers(" + id + ")");
+			this._mode = "EDIT";
 			
 		// leave
 		} else {
@@ -42,7 +44,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		
 		// create || edit || leave
 		var oRouter = this.getOwnerComponent().getRouter();
-		oRouter.attachRouteMatched(this.controllMode, this);
+		oRouter.attachRouteMatched(this.controlMode, this);
 	},
 
 	/**
@@ -50,7 +52,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 */
 	onSave : function() {
 		var model = this.getView().getModel();
-		model.submitChanges(this.successMsg, this.errorMsg, {});
+		model.submitChanges(jQuery.proxy(this.onSuccess, this), jQuery.proxy(this.onError, this));
 	},
 
 	/**
@@ -72,68 +74,40 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	/**
 	 * Method successMsg.
 	 */
-	successMsg : function() {
-
-		var dialog = new sap.m.Dialog({
-			title : 'Success',
-			type : 'Message',
-			state : 'Success',
-				content: new sap.m.Text({
-					text: 'Customer successfully saved'
-				}),
-			beginButton: new sap.m.Button({
-				text: 'OK',
-				press: function () {
-					var oHistory = sap.ui.core.routing.History.getInstance();
-					var sPreviousHash = oHistory.getPreviousHash();
-
-					// history: go to prev. page
-					if (sPreviousHash !== undefined) {
-						window.history.go(-1);
-					}
-					
-					dialog.close();
-				}
-			}),
-			afterClose: function() {
-				dialog.destroy();
-			}
-		});
+	onSuccess : function(oData) {
 		
-		dialog.open();
+		// set data model
+		var model = new sap.ui.model.json.JSONModel();
+		model.setData( {
+			text : "Customer successfully saved",
+			type : "Success"
+		});
+		this.getView().setModel(model, "msg");
+		
+		var msgArea = this.getView().byId("messageArea");
+		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
+		
+		// nav. to edit for create
+		if(this._mode === "CREATE") {
+			var router = sap.ui.core.UIComponent.getRouterFor(this);
+			router.navTo("masterdata.CustomerDetails", {id: oData.Id}, false);
+		}
 	},
 
 	/**
 	 * Method errorMsg.
 	 */
-	errorMsg : function() {
+	onError : function() {
 		
-		var dialog = new sap.m.Dialog({
-			title : 'Internal Error',
-			type : 'Message',
-			state : 'Error',
-				content: new sap.m.Text({
-					text: 'Not able to save customer'
-				}),
-			beginButton: new sap.m.Button({
-				text: 'OK',
-				press: function () {
-					var oHistory = sap.ui.core.routing.History.getInstance();
-					var sPreviousHash = oHistory.getPreviousHash();
-
-					// history: go to prev. page
-					if (sPreviousHash !== undefined) {
-						window.history.go(-1);
-					}
-					
-					dialog.close();
-				}
-			}),
-			afterClose: function() {
-				dialog.destroy();
-			}
+		// set data model
+		var model = new sap.ui.model.json.JSONModel();
+		model.setData( {
+			text : "Customer could not be saved",
+			type : "Error"
 		});
+		this.getView().setModel(model, "msg");
 		
-		dialog.open();
+		var msgArea = this.getView().byId("messageArea");
+		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 	}
 });

@@ -1,0 +1,12 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	
+	<MessageStrip
+		text="{msg>/text}"
+		type="{msg>/type}"
+		showIcon="true"
+		showCloseButton="true"
+		close="onMessageClose">
+	</MessageStrip>
+</core:FragmentDefinition>
