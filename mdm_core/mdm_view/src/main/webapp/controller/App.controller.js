@@ -4,6 +4,9 @@ sap.ui.controller("uni.mannheim.mdm.controller.App", {
 	 * Method onInit
 	 */
 	onInit : function() {
+		var model = this.getOwnerComponent().getModel();
+		model.setDefaultBindingMode("TwoWay");
+		
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.controllNavButton, this);
 	},

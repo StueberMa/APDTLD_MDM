@@ -151,5 +151,6 @@
 				</f:FormContainer>
 			</f:formContainers>
 		</f:Form>
+		<l:VerticalLayout class="sapUiContentPadding" id="messageArea" width="100%" />
 	</ScrollContainer>
 </core:View>

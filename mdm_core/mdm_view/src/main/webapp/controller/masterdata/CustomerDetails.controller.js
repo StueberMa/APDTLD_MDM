@@ -40,11 +40,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 */
 	onInit : function() {
 		
-		// To-Do: Use model defined in Component.js
-		var model = new sap.ui.model.odata.ODataModel("/mdm_view/services/data.svc");
-		model.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
-		this.getView().setModel(model);
-		
 		// create || edit || leave
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.controllMode, this);

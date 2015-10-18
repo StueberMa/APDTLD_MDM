@@ -47,7 +47,8 @@
         "models": {
             "": {
                 "dataSource": "data",
-                "settings": { "json": false, "defaultBindingMode" : "TwoWay", "useBatch" : false, "defaultCountMode" : "Both", "loadMetadataAsync" : false }
+                "type" : "sap.ui.model.odata.ODataModel",
+                "settings": { "defaultBindingMode" : "TwoWay" }
             }
         },
         "rootView": "uni.mannheim.mdm.view.App",
