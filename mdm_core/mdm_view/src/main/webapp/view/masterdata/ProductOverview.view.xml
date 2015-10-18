@@ -1,0 +1,52 @@
+<mvc:View height="100%"
+	controllerName="uni.mannheim.mdm.controller.masterdata.ProductOverview"
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout">
+
+	<VBox>
+		<Table id="productTable"
+			items="{path: '/Products', sorter: {
+				path: 'Name'
+			}}">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="Product" level="H2" />
+					<ToolbarSpacer></ToolbarSpacer>
+					<Button icon="sap-icon://refresh" press="onRefresh" />
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column>
+					<Text text="Name" />
+				</Column>
+				<Column>
+					<Text text="Size" />
+				</Column>
+				<Column>
+					<Text text="Color" />
+				</Column>
+				<Column>
+					<Text text="Price" />
+				</Column>
+				<Column>
+					<Text text="Currency" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{Name}" />
+						<Text text="{Size}" />
+						<Text text="{Color}" />
+						<Text text="{Price}" />
+						<Text text="{Currency}" />
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<VBox class="mdmNewEntity">
+			<Text text="Product not found?" />
+			<Button text="Create" icon="sap-icon://create" press="onNewProduct" />
+		</VBox>
+	</VBox>
+</mvc:View>

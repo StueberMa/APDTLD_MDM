@@ -1,0 +1,189 @@
+<core:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="uni.mannheim.mdm.controller.masterdata.ProductDetails"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<ScrollContainer height="100%" width="100%" horizontal="true"
+		vertical="true" focusable="false">
+		<Toolbar>
+			<Button icon="sap-icon://save" text="Save" press="onSave" />
+			<ToolbarSpacer />
+			<ToolbarSpacer />
+			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
+		</Toolbar>
+		<f:Form id="FormProductDetails" minWidth="1024"
+			maxContainerCols="2" editable="true">
+			<f:title>
+				<core:Title text="Product Details" />
+			</f:title>
+			<f:layout>
+				<f:ResponsiveGridLayout labelSpanL="2"
+					labelSpanM="2" emptySpanL="1" emptySpanM="1" columnsL="1" columnsM="1" />
+			</f:layout>
+			<f:formContainers>
+
+				<!-- General product details -->
+				<f:FormContainer title="General data">
+					<f:formElements>
+						<f:FormElement label="Name">
+							<f:fields>
+								<Input id="nameFieldId" value="{Name}"
+									placeholder="Name">
+									<layoutData></layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="Description">
+							<f:fields>
+								<Input id="descriptionFieldId" value="{Description}"
+									placeholder="Description">
+									<layoutData></layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="UnitOfMeasure">
+							<f:fields>
+								<Select id="unitOfMeasureFieldId" selectedKey="{UnitOfMeasure}" width="30%">
+									<items>
+										<core:Item text="Kilogram" key="KG" />
+										<core:Item text="Liter" key="L" />
+										<core:Item text="Meter" key="M" />
+										<core:Item text="Piece" key="PC" />
+									</items>
+									<layoutData></layoutData>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="GrossWeight">
+							<f:fields>
+								<Input id="grossWeightFieldId" value="{GrossWeight}"
+									placeholder="GrossWeight">
+									<layoutData></layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="NetWeight">
+							<f:fields>
+								<Input id="netWeightFieldId" value="{NetWeight}"
+									placeholder="NetWeight">
+									<layoutData></layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="WeightUnit">
+							<f:fields>
+								<Select id="weightUnitFieldId" selectedKey="{WeightUnit}" width="30%">
+									<items>
+										<core:Item text="Gram" key="G" />
+										<core:Item text="Kilogram" key="KG" />
+										<core:Item text="Ton" key="TO" />
+									</items>
+									<layoutData></layoutData>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="Size">
+							<f:fields>
+								<Input id="sizeFieldId" value="{Size}"
+									placeholder="Size">
+									<layoutData></layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="Color">
+							<f:fields>
+								<Input id="colorFieldId" value="{Color}"
+									placeholder="Color">
+									<layoutData></layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="Price">
+							<f:fields>
+								<Input id="priceFieldId" value="{Price}"
+									placeholder="Price">
+									<layoutData></layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="Currency">
+							<f:fields>
+								<Select id="currencyFieldId" selectedKey="{Currency}" width="30%">
+									<items>
+										<core:Item text="Euro" key="EUR" />
+										<core:Item text="British Pound" key="GBP" />
+										<core:Item text="US Dollar" key="USD" />
+									</items>
+									<layoutData></layoutData>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:layoutData>
+						<f:GridContainerData />
+					</f:layoutData>
+				</f:FormContainer>
+
+				<!-- Procurement details form -->
+				<f:FormContainer title="Procurement details">
+					<f:formElements>
+						<f:FormElement label="ProcurementType">
+							<f:fields>
+								<Select id="procurementTypeFieldId" selectedKey="{ProcurementType}" width="30%">
+									<items>
+										<core:Item text="In-house production" key="IN" />
+										<core:Item text="External production" key="OUT" />
+									</items>
+									<layoutData></layoutData>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="ProcurementTime">
+							<f:fields>
+								<Input id="procurementTimeFieldId" value="{ProcurementTime}"
+									placeholder="ProcurementTime">
+									<layoutData></layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="SafetyStock">
+							<f:fields>
+								<Input id="safetyStockFieldId" value="{SafetyStock}"
+									placeholder="SafetyStock">
+									<layoutData></layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="TotalStock">
+							<f:fields>
+								<Input id="totalStockFieldId" value="{TotalStock}"
+									placeholder="TotalStock">
+									<layoutData></layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+		<l:VerticalLayout class="sapUiContentPadding" id="messageArea" width="100%" />
+	</ScrollContainer>
+</core:View>
