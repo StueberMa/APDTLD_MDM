@@ -27,6 +27,9 @@
                 },
                 {
                     "uri": "resources/styles/mdmCustomerDetails.css"
+                },
+                {
+                    "uri": "resources/styles/mdmProductDetails.css"
                 }
             ]
         },
@@ -90,6 +93,21 @@
                     "pattern": "masterdata/customer/overview",
                     "name": "masterdata.CustomerOverview",
                     "view": "masterdata.CustomerOverview"
+                },
+                {
+                    "pattern": "masterdata/product/details/{id}",
+                    "name": "masterdata.ProductDetails",
+                    "view": "masterdata.ProductDetails"
+                },
+                {
+                    "pattern": "masterdata/product/create",
+                    "name": "masterdata.ProductCreate",
+                    "view": "masterdata.ProductDetails"
+                },
+                {
+                    "pattern": "masterdata/product/overview",
+                    "name": "masterdata.ProductOverview",
+                    "view": "masterdata.ProductOverview"
                 },
                 {
                     "pattern": "import/overview",
