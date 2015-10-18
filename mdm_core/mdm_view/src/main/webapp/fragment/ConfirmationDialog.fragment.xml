@@ -1,7 +1,7 @@
 <core:FragmentDefinition
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
-	<Dialog id="saveSuccessDialog"
+	<Dialog id="confimrationDialog"
 		title="{dialog>/title}"
 		typ="{dialog>/type}"
 		state="{dialog>/state}">
