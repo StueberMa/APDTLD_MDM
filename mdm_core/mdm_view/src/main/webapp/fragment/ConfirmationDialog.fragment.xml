@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog id="saveSuccessDialog"
+		title="{dialog>/title}"
+		typ="{dialog>/type}"
+		state="{dialog>/state}">
+		<content>
+			<Text text="{dialog>/text}"/>
+		</content>
+		<beginButton>
+			<Button text="OK" press="onDialogConfirmed"/>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>
