@@ -24,12 +24,6 @@
             "css": [
                 {
                     "uri": "resources/styles/mdmBasics.css"
-                },
-                {
-                    "uri": "resources/styles/mdmCustomerDetails.css"
-                },
-                {
-                    "uri": "resources/styles/mdmProductDetails.css"
                 }
             ]
         },

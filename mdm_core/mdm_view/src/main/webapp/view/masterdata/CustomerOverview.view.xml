@@ -32,7 +32,7 @@
 			<items>
 				<ColumnListItem>
 					<cells>
-						<Text text="{LastName}" />
+						<Text class="mdmBoldTxt" text="{LastName}" />
 						<Text text="{FirstName}" />
 						<Text text="{Address/City}" />
 						<Text text="{Address/Country}" />

@@ -94,6 +94,6 @@
 	font-weight: bold;
 }
 
-.mdmSmartTable {
-	margin-top:20px !important;
+.mdmBoldTxt {
+	font-weight: bold !important;
 }

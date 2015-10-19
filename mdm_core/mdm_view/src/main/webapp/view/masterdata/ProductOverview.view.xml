@@ -35,7 +35,7 @@
 			<items>
 				<ColumnListItem>
 					<cells>
-						<Text text="{Name}" />
+						<Text class="mdmBoldTxt" text="{Name}" />
 						<Text text="{Size}" />
 						<Text text="{Color}" />
 						<Text text="{Price}" />
