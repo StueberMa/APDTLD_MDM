@@ -20,12 +20,14 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 			
 		// leave
 		} else {
-			var context = this.getView().getBindingContext();
-
-			if (context === "undefined")
+			
+			// skip if edit
+			if ( this._mode !== "CREATE")
 				return;
 			
+			var context = this.getView().getBindingContext();
 			this.getView().getModel().deleteCreatedEntry(context);
+			this._mode = undefined;
 		}
 	},
 
@@ -41,8 +43,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 	 * Method onInit.
 	 */
 	onInit : function() {
-		
-		// create || edit || leave
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.controlMode, this);
 	},
@@ -90,7 +90,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 		// nav. to edit for create
 		if(this._mode === "CREATE") {
 			var router = sap.ui.core.UIComponent.getRouterFor(this);
-			router.navTo("masterdata.ProductDetails", {id: oData.Id}, false);
+			router.navTo("masterdata.ProductDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, false);
 		}
 	},
 
