@@ -12,7 +12,8 @@
 				<Toolbar>
 					<Title text="Customer" level="H2" />
 					<ToolbarSpacer></ToolbarSpacer>
-					<Button icon="sap-icon://refresh" press="onRefresh" />
+					<SearchField width="25%" placeholder="Search for Last Name ..." search="onSearch" />
+					<Button  icon="sap-icon://refresh" press="onRefresh" />
 				</Toolbar>
 			</headerToolbar>
 			<columns>
