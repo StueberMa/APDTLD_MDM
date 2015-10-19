@@ -117,7 +117,6 @@ public class ODataJPAServiceFactory extends ODataServiceFactory {
 			emf = JpaEntityManagerFactory.getEntityManagerFactory(DATA_MODEL_NAME);
 			oDataJPAContext.setEntityManagerFactory(emf);
 			oDataJPAContext.setPersistenceUnitName(DATA_MODEL_NAME);
-			oDataJPAContext.setODataProcessor(new ODataBatchProcessor(oDataJPAContext));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
