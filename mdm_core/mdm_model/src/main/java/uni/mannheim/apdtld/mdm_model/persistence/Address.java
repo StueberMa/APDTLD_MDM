@@ -3,8 +3,6 @@ package uni.mannheim.apdtld.mdm_model.persistence;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @Embeddable
 public class Address implements Serializable {

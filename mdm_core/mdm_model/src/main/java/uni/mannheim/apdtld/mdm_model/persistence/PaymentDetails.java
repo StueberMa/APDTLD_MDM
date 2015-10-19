@@ -3,9 +3,6 @@ package uni.mannheim.apdtld.mdm_model.persistence;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 
 @Embeddable //@IdClass(PaymentDetailsId.class)
 public class PaymentDetails implements Serializable {
