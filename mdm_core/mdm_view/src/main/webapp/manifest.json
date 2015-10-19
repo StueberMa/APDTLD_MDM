@@ -54,7 +54,7 @@
                 "settings" : {
                 	"defaultBindingMode" : "TwoWay",
                 	"defaultCountMode" : "Both",
-                	"useBatch" : false
+                	"useBatch" : true
                 	
                 }
             }
