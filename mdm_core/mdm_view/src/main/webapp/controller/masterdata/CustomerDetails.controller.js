@@ -52,12 +52,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 */
 	onSave : function() {
 		var model = this.getView().getModel();
-		
-		var parameters = {};
-		parameters.success = jQuery.proxy(this.onSuccess, this);
-		parameters.error = jQuery.proxy(this.onError, this);
-		
-		model.submitChanges(parameters);
+		model.submitChanges({success : jQuery.proxy(this.onSuccess, this), error: jQuery.proxy(this.onError, this)});
 	},
 
 	/**
