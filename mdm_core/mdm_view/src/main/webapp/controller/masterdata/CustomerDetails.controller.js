@@ -12,11 +12,17 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			this.getView().setBindingContext(context);
 			this._mode = "CREATE";
 			
+			var button = this.getView().byId("deleteButton");
+			button.setVisible(false);
+			
 		// edit
 		} else if (oEvent.getParameter("name") === "masterdata.CustomerDetails") {
-			var id = oEvent.getParameter("arguments").id;
-			this.getView().bindElement("/Customers(" + id + ")");
+			this._id = oEvent.getParameter("arguments").id;
+			this.getView().bindElement("/Customers(" + this._id + ")");
 			this._mode = "EDIT";
+			
+			var button = this.getView().byId("deleteButton");
+			button.setVisible(true);
 			
 		// leave
 		} else {
@@ -29,6 +35,14 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			this.getView().getModel().deleteCreatedEntry(context);
 			this._mode = undefined;
 		}
+	},
+	
+	/**
+	 * Method onDelete
+	 */
+	onDelete : function() {
+		var model = this.getView().getModel();
+		model.remove("/Customers(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
 	},
 
 	/**
@@ -52,7 +66,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 */
 	onSave : function() {
 		var model = this.getView().getModel();
-		model.submitChanges({success : jQuery.proxy(this.onSuccess, this), error: jQuery.proxy(this.onError, this)});
+		model.submitChanges({success : jQuery.proxy(this.onCreateSuccess, this), error: jQuery.proxy(this.onCreateError, this)});
 	},
 
 	/**
@@ -72,9 +86,9 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	},
 
 	/**
-	 * Method onSuccess
+	 * Method onCreateSuccess
 	 */
-	onSuccess : function(oData) {
+	onCreateSuccess : function(oData) {
 		
 		// set data model
 		var model = new sap.ui.model.json.JSONModel();
@@ -95,14 +109,52 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	},
 
 	/**
-	 * Method onError
+	 * Method onCreateError
 	 */
-	onError : function(oError) {
+	onCreateError : function(oError) {
 		
 		// set data model
 		var model = new sap.ui.model.json.JSONModel();
 		model.setData( {
 			text : "Customer could not be saved",
+			type : "Error"
+		});
+		this.getView().setModel(model, "msg");
+		
+		var msgArea = this.getView().byId("messageArea");
+		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
+	},
+	
+	/**
+	 * Method onDeleteSuccess
+	 */
+	onDeleteSuccess : function(oData) {
+		
+		// set data model
+		var model = new sap.ui.model.json.JSONModel();
+		model.setData( {
+			text : "Customer successfully deleted",
+			type : "Success"
+		});
+		this.getView().setModel(model, "msg");
+		
+		var msgArea = this.getView().byId("messageArea");
+		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
+		
+		// nav. to edit for create
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("masterdata.CustomerOverview", false);
+	},
+
+	/**
+	 * Method onDeleteError
+	 */
+	onDeleteError : function(oError) {
+		
+		// set data model
+		var model = new sap.ui.model.json.JSONModel();
+		model.setData( {
+			text : "Customer could not be deleted",
 			type : "Error"
 		});
 		this.getView().setModel(model, "msg");
