@@ -92,13 +92,4 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Uploader", {
 			}, this), 1000);
 		}, this), 1000);
 	},
-
-	onBack : function () {
-		var sPreviousHash = sap.ui.core.routing.History.getInstance().getPreviousHash();
-		if (sPreviousHash !== undefined) {
-			window.history.go(-1);
-		} else {
-			this.getOwnerComponent().getRouter().navTo("import.Overview", null, true);
-		}
-	},
 });
