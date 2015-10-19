@@ -19,6 +19,30 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductOverview", {
 	},
 	
 	/**
+	 * Method onSearch
+	 */
+	onSearch : function(oEvent) {
+		
+		var filters = [];
+		var query = oEvent.getSource().getValue();
+		var operator = sap.ui.model.FilterOperator.EQ;
+		var listBinding = this.getView().byId("productTable").getBinding("items");
+		
+		if(oEvent.getSource().getValue() === "") {
+			listBinding.filter(filters, sap.ui.model.FilterType.Application);
+			return;
+		}
+		
+		if(query.indexOf("*") != -1) {
+			operator = sap.ui.model.FilterOperator.Contains;
+			query = query.replace("*", "");
+		}
+		
+		filters.push(new sap.ui.model.Filter({path: "Name", operator: operator, value1: query}));
+		listBinding.filter(filters, sap.ui.model.FilterType.Application);
+	},
+	
+	/**
 	 * Method onSelectionChange
 	 */
 	onSelectionChange : function(oEvent) {
