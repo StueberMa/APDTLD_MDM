@@ -106,7 +106,7 @@
 					<f:formElements>
 						<f:FormElement label="Price">
 							<f:fields>
-								<Input id="priceFieldId" value="{path:'Price', type:'sap.ui.model.type.Integer'}" placeholder="Price">
+								<Input id="priceFieldId" value="{path:'Price', type:'sap.ui.model.type.String'}" placeholder="Price">
 								</Input>
 								<Select id="currencyFieldId" selectedKey="{Currency}"
 									width="50%">

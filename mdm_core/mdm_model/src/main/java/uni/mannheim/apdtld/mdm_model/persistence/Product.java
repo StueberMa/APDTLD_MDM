@@ -31,7 +31,7 @@ public class Product implements Serializable {
 	private String weightUnit;
 	private String size;
 	private String color;
-	private int price;
+	private double price;
 	private String currency;
 	private Procurement procurement;
 	
@@ -124,11 +124,11 @@ public class Product implements Serializable {
 		this.color = param;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int param) {
+	public void setPrice(double param) {
 		this.price = param;
 	}
 
