@@ -118,12 +118,22 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 */
 	onCreateSuccess : function(oData) {
 		
-		// set data model
 		var model = new sap.ui.model.json.JSONModel();
-		model.setData( {
-			text : "Customer successfully saved",
-			type : "Success"
-		});
+		var error = false;
+		
+		// analyze response for error
+		if(typeof oData.__batchResponses[0].__changeResponses == "undefined") {
+			error = true;
+			model.setData( {
+				text : "Customer could not be saved",
+				type : "Error"
+			});
+		} else {
+			model.setData( {
+				text : "Customer successfully saved",
+				type : "Success"
+			});
+		}
 		this.getView().setModel(model, "msg");
 		
 		var msgArea = this.getView().byId("messageArea");
@@ -131,7 +141,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 		
 		// nav. to edit for create
-		if(this._mode === "CREATE") {
+		if(this._mode === "CREATE" && !error) {
 			var router = sap.ui.core.UIComponent.getRouterFor(this);
 			router.navTo("masterdata.CustomerDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, false);
 		}
