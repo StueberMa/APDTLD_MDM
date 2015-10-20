@@ -42,6 +42,14 @@ sap.ui.controller("uni.mannheim.mdm.controller.App", {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("Overview", false);
 	},
+	
+	/**
+	 * Method onMarketingDataOverview
+	 */
+	onMarketingOverview : function() {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("marketing.Overview", false);
+	},
 
 	/**
 	 * Method onMasterDataOverview

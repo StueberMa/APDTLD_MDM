@@ -1,0 +1,74 @@
+<mvc:View height="100%" controllerName="uni.mannheim.mdm.controller.marketing.Overview"
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout">
+
+	<TileContainer>
+		<!-- Dashboard -->
+		<CustomTile class="mdmTile">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://overview-chart" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Dashboard" />
+							<Text class="mdmTileHeaderSub" text="Transparenzy and Control for all Marketing Activities" />
+						</VBox>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
+
+		<!-- Campaign -->
+		<CustomTile class="mdmTile">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://marketing-campaign" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Campaign" />
+							<Text class="mdmTileHeaderSub" text="Monitor and Create Marketing Campaigns" />
+						</VBox>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
+
+		<!-- Lead -->
+		<CustomTile class="mdmTile">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://leads" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Lead" />
+							<Text class="mdmTileHeaderSub" text="Keep Track of the Interests of Your Clients" />
+						</VBox>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
+		
+		<!-- Opportunity -->
+		<CustomTile class="mdmTile">
+			<content>
+				<VBox>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://opportunity" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Opportunity" />
+							<Text class="mdmTileHeaderSub" text="Manage Your Sales Deals" />
+						</VBox>
+					</l:HorizontalLayout>
+					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+						densityAware="false" />
+				</VBox>
+			</content>
+		</CustomTile>
+	</TileContainer>
+</mvc:View>

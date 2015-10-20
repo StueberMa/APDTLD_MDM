@@ -45,7 +45,7 @@
 						<core:Icon class="mdmTileIcon" src="sap-icon://cargo-train" />
 						<VBox class="mdmTileHeader">
 							<Text class="mdmTileHeaderTitle" text="Supplier" />
-							<Text class="mdmTileHeaderSub" text="Examine Your Suppliers" />
+							<Text class="mdmTileHeaderSub" text="Maintain Supplier Information" />
 						</VBox>
 					</l:HorizontalLayout>
 					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"

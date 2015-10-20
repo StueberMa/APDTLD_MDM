@@ -21,7 +21,7 @@
 		</CustomTile>
 
 		<!-- Marketing -->
-		<CustomTile class="mdmTile">
+		<CustomTile class="mdmTile" press="onMarketingOverview">
 			<content>
 				<VBox>
 					<l:HorizontalLayout>
@@ -31,7 +31,7 @@
 							<Text class="mdmTileHeaderSub" text="All Your Campaigns at a Glanze" />
 						</VBox>
 					</l:HorizontalLayout>
-					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+					<Image src="./resources/img/no_image.png" class="mdmTileImage"
 						densityAware="false" />
 				</VBox>
 			</content>

@@ -69,6 +69,11 @@
                     "view": "Overview"
                 },
                 {
+                    "pattern": "marketing/overview",
+                    "name": "marketing.Overview",
+                    "view": "marketing.Overview"
+                },
+                {
                     "pattern": "masterdata/overview",
                     "name": "masterdata.Overview",
                     "view": "masterdata.Overview"
