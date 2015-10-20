@@ -33,6 +33,31 @@ public class Product implements Serializable {
 	private int price;
 	private String currency;
 	private Procurement procurement;
+	
+	/**
+	 * Constructor
+	 */
+	public Product() {
+		
+	}
+	
+	/**
+	 * Method getId
+	 * 
+	 * @return
+	 */
+	public int getId() {
+		return id;
+	}
+	
+	/**
+	 * Method setId
+	 * 
+	 * @param id
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
