@@ -27,7 +27,7 @@
 					<l:HorizontalLayout>
 						<core:Icon class="mdmTileIcon" src="sap-icon://it-system" />
 						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Data Source" />
+							<Text class="mdmTileHeaderTitle" text="Data Sources" />
 							<Text class="mdmTileHeaderSub" text="Guided Data Import from Local Staging Area" />
 						</VBox>
 					</l:HorizontalLayout>

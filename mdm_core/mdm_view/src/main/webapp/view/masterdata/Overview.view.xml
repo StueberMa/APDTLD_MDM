@@ -10,7 +10,7 @@
 					<l:HorizontalLayout>
 						<core:Icon class="mdmTileIcon" src="sap-icon://customer" />
 						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Customer" />
+							<Text class="mdmTileHeaderTitle" text="Customers" />
 							<Text class="mdmTileHeaderSub" text="Stay in Control of Your Customers" />
 						</VBox>
 					</l:HorizontalLayout>
@@ -27,7 +27,7 @@
 					<l:HorizontalLayout>
 						<core:Icon class="mdmTileIcon" src="sap-icon://product" />
 						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Product" />
+							<Text class="mdmTileHeaderTitle" text="Products" />
 							<Text class="mdmTileHeaderSub" text="Examine Your Products" />
 						</VBox>
 					</l:HorizontalLayout>
@@ -44,7 +44,7 @@
 					<l:HorizontalLayout>
 						<core:Icon class="mdmTileIcon" src="sap-icon://cargo-train" />
 						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Supplier" />
+							<Text class="mdmTileHeaderTitle" text="Suppliers" />
 							<Text class="mdmTileHeaderSub" text="Maintain Supplier Information" />
 						</VBox>
 					</l:HorizontalLayout>
