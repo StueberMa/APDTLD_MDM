@@ -97,3 +97,7 @@
 .mdmBoldTxt {
 	font-weight: bold !important;
 }
+
+.mdmConfirmationDialogTxt {
+	padding: 15px !important;
+}

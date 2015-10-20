@@ -41,8 +41,19 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 	 * Method onDelete
 	 */
 	onDelete : function() {
-		var model = this.getView().getModel();
-		model.remove("/Customers(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+		
+		this._dialog = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.ConfirmationDialog", this);
+		
+		var model = new sap.ui.model.json.JSONModel();
+		model.setData( {
+			title: 'Delete',
+			text : "Do you really want to delete the customer?",
+			type: 'Message',
+			state : "Warning"
+		});
+		this._dialog.setModel(model, "dialog");
+		
+		this._dialog.open();
 	},
 
 	/**
@@ -84,9 +95,26 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 			router.navTo("masterdata.ProductOverview", false);
 		}
 	},
+	
+	/**
+	 * Method onDialogConfirmed
+	 */
+	onDialogConfirmed : function(oEvent) {
+		this._dialog.destroy();
+		
+		var model = this.getView().getModel();
+		model.remove("/Products(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+	},
+	
+	/**
+	 * Method onDialogCanceled
+	 */
+	onDialogCanceled : function(oEvent) {
+		this._dialog.destroy();
+	},
 
 	/**
-	 * Method successMsg.
+	 * Method onCreateSuccess.
 	 */
 	onCreateSuccess : function(oData) {
 		
@@ -109,7 +137,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 	},
 
 	/**
-	 * Method errorMsg.
+	 * Method onCreateError.
 	 */
 	onCreateError : function() {
 		

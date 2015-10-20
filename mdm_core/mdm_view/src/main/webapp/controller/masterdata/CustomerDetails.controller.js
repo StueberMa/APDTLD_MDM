@@ -41,8 +41,19 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 * Method onDelete
 	 */
 	onDelete : function() {
-		var model = this.getView().getModel();
-		model.remove("/Customers(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+		
+		this._dialog = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.ConfirmationDialog", this);
+		
+		var model = new sap.ui.model.json.JSONModel();
+		model.setData( {
+			title: 'Delete',
+			text : "Do you really want to delete the customer?",
+			type: 'Message',
+			state : "Warning"
+		});
+		this._dialog.setModel(model, "dialog");
+		
+		this._dialog.open();
 	},
 
 	/**
@@ -84,6 +95,23 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			router.navTo("masterdata.CustomerOverview", false);
 		}
 	},
+	
+	/**
+	 * Method onDialogConfirmed
+	 */
+	onDialogConfirmed : function(oEvent) {
+		this._dialog.destroy();
+		
+		var model = this.getView().getModel();
+		model.remove("/Customers(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+	},
+	
+	/**
+	 * Method onDialogCanceled
+	 */
+	onDialogCanceled : function(oEvent) {
+		this._dialog.destroy();
+	},
 
 	/**
 	 * Method onCreateSuccess
@@ -99,6 +127,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		this.getView().setModel(model, "msg");
 		
 		var msgArea = this.getView().byId("messageArea");
+		msgArea.removeAllContent();
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 		
 		// nav. to edit for create
@@ -122,6 +151,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		this.getView().setModel(model, "msg");
 		
 		var msgArea = this.getView().byId("messageArea");
+		msgArea.removeAllContent();
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 	},
 	
@@ -139,6 +169,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		this.getView().setModel(model, "msg");
 		
 		var msgArea = this.getView().byId("messageArea");
+		msgArea.removeAllContent();
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 		
 		// nav. to edit for create
@@ -160,6 +191,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		this.getView().setModel(model, "msg");
 		
 		var msgArea = this.getView().byId("messageArea");
+		msgArea.removeAllContent();
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 	}
 });

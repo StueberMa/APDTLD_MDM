@@ -1,12 +1,12 @@
 <core:FragmentDefinition
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
-	<Dialog id="confimrationDialog"
+	<Dialog id="confirmationDialog"
 		title="{dialog>/title}"
 		typ="{dialog>/type}"
 		state="{dialog>/state}">
 		<content>
-			<Text text="{dialog>/text}"/>
+			<Text class="mdmConfirmationDialogTxt" text="{dialog>/text}"/>
 		</content>
 		<beginButton>
 			<Button text="OK" press="onDialogConfirmed"/>
