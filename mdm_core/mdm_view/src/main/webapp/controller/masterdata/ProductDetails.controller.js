@@ -140,7 +140,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 	/**
 	 * Method onCreateError.
 	 */
-	onCreateError : function() {
+	onCreateError : function(oError) {
 		
 		// set data model
 		var model = new sap.ui.model.json.JSONModel();
