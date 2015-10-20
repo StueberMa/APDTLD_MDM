@@ -101,3 +101,8 @@
 .mdmConfirmationDialogTxt {
 	padding: 15px !important;
 }
+
+.sapMScrollContScroll{
+	display:inline-block;
+	width: 98%;
+}

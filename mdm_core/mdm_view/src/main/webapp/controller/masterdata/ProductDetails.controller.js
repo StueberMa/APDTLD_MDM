@@ -17,8 +17,8 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 			
 		// edit
 		} else if (oEvent.getParameter("name") === "masterdata.ProductDetails") {
-			var id = oEvent.getParameter("arguments").id;
-			this.getView().bindElement("/Products(" + id + ")");
+			this._id = oEvent.getParameter("arguments").id;
+			this.getView().bindElement("/Products(" + this._id + ")");
 			this._mode = "EDIT";
 			
 			var button = this.getView().byId("deleteButton");

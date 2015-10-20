@@ -21,8 +21,8 @@
 				<f:ResponsiveGridLayout labelSpanL="2"
 					labelSpanM="2" emptySpanL="1" emptySpanM="1" columnsL="1" columnsM="1" />
 			</f:layout>
+			
 			<f:formContainers>
-
 				<!-- General user details -->
 				<f:FormContainer title="General data">
 					<f:formElements>
@@ -33,7 +33,6 @@
 										<core:Item text="Mr." key="Mr." />
 										<core:Item text="Mrs." key="Mrs." />
 									</items>
-									<layoutData></layoutData>
 								</Select>
 							</f:fields>
 						</f:FormElement>
@@ -43,11 +42,9 @@
 							<f:fields>
 								<Input id="firstNameFieldId" value="{FirstName}"
 									placeholder="First name">
-									<layoutData></layoutData>
 								</Input>
 								<Input id="lastNameFieldId" value="{LastName}"
 									placeholder="Last name">
-									<layoutData></layoutData>
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -72,9 +69,6 @@
 							</f:fields>
 						</f:FormElement>
 					</f:formElements>
-					<f:layoutData>
-						<f:GridContainerData />
-					</f:layoutData>
 				</f:FormContainer>
 
 				<!-- Address details form -->
@@ -84,11 +78,9 @@
 							<f:fields>
 								<Input id="addressStreetFieldId" value="{Address/Street}"
 									placeholder="Street">
-									<layoutData></layoutData>
 								</Input>
 								<Input id="addressHouseNoFieldId" value="{Address/HouseNo}"
 									placeholder="No" width="20%">
-									<layoutData></layoutData>
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -96,11 +88,9 @@
 							<f:fields>
 								<Input id="addressCityFieldId" value="{Address/City}"
 									placeholder="City">
-									<layoutData></layoutData>
 								</Input>
 								<Input id="addressZipCodeFieldId" value="{Address/ZipCode}"
 									placeholder="Zip code" width="40%">
-									<layoutData></layoutData>
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -108,7 +98,6 @@
 							<f:fields>
 								<Input id="addressCountryFieldId" value="{Address/Country}"
 									placeholder="Country">
-									<layoutData></layoutData>
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -122,7 +111,6 @@
 							<f:fields>
 								<Input id="contactDetailsEmailFieldId" type="Email"
 									value="{ContactDetails/Email}" placeholder="E-Mail address">
-									<layoutData></layoutData>
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -130,7 +118,6 @@
 							<f:fields>
 								<Input id="contactDetailsPhoneFieldId" type="Tel"
 									value="{ContactDetails/Phone}" placeholder="Phone number">
-									<layoutData></layoutData>
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -138,7 +125,6 @@
 							<f:fields>
 								<Input id="contactDetailsMobileFieldId" type="Tel"
 									value="{ContactDetails/Mobile}" placeholder="Mobile number">
-									<layoutData></layoutData>
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -146,6 +132,8 @@
 				</f:FormContainer>
 			</f:formContainers>
 		</f:Form>
+		
 		<l:VerticalLayout class="sapUiContentPadding" id="messageArea" width="100%" />
+		
 	</ScrollContainer>
 </core:View>
