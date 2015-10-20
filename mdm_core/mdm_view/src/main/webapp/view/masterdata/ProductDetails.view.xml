@@ -49,6 +49,7 @@
 								<Select id="unitOfMeasureFieldId" selectedKey="{UnitOfMeasure}"
 									width="30%">
 									<items>
+										<core:Item text="" key="" />
 										<core:Item text="Kilogram" key="KG" />
 										<core:Item text="Liter" key="L" />
 										<core:Item text="Meter" key="M" />
@@ -77,6 +78,7 @@
 								<Select id="weightUnitFieldId" selectedKey="{WeightUnit}"
 									width="30%">
 									<items>
+										<core:Item text="" key="" />
 										<core:Item text="Gram" key="G" />
 										<core:Item text="Kilogram" key="KG" />
 										<core:Item text="Ton" key="TO" />
@@ -109,6 +111,7 @@
 								<Select id="currencyFieldId" selectedKey="{Currency}"
 									width="50%">
 									<items>
+										<core:Item text="" key="" />
 										<core:Item text="Euro" key="EUR" />
 										<core:Item text="British Pound" key="GBP" />
 										<core:Item text="US Dollar" key="USD" />
@@ -127,6 +130,7 @@
 								<Select id="procurementTypeFieldId" selectedKey="{Procurement/ProcurementType}"
 									width="50%">
 									<items>
+										<core:Item text="" key="" />
 										<core:Item text="In-house production" key="IN" />
 										<core:Item text="External production" key="OUT" />
 									</items>

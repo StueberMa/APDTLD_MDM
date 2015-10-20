@@ -30,8 +30,9 @@
 							<f:fields>
 								<Select id="titleFieldId" selectedKey="{Title}" width="30%">
 									<items>
-										<core:Item text="Mr." key="Mr." />
-										<core:Item text="Mrs." key="Mrs." />
+										<core:Item text="" key="" />
+										<core:Item text="Mr." key="MR" />
+										<core:Item text="Mrs." key="MRS" />
 									</items>
 								</Select>
 							</f:fields>
