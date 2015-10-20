@@ -1,13 +1,11 @@
 <mvc:View height="100%" controllerName="uni.mannheim.mdm.controller.import.FieldMapper"
-	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout" xmlns:t="sap.ui.table">
-
-
-		<List headerText="Custom Content">
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout" xmlns:t="sap.ui.table" xmlns:vbm="sap.ui.vbm">
+		<List headerText="Custom Content" items="{/Customer/items/}" id="list">
 			<CustomListItem>
 				<HBox>
 					<HBox width="50%">
 						<VBox width="100%" alignItems="Center" justifyContent="Center">
-							<Title level="H2" text="Customers.xlsx" />
+							<Title level="H2" text="{fileName}" />
 						</VBox>
 					</HBox>
 					<HBox width="50%">
@@ -47,32 +45,28 @@
 				<HBox>
 					<HBox width="48%">
 						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Label text="userID" />
+							<Label text="{fName}" />
 						</VBox>
 						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Select>
-								<core:Item key="int" text="Integer" />
-								<core:Item key="str" text="Text" />
-								<core:Item key="float" text="Real" />
+							<Select selectedKey="str">
+								<core:Item key="Number" text="Number" />
+								<core:Item key="Text" text="Text" />
+								<core:Item key="Date" text="Date" />
 							</Select>
 						</VBox>
 						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Label text="1,501,204" />
+							<Label text="{fSample}" />
 						</VBox>
 					</HBox>
 					<HBox width="47%">
 						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Select>
-								<core:Item key="int" text="userId" />
-								<core:Item key="str" text="userName" />
-								<core:Item key="float" text="firstName" />
-							</Select>
+							<Label text="{dbName}" />
 						</VBox>
 						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Label text="Integer" />
+							<Label text="{dbType}" />
 						</VBox>
 						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Label text="3,423,604" />
+							<Label text="{dbSample}" />
 						</VBox>
 					</HBox>
 					<HBox width="5%">
@@ -82,88 +76,5 @@
 					</HBox>
 				</HBox>
 			</CustomListItem>
-		</List>
-		<List headerText="Custom Content">
-			<CustomListItem>
-				<HBox>
-					<HBox width="50%">
-						<VBox width="100%" alignItems="Center" justifyContent="Center">
-							<Title level="H2" text="Customers.xlsx" />
-						</VBox>
-					</HBox>
-					<HBox width="50%">
-						<VBox width="100%" alignItems="Center" justifyContent="Center">
-							<Title level="H2" text="department.Customers" />
-						</VBox>
-					</HBox>
-				</HBox>
-				<HBox>
-					<HBox width="48%">
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Title level="H3" text="Field Name" />
-						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Title level="H3" text="Field Type" />
-						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Title level="H3" text="Field Sample" />
-						</VBox>
-					</HBox>
-					<HBox width="47%">
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Title level="H3" text="Field Name" />
-						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Title level="H3" text="Field Type" />
-						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Title level="H3" text="Field Sample" />
-						</VBox>
-					</HBox>
-					<HBox width="5%">
-						<VBox width="100%" alignItems="Center" justifyContent="Center">
-						</VBox>
-					</HBox>
-				</HBox>
-				<HBox>
-					<HBox width="48%">
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Label text="userID" />
-						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Select>
-								<core:Item key="int" text="Integer" />
-								<core:Item key="str" text="Text" />
-								<core:Item key="float" text="Real" />
-							</Select>
-						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Label text="1,501,204" />
-						</VBox>
-					</HBox>
-					<HBox width="47%">
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Select>
-								<core:Item key="int" text="userId" />
-								<core:Item key="str" text="userName" />
-								<core:Item key="float" text="firstName" />
-							</Select>
-						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Label text="Integer" />
-						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<Label text="3,423,604" />
-						</VBox>
-					</HBox>
-					<HBox width="5%">
-						<VBox width="100%" alignItems="Center" justifyContent="Center">
-							<Button icon="sap-icon://move" press="onPress" ariaLabelledBy="editButtonLabel"/>
-						</VBox>
-					</HBox>
-				</HBox>
-			</CustomListItem>
-		</List>
-
-	
+		</List>	
 </mvc:View>
