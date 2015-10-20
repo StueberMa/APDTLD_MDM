@@ -62,10 +62,10 @@
 						<f:FormElement label="Weight">
 							<f:fields>
 								<Input id="grossWeightFieldId"
-									value="{path: 'GrossWeight', type: 'sap.ui.model.type.Float'}"
+									value="{path: 'GrossWeight', type: 'sap.ui.model.type.Integer'}"
 									placeholder="Gross weight">
 								</Input>
-								<Input id="netWeightFieldId" value="{path: 'NetWeight', type: 'sap.ui.model.type.Float'}"
+								<Input id="netWeightFieldId" value="{path: 'NetWeight', type: 'sap.ui.model.type.Integer'}"
 									placeholder="Net weight">
 								</Input>
 							</f:fields>
@@ -104,7 +104,7 @@
 					<f:formElements>
 						<f:FormElement label="Price">
 							<f:fields>
-								<Input id="priceFieldId" value="{path: 'Price', type: 'sap.ui.model.type.Float'}" placeholder="Price">
+								<Input id="priceFieldId" value="{path:'Price', type:'sap.ui.model.type.Integer'}" placeholder="Price">
 								</Input>
 								<Select id="currencyFieldId" selectedKey="{Currency}"
 									width="50%">

@@ -26,12 +26,12 @@ public class Product implements Serializable {
 	private String name;
 	private String description;
 	private String unitOfMeasure;
-	private double grossWeight;
-	private double netWeight;
+	private int grossWeight;
+	private int netWeight;
 	private String weightUnit;
 	private String size;
 	private String color;
-	private double price;
+	private int price;
 	private String currency;
 	private Procurement procurement;
 	
@@ -84,19 +84,19 @@ public class Product implements Serializable {
 		this.unitOfMeasure = param;
 	}
 
-	public double getGrossWeight() {
+	public int getGrossWeight() {
 		return grossWeight;
 	}
 
-	public void setGrossWeight(double param) {
+	public void setGrossWeight(int param) {
 		this.grossWeight = param;
 	}
 
-	public double getNetWeight() {
+	public int getNetWeight() {
 		return netWeight;
 	}
 
-	public void setNetWeight(double param) {
+	public void setNetWeight(int param) {
 		this.netWeight = param;
 	}
 
@@ -124,11 +124,11 @@ public class Product implements Serializable {
 		this.color = param;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(double param) {
+	public void setPrice(int param) {
 		this.price = param;
 	}
 
