@@ -7,7 +7,8 @@
 		vertical="true" focusable="false">
 		<Toolbar>
 			<Button icon="sap-icon://save" text="Save" press="onSave" />
-			<Button icon="sap-icon://delete" text="Delete" press="onDelete" id="deleteButton"/>
+			<Button icon="sap-icon://delete" text="Delete" press="onDelete"
+				id="deleteButton" />
 			<ToolbarSpacer />
 			<ToolbarSpacer />
 			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
@@ -21,15 +22,14 @@
 				<f:ResponsiveGridLayout labelSpanL="2"
 					labelSpanM="2" emptySpanL="1" emptySpanM="1" columnsL="1" columnsM="1" />
 			</f:layout>
-			
+
 			<f:formContainers>
 				<!-- General product details -->
 				<f:FormContainer title="General data">
 					<f:formElements>
 						<f:FormElement label="Name">
 							<f:fields>
-								<Input id="nameFieldId" value="{Name}"
-									placeholder="Name">
+								<Input id="nameFieldId" value="{Name}" placeholder="Name">
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -46,7 +46,8 @@
 					<f:formElements>
 						<f:FormElement label="Unit of Measure">
 							<f:fields>
-								<Select id="unitOfMeasureFieldId" selectedKey="{UnitOfMeasure}" width="30%">
+								<Select id="unitOfMeasureFieldId" selectedKey="{UnitOfMeasure}"
+									width="30%">
 									<items>
 										<core:Item text="Kilogram" key="KG" />
 										<core:Item text="Liter" key="L" />
@@ -60,10 +61,11 @@
 					<f:formElements>
 						<f:FormElement label="Weight">
 							<f:fields>
-								<Input id="grossWeightFieldId" value="{GrossWeight}"
+								<Input id="grossWeightFieldId"
+									value="{path: 'GrossWeight', type: 'sap.ui.model.type.Float'}"
 									placeholder="Gross weight">
 								</Input>
-								<Input id="netWeightFieldId" value="{NetWeight}"
+								<Input id="netWeightFieldId" value="{path: 'NetWeight', type: 'sap.ui.model.type.Float'}"
 									placeholder="Net weight">
 								</Input>
 							</f:fields>
@@ -72,7 +74,8 @@
 					<f:formElements>
 						<f:FormElement label="Weight Unit">
 							<f:fields>
-								<Select id="weightUnitFieldId" selectedKey="{WeightUnit}" width="30%">
+								<Select id="weightUnitFieldId" selectedKey="{WeightUnit}"
+									width="30%">
 									<items>
 										<core:Item text="Gram" key="G" />
 										<core:Item text="Kilogram" key="KG" />
@@ -85,8 +88,7 @@
 					<f:formElements>
 						<f:FormElement label="Size">
 							<f:fields>
-								<Input id="sizeFieldId" value="{Size}"
-									placeholder="Size">
+								<Input id="sizeFieldId" value="{Size}" placeholder="Size">
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -94,8 +96,7 @@
 					<f:formElements>
 						<f:FormElement label="Color">
 							<f:fields>
-								<Input id="colorFieldId" value="{Color}"
-									placeholder="Color">
+								<Input id="colorFieldId" value="{Color}" placeholder="Color">
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -103,10 +104,10 @@
 					<f:formElements>
 						<f:FormElement label="Price">
 							<f:fields>
-								<Input id="priceFieldId" value="{Price}"
-									placeholder="Price">
+								<Input id="priceFieldId" value="{path: 'Price', type: 'sap.ui.model.type.Float'}" placeholder="Price">
 								</Input>
-								<Select id="currencyFieldId" selectedKey="{Currency}" width="50%">
+								<Select id="currencyFieldId" selectedKey="{Currency}"
+									width="50%">
 									<items>
 										<core:Item text="Euro" key="EUR" />
 										<core:Item text="British Pound" key="GBP" />
@@ -123,7 +124,8 @@
 					<f:formElements>
 						<f:FormElement label="Procurement Type">
 							<f:fields>
-								<Select id="procurementTypeFieldId" selectedKey="{Procurement/ProcurementType}" width="50%">
+								<Select id="procurementTypeFieldId" selectedKey="{Procurement/ProcurementType}"
+									width="50%">
 									<items>
 										<core:Item text="In-house production" key="IN" />
 										<core:Item text="External production" key="OUT" />
@@ -133,17 +135,17 @@
 						</f:FormElement>
 						<f:FormElement label="Procurement Time">
 							<f:fields>
-								<Input id="procurementTimeFieldId" value="{Procurement/ProcurementTime}"
+								<Input id="procurementTimeFieldId" value="{path: 'Procurement/ProcurementTime', type: 'sap.ui.model.type.Integer'}"
 									placeholder="Procurement time">
 								</Input>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Stock">
 							<f:fields>
-								<Input id="totalStockFieldId" value="{Procurement/TotalStock}"
+								<Input id="totalStockFieldId" value="{path: 'Procurement/TotalStock', type: 'sap.ui.model.type.Integer'}"
 									placeholder="Total stock">
 								</Input>
-								<Input id="safetyStockFieldId" value="{Procurement/SafetyStock}"
+								<Input id="safetyStockFieldId" value="{path: 'Procurement/SafetyStock', type: 'sap.ui.model.type.Integer'}"
 									placeholder="Safety stock">
 								</Input>
 							</f:fields>
@@ -152,8 +154,9 @@
 				</f:FormContainer>
 			</f:formContainers>
 		</f:Form>
-		
-		<l:VerticalLayout class="sapUiContentPadding" id="messageArea" width="100%" />
-		
+
+		<l:VerticalLayout class="sapUiContentPadding" id="messageArea"
+			width="100%" />
+
 	</ScrollContainer>
 </core:View>

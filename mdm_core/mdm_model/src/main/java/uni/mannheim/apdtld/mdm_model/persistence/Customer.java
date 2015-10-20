@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Customer implements Serializable {
+	
 	// constants
 	private static final long serialVersionUID = 1L;
 	

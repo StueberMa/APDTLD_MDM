@@ -14,6 +14,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class Product implements Serializable {
+	
 	// constants
 	private static final long serialVersionUID = 1L;
 
@@ -25,12 +26,12 @@ public class Product implements Serializable {
 	private String name;
 	private String description;
 	private String unitOfMeasure;
-	private int grossWeight;
-	private int netWeight;
+	private double grossWeight;
+	private double netWeight;
 	private String weightUnit;
 	private String size;
 	private String color;
-	private int price;
+	private double price;
 	private String currency;
 	private Procurement procurement;
 	
@@ -83,19 +84,19 @@ public class Product implements Serializable {
 		this.unitOfMeasure = param;
 	}
 
-	public int getGrossWeight() {
+	public double getGrossWeight() {
 		return grossWeight;
 	}
 
-	public void setGrossWeight(int param) {
+	public void setGrossWeight(double param) {
 		this.grossWeight = param;
 	}
 
-	public int getNetWeight() {
+	public double getNetWeight() {
 		return netWeight;
 	}
 
-	public void setNetWeight(int param) {
+	public void setNetWeight(double param) {
 		this.netWeight = param;
 	}
 
@@ -123,11 +124,11 @@ public class Product implements Serializable {
 		this.color = param;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int param) {
+	public void setPrice(double param) {
 		this.price = param;
 	}
 

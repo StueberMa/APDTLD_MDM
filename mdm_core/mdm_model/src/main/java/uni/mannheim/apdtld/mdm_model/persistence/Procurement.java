@@ -6,40 +6,45 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Procurement implements Serializable {
+	
 	// constants
 	private static final long serialVersionUID = 1L;
 	
+	// attributes
 	private String procurementType;
-	private String procurementTime;
-	private String safetyStock;
-	private String totalStock;
+	private int procurementTime;
+	private int safetyStock;
+	private int totalStock;
 	
 	public String getProcurementType() {
 		return procurementType;
 	}
+	
 	public void setProcurementType(String procurementType) {
 		this.procurementType = procurementType;
 	}
-	public String getProcurementTime() {
+	
+	public int getProcurementTime() {
 		return procurementTime;
 	}
-	public void setProcurementTime(String procurementTime) {
+	
+	public void setProcurementTime(int procurementTime) {
 		this.procurementTime = procurementTime;
 	}
-	public String getSafetyStock() {
+	
+	public int getSafetyStock() {
 		return safetyStock;
 	}
-	public void setSafetyStock(String safetyStock) {
+	
+	public void setSafetyStock(int safetyStock) {
 		this.safetyStock = safetyStock;
 	}
-	public String getTotalStock() {
+	
+	public int getTotalStock() {
 		return totalStock;
 	}
-	public void setTotalStock(String totalStock) {
+	
+	public void setTotalStock(int totalStock) {
 		this.totalStock = totalStock;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 }

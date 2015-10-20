@@ -6,23 +6,17 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address implements Serializable {
+	
 	// constants
 	private static final long serialVersionUID = 1L;
 	
-	//@Id @GeneratedValue private long id;
+	// attributes
 	private String street;
 	private String houseNo;
 	private String zipCode;
 	private String city;
 	private String country;	
 	
-//	public long getId() {
-//		return id;
-//	}
-//	public void setId(long id) {
-//		this.id = id;
-//	}
-//	
 	public String getStreet() {
 		return street;
 	}
