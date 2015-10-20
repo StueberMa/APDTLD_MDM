@@ -127,6 +127,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 		this.getView().setModel(model, "msg");
 		
 		var msgArea = this.getView().byId("messageArea");
+		msgArea.removeAllContent();
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 		
 		// nav. to edit for create
@@ -150,6 +151,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 		this.getView().setModel(model, "msg");
 		
 		var msgArea = this.getView().byId("messageArea");
+		msgArea.removeAllContent();
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 	},
 	
@@ -167,6 +169,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 		this.getView().setModel(model, "msg");
 		
 		var msgArea = this.getView().byId("messageArea");
+		msgArea.removeAllContent();
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 		
 		// nav. to edit for create
@@ -188,6 +191,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 		this.getView().setModel(model, "msg");
 		
 		var msgArea = this.getView().byId("messageArea");
+		msgArea.removeAllContent();
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 	}
 });
