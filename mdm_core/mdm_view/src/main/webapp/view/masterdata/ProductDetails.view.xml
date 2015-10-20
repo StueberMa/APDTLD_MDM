@@ -7,6 +7,7 @@
 		vertical="true" focusable="false">
 		<Toolbar>
 			<Button icon="sap-icon://save" text="Save" press="onSave" />
+			<Button icon="sap-icon://delete" text="Delete" press="onDelete" id="deleteButton"/>
 			<ToolbarSpacer />
 			<ToolbarSpacer />
 			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />

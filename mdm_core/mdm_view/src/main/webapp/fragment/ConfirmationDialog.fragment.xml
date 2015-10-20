@@ -11,5 +11,8 @@
 		<beginButton>
 			<Button text="OK" press="onDialogConfirmed"/>
 		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onDialogCanceled"/>
+		</endButton>
 	</Dialog>
 </core:FragmentDefinition>

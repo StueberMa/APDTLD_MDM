@@ -12,11 +12,17 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 			this.getView().setBindingContext(context);
 			this._mode = "CREATE";
 			
+			var button = this.getView().byId("deleteButton");
+			button.setVisible(false);
+			
 		// edit
 		} else if (oEvent.getParameter("name") === "masterdata.ProductDetails") {
 			var id = oEvent.getParameter("arguments").id;
 			this.getView().bindElement("/Products(" + id + ")");
 			this._mode = "EDIT";
+			
+			var button = this.getView().byId("deleteButton");
+			button.setVisible(true);
 			
 		// leave
 		} else {
@@ -29,6 +35,14 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 			this.getView().getModel().deleteCreatedEntry(context);
 			this._mode = undefined;
 		}
+	},
+	
+	/**
+	 * Method onDelete
+	 */
+	onDelete : function() {
+		var model = this.getView().getModel();
+		model.remove("/Customers(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
 	},
 
 	/**
@@ -52,7 +66,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 	 */
 	onSave : function() {
 		var model = this.getView().getModel();
-		model.submitChanges({success : jQuery.proxy(this.onSuccess, this), error: jQuery.proxy(this.onError, this)});
+		model.submitChanges({success : jQuery.proxy(this.onCreateSuccess, this), error: jQuery.proxy(this.onCreateError, this)});
 	},
 
 	/**
@@ -74,7 +88,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 	/**
 	 * Method successMsg.
 	 */
-	onSuccess : function(oData) {
+	onCreateSuccess : function(oData) {
 		
 		// set data model
 		var model = new sap.ui.model.json.JSONModel();
@@ -97,12 +111,50 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 	/**
 	 * Method errorMsg.
 	 */
-	onError : function() {
+	onCreateError : function() {
 		
 		// set data model
 		var model = new sap.ui.model.json.JSONModel();
 		model.setData( {
 			text : "Product could not be saved",
+			type : "Error"
+		});
+		this.getView().setModel(model, "msg");
+		
+		var msgArea = this.getView().byId("messageArea");
+		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
+	},
+	
+	/**
+	 * Method onDeleteSuccess
+	 */
+	onDeleteSuccess : function(oData) {
+		
+		// set data model
+		var model = new sap.ui.model.json.JSONModel();
+		model.setData( {
+			text : "Product successfully deleted",
+			type : "Success"
+		});
+		this.getView().setModel(model, "msg");
+		
+		var msgArea = this.getView().byId("messageArea");
+		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
+		
+		// nav. to edit for create
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("masterdata.ProductOverview", false);
+	},
+
+	/**
+	 * Method onDeleteError
+	 */
+	onDeleteError : function(oError) {
+		
+		// set data model
+		var model = new sap.ui.model.json.JSONModel();
+		model.setData( {
+			text : "Product could not be deleted",
 			type : "Error"
 		});
 		this.getView().setModel(model, "msg");
