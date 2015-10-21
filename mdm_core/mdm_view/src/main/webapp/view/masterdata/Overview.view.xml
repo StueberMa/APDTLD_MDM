@@ -16,11 +16,16 @@
 						<core:Icon class="mdmTileIcon" src="sap-icon://customer" />
 						<VBox class="mdmTileHeader">
 							<Text class="mdmTileHeaderTitle" text="Customers" />
-							<Text class="mdmTileHeaderSub" text="Stay in Control of Your Customers" />
+							<Text class="mdmTileHeaderSub" text="Manage Your Customers" />
 						</VBox>
 					</l:HorizontalLayout>
-					<Image src="./resources/img/no_image.png" class="mdmTileImage"
-						densityAware="false" />
+					<ObjectNumber
+						number="{masterdata>/customers}"
+						unit="Customers" />
+					<ObjectStatus
+						text="No issues detected"
+						state="Success"
+						icon="sap-icon://sys-enter" />
 				</VBox>
 			</content>
 		</CustomTile>
@@ -36,8 +41,15 @@
 							<Text class="mdmTileHeaderSub" text="Examine Your Products" />
 						</VBox>
 					</l:HorizontalLayout>
-					<Image src="./resources/img/no_image.png" class="mdmTileImage"
-						densityAware="false" />
+					<ObjectNumber
+						class="mdmTileObjCount"
+						number="{masterdata>/products}"
+						unit="Products" />
+					<ObjectStatus
+						class="mdmTileObjStatus"
+						text="No issues detected"
+						state="Success"
+						icon="sap-icon://sys-enter" />
 				</VBox>
 			</content>
 		</CustomTile>

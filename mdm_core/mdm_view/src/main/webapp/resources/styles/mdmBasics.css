@@ -125,7 +125,7 @@
 	color: #FFFFFF;
 }
 
-.mdmTile :onclick {
+.mdmTile:onclick {
 	background-color: #FFFFFF;
 }
 
@@ -147,6 +147,32 @@
 .mdmTileIcon {
 	font-family: SAP-icons;
 	font-size: 2rem;
+}
+
+.mdmTile .sapMObjectNumber {
+	margin-top: 30px;
+	float: right;
+}
+
+.mdmTile .sapMObjectNumberText {
+	color: #666666;
+	font-size: 1.75rem
+}
+
+.mdmTile .sapMObjectNumberUnit {
+	color: #666666;
+	font-size: 1.0rem
+}
+
+.mdmTile .sapMObjStatus {
+	margin-top: 60px;
+	font-size: 1.0rem;
+}
+
+.mdmTile:hover .sapMObjectNumberText,
+.mdmTile:hover .sapMObjectNumberUnit,
+.mdmTile:hover .sapMObjStatusText {
+	color: #FFFFFF;
 }
 
 .mdmTileUnderDevImage {

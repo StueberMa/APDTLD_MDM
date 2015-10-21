@@ -1,5 +1,24 @@
 sap.ui.controller("uni.mannheim.mdm.controller.masterdata.Overview", {
-
+	
+	/**
+	 * Method onInit
+	 */
+	onInit : function() {
+		
+		// count objects
+		var model = this.getOwnerComponent().getModel();
+		var customerCount = model.bindList("/Customers").getLength();
+		var productCount = model.bindList("/Products").getLength();
+		
+		// set model
+		var jsonModel = new sap.ui.model.json.JSONModel();
+		jsonModel.setData( {
+			customers: customerCount,
+			products : productCount
+		});
+		this.getView().setModel(jsonModel, "masterdata");
+	},
+	
 	/**
 	 * Method onCustomerOverview
 	 */
