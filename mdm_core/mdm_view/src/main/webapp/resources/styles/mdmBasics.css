@@ -40,7 +40,7 @@
 .mdmHeader .mdmHeaderLogo {
 	padding-left: 10px;
 	margin-top: 2px !important;
-	height: 33px;
+	height: 30px;
 	vertical-align: middle;
 }
 
@@ -50,6 +50,11 @@
 	margin-right: 5px !important;
 	color: #FFFFFF;
 	vertical-align: middle;
+}
+
+.mdmHeader .mdmHeaderLogout {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .mdmHeader .sapMLnk,

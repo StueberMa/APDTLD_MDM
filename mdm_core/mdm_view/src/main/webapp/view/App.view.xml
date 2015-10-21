@@ -17,7 +17,7 @@
 						<l:HorizontalLayout>
 							<Text class="mdmHeaderWelcome" text="Account: " />
 							<Link text="Max Mustermann" />
-							<Button icon="sap-icon://log" tooltip="Logout" />
+							<Button class="mdmHeaderLogout" icon="sap-icon://log" tooltip="Logout" />
 						</l:HorizontalLayout>
 					</contentRight>
 				</Bar>

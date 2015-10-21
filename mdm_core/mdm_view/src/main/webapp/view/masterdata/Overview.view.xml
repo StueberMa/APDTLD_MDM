@@ -4,7 +4,7 @@
 	
 	<VBox class="mdmScreenTitle">
 		<Text class="mdmTitle" text="Master Data" />
-		<Text class="mdmSubTitle" text="Choose among the available functions." />
+		<Text class="mdmSubTitle" text="Choose among the available functions" />
 	</VBox>
 	
 	<TileContainer>
