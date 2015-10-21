@@ -171,7 +171,8 @@
 
 .mdmTile:hover .sapMObjectNumberText,
 .mdmTile:hover .sapMObjectNumberUnit,
-.mdmTile:hover .sapMObjStatusText {
+.mdmTile:hover .sapMObjStatusText,
+.mdmTile:hover .sapMObjStatusIcon {
 	color: #FFFFFF;
 }
 
