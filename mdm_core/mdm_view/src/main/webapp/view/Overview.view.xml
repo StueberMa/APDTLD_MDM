@@ -3,8 +3,8 @@
 	xmlns:l="sap.ui.layout">
 	
 	<VBox class="mdmScreenTitle">
-		<Text class="mdmTitle" text="Overview" />
-		<Text class="mdmSubTitle" text="Choose among the available functions" />
+		<Text class="mdmTitle" text="Welcome to SolveIT!" />
+		<Text class="mdmSubTitle" text="Master Data Management Special Designed for Marketing" />
 	</VBox>
 	
 	<TileContainer>

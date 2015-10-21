@@ -15,7 +15,7 @@
 					</contentLeft>
 					<contentRight>
 						<l:HorizontalLayout>
-							<Text class="mdmHeaderWelcome" text="Welcome: " />
+							<Text class="mdmHeaderWelcome" text="Account: " />
 							<Link text="Max Mustermann" />
 							<Button icon="sap-icon://log" tooltip="Logout" />
 						</l:HorizontalLayout>
@@ -44,7 +44,7 @@
 						<Button text="Settings" ariaDescribedBy="Settings" />
 					</contentLeft>
 					<contentRight>
-						<Text class="mdmCopyright" text="© solveIT 2015" />
+						<Text class="mdmCopyright" text="© SolveIT 2015" />
 					</contentRight>
 				</Bar>
 			</footer>
