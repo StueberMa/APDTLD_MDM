@@ -3,20 +3,20 @@
 	controllerName="uni.mannheim.mdm.controller.masterdata.CustomerDetails"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 
-	<ScrollContainer height="100%" width="100%" horizontal="true"
+	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
 		vertical="true" focusable="false">
+		
 		<Toolbar>
 			<Button icon="sap-icon://save" text="Save" press="onSave" />
 			<Button icon="sap-icon://delete" text="Delete" press="onDelete" id="deleteButton"/>
 			<ToolbarSpacer />
+				<Text class="mdmDetailScreenTitle" text="Customer Details"></Text>
 			<ToolbarSpacer />
 			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
 		</Toolbar>
+		
 		<f:Form id="FormCustomerDetails" minWidth="1024"
 			maxContainerCols="2" editable="true">
-			<f:title>
-				<core:Title text="Customer Details" />
-			</f:title>
 			<f:layout>
 				<f:ResponsiveGridLayout labelSpanL="2"
 					labelSpanM="2" emptySpanL="1" emptySpanM="1" columnsL="1" columnsM="1" />

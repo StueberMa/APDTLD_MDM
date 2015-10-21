@@ -2,15 +2,18 @@
 	controllerName="uni.mannheim.mdm.controller.masterdata.CustomerOverview"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout">
-
-	<VBox>
+	
+	<VBox class="mdmScreenTitle">
+		<Text class="mdmTitle" text="Customer Overview" />
+	</VBox>
+	
+	<VBox class="mdmScreenContent"> 
 		<Table id="customerTable"
 			items="{path: '/Customers', sorter: {
 				path: 'LastName'
 			}}">
 			<headerToolbar>
 				<Toolbar>
-					<Title text="Customer" level="H2" />
 					<ToolbarSpacer></ToolbarSpacer>
 					<SearchField width="25%" placeholder="Search for Last Name ..." search="onSearch" />
 					<Button  icon="sap-icon://refresh" press="onRefresh" />
@@ -41,7 +44,7 @@
 				</ColumnListItem>
 			</items>
 		</Table>
-		<VBox class="mdmNewEntity">
+		<VBox class="mdmNewEntityContainer">
 			<Text text="Customer not found?" />
 			<Button text="Create" icon="sap-icon://create" press="onNewCustomer" />
 		</VBox>

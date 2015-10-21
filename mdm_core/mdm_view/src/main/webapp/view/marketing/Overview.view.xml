@@ -1,7 +1,12 @@
 <mvc:View height="100%" controllerName="uni.mannheim.mdm.controller.marketing.Overview"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout">
-
+	
+	<VBox class="mdmScreenTitle">
+		<Text class="mdmTitle" text="Marketing" />
+		<Text class="mdmSubTitle" text="Choose among the available functions." />
+	</VBox>
+	
 	<TileContainer>
 		<!-- Dashboard -->
 		<CustomTile class="mdmTile">
@@ -27,7 +32,7 @@
 					<l:HorizontalLayout>
 						<core:Icon class="mdmTileIcon" src="sap-icon://marketing-campaign" />
 						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Marketing Campaigns" />
+							<Text class="mdmTileHeaderTitle" text="Campaigns" />
 							<Text class="mdmTileHeaderSub" text="Monitor and Create Marketing Campaigns" />
 						</VBox>
 					</l:HorizontalLayout>

@@ -5,17 +5,17 @@
 		<Page id="main" title="SolveIT" class="sapUiContentPadding">
 			<!-- Header -->
 			<customHeader>
-				<Bar>
+				<Bar class="mdmHeader">
 					<contentLeft>
 						<l:HorizontalLayout>
 							<Button id="navBack" type="Back" press="onBack" />
-							<Text class="mdmPageTitle" text="solveIT" />
-							<Text class="mdmPageSlogan" text="The customer in mind" />
+							<Image src="./resources/img/logo.png" class="mdmHeaderLogo"
+								press="onOverview" densityAware="false" />
 						</l:HorizontalLayout>
 					</contentLeft>
 					<contentRight>
 						<l:HorizontalLayout>
-							<Text class="mdmWelcome" text="Welcome: " />
+							<Text class="mdmHeaderWelcome" text="Welcome: " />
 							<Link text="Max Mustermann" />
 							<Button icon="sap-icon://log" tooltip="Logout" />
 						</l:HorizontalLayout>
@@ -31,7 +31,7 @@
 
 			<!-- Footer -->
 			<footer>
-				<Bar>
+				<Bar class="mdmFooter">
 					<contentLeft>
 						<Button text="Overview" press="onOverview" ariaDescribedBy="Overview" />
 						<Button text="Worklist" ariaDescribedBy="Worklist" />
