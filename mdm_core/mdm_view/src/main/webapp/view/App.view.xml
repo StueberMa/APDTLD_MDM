@@ -9,7 +9,7 @@
 					<contentLeft>
 						<l:HorizontalLayout>
 							<Button id="navBack" type="Back" press="onBack" />
-							<Image src="./resources/img/logo.png" class="mdmHeaderLogo"
+							<Image src="./resources/img/logo.svg" class="mdmHeaderLogo"
 								press="onOverview" densityAware="false" />
 						</l:HorizontalLayout>
 					</contentLeft>
