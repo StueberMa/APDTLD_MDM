@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
+import com.google.gson.JsonObject;
 
 import uni.mannheim.apdtld.mdm_view.odata.JpaEntityManagerFactory;
 
@@ -33,11 +33,11 @@ public class JPAInfo extends HttpServlet {
 
 		// declaration
 		EntityManager em = null;
-		JSONObject json = null;
+		JsonObject json = null;
 		PrintWriter out = null;
 
 		// initialization
-		json = new JSONObject();
+		json = new JsonObject();
 		out = resp.getWriter();
 		
 		// set response
@@ -60,11 +60,11 @@ public class JPAInfo extends HttpServlet {
 			
 			// customer
 			value = (Long) em.createQuery("SELECT count(distinct c) FROM Customer c").getSingleResult();
-			json.put("customers", value);
+			json.addProperty("customers", value);
 			
 			// products
 			value = (Long) em.createQuery("SELECT count(distinct p) FROM Product p").getSingleResult();
-			json.put("products", value);
+			json.addProperty("products", value);
 
 			out.print(json.toString());
 			out.close();
@@ -85,23 +85,23 @@ public class JPAInfo extends HttpServlet {
 	private void reportError(int type, HttpServletResponse resp) throws ServletException, IOException {
 
 		// declaration
-		JSONObject json = null;
+		JsonObject json = null;
 		PrintWriter out = null;
 
 		// initialization
-		json = new JSONObject();
+		json = new JsonObject();
 		out = resp.getWriter();
 
 		// handle according to type
 		switch (type) {
 			case ERROR_INTERNAL:
 				resp.setStatus(500);
-				json.put("error", "Internal server error");
+				json.addProperty("error", "Internal server error");
 				break;
 	
 			case ERROR_NOT_FOUND:
 				resp.setStatus(404);
-				json.put("error", "Service not found");
+				json.addProperty("error", "Service not found");
 				break;
 		}
 		
