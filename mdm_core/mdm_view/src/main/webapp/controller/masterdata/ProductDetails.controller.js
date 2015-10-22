@@ -60,7 +60,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 		var model = new sap.ui.model.json.JSONModel();
 		model.setData( {
 			title: 'Delete',
-			text : "Do you really want to delete the customer?",
+			text : "Do you really want to delete the product?",
 			type: 'Message',
 			state : "Warning"
 		});
