@@ -204,7 +204,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		// nav. to edit for create
 		if(this._mode === "CREATE" && !error) {
 			var router = sap.ui.core.UIComponent.getRouterFor(this);
-			router.navTo("masterdata.CustomerDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, false);
+			router.navTo("masterdata.CustomerDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, true);
 		}
 	}
 	
