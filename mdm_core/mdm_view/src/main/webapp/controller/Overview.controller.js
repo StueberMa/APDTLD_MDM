@@ -1,13 +1,13 @@
 sap.ui.controller("uni.mannheim.mdm.controller.Overview", {
-
+	
 	/**
-	 * Method onMasterDataOverview
+	 * Method onCustomerOverview
 	 */
-	onMasterDataOverview : function() {
+	onCustomerOverview : function() {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("masterdata.Overview", false);
+		router.navTo("masterdata.CustomerOverview", false);
 	},
-
+	
 	/**
 	 * Method onDataImportOverview
 	 */
@@ -17,10 +17,34 @@ sap.ui.controller("uni.mannheim.mdm.controller.Overview", {
 	},
 	
 	/**
+	 * Method onFileUpload
+	 */
+	onFileUpload : function() {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("import.Uploader", false);
+	},
+	
+	/**
 	 * Method onMarketingOverview
 	 */
 	onMarketingOverview : function() {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("marketing.Overview", false);
+	},
+	
+	/**
+	 * Method onMasterDataOverview
+	 */
+	onMasterDataOverview : function() {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("masterdata.Overview", false);
+	},
+	
+	/**
+	 * Method onProductOverview
+	 */
+	onProductOverview : function() {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("masterdata.ProductOverview", false);
 	}
 });

@@ -30,7 +30,7 @@
 	text-shadow: none;
 	background-color: #599CC3 !important;
 	border-bottom:1px solid #3582B0;
-	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
 }
 
 .mdmHeader::before {
@@ -174,6 +174,41 @@
 .mdmTile:hover .sapMObjStatusText,
 .mdmTile:hover .sapMObjStatusIcon {
 	color: #FFFFFF;
+}
+
+.mdmTile .mdmTileQuickAction {
+	position:absolute;
+	bottom:0;
+}
+
+.mdmTile .mdmTileQuickAction .sapMText {
+	font-weight: bold !important;
+	font-size: 1.0rem !important;
+}
+
+.mdmTile .mdmTileQuickAction ol {
+	margin: 0px 0px 20px 25px;
+	padding: 0px;
+	font-size: 0.875rem !important;
+	line-height: 0.875rem !important;
+}
+
+.mdmTile .mdmTileQuickAction li {
+	margin-top: 10px;
+	font-size: 0.875rem !important;
+	font-weight: bold;
+	line-height: 0.875rem !important;
+}
+
+.mdmTile .mdmTileQuickAction .sapMLnk {
+	vertical-align: text-bottom;
+	font-weight: normal;
+}
+
+.mdmTile:hover .mdmTileQuickAction ol,
+.mdmTile:hover .mdmTileQuickAction li,
+.mdmTile:hover .mdmTileQuickAction .sapMLnk {
+	color: #FFFFFF !important;
 }
 
 .mdmTileUnderDevImage {
