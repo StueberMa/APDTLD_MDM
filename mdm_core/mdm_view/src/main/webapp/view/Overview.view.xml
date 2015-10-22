@@ -11,80 +11,72 @@
 	<TileContainer>
 		<!-- Worklist -->
 		<CustomTile class="mdmTile">
-			<content>
-				<VBox>
-					<l:HorizontalLayout>
-						<core:Icon class="mdmTileIcon" src="sap-icon://list" />
-						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Worklist" />
-							<Text class="mdmTileHeaderSub" text="Easily Manage Your Daily Work Across Functions" />
-						</VBox>
-					</l:HorizontalLayout>
-					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
-						densityAware="false" />
-				</VBox>
-			</content>
+			<VBox>
+				<l:HorizontalLayout>
+					<core:Icon class="mdmTileIcon" src="sap-icon://list" />
+					<VBox class="mdmTileHeader">
+						<Text class="mdmTileHeaderTitle" text="Worklist" />
+						<Text class="mdmTileHeaderSub" text="Easily Manage Your Daily Work Across Functions" />
+					</VBox>
+				</l:HorizontalLayout>
+				<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+					densityAware="false" />
+			</VBox>
 		</CustomTile>
 
 		<!-- Marketing -->
 		<CustomTile class="mdmTile" press="onMarketingOverview">
-			<content>
-				<VBox>
-					<l:HorizontalLayout>
-						<core:Icon class="mdmTileIcon" src="sap-icon://marketing-campaign" />
-						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Marketing" />
-							<Text class="mdmTileHeaderSub" text="All Your Campaigns at a Glanze" />
-						</VBox>
-					</l:HorizontalLayout>
-					<Image src="./resources/img/no_image.png" class="mdmTileImage"
-						densityAware="false" />
-				</VBox>
-			</content>
+			<VBox>
+				<l:HorizontalLayout>
+					<core:Icon class="mdmTileIcon" src="sap-icon://marketing-campaign" />
+					<VBox class="mdmTileHeader">
+						<Text class="mdmTileHeaderTitle" text="Marketing" />
+						<Text class="mdmTileHeaderSub" text="All Your Campaigns at a Glanze" />
+					</VBox>
+				</l:HorizontalLayout>
+				<Image src="./resources/img/no_image.png" class="mdmTileImage"
+					densityAware="false" />
+			</VBox>
 		</CustomTile>
 
 		<!-- Analysis -->
 		<CustomTile class="mdmTile">
-			<content>
-				<VBox>
-					<l:HorizontalLayout>
-						<core:Icon class="mdmTileIcon" src="sap-icon://bar-chart" />
-						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Analysis" />
-							<Text class="mdmTileHeaderSub" text="Advanced Analysis with Rich Visualizations" />
-						</VBox>
-					</l:HorizontalLayout>
-					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
-						densityAware="false" />
-				</VBox>
-			</content>
+			<VBox>
+				<l:HorizontalLayout>
+					<core:Icon class="mdmTileIcon" src="sap-icon://bar-chart" />
+					<VBox class="mdmTileHeader">
+						<Text class="mdmTileHeaderTitle" text="Analysis" />
+						<Text class="mdmTileHeaderSub" text="Advanced Analysis with Rich Visualizations" />
+					</VBox>
+				</l:HorizontalLayout>
+				<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+					densityAware="false" />
+			</VBox>
 		</CustomTile>
 
 		<!-- Master Data -->
 		<CustomTile class="mdmTile">
 			<VBox>
 				<CustomTile press="onMasterDataOverview">
-					<content>
-						<l:HorizontalLayout>
-							<core:Icon class="mdmTileIcon"
-								src="sap-icon://customer-financial-fact-sheet" />
-							<VBox class="mdmTileHeader">
-								<Text class="mdmTileHeaderTitle" text="Master Data" />
-								<Text class="mdmTileHeaderSub" text="Maintain and Search for Master Data" />
-							</VBox>
-						</l:HorizontalLayout>
-					</content>
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon"
+							src="sap-icon://customer-financial-fact-sheet" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Master Data" />
+							<Text class="mdmTileHeaderSub" text="Maintain and Search for Master Data" />
+						</VBox>
+					</l:HorizontalLayout>
 				</CustomTile>
 				<VBox class="mdmTileQuickAction">
 					<Text text="Quick Action:" />
-					<html:ol>
-						<html:li>
-							<Link text="Customer Overview" press="onCustomerOverview" />
-						</html:li>
-						<html:li>
-							<Link text="Product Overview" press="onProductOverview" />
-						</html:li>
-					</html:ol>
+					<HBox class="mdmTileLinkEnum">
+						<Text text="1."></Text>
+						<Link text="Customer Overview" press="onCustomerOverview" />
+					</HBox>
+					<HBox class="mdmTileLinkEnum">
+						<Text text="2."></Text>
+						<Link text="Product Overview" press="onProductOverview" />
+					</HBox>
 				</VBox>
 			</VBox>
 		</CustomTile>
@@ -104,30 +96,28 @@
 				</CustomTile>
 				<VBox class="mdmTileQuickAction">
 					<Text text="Quick Action:" />
-					<html:ol>
-						<html:li>
-							<Link text="File Upload" press="onFileUpload" />
-						</html:li>
-					</html:ol>
+					<HBox class="mdmTileLinkEnum">
+						<Text text="1."></Text>
+						<Link text="File Upload" press="onFileUpload" />
+					</HBox>
 				</VBox>
 			</VBox>
 		</CustomTile>
 
 		<!-- Settings -->
 		<CustomTile class="mdmTile">
-			<content>
-				<VBox>
-					<l:HorizontalLayout>
-						<core:Icon class="mdmTileIcon" src="sap-icon://settings" />
-						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Settings" />
-							<Text class="mdmTileHeaderSub" text="Change Your Preferences and Manage Authorities" />
-						</VBox>
-					</l:HorizontalLayout>
-					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
-						densityAware="false" />
-				</VBox>
-			</content>
+			<VBox>
+				<l:HorizontalLayout>
+					<core:Icon class="mdmTileIcon" src="sap-icon://settings" />
+					<VBox class="mdmTileHeader">
+						<Text class="mdmTileHeaderTitle" text="Settings" />
+						<Text class="mdmTileHeaderSub" text="Change Your Preferences and Manage Authorities" />
+					</VBox>
+				</l:HorizontalLayout>
+				<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+					densityAware="false" />
+			</VBox>
 		</CustomTile>
 	</TileContainer>
+	
 </mvc:View>

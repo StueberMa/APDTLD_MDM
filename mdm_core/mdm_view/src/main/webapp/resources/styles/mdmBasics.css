@@ -172,43 +172,33 @@
 .mdmTile:hover .sapMObjectNumberText,
 .mdmTile:hover .sapMObjectNumberUnit,
 .mdmTile:hover .sapMObjStatusText,
-.mdmTile:hover .sapMObjStatusIcon {
+.mdmTile:hover .sapMObjStatusIcon,
+.mdmTile:hover .sapMLnk {
 	color: #FFFFFF;
 }
 
 .mdmTile .mdmTileQuickAction {
 	position:absolute;
 	bottom:0;
+	margin-bottom: 15px;
 }
 
 .mdmTile .mdmTileQuickAction .sapMText {
 	font-weight: bold !important;
 	font-size: 1.0rem !important;
+	margin-bottom: 5px;
 }
 
-.mdmTile .mdmTileQuickAction ol {
-	margin: 0px 0px 20px 25px;
-	padding: 0px;
+.mdmTile .mdmTileLinkEnum {
+	margin-top: 5px;
+	margin-left: 10px;
+}
+
+.mdmTile .mdmTileLinkEnum .sapMText {
+	font-weight: bold !important;
 	font-size: 0.875rem !important;
-	line-height: 0.875rem !important;
-}
-
-.mdmTile .mdmTileQuickAction li {
-	margin-top: 10px;
-	font-size: 0.875rem !important;
-	font-weight: bold;
-	line-height: 0.875rem !important;
-}
-
-.mdmTile .mdmTileQuickAction .sapMLnk {
-	vertical-align: text-bottom;
-	font-weight: normal;
-}
-
-.mdmTile:hover .mdmTileQuickAction ol,
-.mdmTile:hover .mdmTileQuickAction li,
-.mdmTile:hover .mdmTileQuickAction .sapMLnk {
-	color: #FFFFFF !important;
+	margin-right: 10px;
+	margin-bottom: 0px;
 }
 
 .mdmTileUnderDevImage {
