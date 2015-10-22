@@ -68,7 +68,7 @@
 			<artifactId>olingo-odata2-jpa-processor-core</artifactId>
 			<version>1.2.0</version>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>org.apache.olingo</groupId>
 			<artifactId>olingo-odata2-jpa-processor-api</artifactId>
 			<version>1.2.0</version>
@@ -83,8 +83,13 @@
 			<artifactId>eclipselink</artifactId>
 			<version>2.5.0</version>
 		</dependency>
-	
-		
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
+		</dependency>
+
+
 		<!-- File Upload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
