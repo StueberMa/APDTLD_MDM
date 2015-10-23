@@ -59,9 +59,9 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 		
 		var model = new sap.ui.model.json.JSONModel();
 		model.setData( {
-			title: 'Delete',
+			title: "Delete",
 			text : "Do you really want to delete the product?",
-			type: 'Message',
+			type: "Message",
 			state : "Warning"
 		});
 		this._dialog.setModel(model, "dialog");

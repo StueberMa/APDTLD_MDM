@@ -40,7 +40,7 @@
 		</CustomTile>
 
 		<!-- Lead -->
-		<CustomTile class="mdmTile">
+		<CustomTile class="mdmTile" press="onLeadOverview">
 			<VBox>
 				<l:HorizontalLayout>
 					<core:Icon class="mdmTileIcon" src="sap-icon://leads" />
@@ -49,7 +49,7 @@
 						<Text class="mdmTileHeaderSub" text="Keep Track of the Interests of Your Clients" />
 					</VBox>
 				</l:HorizontalLayout>
-				<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+				<Image src="./resources/img/no_image.png" class="mdmTileImage"
 					densityAware="false" />
 			</VBox>
 		</CustomTile>

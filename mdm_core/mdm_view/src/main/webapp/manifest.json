@@ -74,6 +74,21 @@
                     "view": "marketing.Overview"
                 },
                 {
+                    "pattern": "marketing/lead/details/{id}",
+                    "name": "marketing.LeadDetails",
+                    "view": "marketing.LeadDetails"
+                },
+                {
+                    "pattern": "marketing/lead/create",
+                    "name": "marketing.LeadCreate",
+                    "view": "marketing.LeadDetails"
+                },
+                {
+                    "pattern": "marketing/lead/overview",
+                    "name": "marketing.LeadOverview",
+                    "view": "marketing.LeadOverview"
+                },
+                {
                     "pattern": "masterdata/overview",
                     "name": "masterdata.Overview",
                     "view": "masterdata.Overview"
