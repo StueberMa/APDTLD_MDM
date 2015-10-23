@@ -17,7 +17,8 @@
 						<l:HorizontalLayout>
 							<Text class="mdmHeaderWelcome" text="Account: " />
 							<Link text="Max Mustermann" />
-							<Button class="mdmHeaderLogout" icon="sap-icon://log" tooltip="Logout" />
+							<Button class="mdmHeaderLogout" icon="sap-icon://log"
+								tooltip="Logout" />
 						</l:HorizontalLayout>
 					</contentRight>
 				</Bar>
@@ -31,22 +32,21 @@
 
 			<!-- Footer -->
 			<footer>
-				<Bar class="mdmFooter">
-					<contentLeft>
-						<Button text="Overview" press="onOverview" ariaDescribedBy="Overview" />
-						<Button text="Worklist" ariaDescribedBy="Worklist" />
-						<Button text="Marketing" press="onMarketingOverview" ariaDescribedBy="Marketing" />
-						<Button text="Analysis" ariaDescribedBy="Analysis" />
-						<Button text="Master Data" press="onMasterDataOverview"
-							ariaDescribedBy="Master Data" />
-						<Button text="Data Import" press="onDataImportOverview"
-							ariaDescribedBy="Data Import" />
-						<Button text="Settings" ariaDescribedBy="Settings" />
-					</contentLeft>
-					<contentRight>
-						<Text class="mdmCopyright" text="© SolveIT 2015" />
-					</contentRight>
-				</Bar>
+				<OverflowToolbar class="mdmFooter">
+					<Button text="Overview" press="onOverview" ariaDescribedBy="Overview" />
+					<Button text="Worklist" ariaDescribedBy="Worklist" />
+					<Button text="Marketing" press="onMarketingOverview"
+						ariaDescribedBy="Marketing" />
+					<Button text="Analysis" ariaDescribedBy="Analysis" />
+					<Button text="Master Data" press="onMasterDataOverview"
+						ariaDescribedBy="Master Data" />
+					<Button text="Data Import" press="onDataImportOverview"
+						ariaDescribedBy="Data Import" />
+					<Button text="Settings" ariaDescribedBy="Settings" />
+					<ToolbarSpacer />
+					<ToolbarSpacer />
+					<Text class="mdmCopyright" text="© SolveIT 2015" />
+				</OverflowToolbar>
 			</footer>
 		</Page>
 	</App>
