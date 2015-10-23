@@ -68,19 +68,45 @@
                     "name": "Overview",
                     "view": "Overview"
                 },
+                
                 {
-                    "pattern": "marketing/overview",
-                    "name": "marketing.Overview",
-                    "view": "marketing.Overview"
+                    "pattern": "import/overview",
+                    "name": "import.Overview",
+                    "view": "import.Overview"
                 },
                 {
-                    "pattern": "marketing/lead/details/{id}",
-                    "name": "marketing.LeadDetails",
-                    "view": "marketing.LeadDetails"
+                    "pattern": "import/FieldMapper",
+                    "name": "import.FieldMapper",
+                    "view": "import.FieldMapper"
+                },
+                {
+                    "pattern": "import/Uploader",
+                    "name": "import.Uploader",
+                    "view": "import.Uploader"
+                },
+                {
+                    "pattern": "marketing/campaign/create",
+                    "name": "marketing.CampaignCreate",
+                    "view": "marketing.CampaignDetails"
+                },
+                {
+                    "pattern": "marketing/campaign/details/{id}",
+                    "name": "marketing.CampaignDetails",
+                    "view": "marketing.CampaignDetails"
+                },
+                {
+                    "pattern": "marketing/campaign/overview",
+                    "name": "marketing.CampaignOverview",
+                    "view": "marketing.CampaignOverview"
                 },
                 {
                     "pattern": "marketing/lead/create",
                     "name": "marketing.LeadCreate",
+                    "view": "marketing.LeadDetails"
+                },
+                {
+                    "pattern": "marketing/lead/details/{id}",
+                    "name": "marketing.LeadDetails",
                     "view": "marketing.LeadDetails"
                 },
                 {
@@ -89,18 +115,18 @@
                     "view": "marketing.LeadOverview"
                 },
                 {
-                    "pattern": "masterdata/overview",
-                    "name": "masterdata.Overview",
-                    "view": "masterdata.Overview"
-                },
-                {
-                    "pattern": "masterdata/customer/details/{id}",
-                    "name": "masterdata.CustomerDetails",
-                    "view": "masterdata.CustomerDetails"
+                    "pattern": "marketing/overview",
+                    "name": "marketing.Overview",
+                    "view": "marketing.Overview"
                 },
                 {
                     "pattern": "masterdata/customer/create",
                     "name": "masterdata.CustomerCreate",
+                    "view": "masterdata.CustomerDetails"
+                },
+                {
+                    "pattern": "masterdata/customer/details/{id}",
+                    "name": "masterdata.CustomerDetails",
                     "view": "masterdata.CustomerDetails"
                 },
                 {
@@ -109,9 +135,9 @@
                     "view": "masterdata.CustomerOverview"
                 },
                 {
-                    "pattern": "masterdata/product/details/{id}",
-                    "name": "masterdata.ProductDetails",
-                    "view": "masterdata.ProductDetails"
+                    "pattern": "masterdata/overview",
+                    "name": "masterdata.Overview",
+                    "view": "masterdata.Overview"
                 },
                 {
                     "pattern": "masterdata/product/create",
@@ -119,24 +145,14 @@
                     "view": "masterdata.ProductDetails"
                 },
                 {
+                    "pattern": "masterdata/product/details/{id}",
+                    "name": "masterdata.ProductDetails",
+                    "view": "masterdata.ProductDetails"
+                },
+                {
                     "pattern": "masterdata/product/overview",
                     "name": "masterdata.ProductOverview",
                     "view": "masterdata.ProductOverview"
-                },
-                {
-                    "pattern": "import/overview",
-                    "name": "import.Overview",
-                    "view": "import.Overview"
-                },
-                {
-                    "pattern": "import/Uploader",
-                    "name": "import.Uploader",
-                    "view": "import.Uploader"
-                },
-                {
-                    "pattern": "import/FieldMapper",
-                    "name": "import.FieldMapper",
-                    "view": "import.FieldMapper"
                 }
             ]
         }

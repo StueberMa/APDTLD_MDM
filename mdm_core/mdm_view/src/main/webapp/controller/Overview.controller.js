@@ -1,6 +1,14 @@
 sap.ui.controller("uni.mannheim.mdm.controller.Overview", {
 	
 	/**
+	 * Method onCampaignOverview
+	 */
+	onCampaignOverview : function() {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("marketing.CampaignOverview", false);
+	},
+	
+	/**
 	 * Method onCustomerOverview
 	 */
 	onCustomerOverview : function() {
@@ -22,6 +30,14 @@ sap.ui.controller("uni.mannheim.mdm.controller.Overview", {
 	onFileUpload : function() {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("import.Uploader", false);
+	},
+	
+	/**
+	 * Method onLeadOverview
+	 */
+	onLeadOverview : function() {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("marketing.LeadOverview", false);
 	},
 	
 	/**

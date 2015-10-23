@@ -25,7 +25,7 @@
 		</CustomTile>
 
 		<!-- Campaign -->
-		<CustomTile class="mdmTile">
+		<CustomTile class="mdmTile" press="onCampaignOverview">
 			<VBox>
 				<l:HorizontalLayout>
 					<core:Icon class="mdmTileIcon" src="sap-icon://marketing-campaign" />
@@ -34,7 +34,7 @@
 						<Text class="mdmTileHeaderSub" text="Monitor and Create Marketing Campaigns" />
 					</VBox>
 				</l:HorizontalLayout>
-				<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+				<Image src="./resources/img/no_image.png" class="mdmTileImage"
 					densityAware="false" />
 			</VBox>
 		</CustomTile>

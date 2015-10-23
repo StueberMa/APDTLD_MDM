@@ -1,21 +1,21 @@
-sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
+sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 
 	/**
 	 * Method onInit
 	 */
 	onInit : function() {
 		// register event for selection
-		var table = this.getView().byId("leadTable");
+		var table = this.getView().byId("campaignTable");
 		table.setMode(sap.m.ListMode.SingleSelectMaster);
 		table.attachEvent("selectionChange", this.onSelectionChange, this);
 	},
 
 	/**
-	 * Method onNewLead
+	 * Method onNewCampaign
 	 */
-	onNewLead : function() {
+	onNewCampaign : function() {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("marketing.LeadCreate", false);
+		router.navTo("marketing.CampaignCreate", false);
 	},
 	
 	/**
@@ -26,7 +26,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 		var filters = [];
 		var query = oEvent.getSource().getValue();
 		var operator = sap.ui.model.FilterOperator.EQ;
-		var listBinding = this.getView().byId("leadTable").getBinding("items");
+		var listBinding = this.getView().byId("campaignTable").getBinding("items");
 		
 		if(oEvent.getSource().getValue() === "") {
 			listBinding.filter(filters, sap.ui.model.FilterType.Application);
@@ -38,7 +38,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 			query = query.replace("*", "");
 		}
 		
-		filters.push(new sap.ui.model.Filter({path: "Lead", operator: operator, value1: query}));
+		filters.push(new sap.ui.model.Filter({path: "Campaign", operator: operator, value1: query}));
 		listBinding.filter(filters, sap.ui.model.FilterType.Application);
 	},
 	
@@ -51,12 +51,12 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 		var id = oEvent.getParameter("listItem").getBindingContext().getProperty("Id");
 		
 		// deselect all rows
-		var table = this.getView().byId("leadTable");
+		var table = this.getView().byId("campaignTable");
 		table.removeSelections(true);
 		
 		// navigate to details
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("marketing.LeadDetails", {id: id}, false);
+		router.navTo("marketing.CampaignDetails", {id: id}, false);
 		
 	},
 	

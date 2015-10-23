@@ -6,8 +6,6 @@ import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -27,17 +25,17 @@ public class Lead implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
-	@OneToOne
-	@JoinColumn
-	private Customer customer;
+	//@OneToOne
+	//@JoinColumn
+	private int customer;
 	private String description;
 	@Temporal(TemporalType.DATE)
 	private Calendar contactOn;
 	private String status;
 	private String campaign;
-	@OneToOne
-	@JoinColumn
-	private Product product;
+	//@OneToOne
+	//@JoinColumn
+	private int product;
 	private int amount;
 
 	/**
@@ -63,11 +61,11 @@ public class Lead implements Serializable {
 		this.campaign = campaign;
 	}
 
-	public Customer getCustomer() {
+	public int getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(int customer) {
 		this.customer = customer;
 	}
 
@@ -95,11 +93,11 @@ public class Lead implements Serializable {
 		this.status = status;
 	}
 
-	public Product getProduct() {
+	public int getProduct() {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(int product) {
 		this.product = product;
 	}
 
