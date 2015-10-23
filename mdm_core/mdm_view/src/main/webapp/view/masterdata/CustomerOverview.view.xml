@@ -7,7 +7,8 @@
 		<Text class="mdmTitle" text="Customer Overview" />
 	</VBox>
 	
-	<VBox class="mdmScreenContent"> 
+	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
+		vertical="true" focusable="false">
 		<Table id="customerTable"
 			items="{path: '/Customers', sorter: {
 				path: 'LastName'
@@ -48,5 +49,5 @@
 			<Text text="Customer not found?" />
 			<Button text="Create" icon="sap-icon://create" press="onNewCustomer" />
 		</VBox>
-	</VBox>
+	</ScrollContainer>
 </mvc:View>

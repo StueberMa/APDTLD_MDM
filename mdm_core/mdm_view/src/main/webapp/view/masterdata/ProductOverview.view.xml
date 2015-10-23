@@ -7,7 +7,8 @@
 		<Text class="mdmTitle" text="Product Overview" />
 	</VBox>
 	
-	<VBox class="mdmScreenContent">
+	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
+		vertical="true" focusable="false">
 		<Table id="productTable"
 			items="{path: '/Products', sorter: {
 				path: 'Name'
@@ -52,5 +53,5 @@
 			<Text text="Product not found?" />
 			<Button text="Create" icon="sap-icon://create" press="onNewProduct" />
 		</VBox>
-	</VBox>
+	</ScrollContainer>
 </mvc:View>
