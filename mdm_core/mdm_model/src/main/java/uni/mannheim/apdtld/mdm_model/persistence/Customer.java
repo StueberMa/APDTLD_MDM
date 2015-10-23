@@ -3,7 +3,6 @@ package uni.mannheim.apdtld.mdm_model.persistence;
 import java.io.Serializable;
 import java.util.Calendar;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,7 +24,6 @@ public class Customer implements Serializable {
 	// attributes
 	@Id
 	@GeneratedValue
-	@Column(name="CustomerId")
 	private int id;
 	private String title;
 	private String firstName;

@@ -32,7 +32,7 @@ public class Lead implements Serializable {
 	@GeneratedValue
 	private int id;
 	private String description;
-	@Column(name="CustomerId", insertable=false, updatable=false)
+	@Column(insertable=false, updatable=false)
 	private int customerId;
 	@Temporal(TemporalType.DATE)
 	private Calendar contactOn;
@@ -42,7 +42,7 @@ public class Lead implements Serializable {
 	private int amount;
 
 	@OneToOne
-	@JoinColumn(name="CustomerId")
+	@JoinColumn(name="customerId")
 	private Customer customer;
 
 	/**
