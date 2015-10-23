@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uni.mannheim.apdtld.mdm_model.persistence.Customer;
+import javax.persistence.OneToOne;
 
 /**
  * Entity Lead.
@@ -25,7 +27,6 @@ public class Lead implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
-	private int customer;
 	private String description;
 	@Temporal(TemporalType.DATE)
 	private Calendar contactOn;
@@ -33,6 +34,9 @@ public class Lead implements Serializable {
 	private String campaign;
 	private int product;
 	private int amount;
+
+	@OneToOne
+	private Customer customer;
 
 	/**
 	 * Constructor
@@ -75,24 +79,6 @@ public class Lead implements Serializable {
 	 */
 	public void setCampaign(String campaign) {
 		this.campaign = campaign;
-	}
-
-	/**
-	 * GET customer
-	 * 
-	 * @return
-	 */
-	public int getCustomer() {
-		return customer;
-	}
-
-	/**
-	 * SET customer
-	 * 
-	 * @param customer
-	 */
-	public void setCustomer(int customer) {
-		this.customer = customer;
 	}
 
 	/**
@@ -183,5 +169,23 @@ public class Lead implements Serializable {
 	 */
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+
+	/**
+	 * GET customer
+	 * 
+	 * @return
+	 */
+	public Customer getCustomer() {
+	    return customer;
+	}
+
+	/**
+	 * SET customer
+	 * 
+	 * @param param
+	 */
+	public void setCustomer(Customer param) {
+	    this.customer = param;
 	}
 }
