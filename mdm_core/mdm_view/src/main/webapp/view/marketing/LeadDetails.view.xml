@@ -28,7 +28,7 @@
 					<f:formElements>
 						<f:FormElement label="Customer">
 							<f:fields>
-								<Input value="{path: 'Customer', type: 'sap.ui.model.type.Integer'}"  placeholder="Customer">
+								<Input value="{path: 'CustomerId', type: 'sap.ui.model.type.Integer'}"  placeholder="Customer ID">
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -58,7 +58,7 @@
 					<f:formElements>
 						<f:FormElement label="Campaign">
 							<f:fields>
-								<Input value="{Campaign}" placeholder="Campaign">
+								<Input value="{Campaign}" placeholder="Campaign ID">
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -76,7 +76,7 @@
 						</f:FormElement>
 						<f:FormElement label="Product">
 							<f:fields>
-								<Input value="{path: 'Product', type: 'sap.ui.model.type.Integer'}" placeholder="Product">
+								<Input value="{path: 'Product', type: 'sap.ui.model.type.Integer'}" placeholder="Product ID">
 								</Input>
 							</f:fields>
 						</f:FormElement>

@@ -38,7 +38,7 @@
 				<ColumnListItem>
 					<cells>
 						<Text class="mdmBoldTxt" text="{Id}" />
-						<Text text="{Customer}" />
+						<Text text="{CustomerId}" />
 						<Text text="{Product}" />
 						<Text text="{Status}" />
 					</cells>

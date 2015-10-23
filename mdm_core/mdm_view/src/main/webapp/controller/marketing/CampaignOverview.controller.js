@@ -38,7 +38,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 			query = query.replace("*", "");
 		}
 		
-		filters.push(new sap.ui.model.Filter({path: "Campaign", operator: operator, value1: query}));
+		filters.push(new sap.ui.model.Filter({path: "Name", operator: operator, value1: query}));
 		listBinding.filter(filters, sap.ui.model.FilterType.Application);
 	},
 	

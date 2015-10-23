@@ -38,7 +38,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 			query = query.replace("*", "");
 		}
 		
-		filters.push(new sap.ui.model.Filter({path: "Lead", operator: operator, value1: query}));
+		filters.push(new sap.ui.model.Filter({path: "CustomerId", operator: operator, value1: query}));
 		listBinding.filter(filters, sap.ui.model.FilterType.Application);
 	},
 	
