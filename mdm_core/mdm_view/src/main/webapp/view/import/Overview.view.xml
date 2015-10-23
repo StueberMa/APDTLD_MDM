@@ -37,6 +37,21 @@
 					densityAware="false" />
 			</VBox>
 		</CustomTile>
+		
+		<!-- SAP Integration -->
+		<CustomTile class="mdmTile">
+			<VBox>
+				<l:HorizontalLayout>
+					<core:Icon class="mdmTileIcon" src="sap-icon://sap-logo-shape" />
+					<VBox class="mdmTileHeader">
+						<Text class="mdmTileHeaderTitle" text="SAP Integration" />
+						<Text class="mdmTileHeaderSub" text="Connect to Your SAP ERR" />
+					</VBox>
+				</l:HorizontalLayout>
+				<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+					densityAware="false" />
+			</VBox>
+		</CustomTile>
 
 		<!-- Manual Import -->
 		<CustomTile class="mdmTile" press="onManualImport">
