@@ -25,16 +25,12 @@ public class Lead implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
-	//@OneToOne
-	//@JoinColumn
 	private int customer;
 	private String description;
 	@Temporal(TemporalType.DATE)
 	private Calendar contactOn;
 	private String status;
 	private String campaign;
-	//@OneToOne
-	//@JoinColumn
 	private int product;
 	private int amount;
 
@@ -45,66 +41,146 @@ public class Lead implements Serializable {
 
 	}
 
+	/**
+	 * GET id
+	 * 
+	 * @return
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * SET id
+	 * 
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 	
+	/**
+	 * GET campaign
+	 * 
+	 * @return
+	 */
 	public String getCampaign() {
 		return campaign;
 	}
 
+	/**
+	 * SET campaign
+	 * 
+	 * @param campaign
+	 */
 	public void setCampaign(String campaign) {
 		this.campaign = campaign;
 	}
 
+	/**
+	 * GET customer
+	 * 
+	 * @return
+	 */
 	public int getCustomer() {
 		return customer;
 	}
 
+	/**
+	 * SET customer
+	 * 
+	 * @param customer
+	 */
 	public void setCustomer(int customer) {
 		this.customer = customer;
 	}
 
+	/**
+	 * GET description
+	 * 
+	 * @return
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * SET description
+	 * 
+	 * @param description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * GET contactOn
+	 * 
+	 * @return
+	 */
 	public Calendar getContactOn() {
 		return contactOn;
 	}
 
+	/**
+	 * SET contactOn
+	 * 
+	 * @param contactOn
+	 */
 	public void setContactOn(Calendar contactOn) {
 		this.contactOn = contactOn;
 	}
 
+	/**
+	 * GET status
+	 * 
+	 * @return
+	 */
 	public String getStatus() {
 		return status;
 	}
 
+	/**
+	 * SET status
+	 * 
+	 * @param status
+	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
+	/**
+	 * GET product
+	 * 
+	 * @return
+	 */
 	public int getProduct() {
 		return product;
 	}
 
+	/**
+	 * SET product
+	 * 
+	 * @param product
+	 */
 	public void setProduct(int product) {
 		this.product = product;
 	}
 
+	/**
+	 * GET amount
+	 * 
+	 * @return
+	 */
 	public int getAmount() {
 		return amount;
 	}
 
+	/**
+	 * SET amount
+	 * 
+	 * @param amount
+	 */
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
