@@ -14,11 +14,11 @@
 				path: 'LastName'
 			}}">
 			<headerToolbar>
-				<Toolbar>
+				<OverflowToolbar>
 					<ToolbarSpacer></ToolbarSpacer>
 					<SearchField width="25%" placeholder="Search for Last Name ..." search="onSearch" />
 					<Button  icon="sap-icon://refresh" press="onRefresh" />
-				</Toolbar>
+				</OverflowToolbar>
 			</headerToolbar>
 			<columns>
 				<Column>

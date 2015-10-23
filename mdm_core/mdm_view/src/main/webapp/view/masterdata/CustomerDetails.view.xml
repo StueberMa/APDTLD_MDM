@@ -6,14 +6,14 @@
 	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
 		vertical="true" focusable="false">
 		
-		<Toolbar>
+		<OverflowToolbar>
 			<Button icon="sap-icon://save" text="Save" press="onSave" />
 			<Button icon="sap-icon://delete" text="Delete" press="onDelete" id="deleteButton"/>
 			<ToolbarSpacer />
 				<Text class="mdmDetailScreenTitle" text="Customer Details"></Text>
 			<ToolbarSpacer />
 			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
-		</Toolbar>
+		</OverflowToolbar>
 		
 		<f:Form id="FormCustomerDetails" minWidth="1024"
 			maxContainerCols="2" editable="true">
