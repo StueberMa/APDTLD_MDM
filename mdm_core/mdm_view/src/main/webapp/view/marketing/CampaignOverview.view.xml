@@ -1,53 +1,57 @@
 <mvc:View height="100%"
-	controllerName="uni.mannheim.mdm.controller.masterdata.CustomerOverview"
+	controllerName="uni.mannheim.mdm.controller.marketing.CampaignOverview"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout">
 	
 	<VBox class="mdmScreenTitle">
-		<Text class="mdmTitle" text="Customer Overview" />
+		<Text class="mdmTitle" text="Campaign Overview" />
 	</VBox>
 	
 	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
 		vertical="true" focusable="false">
-		<Table id="customerTable"
-			items="{path: '/Customers', sorter: {
-				path: 'LastName'
+		<Table id="campaignTable"
+			items="{path: '/Campaigns', sorter: {
+				path: 'Name'
 			}}">
 			<headerToolbar>
 				<OverflowToolbar>
 					<ToolbarSpacer></ToolbarSpacer>
-					<SearchField width="25%" placeholder="Search for Last Name ..." search="onSearch" />
+					<SearchField width="25%" placeholder="Search for Name ..." search="onSearch" />
 					<Button  icon="sap-icon://refresh" press="onRefresh" />
 				</OverflowToolbar>
 			</headerToolbar>
 			<columns>
 				<Column>
-					<Text text="Last Name" />
+					<Text text="Name" />
 				</Column>
 				<Column>
-					<Text text="First Name" />
+					<Text text="Type" />
 				</Column>
 				<Column>
-					<Text text="City" />
+					<Text text="Starts on" />
 				</Column>
 				<Column>
-					<Text text="Country" />
+					<Text text="Ends on" />
+				</Column>
+				<Column>
+					<Text text="Status" />
 				</Column>
 			</columns>
 			<items>
 				<ColumnListItem>
 					<cells>
-						<Text class="mdmBoldTxt" text="{LastName}" />
-						<Text text="{FirstName}" />
-						<Text text="{Address/City}" />
-						<Text text="{Address/Country}" />
+						<Text class="mdmBoldTxt" text="{Name}" />
+						<Text text="{Type}" />
+						<Text text="{StartDate}" />
+						<Text text="{EndDate}" />
+						<Text text="{Status}" />
 					</cells>
 				</ColumnListItem>
 			</items>
 		</Table>
 		<VBox class="mdmNewEntityContainer">
-			<Text text="Customer not found?" />
-			<Button text="Create" icon="sap-icon://create" press="onNewCustomer" />
+			<Text text="Campaign not found?" />
+			<Button text="Create" icon="sap-icon://create" press="onNewCampaign" />
 		</VBox>
 	</ScrollContainer>
 </mvc:View>

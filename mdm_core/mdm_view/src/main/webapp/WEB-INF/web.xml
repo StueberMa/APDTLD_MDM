@@ -42,6 +42,17 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		<url-pattern>/services/data.svc/*</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>JPAInfo</servlet-name>
+		<servlet-class>uni.mannheim.apdtld.mdm_view.services.JPAInfo</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>JPAInfo</servlet-name>
+		<url-pattern>/services/info/*</url-pattern>
+	</servlet-mapping>
+	
 	<!-- ============================================================== -->
 	<!-- Uploader service -->
 	<!-- ============================================================== -->

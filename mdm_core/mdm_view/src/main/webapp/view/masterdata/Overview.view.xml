@@ -2,56 +2,59 @@
 	controllerName="uni.mannheim.mdm.controller.masterdata.Overview" xmlns="sap.m"
 	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout">
 
+	<VBox class="mdmScreenTitle">
+		<Text class="mdmTitle" text="Master Data" />
+		<Text class="mdmSubTitle" text="Choose among the available functions ..." />
+	</VBox>
+
 	<TileContainer>
 		<!-- Customer -->
 		<CustomTile class="mdmTile" press="onCustomerOverview">
-			<content>
-				<VBox>
-					<l:HorizontalLayout>
-						<core:Icon class="mdmTileIcon" src="sap-icon://customer" />
-						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Customer" />
-							<Text class="mdmTileHeaderSub" text="Stay in Control of Your Customers" />
-						</VBox>
-					</l:HorizontalLayout>
-					<Image src="./resources/img/no_image.png" class="mdmTileImage"
-						densityAware="false" />
-				</VBox>
-			</content>
+			<VBox>
+				<l:HorizontalLayout>
+					<core:Icon class="mdmTileIcon" src="sap-icon://customer" />
+					<VBox class="mdmTileHeader">
+						<Text class="mdmTileHeaderTitle" text="Customers" />
+						<Text class="mdmTileHeaderSub" text="Manage Your Customers" />
+					</VBox>
+				</l:HorizontalLayout>
+				<ObjectNumber number="{masterdata>/customers}" unit="Customers" />
+				<ObjectStatus text="No issues detected" state="Success"
+					icon="sap-icon://sys-enter" />
+			</VBox>
 		</CustomTile>
 
 		<!-- Product -->
 		<CustomTile class="mdmTile" press="onProductOverview">
-			<content>
-				<VBox>
-					<l:HorizontalLayout>
-						<core:Icon class="mdmTileIcon" src="sap-icon://product" />
-						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Product" />
-							<Text class="mdmTileHeaderSub" text="Examine Your Products" />
-						</VBox>
-					</l:HorizontalLayout>
-					<Image src="./resources/img/no_image.png" class="mdmTileImage"
-						densityAware="false" />
-				</VBox>
-			</content>
+			<VBox>
+				<l:HorizontalLayout>
+					<core:Icon class="mdmTileIcon" src="sap-icon://product" />
+					<VBox class="mdmTileHeader">
+						<Text class="mdmTileHeaderTitle" text="Products" />
+						<Text class="mdmTileHeaderSub" text="Examine Your Products" />
+					</VBox>
+				</l:HorizontalLayout>
+				<ObjectNumber class="mdmTileObjCount" number="{masterdata>/products}"
+					unit="Products" />
+				<ObjectStatus class="mdmTileObjStatus" text="No issues detected"
+					state="Success" icon="sap-icon://sys-enter" />
+			</VBox>
 		</CustomTile>
 
 		<!-- Supplier -->
 		<CustomTile class="mdmTile">
-			<content>
-				<VBox>
-					<l:HorizontalLayout>
-						<core:Icon class="mdmTileIcon" src="sap-icon://cargo-train" />
-						<VBox class="mdmTileHeader">
-							<Text class="mdmTileHeaderTitle" text="Supplier" />
-							<Text class="mdmTileHeaderSub" text="Examine Your Suppliers" />
-						</VBox>
-					</l:HorizontalLayout>
-					<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
-						densityAware="false" />
-				</VBox>
-			</content>
+			<VBox>
+				<l:HorizontalLayout>
+					<core:Icon class="mdmTileIcon" src="sap-icon://cargo-train" />
+					<VBox class="mdmTileHeader">
+						<Text class="mdmTileHeaderTitle" text="Suppliers" />
+						<Text class="mdmTileHeaderSub" text="Maintain Supplier Information" />
+					</VBox>
+				</l:HorizontalLayout>
+				<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+					densityAware="false" />
+			</VBox>
 		</CustomTile>
 	</TileContainer>
+	
 </mvc:View>
