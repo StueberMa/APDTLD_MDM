@@ -72,26 +72,19 @@ public class FileAnalyser extends HttpServlet {
 		
 		this.analyseDatabaseStructure();
 				
-		JsonObject tableCategory = null;
-		HashMap<String, JsonObject> tableMap = new HashMap<String, JsonObject>();
+		JsonArray jsonMappings = new JsonArray();
 		for(ArrayList<String> column:sampleList) {
 			
 			String fileColumnHeader = column.get(0);
 			for(Table table:this.tables) {
-				//String dbTableName = table.getName();
+				String dbTableName = table.getName();
 				HashMap<String, String> attributesAndTypes = table.getAttributeNamesAndTypes();
 				for(Entry<String, String> attributeAndType:attributesAndTypes.entrySet()) {
 					if(StringUtils.getLevenshteinDistance(attributeAndType.getKey(), fileColumnHeader) < 3 && 
 							this.attributeTypeMap.get(fileColumnHeader).equals(attributeAndType.getValue())) {
-						if(!tableMap.containsKey(table.getName())) {
-							 tableCategory = new JsonObject();
-							 tableCategory.add("items", new JsonArray());
-							 tableMap.put(table.getName(), tableCategory);
-						 }
 						 
-						
 						 String attributeName = column.get(0);
-						 JsonArray items = tableCategory.getAsJsonArray("items");
+						 
 						 JsonObject item = new JsonObject();
 						 item.addProperty("fName", attributeName);
 						 
@@ -103,21 +96,30 @@ public class FileAnalyser extends HttpServlet {
 						 }
 						 item.addProperty("fSample", sample.substring(0, sample.length()-2));
 						 
-						 item.addProperty("dbName", attributeAndType.getKey());
+						 item.addProperty("dbName", dbTableName + "." + attributeAndType.getKey());
 						 item.addProperty("dbType", attributeAndType.getValue());
 						 item.addProperty("dbSample", "");
 						 
-						 items.add(item);
+						 jsonMappings.add(item);
 						
 					}
 				}
 			}	 
 		}
 		
-		for(Map.Entry<String, JsonObject> entry:tableMap.entrySet()) {
-			json.add(entry.getKey(), entry.getValue());
+		JsonArray jsonAttributes = new JsonArray();
+		for(Table table:this.tables) {
+			for(Map.Entry<String, String> entry:table.getAttributeNamesAndTypes().entrySet()) {
+				JsonObject jsonAttribute = new JsonObject();
+				jsonAttribute.addProperty("name", table.getName() + "." + entry.getKey());
+				jsonAttribute.addProperty("type", entry.getValue());
+				jsonAttributes.add(jsonAttribute);
+			}
+			
 		}
 		
+		json.add("mappings", jsonMappings);
+		json.add("attributes", jsonAttributes);
 		out.write(json.toString());
 		
 	}
@@ -188,10 +190,12 @@ public class FileAnalyser extends HttpServlet {
 					String type = attr.getJavaType().getName();
 					if(type.indexOf("String")>0) {
 						type = "Text";
-					} else if(type.indexOf("Integer")>0 || type.indexOf("Float")>0 || type.indexOf("Double")>0) {
+					} else if(type.indexOf("int")>=0 || type.indexOf("float")>=0 || type.indexOf("double")>=0) {
 						type = "Number";
-					} else if(type.indexOf("Date")>0) {
+					} else if(type.equals("java.util.Calendar")) {
 						type = "Date";
+					} else {
+						type = "ref";
 					}
 					
 					if(!type.equals("ref")) {
