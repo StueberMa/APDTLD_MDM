@@ -1,0 +1,97 @@
+<core:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="uni.mannheim.mdm.controller.marketing.LeadDetails"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
+		vertical="true" focusable="false">
+		
+		<OverflowToolbar>
+			<Button icon="sap-icon://save" text="Save" press="onSave" />
+			<Button icon="sap-icon://delete" text="Delete" press="onDelete" id="deleteButton"/>
+			<ToolbarSpacer />
+				<Text class="mdmDetailScreenTitle" text="Lead Details"></Text>
+			<ToolbarSpacer />
+			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
+		</OverflowToolbar>
+		
+		<f:Form id="FormCustomerDetails" minWidth="1024"
+			maxContainerCols="2" editable="true">
+			<f:layout>
+				<f:ResponsiveGridLayout labelSpanL="2"
+					labelSpanM="2" emptySpanL="1" emptySpanM="1" columnsL="1" columnsM="1" />
+			</f:layout>
+			
+			<f:formContainers>
+				<!-- Lead Header -->
+				<f:FormContainer title="General data">
+					<f:formElements>
+						<f:FormElement label="Customer">
+							<f:fields>
+								<Input value="{path: 'CustomerId', type: 'sap.ui.model.type.Integer'}"  placeholder="Customer ID">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="Contact on">
+							<f:fields>
+								<DatePicker value="{path:'ContactOn', type:'sap.ui.model.type.Date',
+									formatOptions: { style: 'medium', strictParsing: true}}" placeholder="Contact on" width="30%">
+								</DatePicker>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="Status">
+							<f:fields>
+								<Select selectedKey="{Status}" width="30%">
+									<items>
+										<core:Item text="" key="" />
+										<core:Item text="Open" key="OPEN" />
+										<core:Item text="Closed" key="CLOSE" />
+									</items>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="Campaign">
+							<f:fields>
+								<Input value="{Campaign}" placeholder="Campaign ID">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+
+				<!-- Lead Data -->
+				<f:FormContainer title="Lead data">
+					<f:formElements>
+						<f:FormElement label="Description">
+							<f:fields>
+								<TextArea value="{Description}" placeholder="Description" rows="4" cols="2">
+								</TextArea>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Product">
+							<f:fields>
+								<Input value="{path: 'Product', type: 'sap.ui.model.type.Integer'}" placeholder="Product ID">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Amount">
+							<f:fields>
+								<Input value="{path: 'Amount', type: 'sap.ui.model.type.Integer'}" placeholder="Amount">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+		
+		<l:VerticalLayout class="sapUiContentPadding" id="messageArea" width="100%" />
+		
+	</ScrollContainer>
+</core:View>

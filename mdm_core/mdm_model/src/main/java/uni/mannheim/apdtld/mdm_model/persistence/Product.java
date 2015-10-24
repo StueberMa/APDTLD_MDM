@@ -14,6 +14,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class Product implements Serializable {
+	
 	// constants
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +22,6 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
-
 	private String name;
 	private String description;
 	private String unitOfMeasure;
@@ -30,96 +30,229 @@ public class Product implements Serializable {
 	private String weightUnit;
 	private String size;
 	private String color;
-	private int price;
+	private double price;
 	private String currency;
 	private Procurement procurement;
+	
+	/**
+	 * Constructor
+	 */
+	public Product() {
+		
+	}
+	
+	/**
+	 * GET id
+	 * 
+	 * @return
+	 */
+	public int getId() {
+		return id;
+	}
+	
+	/**
+	 * SET id
+	 * 
+	 * @param id
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 
+	/**
+	 * GET name
+	 * 
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String param) {
-		this.name = param;
+	/**
+	 * SET name
+	 * 
+	 * @param name
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
+	/**
+	 * GET description
+	 * 
+	 * @return
+	 */
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String param) {
-		this.description = param;
+	/**
+	 * SET description
+	 * 
+	 * @param description
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
+	/**
+	 * GET unitOfMeasure
+	 * 
+	 * @return
+	 */
 	public String getUnitOfMeasure() {
 		return unitOfMeasure;
 	}
-
-	public void setUnitOfMeasure(String param) {
-		this.unitOfMeasure = param;
+	
+	/**
+	 * SET unitOfMeasure
+	 * @param unitOfMeasure
+	 */
+	public void setUnitOfMeasure(String unitOfMeasure) {
+		this.unitOfMeasure = unitOfMeasure;
 	}
 
+	/**
+	 * GET grossWeight
+	 * 
+	 * @return
+	 */
 	public int getGrossWeight() {
 		return grossWeight;
 	}
 
-	public void setGrossWeight(int param) {
-		this.grossWeight = param;
+	/**
+	 * SET grossWeight
+	 * 
+	 * @param grossWeight
+	 */
+	public void setGrossWeight(int grossWeight) {
+		this.grossWeight = grossWeight;
 	}
 
+	/**
+	 * SET netWeight
+	 * 
+	 * @return
+	 */
 	public int getNetWeight() {
 		return netWeight;
 	}
 
-	public void setNetWeight(int param) {
-		this.netWeight = param;
+	/**
+	 * GET netWeight
+	 * 
+	 * @param netWeight
+	 */
+	public void setNetWeight(int netWeight) {
+		this.netWeight = netWeight;
 	}
 
+	/**
+	 * GET weightUnit
+	 * @return
+	 */
 	public String getWeightUnit() {
 		return weightUnit;
 	}
-
-	public void setWeightUnit(String param) {
-		this.weightUnit = param;
+	
+	/**
+	 * SET weightUnit
+	 * 
+	 * @param weightUnit
+	 */
+	public void setWeightUnit(String weightUnit) {
+		this.weightUnit = weightUnit;
 	}
 
+	/**
+	 * GET size
+	 * 
+	 * @return
+	 */
 	public String getSize() {
 		return size;
 	}
 
-	public void setSize(String param) {
-		this.size = param;
+	/**
+	 * SET size
+	 * 
+	 * @param size
+	 */
+	public void setSize(String size) {
+		this.size = size;
 	}
 
+	/**
+	 * GET color
+	 * 
+	 * @return
+	 */
 	public String getColor() {
 		return color;
 	}
 
-	public void setColor(String param) {
-		this.color = param;
+	/**
+	 * SET color
+	 * 
+	 * @param color
+	 */
+	public void setColor(String color) {
+		this.color = color;
 	}
 
-	public int getPrice() {
+	/**
+	 * GET price
+	 * 
+	 * @return
+	 */
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int param) {
-		this.price = param;
+	/**
+	 * SET price
+	 * 
+	 * @param price
+	 */
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
+	/**
+	 * GET currency
+	 * 
+	 * @return
+	 */
 	public String getCurrency() {
 		return currency;
 	}
 
-	public void setCurrency(String param) {
-		this.currency = param;
+	/**
+	 * SET currency
+	 * 
+	 * @param currency
+	 */
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
+	/**
+	 * GET procurement
+	 * 
+	 * @return
+	 */
 	public Procurement getProcurement() {
 		return procurement;
 	}
 
-	public void setProcurement(Procurement param) {
-		this.procurement = param;
+	/**
+	 * SET procurement
+	 * 
+	 * @param procurement
+	 */
+	public void setProcurement(Procurement procurement) {
+		this.procurement = procurement;
 	}
-
+	
 }

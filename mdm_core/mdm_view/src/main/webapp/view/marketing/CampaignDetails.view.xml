@@ -1,0 +1,136 @@
+<core:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="uni.mannheim.mdm.controller.marketing.CampaignDetails"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
+		vertical="true" focusable="false">
+		
+		<OverflowToolbar>
+			<Button icon="sap-icon://save" text="Save" press="onSave" />
+			<Button icon="sap-icon://delete" text="Delete" press="onDelete" id="deleteButton"/>
+			<ToolbarSpacer />
+				<Text class="mdmDetailScreenTitle" text="Campaign Details"></Text>
+			<ToolbarSpacer />
+			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
+		</OverflowToolbar>
+		
+		<f:Form id="FormCustomerDetails" minWidth="1024"
+			maxContainerCols="2" editable="true">
+			<f:layout>
+				<f:ResponsiveGridLayout labelSpanL="2"
+					labelSpanM="2" emptySpanL="1" emptySpanM="1" columnsL="1" columnsM="1" />
+			</f:layout>
+			
+			<f:formContainers>
+				<!-- Lead Header -->
+				<f:FormContainer title="General data">
+					<f:formElements>
+						<f:FormElement label="Name">
+							<f:fields>
+								<Input value="{Name}"  placeholder="Name">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="Type">
+							<f:fields>
+								<Select selectedKey="{Type}" width="30%">
+									<items>
+										<core:Item text="" key="" />
+										<core:Item text="E-Mail" key="EMAIL" />
+										<core:Item text="Partner" key="PARTNER" />
+										<core:Item text="Social Media" key="SOCMEDIA" />
+									</items>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="Description">
+							<f:fields>
+								<Input value="{Description}" placeholder="Description">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+					<f:formElements>
+						<f:FormElement label="Status">
+							<f:fields>
+								<Select selectedKey="{Status}" width="30%">
+									<items>
+										<core:Item text="" key="" />
+										<core:Item text="Active" key="ACTIVE" />
+										<core:Item text="Finished" key="FINISH" />
+									</items>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+
+				<!-- Planned Data -->
+				<f:FormContainer title="Planning">
+					<f:formElements>
+						<f:FormElement label="Duration">
+							<f:fields>
+								<DatePicker value="{path:'StartDate', type:'sap.ui.model.type.Date',
+									formatOptions: { style: 'medium', strictParsing: true}}" placeholder="Starts on" width="60%">
+								</DatePicker>
+								<DatePicker value="{path:'EndDate', type:'sap.ui.model.type.Date',
+									formatOptions: { style: 'medium', strictParsing: true}}" placeholder="Ends on" width="60%">
+								</DatePicker>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Costs">
+							<f:fields>
+								<Input value="{PlannedCosts}" placeholder="Planned costs">
+								</Input>
+								<Input value="{Costs}" placeholder="Costs">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="No. Send">
+							<f:fields>
+								<Input value="{path: 'NumberSend', type: 'sap.ui.model.type.Integer'}" placeholder="Number send">
+								</Input>
+								<Input value="{path: 'PlannedReceived', type: 'sap.ui.model.type.Integer'}" placeholder="Planned received">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+				
+				<!-- Planned Data -->
+				<f:FormContainer title="Statistics">
+					<f:formElements>
+						<f:FormElement label="No. Received">
+							<f:fields>
+								<Input value="{path: 'NumberReceived', type: 'sap.ui.model.type.Integer'}" placeholder="Number received">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="No. Leads">
+							<f:fields>
+								<Input value="{path: 'NumberLeads', type: 'sap.ui.model.type.Integer'}" placeholder="Number leads">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="No. Opportunities">
+							<f:fields>
+								<Input value="{path: 'NumberOpport', type: 'sap.ui.model.type.Integer'}" placeholder="Number opportunities">
+								</Input>
+								<Input value="{ValueOpport}" placeholder="Value opportunities">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+		
+		<l:VerticalLayout class="sapUiContentPadding" id="messageArea" width="100%" />
+		
+	</ScrollContainer>
+</core:View>

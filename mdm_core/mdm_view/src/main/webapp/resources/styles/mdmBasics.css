@@ -1,34 +1,116 @@
-.mdmPageTitle {
+/**
+ *  MDM page
+ */
+.mdmPage .sapMShellGlobalOuterBackground {
+	background-color: #FCFCFC;
+	background-image: none;
+}
+ 
+.mdmPage .sapMShellBrandingBar {
+ 	background-color: transparent;
+ }
+ 
+.mdmPage .sapUiUfdShellBackground,
+.mdmPage .sapUshellShellBackground,
+.mdmPage .sapMGlobalBackgroundColor {
+	background-color: #FCFCFC !important;
+	background-image: none !important;
+}
+
+.mdmPage .sapMScrollContScroll{
+	display:inline-block;
+	width: 98%;
+}
+
+
+/**
+ *  MDM header
+ */
+.mdmHeader {
+	text-shadow: none;
+	background-color: #599CC3 !important;
+	border-bottom:1px solid #3582B0;
+	box-shadow: none !important;
+}
+
+.mdmHeader::before {
+	border-top: 0.25rem solid #3582B0;
+}
+
+.mdmHeader .mdmHeaderLogo {
 	padding-left: 10px;
-	font-size: 1.25rem !important;
-	font-weight: bold;
+	margin-top: 2px !important;
+	height: 26px;
+	vertical-align: middle;
 }
 
-.mdmPageSlogan {
-	margin-left: 10px !important;
-	margin-top: 20px !important;
-	font-size: 0.7rem !important;
-	font-style: italic;
-}
-
-.mdmWelcome {
+.mdmHeader .mdmHeaderWelcome {
 	font-size: 0.875rem !important;
 	font-weight: bold;
 	margin-right: 5px !important;
+	color: #FFFFFF;
+	vertical-align: middle;
 }
 
-.mdmPageHeaderCont {
-	vertical-align:middle;
+.mdmHeader .mdmHeaderLogout {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
-.mdmCopyright {
+.mdmHeader .sapMLnk,
+.mdmHeader .sapMLnk:link {
+	color: #FCFCFC;
+	vertical-align: middle;
+}
+
+.mdmHeader .sapMLnk:hover {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
+.mdmHeader .sapMLnk:visited,
+.mdmHeader .sapMLnk:active,
+.mdmHeader .sapMLnk:active:not {
+	color: #FCFCFC;
+}
+
+.mdmHeader .sapMBtnIcon,
+.mdmHeader .sapMBtnInner {
+	color: #3582B0;
+	text-shadow: none;
+}
+
+.mdmHeader .sapMBtnIcon:hover,
+.mdmHeader .sapMBtn:hover>.sapMBtnHoverable {
+	background-color: transparent;
+	color: #FFFFFF;
+}
+
+.mdmHeader .sapMBtnIcon:click {
+	background-color: transparent;
+	color: #FFFFFF;
+}
+
+
+/**
+ *  MDM footer
+ */
+.mdmFooter{
+ 	background-color: #464545 !important;
+}
+ 
+.mdmFooter .mdmCopyright {
 	padding-right: 15px !important;
 }
 
+
+/**
+ * MDM tile
+ */
 .mdmTile {
-	background-color: #ffffff;
-	border: 1px solid #dddddd;
-	box-shadow: 0px 2px 2px #dddddd;
+	background-color: #FFFFFF;
+	border: 1px solid #DDDDDD;
+	box-shadow: 0px 2px 2px #DDDDDD;
 	display: inline-block;
 	height: 14rem !important;
 	margin: 0.5rem !important;
@@ -39,12 +121,12 @@
 }
 
 .mdmTile:hover {
-	background: #007cc0;
-	color: #ffffff;
+	background: #3582B0;
+	color: #FFFFFF;
 }
 
-.mdmTile :onclick {
-	background-color: #ffffff;
+.mdmTile:onclick {
+	background-color: #FFFFFF;
 }
 
 .mdmTileHeader {
@@ -67,6 +149,58 @@
 	font-size: 2rem;
 }
 
+.mdmTile .sapMObjectNumber {
+	margin-top: 30px;
+	float: right;
+}
+
+.mdmTile .sapMObjectNumberText {
+	color: #666666;
+	font-size: 1.75rem
+}
+
+.mdmTile .sapMObjectNumberUnit {
+	color: #666666;
+	font-size: 1.0rem
+}
+
+.mdmTile .sapMObjStatus {
+	margin-top: 60px;
+	font-size: 1.0rem;
+}
+
+.mdmTile:hover .sapMObjectNumberText,
+.mdmTile:hover .sapMObjectNumberUnit,
+.mdmTile:hover .sapMObjStatusText,
+.mdmTile:hover .sapMObjStatusIcon,
+.mdmTile:hover .sapMLnk {
+	color: #FFFFFF;
+}
+
+.mdmTile .mdmTileQuickAction {
+	position:absolute;
+	bottom:0;
+	margin-bottom: 15px;
+}
+
+.mdmTile .mdmTileQuickAction .sapMText {
+	font-weight: bold !important;
+	font-size: 1.0rem !important;
+	margin-bottom: 5px;
+}
+
+.mdmTile .mdmTileLinkEnum {
+	margin-top: 5px;
+	margin-left: 10px;
+}
+
+.mdmTile .mdmTileLinkEnum .sapMText {
+	font-weight: bold !important;
+	font-size: 0.875rem !important;
+	margin-right: 10px;
+	margin-bottom: 0px;
+}
+
 .mdmTileUnderDevImage {
 	width: 6.5rem !important;
 	margin-top: 25px;
@@ -83,9 +217,37 @@
 	margin-right: auto;
 }
 
-.mdmNewEntity {
+
+/**
+ *  MDM others
+ */
+.mdmScreenTitle {
+	margin-top: 15px;
+	margin-left: 10px;
+}
+ 
+ .mdmScreenTitle .mdmTitle {
+	font-size: 1.15rem;
+	font-weight: bold;
+}
+
+.mdmScreenTitle .mdmSubTitle {
+	font-size: 0.875rem;
+	font-style: italic;
+}
+
+.mdmDetailScreenTitle {
+	font-size: 1.15rem;
+	font-weight: bold;
+}
+
+.mdmScreenContent {
+	margin-left: 10px;
+}
+ 
+.mdmNewEntityContainer {
 	padding: 10px !important;
-	background-color: #F8FCFC;
+	background-color: #FCFCFC;
 	border: 1px solid #dddddd;
 	box-shadow: 0px 2px 2px #dddddd;
 	margin-top: 20px !important;
@@ -96,4 +258,8 @@
 
 .mdmBoldTxt {
 	font-weight: bold !important;
+}
+
+.mdmConfirmationDialogTxt {
+	padding: 15px !important;
 }

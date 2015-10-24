@@ -2,19 +2,23 @@
 	controllerName="uni.mannheim.mdm.controller.masterdata.ProductOverview"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout">
-
-	<VBox>
+	
+	<VBox class="mdmScreenTitle">
+		<Text class="mdmTitle" text="Product Overview" />
+	</VBox>
+	
+	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
+		vertical="true" focusable="false">
 		<Table id="productTable"
 			items="{path: '/Products', sorter: {
 				path: 'Name'
 			}}">
 			<headerToolbar>
-				<Toolbar>
-					<Title text="Product" level="H2" />
+				<OverflowToolbar>
 					<ToolbarSpacer></ToolbarSpacer>
 					<SearchField width="25%" placeholder="Search for Name ..." search="onSearch" />
 					<Button icon="sap-icon://refresh" press="onRefresh" />
-				</Toolbar>
+				</OverflowToolbar>
 			</headerToolbar>
 			<columns>
 				<Column>
@@ -45,9 +49,9 @@
 				</ColumnListItem>
 			</items>
 		</Table>
-		<VBox class="mdmNewEntity">
+		<VBox class="mdmNewEntityContainer">
 			<Text text="Product not found?" />
 			<Button text="Create" icon="sap-icon://create" press="onNewProduct" />
 		</VBox>
-	</VBox>
+	</ScrollContainer>
 </mvc:View>

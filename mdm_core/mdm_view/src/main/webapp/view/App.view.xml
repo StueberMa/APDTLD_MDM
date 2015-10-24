@@ -5,19 +5,20 @@
 		<Page id="main" title="SolveIT" class="sapUiContentPadding">
 			<!-- Header -->
 			<customHeader>
-				<Bar>
+				<Bar class="mdmHeader">
 					<contentLeft>
 						<l:HorizontalLayout>
 							<Button id="navBack" type="Back" press="onBack" />
-							<Text class="mdmPageTitle" text="solveIT" />
-							<Text class="mdmPageSlogan" text="The customer in mind" />
+							<Image src="./resources/img/logo.svg" class="mdmHeaderLogo"
+								press="onOverview" densityAware="false" />
 						</l:HorizontalLayout>
 					</contentLeft>
 					<contentRight>
 						<l:HorizontalLayout>
-							<Text class="mdmWelcome" text="Welcome: " />
+							<Text class="mdmHeaderWelcome" text="Account: " />
 							<Link text="Max Mustermann" />
-							<Button icon="sap-icon://log" tooltip="Logout" />
+							<Button class="mdmHeaderLogout" icon="sap-icon://log"
+								tooltip="Logout" />
 						</l:HorizontalLayout>
 					</contentRight>
 				</Bar>
@@ -31,22 +32,21 @@
 
 			<!-- Footer -->
 			<footer>
-				<Bar>
-					<contentLeft>
-						<Button text="Overview" press="onOverview" ariaDescribedBy="Overview" />
-						<Button text="Worklist" ariaDescribedBy="Worklist" />
-						<Button text="Marketing" ariaDescribedBy="Marketing" />
-						<Button text="Analysis" ariaDescribedBy="Analysis" />
-						<Button text="Master Data" press="onMasterDataOverview"
-							ariaDescribedBy="Master Data" />
-						<Button text="Data Import" press="onDataImportOverview"
-							ariaDescribedBy="Data Import" />
-						<Button text="Settings" ariaDescribedBy="Settings" />
-					</contentLeft>
-					<contentRight>
-						<Text class="mdmCopyright" text="© solveIT 2015" />
-					</contentRight>
-				</Bar>
+				<OverflowToolbar class="mdmFooter">
+					<Button text="Overview" press="onOverview" ariaDescribedBy="Overview" />
+					<Button text="Worklist" ariaDescribedBy="Worklist" />
+					<Button text="Marketing" press="onMarketingOverview"
+						ariaDescribedBy="Marketing" />
+					<Button text="Analysis" ariaDescribedBy="Analysis" />
+					<Button text="Master Data" press="onMasterDataOverview"
+						ariaDescribedBy="Master Data" />
+					<Button text="Data Import" press="onDataImportOverview"
+						ariaDescribedBy="Data Import" />
+					<Button text="Settings" ariaDescribedBy="Settings" />
+					<ToolbarSpacer />
+					<ToolbarSpacer />
+					<Text class="mdmCopyright" text="© SolveIT 2015" />
+				</OverflowToolbar>
 			</footer>
 		</Page>
 	</App>

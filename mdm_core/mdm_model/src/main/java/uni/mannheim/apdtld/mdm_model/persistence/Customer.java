@@ -17,16 +17,18 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Customer implements Serializable {
+	
 	// constants
 	private static final long serialVersionUID = 1L;
 	
 	// attributes
-	@Id @GeneratedValue private int id;
+	@Id
+	@GeneratedValue
+	private int id;
 	private String title;
 	private String firstName;
 	private String lastName;
 	private int gender;
-	
 	@Temporal(TemporalType.DATE)
 	private Calendar birthDate;
 	private Address address;
@@ -39,9 +41,9 @@ public class Customer implements Serializable {
 	public Customer() {
 		
 	}
-
+	
 	/**
-	 * Method getId
+	 * GET id
 	 * 
 	 * @return
 	 */
@@ -50,7 +52,7 @@ public class Customer implements Serializable {
 	}
 	
 	/**
-	 * Method setId
+	 * SET id
 	 * 
 	 * @param id
 	 */
@@ -59,7 +61,7 @@ public class Customer implements Serializable {
 	}
 
 	/**
-	 * Method getFirstName
+	 * GET firstName
 	 * 
 	 * @return
 	 */
@@ -68,16 +70,16 @@ public class Customer implements Serializable {
 	}
 
 	/**
-	 * Method setFirstName
+	 * SET firstName
 	 * 
-	 * @param param
+	 * @param firstName
 	 */
-	public void setFirstName(String param) {
-		this.firstName = param;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	/**
-	 * Method getLastName
+	 * GET lastName
 	 * 
 	 * @return
 	 */
@@ -86,58 +88,118 @@ public class Customer implements Serializable {
 	}
 
 	/**
-	 * Method setLastName
+	 * SET lastName
 	 * 
-	 * @param param
+	 * @param lastName
 	 */
-	public void setLastName(String param) {
-		this.lastName = param;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
+	/**
+	 * GET contactDetails
+	 * 
+	 * @return
+	 */
 	public ContactDetails getContactDetails() {
 		return contactDetails;
 	}
 
+	/**
+	 * SET contactDetails
+	 * 
+	 * @param contactDetails
+	 */
 	public void setContactDetails(ContactDetails contactDetails) {
 		this.contactDetails = contactDetails;
 	}
 
+	/**
+	 * GET paymentDetails
+	 * 
+	 * @return
+	 */
 	public PaymentDetails getPaymentDetails() {
 		return paymentDetails;
 	}
 
+	/**
+	 * SET paymentDetails
+	 * 
+	 * @param paymentDetails
+	 */
 	public void setPaymentDetails(PaymentDetails paymentDetails) {
 		this.paymentDetails = paymentDetails;
 	}
 
+	/**
+	 * GET title
+	 * 
+	 * @return
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * SET title
+	 * 
+	 * @param title
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/**
+	 * GET birthDate
+	 * 
+	 * @return
+	 */
 	public Calendar getBirthDate() {
 		return birthDate;
 	}
-
+	
+	/**
+	 * SET birthDate
+	 * 
+	 * @param birthDate
+	 */
 	public void setBirthDate(Calendar birthDate) {
 		this.birthDate = birthDate;
 	}
 
+	/**
+	 * GET address
+	 * 
+	 * @return
+	 */
 	public Address getAddress() {
 		return address;
 	}
 
+	/**
+	 * SET address
+	 * 
+	 * @param address
+	 */
 	public void setAddress(Address address) {
 		this.address = address;
 	}
 
+	/**
+	 * GET gender
+	 * 
+	 * @return
+	 */
 	public int getGender() {
 		return gender;
 	}
 
+	/**
+	 * SET gender
+	 * 
+	 * @param gender
+	 */
 	public void setGender(int gender) {
 		this.gender = gender;
 	}

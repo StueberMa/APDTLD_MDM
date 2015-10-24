@@ -1,6 +1,5 @@
-sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
+sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 
-	
 	/**
 	 * Method onInit
 	 */
@@ -29,7 +28,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			window.history.go(-1);
 		} else {
 			var router = sap.ui.core.UIComponent.getRouterFor(this);
-			router.navTo("masterdata.CustomerOverview", false);
+			router.navTo("marketing.CampaignOverview", false);
 		}
 	},
 
@@ -47,7 +46,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		this._dialog.destroy();
 		
 		var model = this.getView().getModel();
-		model.remove("/Customers(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+		model.remove("/Campaigns(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
 	},
 	
 	/**
@@ -60,7 +59,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		var model = new sap.ui.model.json.JSONModel();
 		model.setData( {
 			title: "Delete",
-			text : "Do you really want to delete the customer?",
+			text : "Do you really want to delete the campaign?",
 			type: "Message",
 			state : "Warning"
 		});
@@ -77,7 +76,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		// set data model
 		var model = new sap.ui.model.json.JSONModel();
 		model.setData( {
-			text : "Customer could not be deleted",
+			text : "Campaign could not be deleted",
 			type : "Error"
 		});
 		this.getView().setModel(model, "msg");
@@ -97,7 +96,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		// set data model
 		var model = new sap.ui.model.json.JSONModel();
 		model.setData( {
-			text : "Customer successfully deleted",
+			text : "Campaign successfully deleted",
 			type : "Success"
 		});
 		this.getView().setModel(model, "msg");
@@ -108,7 +107,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		
 		// nav. to edit for create
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("masterdata.CustomerOverview", false);
+		router.navTo("marketing.CampaignOverview", false);
 	},
 	
 	/**
@@ -117,8 +116,8 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	onRequest : function(oEvent) {
 		
 		// create
-		if (oEvent.getParameter("name") === "masterdata.CustomerCreate") {
-			var context = this.getView().getModel().createEntry("/Customers", {});
+		if (oEvent.getParameter("name") === "marketing.CampaignCreate") {
+			var context = this.getView().getModel().createEntry("/Campaigns", {});
 			this.getView().unbindElement();
 			this.getView().setBindingContext(context);
 			this._mode = "CREATE";
@@ -127,9 +126,9 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			button.setVisible(false);
 			
 		// edit
-		} else if (oEvent.getParameter("name") === "masterdata.CustomerDetails") {
+		} else if (oEvent.getParameter("name") === "marketing.CampaignDetails") {
 			this._id = oEvent.getParameter("arguments").id;
-			this.getView().bindElement("/Customers(" + this._id + ")");
+			this.getView().bindElement("/Campaigns(" + this._id + ")");
 			this._mode = "EDIT";
 			
 			var button = this.getView().byId("deleteButton");
@@ -164,7 +163,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		// set data model
 		var model = new sap.ui.model.json.JSONModel();
 		model.setData( {
-			text : "Customer could not be saved",
+			text : "Campaign could not be saved",
 			type : "Error"
 		});
 		this.getView().setModel(model, "msg");
@@ -186,12 +185,12 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		if(typeof oData.__batchResponses[0].__changeResponses == "undefined") {
 			error = true;
 			model.setData( {
-				text : "Customer could not be saved",
+				text : "Campaign could not be saved",
 				type : "Error"
 			});
 		} else {
 			model.setData( {
-				text : "Customer successfully saved",
+				text : "Campaign successfully saved",
 				type : "Success"
 			});
 		}
@@ -204,7 +203,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		// nav. to edit for create
 		if(this._mode === "CREATE" && !error) {
 			var router = sap.ui.core.UIComponent.getRouterFor(this);
-			router.navTo("masterdata.CustomerDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, true);
+			router.navTo("marketing.CampaignDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, true);
 		}
 	}
 	
