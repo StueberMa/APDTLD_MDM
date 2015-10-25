@@ -10,25 +10,25 @@
 	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
 		vertical="true" focusable="false">
 		<Table id="leadTable"
-			items="{path: '/Leads', sorter: {
+			items="{path: '/Leads', parameters: {expand: 'CustomerDetails,ProductDetails'}, sorter: {
 				path: 'Id', descending: false
 			}}">
 			<headerToolbar>
 				<OverflowToolbar>
 					<ToolbarSpacer></ToolbarSpacer>
-					<SearchField width="25%" placeholder="Search for Customer ID ..." search="onSearch" />
+					<SearchField width="25%" placeholder="Search for Customer ..." search="onSearch" />
 					<Button  icon="sap-icon://refresh" press="onRefresh" />
 				</OverflowToolbar>
 			</headerToolbar>
 			<columns>
 				<Column>
-					<Text text="Id" />
+					<Text text="Customer" />
 				</Column>
 				<Column>
-					<Text text="Customer Id" />
+					<Text text="Product" />
 				</Column>
 				<Column>
-					<Text text="Product Id" />
+					<Text text="Contact on" />
 				</Column>
 				<Column>
 					<Text text="Status" />
@@ -37,9 +37,9 @@
 			<items>
 				<ColumnListItem>
 					<cells>
-						<Text class="mdmBoldTxt" text="{Id}" />
-						<Text text="{CustomerId}" />
-						<Text text="{Product}" />
+						<Text class="mdmBoldTxt" text="{CustomerDetails/FirstName} {CustomerDetails/LastName}" />
+						<Text text="{ProductDetails/Name}" />
+						<Text text="{ContactOn}" />
 						<Text text="{Status}" />
 					</cells>
 				</ColumnListItem>
