@@ -5,15 +5,15 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import uni.mannheim.apdtld.mdm_model.persistence.Customer;
-
-import javax.persistence.OneToOne;
 
 /**
  * Entity Lead.
@@ -30,9 +30,10 @@ public class Lead implements Serializable {
 	// attributes
 	@Id
 	@GeneratedValue
+	@Column(name="id")
 	private int id;
 	private String description;
-	@Column(insertable=false, updatable=false)
+	@Column(name="customerId")
 	private int customerId;
 	@Temporal(TemporalType.DATE)
 	private Calendar contactOn;
@@ -41,8 +42,8 @@ public class Lead implements Serializable {
 	private int product;
 	private int amount;
 
-	@OneToOne
-	@JoinColumn(name="customerId")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="customerId", referencedColumnName="id", insertable=false, updatable=false)
 	private Customer customer;
 
 	/**
@@ -194,5 +195,23 @@ public class Lead implements Serializable {
 	 */
 	public void setCustomer(Customer customer) {
 	    this.customer = customer;
+	}
+
+	/**
+	 * GET customerId
+	 * 
+	 * @return
+	 */
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	/**
+	 * SET customerId
+	 * 
+	 * @param customerId
+	 */
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 }

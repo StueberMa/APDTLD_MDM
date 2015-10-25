@@ -2,6 +2,7 @@ package uni.mannheim.apdtld.mdm_model.persistence;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,6 +22,7 @@ public class Product implements Serializable {
 	// attributes
 	@Id
 	@GeneratedValue
+	@Column(name="id")
 	private int id;
 	private String name;
 	private String description;
