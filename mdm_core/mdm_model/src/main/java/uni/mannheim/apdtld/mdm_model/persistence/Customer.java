@@ -25,7 +25,7 @@ public class Customer implements Serializable {
 	// attributes
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name="ID")
 	private int id;
 	private String title;
 	private String firstName;

@@ -22,7 +22,7 @@ public class Product implements Serializable {
 	// attributes
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name="ID")
 	private int id;
 	private String name;
 	private String description;

@@ -25,12 +25,11 @@ public class Campaign implements Serializable {
 	// attributes
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name="ID")
 	private int id;
 	private String name;
 	private String type;
 	private String description;
-	@Column(name="status")
 	private String status;
 	
 	@Temporal(TemporalType.DATE)
