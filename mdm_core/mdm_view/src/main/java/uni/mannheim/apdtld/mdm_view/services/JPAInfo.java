@@ -39,11 +39,11 @@ public class JPAInfo extends HttpServlet {
 		// initialization
 		json = new JsonObject();
 		out = resp.getWriter();
-		
+
 		// set response
 		resp.setStatus(200);
 		resp.setContentType("application/json");
-		
+
 		// connect to JPA
 		try {
 			em = JpaEntityManagerFactory.getEntityManagerFactory("data_model").createEntityManager();
@@ -51,25 +51,60 @@ public class JPAInfo extends HttpServlet {
 			reportError(ERROR_INTERNAL, resp);
 			return;
 		}
-		
+
 		// handle dispatcher path
 		if (req.getPathInfo().equals("/count")) {
-			
+
 			// local declaration
 			long value = 0;
-			
+
 			// customer
 			value = (Long) em.createQuery("SELECT count(distinct c) FROM Customer c").getSingleResult();
 			json.addProperty("customers", value);
-			
+
 			// products
 			value = (Long) em.createQuery("SELECT count(distinct p) FROM Product p").getSingleResult();
 			json.addProperty("products", value);
+
+			// campaign
+			value = (Long) em.createQuery("SELECT count(distinct c) FROM Campaign c").getSingleResult();
+			json.addProperty("campaigns", value);
+
+			// lead
+			value = (Long) em.createQuery("SELECT count(distinct l) FROM Lead l").getSingleResult();
+			json.addProperty("leads", value);
 
 			out.print(json.toString());
 			out.close();
 
 			return;
+		} else if (req.getPathInfo().equals("/active")) {
+
+			// local declaration
+			JsonObject locObj = null;
+			long active = 0;
+			long total = 0;
+
+			// campaign
+			locObj = new JsonObject();
+			total = (Long) em.createQuery("SELECT count(distinct c) FROM Campaign c").getSingleResult();
+			locObj.addProperty("total", total);
+			
+			active = (Long) em.createQuery("SELECT count(distinct c) FROM Campaign c WHERE c.status = 'ACTIVE'").getSingleResult();
+			locObj.addProperty("active", active);
+			json.add("campaign", locObj);
+
+			// lead
+			locObj = new JsonObject();
+			total = (Long) em.createQuery("SELECT count(distinct l) FROM Lead l").getSingleResult();
+			locObj.addProperty("total", total);
+			
+			active = (Long) em.createQuery("SELECT count(distinct l) FROM Lead l WHERE l.status = 'OPEN'").getSingleResult();
+			locObj.addProperty("active", active);
+			json.add("lead", locObj);
+
+			out.print(json.toString());
+			out.close();
 		}
 
 		// no handler found
@@ -94,17 +129,17 @@ public class JPAInfo extends HttpServlet {
 
 		// handle according to type
 		switch (type) {
-			case ERROR_INTERNAL:
-				resp.setStatus(500);
-				json.addProperty("error", "Internal server error");
-				break;
-	
-			case ERROR_NOT_FOUND:
-				resp.setStatus(404);
-				json.addProperty("error", "Service not found");
-				break;
+		case ERROR_INTERNAL:
+			resp.setStatus(500);
+			json.addProperty("error", "Internal server error");
+			break;
+
+		case ERROR_NOT_FOUND:
+			resp.setStatus(404);
+			json.addProperty("error", "Service not found");
+			break;
 		}
-		
+
 		out.print(json.toString());
 		out.close();
 	}

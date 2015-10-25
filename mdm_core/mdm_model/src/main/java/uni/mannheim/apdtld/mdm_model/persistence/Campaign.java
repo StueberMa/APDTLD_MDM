@@ -30,6 +30,7 @@ public class Campaign implements Serializable {
 	private String name;
 	private String type;
 	private String description;
+	@Column(name="status")
 	private String status;
 	
 	@Temporal(TemporalType.DATE)

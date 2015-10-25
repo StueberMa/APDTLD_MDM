@@ -37,6 +37,7 @@ public class Lead implements Serializable {
 	private int customerId;
 	@Temporal(TemporalType.DATE)
 	private Calendar contactOn;
+	@Column(name="status")
 	private String status;
 	private String campaign;
 	private int product;
