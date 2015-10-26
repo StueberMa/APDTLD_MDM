@@ -3,41 +3,50 @@
 	controllerName="uni.mannheim.mdm.controller.marketing.LeadDetails"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 
-	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
-		vertical="true" focusable="false">
-		
+	<ScrollContainer class="mdmScreenContent" height="100%"
+		width="100%" horizontal="true" vertical="true" focusable="false">
+
 		<OverflowToolbar>
 			<Button icon="sap-icon://save" text="Save" press="onSave" />
-			<Button icon="sap-icon://delete" text="Delete" press="onDelete" id="deleteButton"/>
+			<Button icon="sap-icon://delete" text="Delete" press="onDelete"
+				id="deleteButton" />
 			<ToolbarSpacer />
-				<Text class="mdmDetailScreenTitle" text="Lead Details"></Text>
+			<Text class="mdmDetailScreenTitle" text="Lead Details"></Text>
 			<ToolbarSpacer />
 			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
 		</OverflowToolbar>
-		
+
 		<f:Form id="FormCustomerDetails" minWidth="1024"
 			maxContainerCols="2" editable="true">
 			<f:layout>
 				<f:ResponsiveGridLayout labelSpanL="2"
 					labelSpanM="2" emptySpanL="1" emptySpanM="1" columnsL="1" columnsM="1" />
 			</f:layout>
-			
+
 			<f:formContainers>
 				<!-- Lead Header -->
 				<f:FormContainer title="General data">
 					<f:formElements>
 						<f:FormElement label="Customer">
 							<f:fields>
-								<Input value="{path: 'CustomerId', type: 'sap.ui.model.type.Integer'}"  placeholder="Customer ID">
-								</Input>
+								<MultiInput id="CustomerIdInput" placeholder="Name"
+									showValueHelp="false" tokenChange="onCustomerValidation"
+									suggestionItems="{
+										path: '/Customers',
+										sorter: { path: 'LastName' }
+									}">
+									<core:Item key="{Id}" text="{FirstName} {LastName}" />
+								</MultiInput>
 							</f:fields>
 						</f:FormElement>
 					</f:formElements>
 					<f:formElements>
 						<f:FormElement label="Contact on">
 							<f:fields>
-								<DatePicker value="{path:'ContactOn', type:'sap.ui.model.type.Date',
-									formatOptions: { style: 'medium', strictParsing: true}}" placeholder="Contact on" width="30%">
+								<DatePicker
+									value="{path:'ContactOn', type:'sap.ui.model.type.Date',
+									formatOptions: { style: 'medium', strictParsing: true}}"
+									placeholder="Contact on" width="30%">
 								</DatePicker>
 							</f:fields>
 						</f:FormElement>
@@ -58,7 +67,8 @@
 					<f:formElements>
 						<f:FormElement label="Campaign">
 							<f:fields>
-								<Input value="{path: 'CampaignId', type: 'sap.ui.model.type.Integer'}" placeholder="Campaign ID">
+								<Input value="{path: 'CampaignId', type: 'sap.ui.model.type.Integer'}"
+									placeholder="Campaign ID">
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -70,19 +80,34 @@
 					<f:formElements>
 						<f:FormElement label="Description">
 							<f:fields>
-								<TextArea value="{Description}" placeholder="Description" rows="4" cols="2">
+								<TextArea value="{Description}" placeholder="Description"
+									rows="4" cols="2">
 								</TextArea>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Product">
 							<f:fields>
-								<Input value="{path: 'ProductId', type: 'sap.ui.model.type.Integer'}" placeholder="Product ID">
+								<Input value="{path: 'ProductId', type: 'sap.ui.model.type.Integer'}"
+									placeholder="Product ID">
 								</Input>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Amount">
 							<f:fields>
-								<Input value="{path: 'Amount', type: 'sap.ui.model.type.Integer'}" placeholder="Amount">
+								<Input value="{path: 'Amount', type: 'sap.ui.model.type.Integer'}"
+									placeholder="Amount">
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+
+				<!-- IDs -->
+				<f:FormContainer visible="false" title="IDs">
+					<f:formElements>
+						<f:FormElement label="Customer ID">
+							<f:fields>
+								<Input value="{CustomerId}" placeholder="Customer ID">
 								</Input>
 							</f:fields>
 						</f:FormElement>
@@ -90,8 +115,9 @@
 				</f:FormContainer>
 			</f:formContainers>
 		</f:Form>
-		
-		<l:VerticalLayout class="sapUiContentPadding" id="messageArea" width="100%" />
-		
+
+		<l:VerticalLayout class="sapUiContentPadding" id="messageArea"
+			width="100%" />
+
 	</ScrollContainer>
 </core:View>

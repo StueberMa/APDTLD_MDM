@@ -31,6 +31,25 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			router.navTo("marketing.LeadOverview", false);
 		}
 	},
+	
+	/**
+	 * Method onCustomerValidation
+	 */
+	onCustomerValidation : function(oEvent) {
+		
+		if(oEvent.mParameters.type != "added")
+			return;
+		
+		// ensure 1:1 relationship
+		var field = this.getView().byId("CustomerIdInput");
+		if(field.getTokens().length > 1) {
+			field.removeToken(field.getTokens()[0]);
+		}
+		
+		// set id
+		var id = parseInt(oEvent.mParameters.token.mProperties.key);
+		this.getView().getModel().setProperty("CustomerId", id, this.getView().getBindingContext());
+	},
 
 	/**
 	 * Method onDialogCanceled
@@ -125,6 +144,8 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(false);
 			
+			this.getView().byId("CustomerIdInput").removeAllTokens();
+			
 		// edit
 		} else if (oEvent.getParameter("name") === "marketing.LeadDetails") {
 			this._id = oEvent.getParameter("arguments").id;
@@ -133,6 +154,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(true);
+			
+			// customer
+			this.getView().bindElement("/Leads(" + this._id + ")/CustomerDetails");
+			var token = new sap.m.Token({key:"1", text:"Max Mustermann"});
+			this.getView().byId("CustomerIdInput").addToken(token);
 			
 		// leave
 		} else {
@@ -206,5 +232,4 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			router.navTo("marketing.LeadDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, true);
 		}
 	}
-	
 });
