@@ -7,7 +7,7 @@
 		<Text class="mdmTitle" text="Campaign Overview" />
 	</VBox>
 
-	<fb:FilterBar search="onSearch"
+	<fb:FilterBar search="onSearch" class="mdmFilterBar"
 		showRestoreButton="true" showClearButton="true" advancedMode="true">
 		<fb:filterItems>
 			<fb:FilterItem name="Name" label="Name">

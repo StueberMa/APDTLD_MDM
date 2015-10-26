@@ -1,11 +1,43 @@
 <mvc:View height="100%"
 	controllerName="uni.mannheim.mdm.controller.marketing.LeadOverview"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:l="sap.ui.layout">
+	xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout">
 	
 	<VBox class="mdmScreenTitle">
 		<Text class="mdmTitle" text="Lead Overview" />
 	</VBox>
+	
+	<fb:FilterBar search="onSearch" class="mdmFilterBar"
+		showRestoreButton="true" showClearButton="true" advancedMode="true">
+		<fb:filterItems>
+			<fb:FilterItem name="FirstName" label="First Name">
+				<fb:control>
+					<Input type="Text" placeholder="First Name" value="{filter>/FirstName}"/>
+				</fb:control>
+			</fb:FilterItem>
+			<fb:FilterItem name="LastName" label="Last Name">
+				<fb:control>
+					<Input type="Text" placeholder="Last Name" value="{filter>/LastName}"/>
+				</fb:control>
+			</fb:FilterItem>
+			<fb:FilterItem name="ProductName" label="Product">
+				<fb:control>
+					<Input type="Text" placeholder="Product" value="{filter>/Product}"/>
+				</fb:control>
+			</fb:FilterItem>
+			<fb:FilterItem name="Status" label="Status">
+				<fb:control>
+					<Select width="50%" selectedKey="{filter>/Status}">
+						<items>
+							<core:Item text="" key="" />
+							<core:Item text="Open" key="OPEN" />
+							<core:Item text="Closed" key="CLOSE" />
+						</items>
+					</Select>
+				</fb:control>
+			</fb:FilterItem>
+		</fb:filterItems>
+	</fb:FilterBar>
 	
 	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
 		vertical="true" focusable="false">
@@ -16,7 +48,6 @@
 			<headerToolbar>
 				<OverflowToolbar>
 					<ToolbarSpacer></ToolbarSpacer>
-					<SearchField width="25%" placeholder="Search for Customer ..." search="onSearch" />
 					<Button  icon="sap-icon://refresh" press="onRefresh" />
 				</OverflowToolbar>
 			</headerToolbar>

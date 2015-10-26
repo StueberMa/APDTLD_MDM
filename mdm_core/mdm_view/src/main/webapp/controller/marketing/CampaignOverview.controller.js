@@ -41,7 +41,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 		
 		// filter: name
 		if(name && name != "") {
-			var operator = sap.ui.model.FilterOperator.EQ;
+			operator = sap.ui.model.FilterOperator.EQ;
 			
 			if(name.indexOf("*") != -1) {
 				operator = sap.ui.model.FilterOperator.Contains;

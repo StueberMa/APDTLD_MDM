@@ -265,6 +265,8 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	 */
 	setValueSuggestions : function() {
 		
+		var model = this.getView().getModel();
+		
 		// campaign
 		var campaignId = model.getProperty("/Leads(" + this._id + ")/CampaignDetails/Id");
 		var campaignName = model.getProperty("/Leads(" + this._id + ")/CampaignDetails/Name");
