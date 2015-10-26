@@ -67,9 +67,14 @@
 					<f:formElements>
 						<f:FormElement label="Campaign">
 							<f:fields>
-								<Input value="{path: 'CampaignId', type: 'sap.ui.model.type.Integer'}"
-									placeholder="Campaign ID">
-								</Input>
+								<MultiInput id="CampaignIdInput" placeholder="Name"
+									showValueHelp="false" tokenChange="onCampaignValidation"
+									suggestionItems="{
+										path: '/Campaigns',
+										sorter: { path: 'Name' }
+									}">
+									<core:Item key="{Id}" text="{Name}" />
+								</MultiInput>
 							</f:fields>
 						</f:FormElement>
 					</f:formElements>
@@ -87,9 +92,14 @@
 						</f:FormElement>
 						<f:FormElement label="Product">
 							<f:fields>
-								<Input value="{path: 'ProductId', type: 'sap.ui.model.type.Integer'}"
-									placeholder="Product ID">
-								</Input>
+								<MultiInput id="ProductIdInput" placeholder="Name"
+									showValueHelp="false" tokenChange="onProductValidation"
+									suggestionItems="{
+										path: '/Products',
+										sorter: { path: 'Name' }
+									}">
+									<core:Item key="{Id}" text="{Name}" />
+								</MultiInput>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Amount">
@@ -107,8 +117,9 @@
 					<f:formElements>
 						<f:FormElement label="Customer ID">
 							<f:fields>
-								<Input value="{CustomerId}" placeholder="Customer ID">
-								</Input>
+								<Input value="{CustomerId}" placeholder="Customer ID" />						
+								<Input value="{CampaignId}" placeholder="Campaign ID" />
+								<Input value="{ProductId}" placeholder="Product ID" />
 							</f:fields>
 						</f:FormElement>
 					</f:formElements>

@@ -47,7 +47,7 @@
                 "type" : "sap.ui.model.odata.v2.ODataModel",
                 "settings" : {
                 	"defaultBindingMode" : "TwoWay",
-                	"defaultCountMode" : "Both",
+                	"defaultCountMode" : "Inline",
                 	"useBatch" : true
                 	
                 }
