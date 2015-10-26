@@ -156,9 +156,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			button.setVisible(true);
 			
 			// customer
-			this.getView().bindElement("/Leads(" + this._id + ")/CustomerDetails");
-			var token = new sap.m.Token({key:"1", text:"Max Mustermann"});
-			this.getView().byId("CustomerIdInput").addToken(token);
+			this.getView().byId("CustomerIdInput").addToken(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Token"));
 			
 		// leave
 		} else {

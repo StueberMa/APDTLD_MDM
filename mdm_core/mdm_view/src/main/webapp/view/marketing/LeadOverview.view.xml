@@ -10,7 +10,7 @@
 	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
 		vertical="true" focusable="false">
 		<Table id="leadTable"
-			items="{path: '/Leads', parameters: {expand: 'CustomerDetails,ProductDetails'}, sorter: {
+			items="{path: '/Leads', parameters: {expand: 'CampaignDetails,CustomerDetails,ProductDetails'}, sorter: {
 				path: 'Id', descending: false
 			}}">
 			<headerToolbar>
