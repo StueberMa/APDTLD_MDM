@@ -155,8 +155,15 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(true);
 			
+			var model = this.getView().getModel();
+			
 			// customer
-			this.getView().byId("CustomerIdInput").addToken(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Token"));
+			var customerId = model.getProperty("/Leads(" + this._id + ")/CustomerDetails/Id");
+			var customerFirstName = model.getProperty("/Leads(" + this._id + ")/CustomerDetails/FirstName");
+			var customerLastName = model.getProperty("/Leads(" + this._id + ")/CustomerDetails/LastName");;
+			
+			var token = new sap.m.Token({key: customerId, text: customerFirstName + " " + customerLastName});
+			this.getView().byId("CustomerIdInput").addToken(token);
 			
 		// leave
 		} else {
