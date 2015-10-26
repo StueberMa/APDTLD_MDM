@@ -115,7 +115,7 @@
 				<!-- IDs -->
 				<f:FormContainer visible="false" title="IDs">
 					<f:formElements>
-						<f:FormElement label="Customer ID">
+						<f:FormElement label="IDs">
 							<f:fields>
 								<Input value="{CustomerId}" placeholder="Customer ID" />						
 								<Input value="{CampaignId}" placeholder="Campaign ID" />

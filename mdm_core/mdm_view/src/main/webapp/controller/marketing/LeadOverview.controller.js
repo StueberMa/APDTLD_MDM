@@ -14,6 +14,18 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 		table.setMode(sap.m.ListMode.SingleSelectMaster);
 		table.attachEvent("selectionChange", this.onSelectionChange, this);
 	},
+	
+	/**
+	 * Method onCustomerValidation
+	 */
+	onCustomerValidation : function(oEvent) {
+		
+		if(oEvent.mParameters.type == "removed")
+			this.removeToken(oEvent, "/CustomerId");
+		
+		if(oEvent.mParameters.type == "added")
+			this.validateToken(oEvent, "CustomerIdInput", "/CustomerId");
+	},
 
 	/**
 	 * Method onNewLead
@@ -24,15 +36,26 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 	},
 	
 	/**
+	 * Method onProductValidation
+	 */
+	onProductValidation : function(oEvent) {
+		
+		if(oEvent.mParameters.type == "removed")
+			this.removeToken(oEvent, "/ProductId");
+		
+		if(oEvent.mParameters.type == "added")
+			this.validateToken(oEvent, "ProductIdInput", "/ProductId");
+	},
+	
+	/**
 	 * Method onSearch
 	 */
 	onSearch : function(oEvent) {
 		
 		// get values
 		var model = this.getView().getModel("filter");
-		var firstName = model.getProperty("/FirstName");
-		var lastName = model.getProperty("/LastName");
-		var product = model.getProperty("/Product");
+		var customerId = model.getProperty("/CustomerId");
+		var productId = model.getProperty("/ProductId");
 		var status = model.getProperty("/Status");
 
 		// init. filter
@@ -40,45 +63,19 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 		var listBinding = this.getView().byId("leadTable").getBinding("items");
 		var operator = sap.ui.model.FilterOperator.EQ;
 		
-		// filter: firstName
-		if(firstName && firstName != "") {
-			operator = sap.ui.model.FilterOperator.EQ;
-			
-			if(firstName.indexOf("*") != -1) {
-				operator = sap.ui.model.FilterOperator.Contains;
-				firstName = firstName.replace("*", "");
-			}
-		
-			filters.push(new sap.ui.model.Filter({path: "/CustomerDetails/FirstName", operator: operator, value1: firstName}));
+		// filter: customerId
+		if(customerId && customerId != "") {
+			filters.push(new sap.ui.model.Filter({path: "CustomerId", operator: operator, value1: customerId}));
 		}
 		
-		// filter: lastName
-		if(lastName && lastName != "") {
-			operator = sap.ui.model.FilterOperator.EQ;
-			
-			if(lastName.indexOf("*") != -1) {
-				operator = sap.ui.model.FilterOperator.Contains;
-				lastName = lastName.replace("*", "");
-			}
-		
-			filters.push(new sap.ui.model.Filter({path: "/CustomerDetails/FirstName", operator: operator, value1: lastName}));
-		}
-		
-		// filter: product
-		if(product && product != "") {
-			operator = sap.ui.model.FilterOperator.EQ;
-			
-			if(product.indexOf("*") != -1) {
-				operator = sap.ui.model.FilterOperator.Contains;
-				product = product.replace("*", "");
-			}
-			
-			filters.push(new sap.ui.model.Filter({path: "/ProductDetails/Name", operator: operator, value1: product}));
+		// filter: productId
+		if(productId && productId != "") {
+			filters.push(new sap.ui.model.Filter({path: "ProductId", operator: operator, value1: productId}));
 		}
 		
 		// filter: status
 		if(status && status != "") {
-			filters.push(new sap.ui.model.Filter({path: "Status", operator: sap.ui.model.FilterOperator.EQ, value1: status}));
+			filters.push(new sap.ui.model.Filter({path: "Status", operator: operator, value1: status}));
 		}
 		
 		listBinding.filter(filters, sap.ui.model.FilterType.Application);
@@ -108,5 +105,28 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 	onRefresh : function() {
 		var model = this.getView().getModel();
 		model.refresh(true);
+	},
+	
+	/**
+	 * Method removeToken
+	 */
+	removeToken : function (oEvent, attribute) {
+		this.getView().getModel("filter").setProperty(attribute, null, this.getView().getBindingContext());
+	},
+	
+	/**
+	 * Method validateToken
+	 */
+	validateToken : function(oEvent, fieldId, attribute) {
+		
+		// ensure 1:1 relationship
+		var field = this.getView().byId(fieldId);
+		if(field.getTokens().length > 1) {
+			field.removeToken(field.getTokens()[0]);
+		}
+		
+		// set id
+		var id = parseInt(oEvent.mParameters.token.mProperties.key);
+		this.getView().getModel("filter").setProperty(attribute, id, this.getView().getBindingContext());
 	}
 });

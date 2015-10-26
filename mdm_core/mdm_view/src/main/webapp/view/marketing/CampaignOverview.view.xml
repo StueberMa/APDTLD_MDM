@@ -3,46 +3,47 @@
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout">
 
-	<VBox class="mdmScreenTitle">
-		<Text class="mdmTitle" text="Campaign Overview" />
-	</VBox>
-
-	<fb:FilterBar search="onSearch" class="mdmFilterBar"
-		showRestoreButton="true" showClearButton="true" advancedMode="true">
-		<fb:filterItems>
-			<fb:FilterItem name="Name" label="Name">
-				<fb:control>
-					<Input type="Text" placeholder="Name" value="{filter>/Name}"/>
-				</fb:control>
-			</fb:FilterItem>
-			<fb:FilterItem name="Type" label="Type">
-				<fb:control>
-					<Select width="50%" selectedKey="{filter>/Type}">
-						<items>
-							<core:Item text="" key="" />
-							<core:Item text="E-Mail" key="EMAIL" />
-							<core:Item text="Partner" key="PARTNER" />
-							<core:Item text="Social Media" key="SOCMEDIA" />
-						</items>
-					</Select>
-				</fb:control>
-			</fb:FilterItem>
-			<fb:FilterItem name="Status" label="Status">
-				<fb:control>
-					<Select width="50%" selectedKey="{filter>/Status}">
-						<items>
-							<core:Item text="" key="" />
-							<core:Item text="Active" key="ACTIVE" />
-							<core:Item text="Finished" key="FINISH" />
-						</items>
-					</Select>
-				</fb:control>
-			</fb:FilterItem>
-		</fb:filterItems>
-	</fb:FilterBar>
-
 	<ScrollContainer class="mdmScreenContent" height="100%"
 		width="100%" horizontal="true" vertical="true" focusable="false">
+		
+		<VBox class="mdmScreenTitle">
+			<Text class="mdmTitle" text="Campaign Overview" />
+		</VBox>
+
+		<fb:FilterBar search="onSearch" class="mdmFilterBar"
+			showRestoreButton="true" showClearButton="true" advancedMode="true">
+			<fb:filterItems>
+				<fb:FilterItem name="Name" label="Name">
+					<fb:control>
+						<Input type="Text" placeholder="Name" value="{filter>/Name}" />
+					</fb:control>
+				</fb:FilterItem>
+				<fb:FilterItem name="Type" label="Type">
+					<fb:control>
+						<Select width="50%" selectedKey="{filter>/Type}">
+							<items>
+								<core:Item text="" key="" />
+								<core:Item text="E-Mail" key="EMAIL" />
+								<core:Item text="Partner" key="PARTNER" />
+								<core:Item text="Social Media" key="SOCMEDIA" />
+							</items>
+						</Select>
+					</fb:control>
+				</fb:FilterItem>
+				<fb:FilterItem name="Status" label="Status">
+					<fb:control>
+						<Select width="50%" selectedKey="{filter>/Status}">
+							<items>
+								<core:Item text="" key="" />
+								<core:Item text="Active" key="ACTIVE" />
+								<core:Item text="Finished" key="FINISH" />
+							</items>
+						</Select>
+					</fb:control>
+				</fb:FilterItem>
+			</fb:filterItems>
+		</fb:FilterBar>
+
 		<Table id="campaignTable"
 			items="{path: '/Campaigns', sorter: {
 				path: 'Name'
@@ -75,9 +76,11 @@
 					<cells>
 						<Text class="mdmBoldTxt" text="{Name}" />
 						<Text text="{Type}" />
-						<Text text="{path:'StartDate', type:'sap.ui.model.type.Date',
+						<Text
+							text="{path:'StartDate', type:'sap.ui.model.type.Date',
 									formatOptions: { style: 'medium', strictParsing: true}}" />
-						<Text text="{path:'EndDate', type:'sap.ui.model.type.Date',
+						<Text
+							text="{path:'EndDate', type:'sap.ui.model.type.Date',
 									formatOptions: { style: 'medium', strictParsing: true}}" />
 						<Text text="{Status}" />
 					</cells>

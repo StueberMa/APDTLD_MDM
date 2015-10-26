@@ -303,7 +303,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		
 		// set id
 		var id = parseInt(oEvent.mParameters.token.mProperties.key);
-		this.getView().getModel().setProperty(attribute, id, this.getView().getBindingContext());
+		this.getView().getModel("filter").setProperty(attribute, id, this.getView().getBindingContext());
 	}
 	
 });
