@@ -39,7 +39,8 @@
 					<cells>
 						<Text class="mdmBoldTxt" text="{CustomerDetails/FirstName} {CustomerDetails/LastName}" />
 						<Text text="{ProductDetails/Name}" />
-						<Text text="{ContactOn}" />
+						<Text text="{path:'ContactOn', type:'sap.ui.model.type.Date',
+									formatOptions: { style: 'medium', strictParsing: true}}" />
 						<Text text="{Status}" />
 					</cells>
 				</ColumnListItem>
