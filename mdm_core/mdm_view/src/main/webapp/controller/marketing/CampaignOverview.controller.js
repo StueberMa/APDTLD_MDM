@@ -4,6 +4,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 	 * Method onInit
 	 */
 	onInit : function() {
+		
+		// filter model
+		var filterModel = new sap.ui.model.json.JSONModel();
+		this.getView().setModel(filterModel, "filter");
+		
 		// register event for selection
 		var table = this.getView().byId("campaignTable");
 		table.setMode(sap.m.ListMode.SingleSelectMaster);
@@ -23,22 +28,39 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 	 */
 	onSearch : function(oEvent) {
 		
+		// get values
+		var model = this.getView().getModel("filter");
+		var name = model.getProperty("/Name");
+		var type = model.getProperty("/Type");
+		var status = model.getProperty("/Status");
+
+		// init. filter
 		var filters = [];
-		var query = oEvent.getSource().getValue();
-		var operator = sap.ui.model.FilterOperator.EQ;
 		var listBinding = this.getView().byId("campaignTable").getBinding("items");
+		var operator = sap.ui.model.FilterOperator.EQ;
 		
-		if(oEvent.getSource().getValue() === "") {
-			listBinding.filter(filters, sap.ui.model.FilterType.Application);
-			return;
+		// filter: name
+		if(name && name != "") {
+			var operator = sap.ui.model.FilterOperator.EQ;
+			
+			if(name.indexOf("*") != -1) {
+				operator = sap.ui.model.FilterOperator.Contains;
+				name = name.replace("*", "");
+			}
+		
+			filters.push(new sap.ui.model.Filter({path: "Name", operator: operator, value1: name}));
 		}
 		
-		if(query.indexOf("*") != -1) {
-			operator = sap.ui.model.FilterOperator.Contains;
-			query = query.replace("*", "");
+		// filter: type
+		if(type && type != "") {
+			filters.push(new sap.ui.model.Filter({path: "Type", operator: sap.ui.model.FilterOperator.EQ, value1: type}));
 		}
 		
-		filters.push(new sap.ui.model.Filter({path: "Name", operator: operator, value1: query}));
+		// filter: status
+		if(status && status != "") {
+			filters.push(new sap.ui.model.Filter({path: "Status", operator: sap.ui.model.FilterOperator.EQ, value1: status}));
+		}
+		
 		listBinding.filter(filters, sap.ui.model.FilterType.Application);
 	},
 	
@@ -67,4 +89,5 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 		var model = this.getView().getModel();
 		model.refresh(true);
 	}
+	
 });
