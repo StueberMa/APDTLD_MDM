@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import uni.mannheim.apdtld.mdm_view.odata.JpaEntityManagerFactory;
@@ -78,6 +79,7 @@ public class JPAInfo extends HttpServlet {
 			out.close();
 
 			return;
+			
 		} else if (req.getPathInfo().equals("/active")) {
 
 			// local declaration
@@ -104,6 +106,17 @@ public class JPAInfo extends HttpServlet {
 			json.add("lead", locObj);
 
 			out.print(json.toString());
+			out.close();
+		} else if (req.getPathInfo().equals("/debugLeads")) {
+
+			// local declaration
+			Object result = null;
+			Gson gson = null;
+			
+			gson = new Gson();
+			result = em.createQuery("SELECT l FROM Lead l").getResultList();
+			
+			out.print(gson.toJson(result));
 			out.close();
 		}
 
