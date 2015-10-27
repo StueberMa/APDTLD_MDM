@@ -35,8 +35,8 @@
 					</VBox>
 				</l:HorizontalLayout>
 				<ObjectNumber number="{marketing>/campaign/active} / {marketing>/campaign/total}" unit="active" />
-				<ObjectStatus text="Delayed Campaign" state="Warning"
-					icon="sap-icon://message-warning" />
+				<ObjectStatus text="No issues detected" state="Success"
+					icon="sap-icon://sys-enter" />
 			</VBox>
 		</CustomTile>
 

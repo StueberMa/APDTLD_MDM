@@ -152,9 +152,8 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		// create
 		if (oEvent.getParameter("name") === "marketing.LeadCreate") {
 			var model = this.getView().getModel();
-			model.refresh(true);
-			
-			var context = model.createEntry("/Leads", {});
+			var context = model.createEntry("/Leads");
+			//var context = model.createEntry("/Leads", {urlParameters: "$expand=CampaignDetails%2cCustomerDetails%2cProductDetails"});
 			this.getView().unbindElement();
 			this.getView().setBindingContext(context);
 			this._mode = "CREATE";
@@ -172,10 +171,8 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		// edit
 		} else if (oEvent.getParameter("name") === "marketing.LeadDetails") {
 			var model = this.getView().getModel();
-			model.refresh(true);
-			
 			this._id = oEvent.getParameter("arguments").id;
-			this.getView().bindElement("/Leads(" + this._id + ")");
+			this.getView().bindElement("/Leads(" + this._id + ")", {expand: 'CampaignDetails,CustomerDetails,ProductDetails'});
 			this._mode = "EDIT";
 			
 			var button = this.getView().byId("deleteButton");
@@ -287,7 +284,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		var productName = model.getProperty("/Leads(" + this._id + ")/ProductDetails/Name");
 		
 		token = new sap.m.Token({key: productId, text: productName});
-		this.getView().byId("ProductIdInput").addToken(token);
+		this.getView().byId("ProductIdInput").addToken(token); 
 	},
 	
 	/**
@@ -303,7 +300,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		
 		// set id
 		var id = parseInt(oEvent.mParameters.token.mProperties.key);
-		this.getView().getModel("filter").setProperty(attribute, id, this.getView().getBindingContext());
+		this.getView().getModel().setProperty(attribute, id, this.getView().getBindingContext());
 	}
 	
 });

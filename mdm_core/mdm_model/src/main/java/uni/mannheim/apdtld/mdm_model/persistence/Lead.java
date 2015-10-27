@@ -5,15 +5,12 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import uni.mannheim.apdtld.mdm_model.persistence.Customer;
 
 /**
  * Entity Lead.
@@ -44,16 +41,16 @@ public class Lead implements Serializable {
 	private int productId;
 	private int amount;
 
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="CUSTOMERID", referencedColumnName="ID", insertable=false, updatable=false, nullable=true)
+	@ManyToOne
+	@JoinColumn(name="CUSTOMERID", referencedColumnName="ID", insertable=false, updatable=false)
 	private Customer customer;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="CAMPAIGNID", referencedColumnName="ID", insertable=false, updatable=false, nullable=true)
+	@ManyToOne
+	@JoinColumn(name="CAMPAIGNID", referencedColumnName="ID", insertable=false, updatable=false)
 	private Campaign campaign;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="PRODUCTID", referencedColumnName="ID", insertable=false, updatable=false, nullable=true)
+	@ManyToOne
+	@JoinColumn(name="PRODUCTID", referencedColumnName="ID", insertable=false, updatable=false)
 	private Product product;
 
 	/**
@@ -67,7 +64,7 @@ public class Lead implements Serializable {
 	 * GET id
 	 * 
 	 * @return
-	 */
+	 */ 
 	public int getId() {
 		return id;
 	}

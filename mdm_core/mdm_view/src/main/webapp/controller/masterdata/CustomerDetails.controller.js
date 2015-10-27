@@ -86,8 +86,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		msgArea.removeAllContent();
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 	},
-
-	
 	
 	/**
 	 * Method onDeleteSuccess
