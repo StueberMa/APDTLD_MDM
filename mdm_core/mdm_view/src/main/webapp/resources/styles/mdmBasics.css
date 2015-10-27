@@ -247,7 +247,8 @@
 .mdmFilterBar {
 	background-color: #F3F3F3 !important;
 	margin-top: 15px;
-	border: 1px solid #dddddd;
+	border-top: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
 }
  
 .mdmNewEntityContainer {
