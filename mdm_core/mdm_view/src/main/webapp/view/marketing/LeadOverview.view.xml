@@ -48,13 +48,6 @@
 						</Select>
 					</fb:control>
 				</fb:FilterItem>
-				<fb:FilterItem visible="false" name="IDs" label="IDs">
-					<fb:control>
-						<Input type="Text" placeholder="Customer Id" value="{filter>/CustomerId}" />
-						<Input type="Text" placeholder="Product Id" value="{filter>/ProductId}" />
-					</fb:control>
-				</fb:FilterItem>
-				
 			</fb:filterItems>
 		</fb:FilterBar>
 

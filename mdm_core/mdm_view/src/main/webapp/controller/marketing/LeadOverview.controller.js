@@ -111,7 +111,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 	 * Method removeToken
 	 */
 	removeToken : function (oEvent, attribute) {
-		this.getView().getModel("filter").setProperty(attribute, null, this.getView().getBindingContext());
+		this.getView().getModel("filter").setProperty(attribute, undefined);
 	},
 	
 	/**
@@ -127,6 +127,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 		
 		// set id
 		var id = parseInt(oEvent.mParameters.token.mProperties.key);
-		this.getView().getModel("filter").setProperty(attribute, id, this.getView().getBindingContext());
+		this.getView().getModel("filter").setProperty(attribute, id);
 	}
 });
