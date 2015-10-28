@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><entities>
 	<entity>
-		<entity-name>uni.mannheim.apdtld.mdm_model.persistence.Product</entity-name>
+		<entity-name>uni.mannheim.apdtld.mdm_model.persistence.PaymentDetails</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>308</entity-height>
-		<entity-X-Coordinate>50</entity-X-Coordinate>
-		<entity-Y-Coordinate>60</entity-Y-Coordinate>
+		<entity-height>110</entity-height>
+		<entity-X-Coordinate>340</entity-X-Coordinate>
+		<entity-Y-Coordinate>630</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
 	</entity>
 
 	<entity>
-		<entity-name>uni.mannheim.apdtld.mdm_model.persistence.PaymentDetails</entity-name>
+		<entity-name>uni.mannheim.apdtld.mdm_model.persistence.Product</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>110</entity-height>
-		<entity-X-Coordinate>340</entity-X-Coordinate>
-		<entity-Y-Coordinate>630</entity-Y-Coordinate>
+		<entity-height>308</entity-height>
+		<entity-X-Coordinate>50</entity-X-Coordinate>
+		<entity-Y-Coordinate>60</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -33,22 +33,22 @@
 	</entity>
 
 	<entity>
-		<entity-name>uni.mannheim.apdtld.mdm_model.persistence.Campaign</entity-name>
+		<entity-name>uni.mannheim.apdtld.mdm_model.persistence.Lead</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>368</entity-height>
-		<entity-X-Coordinate>565</entity-X-Coordinate>
-		<entity-Y-Coordinate>40</entity-Y-Coordinate>
+		<entity-height>306</entity-height>
+		<entity-X-Coordinate>340</entity-X-Coordinate>
+		<entity-Y-Coordinate>-10</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
 	</entity>
 
 	<entity>
-		<entity-name>uni.mannheim.apdtld.mdm_model.persistence.Lead</entity-name>
+		<entity-name>uni.mannheim.apdtld.mdm_model.persistence.Campaign</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>306</entity-height>
-		<entity-X-Coordinate>340</entity-X-Coordinate>
-		<entity-Y-Coordinate>-10</entity-Y-Coordinate>
+		<entity-height>368</entity-height>
+		<entity-X-Coordinate>565</entity-X-Coordinate>
+		<entity-Y-Coordinate>40</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

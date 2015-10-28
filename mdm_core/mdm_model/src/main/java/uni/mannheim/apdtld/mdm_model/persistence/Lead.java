@@ -27,31 +27,30 @@ public class Lead implements Serializable {
 	// attributes
 	@Id
 	@GeneratedValue
-//	@Column(name="ID")
+	@Column(name="ID")
 	private int id;
 	private String description;
-//	@Column(name="CUSTOMERID")
-	//private int customerId;
+	@Column(name="CUSTOMERID")
+	private int customerId;
 	@Temporal(TemporalType.DATE)
 	private Calendar contactOn;
 	private String status;
-//	@Column(name="CAMPAIGNID")
-	//private int campaignId;
-//	@Column(name="PRODUCTID")
-	//private int productId;
+	@Column(name="CAMPAIGNID")
+	private int campaignId;
+	@Column(name="PRODUCTID")
+	private int productId;
 	private int amount;
 
-	
-	
 	@ManyToOne
+	@JoinColumn(name="CUSTOMERID", referencedColumnName="ID", insertable=false, updatable=false)
 	private Customer customer;
-//	
+	
 	@ManyToOne
-//	@JoinColumn(name="CAMPAIGNID", referencedColumnName="ID", insertable=false, updatable=false)
+	@JoinColumn(name="CAMPAIGNID", referencedColumnName="ID", insertable=false, updatable=false)
 	private Campaign campaign;
-//	
+	
 	@ManyToOne
-//	@JoinColumn(name="PRODUCTID", referencedColumnName="ID", insertable=false, updatable=false)
+	@JoinColumn(name="PRODUCTID", referencedColumnName="ID", insertable=false, updatable=false)
 	private Product product;
 
 	/**
@@ -84,18 +83,18 @@ public class Lead implements Serializable {
 	 * 
 	 * @return
 	 */
-//	public int getCampaignId() {
-//		return campaignId;
-//	}
-//
-//	/**
-//	 * SET campaign
-//	 * 
-//	 * @param campaignId
-//	 */
-//	public void setCampaignId(int campaignId) {
-//		this.campaignId = campaignId;
-//	}
+	public int getCampaignId() {
+		return campaignId;
+	}
+
+	/**
+	 * SET campaign
+	 * 
+	 * @param campaignId
+	 */
+	public void setCampaignId(int campaignId) {
+		this.campaignId = campaignId;
+	}
 
 	/**
 	 * GET description
@@ -156,18 +155,18 @@ public class Lead implements Serializable {
 	 * 
 	 * @return
 	 */
-//	public int getProductId() {
-//		return productId;
-//	}
-//
-//	/**
-//	 * SET product
-//	 * 
-//	 * @param productId
-//	 */
-//	public void setProductId(int productId) {
-//		this.productId = productId;
-//	}
+	public int getProductId() {
+		return productId;
+	}
+
+	/**
+	 * SET product
+	 * 
+	 * @param productId
+	 */
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
 
 	/**
 	 * GET amount
@@ -192,18 +191,18 @@ public class Lead implements Serializable {
 	 * 
 	 * @return
 	 */
-//	public int getCustomerId() {
-//		return customerId;
-//	}
-//
-//	/**
-//	 * SET customerId
-//	 * 
-//	 * @param customerId
-//	 */
-//	public void setCustomerId(int customerId) {
-//		this.customerId = customerId;
-//	}
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	/**
+	 * SET customerId
+	 * 
+	 * @param customerId
+	 */
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
 
 	/**
 	 * GET customer
@@ -211,9 +210,7 @@ public class Lead implements Serializable {
 	 * @return
 	 */
 	public Customer getCustomer() {
-		Customer cust = new Customer();
-		cust.setId(1);
-	    return cust;
+		return customer;
 	}
 
 	/**

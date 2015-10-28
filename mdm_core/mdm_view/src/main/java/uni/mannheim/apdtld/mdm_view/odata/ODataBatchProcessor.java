@@ -1,6 +1,11 @@
 package uni.mannheim.apdtld.mdm_view.odata;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +17,15 @@ import org.apache.olingo.odata2.api.ep.EntityProvider;
 import org.apache.olingo.odata2.api.ep.EntityProviderBatchProperties;
 import org.apache.olingo.odata2.api.exception.ODataException;
 import org.apache.olingo.odata2.api.processor.ODataRequest;
+import org.apache.olingo.odata2.api.processor.ODataRequest.ODataRequestBuilder;
 import org.apache.olingo.odata2.api.processor.ODataResponse;
 import org.apache.olingo.odata2.api.uri.PathInfo;
+import org.apache.olingo.odata2.core.ODataRequestImpl;
 import org.apache.olingo.odata2.jpa.processor.api.ODataJPAContext;
 import org.apache.olingo.odata2.jpa.processor.core.ODataJPAProcessorDefault;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  * OData Batch Processor implementation.
@@ -87,13 +97,15 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 		// declaration
 		List<ODataResponse> responses = null;
 		List<ODataResponse> errorResponses = null;
-		ODataResponse response = null;
+		ODataResponse response = null;	
 
 		// initialization
 		responses = new ArrayList<ODataResponse>();
 
 		// process request
 		for (ODataRequest request : requests) {
+			
+			request = resolveAssociations(request);
 			response = handler.handleRequest(request);
 
 			// handle bad request
@@ -108,5 +120,76 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 
 		return BatchResponsePart.responses(responses).changeSet(true).build();
 	}
-
+	
+	/**
+	 * Method to resolveAssociations
+	 * 
+	 * @param request
+	 */
+	private ODataRequest resolveAssociations(ODataRequest request) {
+		
+		// declaration
+		BufferedReader br = null;
+		InputStream is = null;
+		JsonParser parser = null;
+		JsonObject body = null;
+		JsonObject metadata = null;
+		JsonObject details = null;
+		String bodyTxt = ""; 
+		
+		// initialization
+		parser = new JsonParser();
+		is = request.getBody();
+		br = new BufferedReader(new InputStreamReader(is));
+		
+		try {
+			bodyTxt = br.readLine();
+			br.close();
+			is.reset();
+		} catch (IOException e) {
+			// do nothing
+		}
+		
+		body = (JsonObject) parser.parse(bodyTxt);
+		metadata = body.getAsJsonObject("__metadata");
+		
+		// ensure associations available
+		if(!metadata.get("type").getAsString().equals("data_model.Lead"))
+			return request;
+		
+		// Customer
+		if(body.get("CustomerId") != null) {
+			details = new JsonObject();
+			details.add("Id", body.get("CustomerId"));
+			body.add("CustomerDetails", details);
+		}
+		
+		// Product
+		if(body.get("ProductId") != null) {
+			details = new JsonObject();
+			details.add("Id", body.get("ProductId"));
+			body.add("ProductDetails", details);
+		}
+		
+		// Campaign
+		if(body.get("CampaignId") != null) {
+			details = new JsonObject();
+			details.add("Id", body.get("CampaignId"));
+			body.add("CampaignDetails", details);
+		}
+		
+		// create new Request
+		ODataRequestBuilder req = ODataRequestImpl.newBuilder();
+		req.acceptableLanguages(request.getAcceptableLanguages());
+		req.acceptHeaders(request.getAcceptHeaders());
+		req.allQueryParameters(request.getAllQueryParameters());
+		req.body(new ByteArrayInputStream(body.toString().getBytes(StandardCharsets.UTF_8)));
+		req.contentType(request.getContentType());
+		req.method(request.getMethod());
+		req.pathInfo(request.getPathInfo());
+		req.queryParameters(request.getQueryParameters());
+		req.requestHeaders(request.getRequestHeaders());
+		
+		return req.build();
+	}
 }

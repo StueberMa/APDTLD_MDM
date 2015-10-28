@@ -153,7 +153,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		if (oEvent.getParameter("name") === "marketing.LeadCreate") {
 			var model = this.getView().getModel();
 			var context = model.createEntry("/Leads");
-			//var context = model.createEntry("/Leads", {urlParameters: "$expand=CampaignDetails%2cCustomerDetails%2cProductDetails"});
 			this.getView().unbindElement();
 			this.getView().setBindingContext(context);
 			this._mode = "CREATE";
@@ -172,7 +171,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		} else if (oEvent.getParameter("name") === "marketing.LeadDetails") {
 			var model = this.getView().getModel();
 			this._id = oEvent.getParameter("arguments").id;
-			this.getView().bindElement("/Leads(" + this._id + ")", {expand: 'CampaignDetails,CustomerDetails,ProductDetails'});
+			this.getView().bindElement("/Leads(" + this._id + ")", {"expand": "ProductDetails"});
+			
+			if(this._mode != "CREATE")
+				this.setValueSuggestions();
+			
 			this._mode = "EDIT";
 			
 			var button = this.getView().byId("deleteButton");
@@ -180,9 +183,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			
 			var msgArea = this.getView().byId("messageArea");
 			msgArea.removeAllContent();
-			
-			// set ID suggestions
-			this.setValueSuggestions();
 			
 		// leave
 		} else {
