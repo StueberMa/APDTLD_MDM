@@ -1,34 +1,76 @@
 <mvc:View height="100%"
 	controllerName="uni.mannheim.mdm.controller.marketing.LeadOverview"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:l="sap.ui.layout">
-	
-	<VBox class="mdmScreenTitle">
-		<Text class="mdmTitle" text="Lead Overview" />
-	</VBox>
-	
-	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
-		vertical="true" focusable="false">
+	xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout">
+
+	<ScrollContainer class="mdmScreenContent" height="100%"
+		width="100%" horizontal="true" vertical="true" focusable="false">
+
+		<VBox class="mdmScreenTitle">
+			<Text class="mdmTitle" text="Lead Overview" />
+		</VBox>
+
+		<fb:FilterBar search="onSearch" class="mdmFilterBar"
+			showRestoreButton="true" showClearButton="true" advancedMode="true">
+			<fb:filterItems>
+				<fb:FilterItem name="Customer" label="Customer">
+					<fb:control>
+						<MultiInput id="CustomerIdInput" placeholder="Name"
+									showValueHelp="false" tokenChange="onCustomerValidation"
+									suggestionItems="{
+										path: '/Customers',
+										sorter: { path: 'LastName' }
+									}">
+									<core:Item key="{Id}" text="{FirstName} {LastName}" />
+						</MultiInput>
+					</fb:control>
+				</fb:FilterItem>
+				<fb:FilterItem name="ProductName" label="Product">
+					<fb:control>
+						<MultiInput id="ProductIdInput" placeholder="Name"
+									showValueHelp="false" tokenChange="onProductValidation"
+									suggestionItems="{
+										path: '/Products',
+										sorter: { path: 'Name' }
+									}">
+									<core:Item key="{Id}" text="{Name}" />
+						</MultiInput>
+					</fb:control>
+				</fb:FilterItem>
+				<fb:FilterItem name="Status" label="Status">
+					<fb:control>
+						<Select width="50%" selectedKey="{filter>/Status}">
+							<items>
+								<core:Item text="" key="" />
+								<core:Item text="Open" key="OPEN" />
+								<core:Item text="Closed" key="CLOSE" />
+							</items>
+						</Select>
+					</fb:control>
+				</fb:FilterItem>
+			</fb:filterItems>
+		</fb:FilterBar>
+
+
 		<Table id="leadTable"
-			items="{path: '/Leads', sorter: {
+			items="{path: '/Leads', parameters: {expand: 'CampaignDetails,CustomerDetails,ProductDetails'}, sorter: {
 				path: 'Id', descending: false
 			}}">
 			<headerToolbar>
 				<OverflowToolbar>
 					<ToolbarSpacer></ToolbarSpacer>
-					<SearchField width="25%" placeholder="Search for Customer ID ..." search="onSearch" />
-					<Button  icon="sap-icon://refresh" press="onRefresh" />
+					<Button icon="sap-icon://refresh" press="onRefresh" />
 				</OverflowToolbar>
 			</headerToolbar>
 			<columns>
 				<Column>
-					<Text text="Id" />
+					<Text text="Customer" />
 				</Column>
 				<Column>
-					<Text text="Customer Id" />
+					<Text text="Product" />
 				</Column>
 				<Column>
-					<Text text="Product Id" />
+					<Text text="Contact on" />
 				</Column>
 				<Column>
 					<Text text="Status" />
@@ -37,9 +79,12 @@
 			<items>
 				<ColumnListItem>
 					<cells>
-						<Text class="mdmBoldTxt" text="{Id}" />
-						<Text text="{CustomerId}" />
-						<Text text="{Product}" />
+						<Text class="mdmBoldTxt"
+							text="{CustomerDetails/FirstName} {CustomerDetails/LastName}" />
+						<Text text="{ProductDetails/Name}" />
+						<Text
+							text="{path:'ContactOn', type:'sap.ui.model.type.Date',
+									formatOptions: { style: 'medium', strictParsing: true}}" />
 						<Text text="{Status}" />
 					</cells>
 				</ColumnListItem>

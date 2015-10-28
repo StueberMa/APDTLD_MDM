@@ -2,13 +2,14 @@
 	controllerName="uni.mannheim.mdm.controller.masterdata.CustomerOverview"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout">
-	
-	<VBox class="mdmScreenTitle">
-		<Text class="mdmTitle" text="Customer Overview" />
-	</VBox>
-	
-	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
-		vertical="true" focusable="false">
+
+	<ScrollContainer class="mdmScreenContent" height="100%"
+		width="100%" horizontal="true" vertical="true" focusable="false">
+
+		<VBox class="mdmScreenTitle">
+			<Text class="mdmTitle" text="Customer Overview" />
+		</VBox>
+
 		<Table id="customerTable"
 			items="{path: '/Customers', sorter: {
 				path: 'LastName'
@@ -16,8 +17,9 @@
 			<headerToolbar>
 				<OverflowToolbar>
 					<ToolbarSpacer></ToolbarSpacer>
-					<SearchField width="25%" placeholder="Search for Last Name ..." search="onSearch" />
-					<Button  icon="sap-icon://refresh" press="onRefresh" />
+					<SearchField width="25%" placeholder="Search for Last Name ..."
+						search="onSearch" />
+					<Button icon="sap-icon://refresh" press="onRefresh" />
 				</OverflowToolbar>
 			</headerToolbar>
 			<columns>

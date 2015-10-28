@@ -141,7 +141,7 @@ public class ODataJPAServiceFactory extends ODataServiceFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ODataCallback> T getCallback(final Class<? extends ODataCallback> callbackInterface) {
+	public <T extends ODataCallback> T getCallback(Class<T> callbackInterface) {
 		
 		if (setDetailErrors == true) {
 			if (callbackInterface.isAssignableFrom(ODataErrorCallback.class)) {

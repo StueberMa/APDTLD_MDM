@@ -86,8 +86,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		msgArea.removeAllContent();
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 	},
-
-	
 	
 	/**
 	 * Method onDeleteSuccess
@@ -126,6 +124,9 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(false);
 			
+			var msgArea = this.getView().byId("messageArea");
+			msgArea.removeAllContent();
+			
 		// edit
 		} else if (oEvent.getParameter("name") === "masterdata.CustomerDetails") {
 			this._id = oEvent.getParameter("arguments").id;
@@ -134,6 +135,9 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(true);
+			
+			var msgArea = this.getView().byId("messageArea");
+			msgArea.removeAllContent();
 			
 		// leave
 		} else {

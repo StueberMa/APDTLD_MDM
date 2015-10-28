@@ -165,7 +165,7 @@
 }
 
 .mdmTile .sapMObjStatus {
-	margin-top: 60px;
+	margin-top: 55px;
 	font-size: 1.0rem;
 }
 
@@ -223,7 +223,6 @@
  */
 .mdmScreenTitle {
 	margin-top: 15px;
-	margin-left: 10px;
 }
  
  .mdmScreenTitle .mdmTitle {
@@ -243,6 +242,13 @@
 
 .mdmScreenContent {
 	margin-left: 10px;
+}
+
+.mdmFilterBar {
+	background-color: #F3F3F3 !important;
+	margin-top: 15px;
+	border-top: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
 }
  
 .mdmNewEntityContainer {

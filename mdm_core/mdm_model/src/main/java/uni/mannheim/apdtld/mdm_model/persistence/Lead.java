@@ -8,12 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import uni.mannheim.apdtld.mdm_model.persistence.Customer;
-
-import javax.persistence.OneToOne;
 
 /**
  * Entity Lead.
@@ -30,20 +27,32 @@ public class Lead implements Serializable {
 	// attributes
 	@Id
 	@GeneratedValue
+//	@Column(name="ID")
 	private int id;
 	private String description;
-	@Column(insertable=false, updatable=false)
-	private int customerId;
+//	@Column(name="CUSTOMERID")
+	//private int customerId;
 	@Temporal(TemporalType.DATE)
 	private Calendar contactOn;
 	private String status;
-	private String campaign;
-	private int product;
+//	@Column(name="CAMPAIGNID")
+	//private int campaignId;
+//	@Column(name="PRODUCTID")
+	//private int productId;
 	private int amount;
 
-	@OneToOne
-	@JoinColumn(name="customerId")
+	
+	
+	@ManyToOne
 	private Customer customer;
+//	
+	@ManyToOne
+//	@JoinColumn(name="CAMPAIGNID", referencedColumnName="ID", insertable=false, updatable=false)
+	private Campaign campaign;
+//	
+	@ManyToOne
+//	@JoinColumn(name="PRODUCTID", referencedColumnName="ID", insertable=false, updatable=false)
+	private Product product;
 
 	/**
 	 * Constructor
@@ -56,7 +65,7 @@ public class Lead implements Serializable {
 	 * GET id
 	 * 
 	 * @return
-	 */
+	 */ 
 	public int getId() {
 		return id;
 	}
@@ -71,22 +80,22 @@ public class Lead implements Serializable {
 	}
 	
 	/**
-	 * GET campaign
+	 * GET campaignId
 	 * 
 	 * @return
 	 */
-	public String getCampaign() {
-		return campaign;
-	}
-
-	/**
-	 * SET campaign
-	 * 
-	 * @param campaign
-	 */
-	public void setCampaign(String campaign) {
-		this.campaign = campaign;
-	}
+//	public int getCampaignId() {
+//		return campaignId;
+//	}
+//
+//	/**
+//	 * SET campaign
+//	 * 
+//	 * @param campaignId
+//	 */
+//	public void setCampaignId(int campaignId) {
+//		this.campaignId = campaignId;
+//	}
 
 	/**
 	 * GET description
@@ -143,22 +152,22 @@ public class Lead implements Serializable {
 	}
 
 	/**
-	 * GET product
+	 * GET productId
 	 * 
 	 * @return
 	 */
-	public int getProduct() {
-		return product;
-	}
-
-	/**
-	 * SET product
-	 * 
-	 * @param product
-	 */
-	public void setProduct(int product) {
-		this.product = product;
-	}
+//	public int getProductId() {
+//		return productId;
+//	}
+//
+//	/**
+//	 * SET product
+//	 * 
+//	 * @param productId
+//	 */
+//	public void setProductId(int productId) {
+//		this.productId = productId;
+//	}
 
 	/**
 	 * GET amount
@@ -177,6 +186,24 @@ public class Lead implements Serializable {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+	
+	/**
+	 * GET customerId
+	 * 
+	 * @return
+	 */
+//	public int getCustomerId() {
+//		return customerId;
+//	}
+//
+//	/**
+//	 * SET customerId
+//	 * 
+//	 * @param customerId
+//	 */
+//	public void setCustomerId(int customerId) {
+//		this.customerId = customerId;
+//	}
 
 	/**
 	 * GET customer
@@ -184,7 +211,9 @@ public class Lead implements Serializable {
 	 * @return
 	 */
 	public Customer getCustomer() {
-	    return customer;
+		Customer cust = new Customer();
+		cust.setId(1);
+	    return cust;
 	}
 
 	/**
@@ -195,4 +224,41 @@ public class Lead implements Serializable {
 	public void setCustomer(Customer customer) {
 	    this.customer = customer;
 	}
+
+	/**
+	 * GET campaign
+	 * 
+	 * @return
+	 */
+	public Campaign getCampaign() {
+		return campaign;
+	}
+
+	/**
+	 * SET campaign
+	 * 
+	 * @param campaign
+	 */
+	public void setCampaign(Campaign campaign) {
+		this.campaign = campaign;
+	}
+
+	/**
+	 * GET product
+	 * 
+	 * @return
+	 */
+	public Product getProduct() {
+		return product;
+	}
+
+	/**
+	 * SET product
+	 * 
+	 * @param product
+	 */
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
 }

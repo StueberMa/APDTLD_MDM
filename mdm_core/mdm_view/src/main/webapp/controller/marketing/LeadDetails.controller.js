@@ -31,6 +31,30 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			router.navTo("marketing.LeadOverview", false);
 		}
 	},
+	
+	/**
+	 * Method onCampaignValidation
+	 */
+	onCampaignValidation : function(oEvent) {
+		
+		if(oEvent.mParameters.type != "added")
+			return;
+		
+		// validate token
+		this.validateToken(oEvent, "CampaignIdInput", "CampaignId");
+	},
+	
+	/**
+	 * Method onCustomerValidation
+	 */
+	onCustomerValidation : function(oEvent) {
+		
+		if(oEvent.mParameters.type != "added")
+			return;
+		
+		// validate token
+		this.validateToken(oEvent, "CustomerIdInput", "CustomerId");
+	},
 
 	/**
 	 * Method onDialogCanceled
@@ -85,8 +109,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		msgArea.removeAllContent();
 		msgArea.addContent(sap.ui.xmlfragment("uni.mannheim.mdm.fragment.Message"));
 	},
-
-	
 	
 	/**
 	 * Method onDeleteSuccess
@@ -111,13 +133,27 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	},
 	
 	/**
+	 * Method onProductValidation
+	 */
+	onProductValidation : function(oEvent) {
+		
+		if(oEvent.mParameters.type != "added")
+			return;
+		
+		// validate token
+		this.validateToken(oEvent, "ProductIdInput", "ProductId");
+	},
+	
+	/**
 	 * Method onRequest
 	 */
 	onRequest : function(oEvent) {
 		
 		// create
 		if (oEvent.getParameter("name") === "marketing.LeadCreate") {
-			var context = this.getView().getModel().createEntry("/Leads", {});
+			var model = this.getView().getModel();
+			var context = model.createEntry("/Leads");
+			//var context = model.createEntry("/Leads", {urlParameters: "$expand=CampaignDetails%2cCustomerDetails%2cProductDetails"});
 			this.getView().unbindElement();
 			this.getView().setBindingContext(context);
 			this._mode = "CREATE";
@@ -125,14 +161,28 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(false);
 			
+			var msgArea = this.getView().byId("messageArea");
+			msgArea.removeAllContent();
+			
+			this.getView().byId("CampaignIdInput").removeAllTokens();
+			this.getView().byId("CustomerIdInput").removeAllTokens();
+			this.getView().byId("ProductIdInput").removeAllTokens();
+			
 		// edit
 		} else if (oEvent.getParameter("name") === "marketing.LeadDetails") {
+			var model = this.getView().getModel();
 			this._id = oEvent.getParameter("arguments").id;
-			this.getView().bindElement("/Leads(" + this._id + ")");
+			this.getView().bindElement("/Leads(" + this._id + ")", {expand: 'CampaignDetails,CustomerDetails,ProductDetails'});
 			this._mode = "EDIT";
 			
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(true);
+			
+			var msgArea = this.getView().byId("messageArea");
+			msgArea.removeAllContent();
+			
+			// set ID suggestions
+			this.setValueSuggestions();
 			
 		// leave
 		} else {
@@ -205,6 +255,52 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			var router = sap.ui.core.UIComponent.getRouterFor(this);
 			router.navTo("marketing.LeadDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, true);
 		}
+	},
+	
+	/**
+	 * Method setValueSuggestions
+	 */
+	setValueSuggestions : function() {
+		
+		var model = this.getView().getModel();
+		
+		// campaign
+		var campaignId = model.getProperty("/Leads(" + this._id + ")/CampaignDetails/Id");
+		var campaignName = model.getProperty("/Leads(" + this._id + ")/CampaignDetails/Name");
+		
+		var token = new sap.m.Token({key: campaignId, text: campaignName});
+		this.getView().byId("CampaignIdInput").addToken(token);
+		
+		// customer
+		var customerId = model.getProperty("/Leads(" + this._id + ")/CustomerDetails/Id");
+		var customerFirstName = model.getProperty("/Leads(" + this._id + ")/CustomerDetails/FirstName");
+		var customerLastName = model.getProperty("/Leads(" + this._id + ")/CustomerDetails/LastName");
+		
+		token = new sap.m.Token({key: customerId, text: customerFirstName + " " + customerLastName});
+		this.getView().byId("CustomerIdInput").addToken(token);
+		
+		// product
+		var productId = model.getProperty("/Leads(" + this._id + ")/ProductDetails/Id");
+		var productName = model.getProperty("/Leads(" + this._id + ")/ProductDetails/Name");
+		
+		token = new sap.m.Token({key: productId, text: productName});
+		this.getView().byId("ProductIdInput").addToken(token); 
+	},
+	
+	/**
+	 * Method validateToken
+	 */
+	validateToken : function(oEvent, fieldId, attribute) {
+		
+		// ensure 1:1 relationship
+		var field = this.getView().byId(fieldId);
+		if(field.getTokens().length > 1) {
+			field.removeToken(field.getTokens()[0]);
+		}
+		
+		// set id
+		var id = parseInt(oEvent.mParameters.token.mProperties.key);
+		this.getView().getModel().setProperty(attribute, id, this.getView().getBindingContext());
 	}
 	
 });

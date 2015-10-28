@@ -34,8 +34,9 @@
 						<Text class="mdmTileHeaderSub" text="Monitor and Create Marketing Campaigns" />
 					</VBox>
 				</l:HorizontalLayout>
-				<Image src="./resources/img/no_image.png" class="mdmTileImage"
-					densityAware="false" />
+				<ObjectNumber number="{marketing>/campaign/active} / {marketing>/campaign/total}" unit="active" />
+				<ObjectStatus text="No issues detected" state="Success"
+					icon="sap-icon://sys-enter" />
 			</VBox>
 		</CustomTile>
 
@@ -49,8 +50,9 @@
 						<Text class="mdmTileHeaderSub" text="Keep Track of the Interests of Your Clients" />
 					</VBox>
 				</l:HorizontalLayout>
-				<Image src="./resources/img/no_image.png" class="mdmTileImage"
-					densityAware="false" />
+				<ObjectNumber number="{marketing>/lead/active} / {marketing>/lead/total}" unit="open" />
+				<ObjectStatus text="No issues detected" state="Success"
+					icon="sap-icon://sys-enter" />
 			</VBox>
 		</CustomTile>
 
