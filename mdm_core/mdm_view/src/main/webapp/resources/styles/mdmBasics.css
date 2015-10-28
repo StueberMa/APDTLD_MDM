@@ -269,3 +269,24 @@
 .mdmConfirmationDialogTxt {
 	padding: 15px !important;
 }
+
+.mdmImportFilenameHeader {
+	border-bottom: 1px rgba(0,0,0,0.5) solid;
+}
+
+.mdmImportMetaheader {
+	border-right: 1px rgba(0,0,0,0.5) solid;
+}
+
+.mdmImportAttributeHeaderLeft {
+	border-bottom: 1px rgba(0,0,0,0.5) solid;
+	border-right: 1px rgba(0,0,0,0.5) solid;
+}
+
+.mdmImportAttributeHeaderRight {
+	border-bottom: 1px rgba(0,0,0,0.5) solid;
+}
+
+.mdmImportRowParticle {
+	border-right: 1px rgba(0,0,0,0.5) solid;
+}

@@ -83,7 +83,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Uploader", {
 		if(this.fileCountFinished!=this.fileCount) {
 			return;
 		}
-		var filesParam = this.files;
+		var filesParam = this.files.substring(0,this.files.length-1);
 		console.log(oEvent.getParameters());
 		oUploadProgressIndicator = this.getView().byId("UploadProgressIndicator");
 		oUploadProgressIndicator.setPercentValue(100);
