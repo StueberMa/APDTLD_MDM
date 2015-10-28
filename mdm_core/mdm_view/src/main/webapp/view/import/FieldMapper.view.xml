@@ -7,8 +7,13 @@
 	xmlns:l="sap.ui.layout" 
 	xmlns:t="sap.ui.table" 
 	xmlns:vbm="sap.ui.vbm">
+	<HBox class="mdmImportFilenameHeader">
+		<VBox width="100%" alignItems="Center" justifyContent="Center">
+			<Title level="H1" text="Mappings for {/filename}" />
+		</VBox> 
+	</HBox>
 	<HBox>	
-		<HBox width="47%">
+		<HBox width="47%" class="mdmImportMetaheader">
 			<VBox width="100%" alignItems="Center" justifyContent="Center">
 				<Title level="H1" text="File" />
 			</VBox>
@@ -25,7 +30,7 @@
 		</HBox>
 	</HBox>
 	<HBox>
-		<HBox width="47%">
+		<HBox width="47%" class="mdmImportAttributeHeaderLeft">
 			<VBox width="33%" alignItems="Center" justifyContent="Center">
 				<Title level="H3" text="Field Name" />
 			</VBox>
@@ -36,7 +41,7 @@
 				<Title level="H3" text="Field Sample" />
 			</VBox>
 		</HBox>
-		<HBox width="47%">
+		<HBox width="47%" class="mdmImportAttributeHeaderRight">
 			<VBox width="33%" alignItems="Center" justifyContent="Center">
 				<Title level="H3" text="Field Name" />
 			</VBox>
@@ -46,14 +51,14 @@
 			<VBox width="33%" alignItems="Center" justifyContent="Center">
 				<Title level="H3" text="Field Sample" />
 			</VBox>
-			<HBox width="6%">
-			</HBox>
+		</HBox>
+		<HBox width="6%" class="mdmImportAttributeHeaderRight">
 		</HBox>
 	</HBox>
 	<List items="{/mappings/}" id="mappingList">
 		<CustomListItem>
 			<HBox>
-				<HBox width="47%">
+				<HBox width="47%" class="mdmImportRowParticle">
 					<VBox width="33%" alignItems="Center" justifyContent="Center">
 						<Label text="{fName}" />
 					</VBox>

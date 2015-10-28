@@ -1,6 +1,8 @@
 sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 
 	oPersonalizationDialog: null,
+	file:"",
+	remainingFiles:[],
 	
 	onInit : function (evt) {
 		// set explored app's demo model on this sample
@@ -8,14 +10,16 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		var oModel = new sap.ui.model.json.JSONModel();
 		var parts = window.location.href.split('/');
 		var files = parts[parts.length-1].split(';');
+		this.file = decodeURIComponent(files[0]);
+		files.splice(0,1);
+		this.remainingFiles = files;
 		oModel.loadData("/mdm_view/fileanalyser?file=" + files[0]);
 		this.getView().setModel(oModel);
-		//oModel.attachRequestCompleted($.proxy(this.updateSelects, this));
 		
 		this.oPersonalizationDialog = sap.ui.xmlfragment("uni.mannheim.mdm.controller.import.FieldMapperAdd", this);
 		this.getView().addDependent(this.oPersonalizationDialog);
 	},
-
+	
 	/*updateSelects: function(evt) {
 		var _this = this;
 		var oList = this.getView().byId("mappingList");
@@ -137,9 +141,20 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 			dataType: "json",
 			async: false,
 			data: jsonModel,
-			success: function(data, textStatus, jqXHR) {
-				alert("yeah!");
-			},
+			success: $.proxy(function(data, textStatus, jqXHR) {
+				sap.m.MessageToast.show("All data for file " + this.file + " was successfully imported.");
+				setTimeout($.proxy(function() {
+					console.log(this.remainingFiles);
+					if(this.remainingFiles.length>0) {
+						var oModel = new sap.ui.model.json.JSONModel();
+						oModel.loadData("/mdm_view/fileanalyser?file=" + this.remainingFiles[0]);
+						this.file = decodeURIComponent(this.remainingFiles[0]);
+						this.remainingFiles.splice(0,1);
+					} else {
+						this.getOwnerComponent().getRouter().navTo("masterdata.Overview");
+					}
+				}, this), 2000);
+			}, this),
 			error: function(data, textStatus, jqXHR) {
 				alert("no!");
 			}

@@ -88,11 +88,9 @@ public class FileAnalyser extends HttpServlet {
 				jb.append(line);
 		} catch (Exception e) { /*report an error*/ }
 
-		out.write("test1");
 		MappingArray mappingsArray = new GsonBuilder().create().fromJson(jb.toString(), MappingArray.class);
 		HashMap<String, HashSet<Mapping>> mappings = mappingsArray.getMappingMap();
 		
-		out.write("test2");		
 		EntityManagerFactory fac;
 		try {
 			fac = JpaEntityManagerFactory.getEntityManagerFactory("data_model");
@@ -101,25 +99,19 @@ public class FileAnalyser extends HttpServlet {
 			CSVReader reader = new CSVReader(new FileReader(filePath + "Mappe1.csv"), ';');
 			String[] nextLine;
 			String[] header = reader.readNext();
-			out.write("test3");
-			
 
 			while ((nextLine = reader.readNext()) != null) {
 				HashMap<String, Object> typeObjectMap = new HashMap<String, Object>();
 				int column = 0;
 				for(String attribute:nextLine) {
-					out.write("column: " + column);
 					HashSet<Mapping> attributeMappings = mappings.get(header[column]);
-					out.write("test3.1 " + header[column]);
 					if(attributeMappings==null) {
 						column++;
 						continue; //mapping for attribute in file was not specified
 					}
 					for(Mapping mapping:attributeMappings){
-						out.write(mapping.toString() + "\r\n");
 						String[] dbNameParticles = mapping.dbName.split("\\."); // table.attribute
 						Object object;
-						out.write("test3.1.1");
 						if(!typeObjectMap.containsKey(dbNameParticles[0])) {
 							Class<?> prototype = Class.forName("uni.mannheim.apdtld.mdm_model.persistence." + dbNameParticles[0]);
 							Constructor<?> ctor = prototype.getConstructor();
@@ -129,16 +121,12 @@ public class FileAnalyser extends HttpServlet {
 							object = typeObjectMap.get(dbNameParticles[0]);
 						}
 						
-						out.write("test3.1.2");
 						Field f = object.getClass().getDeclaredField(dbNameParticles[1]);
 						boolean acc = f.isAccessible();
 						f.setAccessible(true);
 						f.set(object, attribute);
-						out.write("set " + object.getClass().getName() + "." + f.getName() + " -> " + attribute + "\r\n");
 						f.setAccessible(acc);
-						out.write("test3.1.3");
 					}
-					out.write("test3.2");
 					column++;
 				}
 				
@@ -150,7 +138,6 @@ public class FileAnalyser extends HttpServlet {
 					ext.commit();
 				}				
 			}
-			out.write("test4");
 			em.close();
 			reader.close();
 			
@@ -159,8 +146,7 @@ public class FileAnalyser extends HttpServlet {
 			out.write(e.getMessage());
 			// Please don't :)
 		}
-		out.write("test5");
-
+		out.write("{}");
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -170,7 +156,8 @@ public class FileAnalyser extends HttpServlet {
 		JsonObject json = new JsonObject();
 		Writer out = response.getWriter();
 		
-		this.parseFile(filePath + request.getParameter("file"));
+		String filename = request.getParameter("file");
+		this.parseFile(filePath + filename);
 		
 		if(!this.headerrowDetected) return;
 		
@@ -240,6 +227,7 @@ public class FileAnalyser extends HttpServlet {
 		json.add("mappings", jsonMappings);
 		json.add("attributes_database", jsonAttributesDB);
 		json.add("attributes_file", jsonAttributesFile);
+		json.addProperty("filename", filename);
 		out.write(json.toString());
 		
 	}
