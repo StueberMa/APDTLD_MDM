@@ -75,7 +75,7 @@
                     "view": "import.Overview"
                 },
                 {
-                    "pattern": "import/FieldMapper",
+                    "pattern": "import/FieldMapper/{files}",
                     "name": "import.FieldMapper",
                     "view": "import.FieldMapper"
                 },

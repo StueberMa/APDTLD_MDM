@@ -7,20 +7,25 @@
 	xmlns:l="sap.ui.layout" 
 	xmlns:t="sap.ui.table" 
 	xmlns:vbm="sap.ui.vbm">
-	<HBox>
-		<HBox width="50%">
+	<HBox>	
+		<HBox width="47%">
 			<VBox width="100%" alignItems="Center" justifyContent="Center">
 				<Title level="H1" text="File" />
 			</VBox>
 		</HBox>
-		<HBox width="50%">
+		<HBox width="47%">
 			<VBox width="100%" alignItems="Center" justifyContent="Center">
 				<Title level="H1" text="Database" />
 			</VBox>
 		</HBox>
+		<HBox width="6%">
+			<VBox width="100%" alignItems="Center" justifyContent="Center">
+				<Button icon="sap-icon://add" press="onAdd" />
+			</VBox>
+		</HBox>
 	</HBox>
 	<HBox>
-		<HBox width="50%">
+		<HBox width="47%">
 			<VBox width="33%" alignItems="Center" justifyContent="Center">
 				<Title level="H3" text="Field Name" />
 			</VBox>
@@ -31,7 +36,7 @@
 				<Title level="H3" text="Field Sample" />
 			</VBox>
 		</HBox>
-		<HBox width="50%">
+		<HBox width="47%">
 			<VBox width="33%" alignItems="Center" justifyContent="Center">
 				<Title level="H3" text="Field Name" />
 			</VBox>
@@ -41,12 +46,14 @@
 			<VBox width="33%" alignItems="Center" justifyContent="Center">
 				<Title level="H3" text="Field Sample" />
 			</VBox>
+			<HBox width="6%">
+			</HBox>
 		</HBox>
 	</HBox>
 	<List items="{/mappings/}" id="mappingList">
 		<CustomListItem>
 			<HBox>
-				<HBox width="50%">
+				<HBox width="47%">
 					<VBox width="33%" alignItems="Center" justifyContent="Center">
 						<Label text="{fName}" />
 					</VBox>
@@ -61,11 +68,11 @@
 						<Label text="{fSample}" />
 					</VBox>
 				</HBox>
-				<HBox width="50%">
+				<HBox width="47%">
 					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<Select selectedKey="str" items="{/attributes/}">
+						<ComboBox selectedKey="{dbName}" items="{/attributes_database/}" selectionChange="onDBNameChange">
 							<core:Item key="{name}" text="{name}" />
-						</Select>
+						</ComboBox>
 					</VBox>
 					<VBox width="33%" alignItems="Center" justifyContent="Center">
 						<Label text="{dbType}" />
@@ -74,7 +81,29 @@
 						<Label text="{dbSample}" />
 					</VBox>
 				</HBox>
+				<HBox width="6%">
+					<VBox width="100%" alignItems="Center" justifyContent="Center">
+						<Button icon="sap-icon://delete" press="onDelete" />
+					</VBox>
+				</HBox>
 			</HBox>
 		</CustomListItem>
-	</List>	
+	</List>
+	<HBox>
+		<Button text="Reset"
+				press="onReset"
+				ariaDescribedBy="defaultButtonDescription genericButtonDescription">
+			<layoutData>
+				<FlexItemData growFactor="1" />
+			</layoutData>
+		</Button>
+		<Button type="Accept"
+				text="Analyse Rows"
+				press="onAnalyseRows"
+				ariaDescribedBy="acceptButtonDescription genericButtonDescription">
+			<layoutData>
+				<FlexItemData growFactor="1" />
+			</layoutData>
+		</Button>
+	</HBox>
 </mvc:View>

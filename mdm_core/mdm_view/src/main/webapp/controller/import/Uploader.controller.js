@@ -3,6 +3,8 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Uploader", {
 	fileProgesses:{},
 	fileCount:0,
 	lastProgressUpdateCall:0,
+	fileCountFinished:0,
+	files:"",
 	
 	onChange: function(oEvent) {
 		console.log("change");
@@ -76,6 +78,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Uploader", {
 	},
 	
 	onUploadComplete: function(oEvent) {
+		this.fileCountFinished++;
+		this.files += oEvent.getParameter("files")[0].responseRaw + ";";
+		if(this.fileCountFinished!=this.fileCount) {
+			return;
+		}
+		var filesParam = this.files;
+		console.log(oEvent.getParameters());
 		oUploadProgressIndicator = this.getView().byId("UploadProgressIndicator");
 		oUploadProgressIndicator.setPercentValue(100);
 		oUploadProgressIndicator.setDisplayValue("100%");
@@ -88,8 +97,9 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Uploader", {
 			}
 			
 			setTimeout($.proxy(function() {
-				this.getOwnerComponent().getRouter().navTo("import.FieldMapper");
+				console.log(filesParam);
+				this.getOwnerComponent().getRouter().navTo("import.FieldMapper", {files: filesParam});
 			}, this), 1000);
 		}, this), 1000);
-	},
+	}
 });

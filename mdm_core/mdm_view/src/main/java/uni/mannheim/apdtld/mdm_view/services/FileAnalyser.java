@@ -4,7 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.Writer;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,15 +17,22 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.naming.NamingException;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.Attribute;
 import javax.persistence.metamodel.EmbeddableType;
 import javax.persistence.metamodel.EntityType;
@@ -30,16 +41,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transaction;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.opencsv.CSVReader;
 
+import uni.mannheim.apdtld.mdm_model.persistence.Customer;
 import uni.mannheim.apdtld.mdm_view.odata.JpaEntityManagerFactory;
 import uni.mannheim.apdtld.mdm_view.odata.ODataJPAServiceFactory;
+import uni.mannheim.apdtld.mdm_view.services.gsonmodel.Mapping;
+import uni.mannheim.apdtld.mdm_view.services.gsonmodel.MappingArray;
 
 public class FileAnalyser extends HttpServlet {
 
@@ -57,6 +73,94 @@ public class FileAnalyser extends HttpServlet {
 		// Get the file location where it would be stored.
 		filePath = getServletContext().getInitParameter("file-upload");
 		new File(filePath).mkdirs();
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	
+		Writer out = response.getWriter();
+		
+		StringBuffer jb = new StringBuffer();
+		String line = null;
+		try {
+			BufferedReader reader = request.getReader();
+			while ((line = reader.readLine()) != null)
+				jb.append(line);
+		} catch (Exception e) { /*report an error*/ }
+
+		out.write("test1");
+		MappingArray mappingsArray = new GsonBuilder().create().fromJson(jb.toString(), MappingArray.class);
+		HashMap<String, HashSet<Mapping>> mappings = mappingsArray.getMappingMap();
+		
+		out.write("test2");		
+		EntityManagerFactory fac;
+		try {
+			fac = JpaEntityManagerFactory.getEntityManagerFactory("data_model");
+			EntityManager em = fac.createEntityManager();
+			
+			CSVReader reader = new CSVReader(new FileReader(filePath + "Mappe1.csv"), ';');
+			String[] nextLine;
+			String[] header = reader.readNext();
+			out.write("test3");
+			
+
+			while ((nextLine = reader.readNext()) != null) {
+				HashMap<String, Object> typeObjectMap = new HashMap<String, Object>();
+				int column = 0;
+				for(String attribute:nextLine) {
+					out.write("column: " + column);
+					HashSet<Mapping> attributeMappings = mappings.get(header[column]);
+					out.write("test3.1 " + header[column]);
+					if(attributeMappings==null) {
+						column++;
+						continue; //mapping for attribute in file was not specified
+					}
+					for(Mapping mapping:attributeMappings){
+						out.write(mapping.toString() + "\r\n");
+						String[] dbNameParticles = mapping.dbName.split("\\."); // table.attribute
+						Object object;
+						out.write("test3.1.1");
+						if(!typeObjectMap.containsKey(dbNameParticles[0])) {
+							Class<?> prototype = Class.forName("uni.mannheim.apdtld.mdm_model.persistence." + dbNameParticles[0]);
+							Constructor<?> ctor = prototype.getConstructor();
+							object = ctor.newInstance();
+							typeObjectMap.put(dbNameParticles[0], object);
+						} else {
+							object = typeObjectMap.get(dbNameParticles[0]);
+						}
+						
+						out.write("test3.1.2");
+						Field f = object.getClass().getDeclaredField(dbNameParticles[1]);
+						boolean acc = f.isAccessible();
+						f.setAccessible(true);
+						f.set(object, attribute);
+						out.write("set " + object.getClass().getName() + "." + f.getName() + " -> " + attribute + "\r\n");
+						f.setAccessible(acc);
+						out.write("test3.1.3");
+					}
+					out.write("test3.2");
+					column++;
+				}
+				
+				for(Object object:typeObjectMap.values()) {
+					EntityTransaction ext = em.getTransaction();
+					ext.begin();
+					em.persist(object);
+					em.flush();
+					ext.commit();
+				}				
+			}
+			out.write("test4");
+			em.close();
+			reader.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			out.write(e.getMessage());
+			// Please don't :)
+		}
+		out.write("test5");
+
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -78,48 +182,64 @@ public class FileAnalyser extends HttpServlet {
 			String fileColumnHeader = column.get(0);
 			for(Table table:this.tables) {
 				String dbTableName = table.getName();
-				HashMap<String, String> attributesAndTypes = table.getAttributeNamesAndTypes();
-				for(Entry<String, String> attributeAndType:attributesAndTypes.entrySet()) {
+				HashMap<String, AttributeTupel> attributesAndTypes = table.getAttributeInfo();
+				for(Entry<String, AttributeTupel> attributeAndType:attributesAndTypes.entrySet()) {
 					if(StringUtils.getLevenshteinDistance(attributeAndType.getKey(), fileColumnHeader) < 3 && 
-							this.attributeTypeMap.get(fileColumnHeader).equals(attributeAndType.getValue())) {
+							this.attributeTypeMap.get(fileColumnHeader).equals(attributeAndType.getValue().type)) {
 						 
-						 String attributeName = column.get(0);
+						String attributeName = column.get(0);
 						 
-						 JsonObject item = new JsonObject();
-						 item.addProperty("fName", attributeName);
-						 
-						 item.addProperty("fType", attributeTypeMap.get(attributeName));
-						 
-						 String sample = "";
-						 for(int rowIndex=1; rowIndex<column.size(); rowIndex++) {
-							 sample += column.get(rowIndex) + ", ";
-						 }
-						 item.addProperty("fSample", sample.substring(0, sample.length()-2));
-						 
-						 item.addProperty("dbName", dbTableName + "." + attributeAndType.getKey());
-						 item.addProperty("dbType", attributeAndType.getValue());
-						 item.addProperty("dbSample", "");
-						 
-						 jsonMappings.add(item);
+						JsonObject item = new JsonObject();
+						item.addProperty("fName", attributeName);
 						
+						item.addProperty("fType", attributeTypeMap.get(attributeName));
+						 
+						String sample = "";
+						for(int rowIndex=1; rowIndex<column.size(); rowIndex++) {
+							sample += column.get(rowIndex) + ", ";
+						}
+						sample = this.shortenSample(sample);
+						item.addProperty("fSample", sample.length());
+						
+						item.addProperty("dbName", dbTableName + "." + attributeAndType.getKey());
+						item.addProperty("dbType", attributeAndType.getValue().type);
+						item.addProperty("dbSample", this.shortenSample(attributeAndType.getValue().sample));
+						 
+						jsonMappings.add(item);
 					}
 				}
 			}	 
 		}
 		
-		JsonArray jsonAttributes = new JsonArray();
+		JsonArray jsonAttributesDB = new JsonArray();
 		for(Table table:this.tables) {
-			for(Map.Entry<String, String> entry:table.getAttributeNamesAndTypes().entrySet()) {
+			for(Map.Entry<String, AttributeTupel> entry:table.getAttributeInfo().entrySet()) {
 				JsonObject jsonAttribute = new JsonObject();
 				jsonAttribute.addProperty("name", table.getName() + "." + entry.getKey());
-				jsonAttribute.addProperty("type", entry.getValue());
-				jsonAttributes.add(jsonAttribute);
+				jsonAttribute.addProperty("type", entry.getValue().type);
+				jsonAttribute.addProperty("sample", this.shortenSample(entry.getValue().sample));
+				jsonAttributesDB.add(jsonAttribute);
 			}
 			
 		}
 		
+		JsonArray jsonAttributesFile = new JsonArray();
+		for(ArrayList<String> column:sampleList) {
+			JsonObject jsonAttribute = new JsonObject();
+			jsonAttribute.addProperty("name", column.get(0));
+			jsonAttribute.addProperty("type", this.attributeTypeMap.get(column.get(0)));
+			String sample = "";
+			for(int rowIndex=1; rowIndex<column.size(); rowIndex++) {
+				sample += column.get(rowIndex) + ", ";
+			}
+			sample = this.shortenSample(sample);
+			jsonAttribute.addProperty("sample", sample);
+			jsonAttributesFile.add(jsonAttribute);
+		}
+		
 		json.add("mappings", jsonMappings);
-		json.add("attributes", jsonAttributes);
+		json.add("attributes_database", jsonAttributesDB);
+		json.add("attributes_file", jsonAttributesFile);
 		out.write(json.toString());
 		
 	}
@@ -181,12 +301,13 @@ public class FileAnalyser extends HttpServlet {
 		
 		try {
 			EntityManagerFactory fac = JpaEntityManagerFactory.getEntityManagerFactory("data_model");
+			//EntityManager em = fac.createEntityManager();
 			Set<EntityType<?>> entities = fac.getMetamodel().getEntities();
 			Iterator<EntityType<?>> it = entities.iterator();
 			while(it.hasNext()) {
 				EntityType<?> o = it.next();
 				Table table = new Table(o.getName());
-				for (Attribute<?,?> attr : o.getAttributes()) {
+				for(Attribute<?,?> attr : o.getAttributes()) {
 					String type = attr.getJavaType().getName();
 					if(type.indexOf("String")>0) {
 						type = "Text";
@@ -198,13 +319,34 @@ public class FileAnalyser extends HttpServlet {
 						type = "ref";
 					}
 					
+				
+					/*CriteriaBuilder em = fac.getCriteriaBuilder();
+					CriteriaQuery<Customer> cq = em.createQuery(Customer.class);
+					Root<Customer> rootEntry = cq.from(Customer.class);
+					CriteriaQuery<Customer> all = cq.select(rootEntry);
+					TypedQuery<Customer> allQuery = em.createQuery(all);
+					allQuery.getResultList();*/
+					String sample = "";
+					List<?> rows = fac.createEntityManager()
+							.createQuery("Select t From " + o.getName() + " t")
+							//.setMaxResults(10)
+							.getResultList();
+
+					for(Object row:rows) {
+						Class<?> c = row.getClass();
+						Field f = c.getDeclaredField(attr.getName());
+						boolean acc = f.isAccessible();
+						f.setAccessible(true);
+						sample += f.get(row) + "; ";
+						f.setAccessible(acc);
+					}
+					
 					if(!type.equals("ref")) {
-						table.addAttribute(attr.getName(), type);
+						table.addAttribute(attr.getName(), type, sample);
 					}
 				}
 				this.tables.add(table);
 			}
-			
 			
 			/*Set<EmbeddableType<?>> embeddables = fac.getMetamodel().getEmbeddables();
 			Iterator<EmbeddableType<?>> it2 = embeddables.iterator();
@@ -247,6 +389,16 @@ public class FileAnalyser extends HttpServlet {
 			return false;
 		}
 		return true;
+	}
+	
+	private String shortenSample(String sample) {
+		if(sample.length()>15) {
+			return sample.substring(0, 15) + "...";
+		} else if(sample.length()>2){
+			return sample.substring(0, sample.length()-3);
+		} else {
+			return "";
+		}
 	}
 
 }

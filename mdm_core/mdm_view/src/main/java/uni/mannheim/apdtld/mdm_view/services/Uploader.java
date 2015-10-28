@@ -14,6 +14,9 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 public class Uploader extends HttpServlet {
 
 	/**
@@ -34,8 +37,7 @@ public class Uploader extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, java.io.IOException {
-			
-		
+
 		// Check that we have a file upload request
 		isMultipart = ServletFileUpload.isMultipartContent(request);
 		response.setContentType("text/html");
@@ -74,25 +76,11 @@ public class Uploader extends HttpServlet {
 			Iterator<FileItem> i = fileItems.iterator();
 			
 			ServletContext context = getServletContext();
-			
-			context.log("test");
-
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet upload</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println(fileItems.size());
+	
 			while (i.hasNext()) {
 				FileItem fi = (FileItem) i.next();
-				out.println("isformfiels?" + fi.isFormField());
 				//if (!fi.isFormField()) {
 					// Get the uploaded file parameters
-					out.println(fi.getFieldName());
-					out.println(fi.getName());
-					out.println(fi.getContentType());
-					out.println(fi.isInMemory());
-					out.println(fi.getSize());
 					String fieldName = fi.getFieldName();
 					String fileName = fi.getName();
 					String contentType = fi.getContentType();
@@ -105,15 +93,18 @@ public class Uploader extends HttpServlet {
 						file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\") + 1));
 					}
 					fi.write(file);
-					out.println("Uploaded Filename: " + fileName + "<br>");
+					out.write(fileName);
 				//}
 			}
-			out.println("</body>");
-			out.println("</html>");
+
 		} catch (Exception ex) {
 			System.out.println(ex);
-			out.println(ex.getLocalizedMessage());
+			//out.println(ex.getLocalizedMessage());
 		}
+		
+		/*JsonObject wrapper = new JsonObject();
+		wrapper.addProperty("filenames", filenames.substring(0, filenames.length()-2));
+		out.write(wrapper.toString());*/
 	}
 
 }

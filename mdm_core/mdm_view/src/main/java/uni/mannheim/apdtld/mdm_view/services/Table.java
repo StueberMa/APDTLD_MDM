@@ -6,7 +6,7 @@ import java.util.HashSet;
 public class Table {
 	
 	private String name;
-	private HashMap<String, String> attibuteTypeMap = new HashMap<String, String>();
+	private HashMap<String, AttributeTupel> attibuteInfoMap = new HashMap<String, AttributeTupel>();
 	private HashSet<Table> dependencies = new HashSet<Table>();
 	
 	public Table(String name) {
@@ -17,15 +17,15 @@ public class Table {
 		this.dependencies.add(table);
 	}
 	
-	public void addAttribute(String name, String type) {
-		this.attibuteTypeMap.put(name, type);
+	public void addAttribute(String name, String type, String sample) {
+		this.attibuteInfoMap.put(name, new AttributeTupel(name, type, sample));
 	}
 	
 	public String getName() {
 		return this.name;
 	}
 
-	public HashMap<String, String> getAttributeNamesAndTypes() {
-		return this.attibuteTypeMap;
+	public HashMap<String, AttributeTupel> getAttributeInfo() {
+		return this.attibuteInfoMap;
 	}
 }
