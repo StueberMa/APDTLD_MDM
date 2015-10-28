@@ -24,9 +24,6 @@
 			</VBox>
 		</HBox>
 		<HBox width="6%">
-			<VBox width="100%" alignItems="Center" justifyContent="Center">
-				<Button icon="sap-icon://add" press="onAdd" />
-			</VBox>
 		</HBox>
 	</HBox>
 	<HBox>
@@ -89,6 +86,47 @@
 				<HBox width="6%">
 					<VBox width="100%" alignItems="Center" justifyContent="Center">
 						<Button icon="sap-icon://delete" press="onDelete" />
+					</VBox>
+				</HBox>
+			</HBox>
+		</CustomListItem>
+	</List>
+	<List>
+		<CustomListItem>
+			<HBox>
+				<HBox width="47%" class="mdmImportRowParticle">
+					<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<ComboBox id="addrowFileName" items="{/attributes_file/}" selectionChange="onAddrowFileNameChange">
+							<core:Item key="{name}" text="{name}" />
+						</ComboBox>
+					</VBox>
+					<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<Select selectedKey="str" id="addrowFileType">
+							<core:Item key="Number" text="Number" />
+							<core:Item key="Text" text="Text" />
+							<core:Item key="Date" text="Date" />
+						</Select>
+					</VBox>
+					<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<Label id="addrowFileSample" text="" />
+					</VBox>
+				</HBox>
+				<HBox width="47%">
+					<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<ComboBox id="addrowDbName" selectedKey="" items="{/attributes_database/}" selectionChange="onAddrowDBNameChange">
+							<core:Item key="{name}" text="{name}" />
+						</ComboBox>
+					</VBox>
+					<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<Label id="addrowDbType" text="" />
+					</VBox>
+					<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<Label id="addrowDbSample" text="" />
+					</VBox>
+				</HBox>
+				<HBox width="6%">
+					<VBox width="100%" alignItems="Center" justifyContent="Center">
+						<Button icon="sap-icon://add" press="onAdd" />
 					</VBox>
 				</HBox>
 			</HBox>

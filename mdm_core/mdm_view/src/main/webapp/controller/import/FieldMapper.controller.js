@@ -72,26 +72,37 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		this.getView().getModel().refresh();
 	},
 	
-	onAdd: function(evt) {
+	/*onAdd: function(evt) {
 		// toggle compact style
 		jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this.oPersonalizationDialog);
 		this.oPersonalizationDialog.open();
-	},
+	},*/
 	
-	handleCloseOk: function(evt) {
+	onAdd: function(evt) {
+		var _this = this;
 		var mappingsArray = this.getView().getModel().getObject('/mappings');
 		var newMapping = {
-				fName: sap.ui.getCore().byId("popoverFileName").getSelectedItem().getText(),
-				fType: sap.ui.getCore().byId("popoverFileType").getSelectedItem().getText(),
-				fSample: sap.ui.getCore().byId("popoverFileSample").getText(),
-				dbName: sap.ui.getCore().byId("popoverDbName").getSelectedItem().getText(),
-				dbType: sap.ui.getCore().byId("popoverDbType").getText(),
-				dbSample: sap.ui.getCore().byId("popoverDbSample").getText()
+				fName: _this.getView().byId("addrowFileName").getSelectedItem().getText(),
+				fType: _this.getView().byId("addrowFileType").getSelectedItem().getText(),
+				fSample: _this.getView().byId("addrowFileSample").getText(),
+				dbName: _this.getView().byId("addrowDbName").getSelectedItem().getText(),
+				dbType: _this.getView().byId("addrowDbType").getText(),
+				dbSample: _this.getView().byId("addrowDbSample").getText()
 		};
 		mappingsArray.push(newMapping);
 		this.getView().getModel().refresh();
-		this.oPersonalizationDialog.close();
-		this.resetPopover();
+		this.resetAddRow();
+		//this.oPersonalizationDialog.close();
+		//this.resetPopover();
+	},
+	
+	resetAddRow: function() {
+		this.getView().byId("addrowFileName").setSelectedKey("");
+		this.getView().byId("addrowFileType").setSelectedKey("str");
+		this.getView().byId("addrowFileSample").setText("-");
+		this.getView().byId("addrowDbName").setSelectedKey("");
+		this.getView().byId("addrowDbType").setText("-");
+		this.getView().byId("addrowDbSample").setText("-");
 	},
 	
 	handleCloseCancel: function() {
@@ -99,37 +110,39 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		this.resetPopover();
 	},
 	
-	onPopoverFileNameChange: function(evt) {
+	onAddrowFileNameChange: function(evt) {
+		var _this = this;
 		var selectedText = evt.getSource().getSelectedItem().getText();
 		var aFileAttributes = this.getView().getModel().getObject('/attributes_file');
 		aFileAttributes.forEach(function(attribute) {
 			if(attribute.name == selectedText) {
-				sap.ui.getCore().byId("popoverFileType").setSelectedKey(attribute.type);
-				sap.ui.getCore().byId("popoverFileSample").setText(attribute.sample);
+				_this.getView().byId("addrowFileType").setSelectedKey(attribute.type);
+				_this.getView().byId("addrowFileSample").setText(attribute.sample);
 				return;
 			}
 		});
 	},
 	
-	onPopoverDBNameChange: function(evt) {
+	onAddrowDBNameChange: function(evt) {
+		var _this = this;
 		var selectedText = evt.getSource().getSelectedItem().getText();
 		var aAttributesDB =  this.getView().getModel().getObject('/attributes_database');
 		aAttributesDB.forEach(function(attribute) {
 			if(attribute.name == selectedText) {
-				sap.ui.getCore().byId("popoverDbType").setText(attribute.type);
-				sap.ui.getCore().byId("popoverDbSample").setText(attribute.sample);
+				_this.getView().byId("addrowDbType").setText(attribute.type);
+				_this.getView().byId("addrowDbSample").setText(attribute.sample);
 				return;
 			}
 		});
 	},
 	
 	resetPopover: function() {
-		sap.ui.getCore().byId("popoverFileName").setSelectedKey('');
-		sap.ui.getCore().byId("popoverFileType").setSelectedKey('Text'),
-		sap.ui.getCore().byId("popoverFileSample").setText(''),
-		sap.ui.getCore().byId("popoverDbName").setSelectedKey(''),
-		sap.ui.getCore().byId("popoverDbType").setText(''),
-		sap.ui.getCore().byId("popoverDbSample").setText('')
+		sap.ui.getCore().byId("addrowFileName").setSelectedKey('');
+		sap.ui.getCore().byId("addrowFileType").setSelectedKey('Text'),
+		sap.ui.getCore().byId("addrowFileSample").setText(''),
+		sap.ui.getCore().byId("addrowDbName").setSelectedKey(''),
+		sap.ui.getCore().byId("addrowDbType").setText(''),
+		sap.ui.getCore().byId("addrowDbSample").setText('')
 	},
 	
 	onAnalyseRows: function() {
