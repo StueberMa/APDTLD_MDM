@@ -10,10 +10,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		var oModel = new sap.ui.model.json.JSONModel();
 		var parts = window.location.href.split('/');
 		var files = parts[parts.length-1].split(';');
+		console.log(files);
 		this.file = decodeURIComponent(files[0]);
 		files.splice(0,1);
 		this.remainingFiles = files;
-		oModel.loadData("/mdm_view/fileanalyser?file=" + files[0]);
+		oModel.loadData("/mdm_view/fileanalyser?file=" + this.file);
 		this.getView().setModel(oModel);
 		
 		this.oPersonalizationDialog = sap.ui.xmlfragment("uni.mannheim.mdm.controller.import.FieldMapperAdd", this);
@@ -150,7 +151,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		$.ajax({
 			type: "POST",
 			contentType: "application/json",
-			url: '/mdm_view/fileanalyser',
+			url: '/mdm_view/fileanalyser?file=' + this.file,
 			dataType: "json",
 			async: false,
 			data: jsonModel,
@@ -161,6 +162,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 					if(this.remainingFiles.length>0) {
 						var oModel = new sap.ui.model.json.JSONModel();
 						oModel.loadData("/mdm_view/fileanalyser?file=" + this.remainingFiles[0]);
+						this.getView().setModel(oModel);
 						this.file = decodeURIComponent(this.remainingFiles[0]);
 						this.remainingFiles.splice(0,1);
 					} else {

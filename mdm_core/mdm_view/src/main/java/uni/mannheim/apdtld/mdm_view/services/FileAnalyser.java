@@ -96,7 +96,7 @@ public class FileAnalyser extends HttpServlet {
 			fac = JpaEntityManagerFactory.getEntityManagerFactory("data_model");
 			EntityManager em = fac.createEntityManager();
 			
-			CSVReader reader = new CSVReader(new FileReader(filePath + "Mappe1.csv"), ';');
+			CSVReader reader = new CSVReader(new FileReader(filePath + request.getParameter("file")), ';');
 			String[] nextLine;
 			String[] header = reader.readNext();
 
@@ -186,7 +186,7 @@ public class FileAnalyser extends HttpServlet {
 							sample += column.get(rowIndex) + ", ";
 						}
 						sample = this.shortenSample(sample);
-						item.addProperty("fSample", sample.length());
+						item.addProperty("fSample", sample);
 						
 						item.addProperty("dbName", dbTableName + "." + attributeAndType.getKey());
 						item.addProperty("dbType", attributeAndType.getValue().type);
@@ -383,7 +383,7 @@ public class FileAnalyser extends HttpServlet {
 		if(sample.length()>15) {
 			return sample.substring(0, 15) + "...";
 		} else if(sample.length()>2){
-			return sample.substring(0, sample.length()-3);
+			return sample;
 		} else {
 			return "";
 		}
