@@ -104,8 +104,7 @@
 						</f:FormElement>
 						<f:FormElement label="Amount">
 							<f:fields>
-								<Input value="{path: 'Amount', type: 'sap.ui.model.type.Integer'}"
-									placeholder="Amount">
+								<Input value="{Amount}" placeholder="Amount">
 								</Input>
 							</f:fields>
 						</f:FormElement>

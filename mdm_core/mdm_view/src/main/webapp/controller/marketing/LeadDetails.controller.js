@@ -176,16 +176,18 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			this._id = oEvent.getParameter("arguments").id;
 			this.getView().bindElement("/Leads(" + this._id + ")", {expand: "ProductDetails,CustomerDetails,CampaignDetails"});
 			
-			if(this._mode != "CREATE") 
+			
+			if(this._mode != "CREATE") {
+				var msgArea = this.getView().byId("messageArea");
+				msgArea.removeAllContent();
+				
 				this.setValueSuggestions();
-
+			}
+			
 			this._mode = "EDIT";
 			
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(true);
-			
-			var msgArea = this.getView().byId("messageArea");
-			msgArea.removeAllContent();
 			
 		// leave
 		} else {

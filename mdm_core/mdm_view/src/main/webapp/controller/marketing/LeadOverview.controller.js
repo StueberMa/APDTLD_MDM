@@ -153,4 +153,5 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 		var id = parseInt(oEvent.mParameters.token.mProperties.key);
 		this.getView().getModel("filter").setProperty(attribute, id);
 	}
+	
 });

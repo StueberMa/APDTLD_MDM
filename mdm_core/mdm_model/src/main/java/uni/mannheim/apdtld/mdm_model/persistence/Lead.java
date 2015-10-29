@@ -39,7 +39,7 @@ public class Lead implements Serializable {
 	private int campaignId;
 	@Column(name="PRODUCTID")
 	private int productId;
-	private int amount;
+	private double amount;
 
 	@ManyToOne
 	@JoinColumn(name="CUSTOMERID", referencedColumnName="ID", insertable=false, updatable=false)
@@ -173,7 +173,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @return
 	 */
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
@@ -182,7 +182,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @param amount
 	 */
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	

@@ -44,7 +44,7 @@ public class Campaign implements Serializable {
 	private int numberReceived;
 	private int numberLeads;
 	private int numberOpport;
-	private int valueOpport;
+	private double valueOpport;
 	
 	/**
 	 * Constructor
@@ -309,7 +309,7 @@ public class Campaign implements Serializable {
 	 * 
 	 * @return
 	 */
-	public int getValueOpport() {
+	public double getValueOpport() {
 		return valueOpport;
 	}
 
@@ -317,7 +317,7 @@ public class Campaign implements Serializable {
 	 * SET valueOpport
 	 * @param valueOpport
 	 */
-	public void setValueOpport(int valueOpport) {
+	public void setValueOpport(double valueOpport) {
 		this.valueOpport = valueOpport;
 	}
 }

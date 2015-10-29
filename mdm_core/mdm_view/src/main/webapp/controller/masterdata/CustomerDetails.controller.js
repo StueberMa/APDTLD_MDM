@@ -134,13 +134,16 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		} else if (oEvent.getParameter("name") === "masterdata.CustomerDetails") {
 			this._id = oEvent.getParameter("arguments").id;
 			this.getView().bindElement("/Customers(" + this._id + ")");
+
+			if(this._mode != "CREATE") {
+				var msgArea = this.getView().byId("messageArea");
+				msgArea.removeAllContent();
+			}
+			
 			this._mode = "EDIT";
 			
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(true);
-			
-			var msgArea = this.getView().byId("messageArea");
-			msgArea.removeAllContent();
 			
 		// leave
 		} else {

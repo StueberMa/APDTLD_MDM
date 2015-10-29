@@ -23,6 +23,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 	},
 	
 	/**
+	 * Method onRefresh
+	 */
+	onRefresh : function() {
+		this._model.refresh(true);
+	},
+	
+	/**
 	 * Method onSearch
 	 */
 	onSearch : function(oEvent) {
@@ -62,12 +69,5 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("masterdata.CustomerDetails", {id: id}, false);
 		
-	},
-	
-	/**
-	 * Method onRefresh
-	 */
-	onRefresh : function() {
-		this._model.refresh(true);
 	}
 });

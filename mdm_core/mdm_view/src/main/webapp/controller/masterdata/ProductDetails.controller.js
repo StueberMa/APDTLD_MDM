@@ -133,13 +133,16 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 		} else if (oEvent.getParameter("name") === "masterdata.ProductDetails") {
 			this._id = oEvent.getParameter("arguments").id;
 			this.getView().bindElement("/Products(" + this._id + ")");
+
+			if(this._mode != "CREATE") {
+				var msgArea = this.getView().byId("messageArea");
+				msgArea.removeAllContent();
+			}
+			
 			this._mode = "EDIT";
 			
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(true);
-			
-			var msgArea = this.getView().byId("messageArea");
-			msgArea.removeAllContent();
 			
 		// leave
 		} else {
@@ -212,4 +215,5 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 			router.navTo("masterdata.ProductDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, true);
 		}
 	}
+	
 });
