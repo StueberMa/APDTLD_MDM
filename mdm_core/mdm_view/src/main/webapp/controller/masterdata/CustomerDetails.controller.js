@@ -5,6 +5,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 * Method onInit
 	 */
 	onInit : function() {
+		
+		// model
+		this._model = this.getOwnerComponent().getModel();
+		
+		// routing
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.onRequest, this);
 	},
@@ -45,9 +50,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 */
 	onDialogConfirmed : function(oEvent) {
 		this._dialog.destroy();
-		
-		var model = this.getView().getModel();
-		model.remove("/Customers(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+		this._model.remove("/Customers(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
 	},
 	
 	/**
@@ -116,7 +119,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 		
 		// create
 		if (oEvent.getParameter("name") === "masterdata.CustomerCreate") {
-			var context = this.getView().getModel().createEntry("/Customers", {});
+			var context = this._model.createEntry("/Customers", {});
 			this.getView().unbindElement();
 			this.getView().setBindingContext(context);
 			this._mode = "CREATE";
@@ -147,7 +150,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 				return;
 			
 			var context = this.getView().getBindingContext();
-			this.getView().getModel().deleteCreatedEntry(context);
+			this._model.deleteCreatedEntry(context);
 			this._mode = undefined;
 		}
 	},
@@ -156,8 +159,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 * Method onSave
 	 */
 	onSave : function() {
-		var model = this.getView().getModel();
-		model.submitChanges({success : jQuery.proxy(this.onSaveSuccess, this), error: jQuery.proxy(this.onSaveError, this)});
+		this._model.submitChanges({success : jQuery.proxy(this.onSaveSuccess, this), error: jQuery.proxy(this.onSaveError, this)});
 	},
 	
 	/**

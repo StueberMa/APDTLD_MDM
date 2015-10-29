@@ -5,15 +5,20 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 	 */
 	onInit : function() {
 		
+		// model
+		this._model = this.getOwnerComponent().getModel();
+		
 		// filter model
 		var filterModel = new sap.ui.model.json.JSONModel();
 		this.getView().setModel(filterModel, "filter");
 		
-		// register event for selection
+		// event for selection
 		var table = this.getView().byId("campaignTable");
 		table.setMode(sap.m.ListMode.SingleSelectMaster);
 		table.attachEvent("selectionChange", this.onSelectionChange, this);
+	
 	},
+		
 
 	/**
 	 * Method onNewCampaign
@@ -21,6 +26,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 	onNewCampaign : function() {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("marketing.CampaignCreate", false);
+	},
+	
+	/**
+	 * Method onRefresh
+	 */
+	onRefresh : function() {
+		this._model.refresh(true);
 	},
 	
 	/**
@@ -80,14 +92,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("marketing.CampaignDetails", {id: id}, false);
 		
-	},
-	
-	/**
-	 * Method onRefresh
-	 */
-	onRefresh : function() {
-		var model = this.getView().getModel();
-		model.refresh(true);
 	}
 	
 });

@@ -5,6 +5,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.Overview", {
 	 */
 	onInit : function() {
 		
+		// router
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.onRequest, this);
 	},
@@ -39,8 +40,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.Overview", {
 	onRequest : function(oEvent) {
 		
 		if (oEvent.getParameter("name") === "masterdata.Overview") {
-			
-			var model = this.getOwnerComponent().getModel();
 			
 			// count objects
 			var jsonModel = new sap.ui.model.json.JSONModel("./services/info/count")

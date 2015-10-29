@@ -4,7 +4,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 	 * Method onInit
 	 */
 	onInit : function() {
-		// register event for selection
+		
+		// model
+		this._model = this.getOwnerComponent().getModel();
+		
+		// event for selection
 		var table = this.getView().byId("customerTable");
 		table.setMode(sap.m.ListMode.SingleSelectMaster);
 		table.attachEvent("selectionChange", this.onSelectionChange, this);
@@ -64,7 +68,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 	 * Method onRefresh
 	 */
 	onRefresh : function() {
-		var model = this.getView().getModel();
-		model.refresh(true);
+		this._model.refresh(true);
 	}
 });

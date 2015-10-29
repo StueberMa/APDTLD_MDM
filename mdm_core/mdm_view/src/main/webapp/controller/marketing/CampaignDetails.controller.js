@@ -4,6 +4,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 	 * Method onInit
 	 */
 	onInit : function() {
+		
+		// model
+		this._model = this.getOwnerComponent().getModel();
+		
+		// router
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.onRequest, this);
 	},
@@ -44,9 +49,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 	 */
 	onDialogConfirmed : function(oEvent) {
 		this._dialog.destroy();
-		
-		var model = this.getView().getModel();
-		model.remove("/Campaigns(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+		this._model.remove("/Campaigns(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
 	},
 	
 	/**
@@ -115,7 +118,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 		
 		// create
 		if (oEvent.getParameter("name") === "marketing.CampaignCreate") {
-			var context = this.getView().getModel().createEntry("/Campaigns", {});
+			var context = this._model.createEntry("/Campaigns", {});
 			this.getView().unbindElement();
 			this.getView().setBindingContext(context);
 			this._mode = "CREATE";
@@ -146,7 +149,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 				return;
 			
 			var context = this.getView().getBindingContext();
-			this.getView().getModel().deleteCreatedEntry(context);
+			this._model.deleteCreatedEntry(context);
 			this._mode = undefined;
 		}
 	},
@@ -155,8 +158,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 	 * Method onSave
 	 */
 	onSave : function() {
-		var model = this.getView().getModel();
-		model.submitChanges({success : jQuery.proxy(this.onSaveSuccess, this), error: jQuery.proxy(this.onSaveError, this)});
+		this._model.submitChanges({success : jQuery.proxy(this.onSaveSuccess, this), error: jQuery.proxy(this.onSaveError, this)});
 	},
 	
 	/**
