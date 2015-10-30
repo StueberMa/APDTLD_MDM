@@ -1,0 +1,41 @@
+<mvc:View height="100%"
+	controllerName="uni.mannheim.mdm.controller.analysis.Overview" xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout">
+
+	<VBox class="mdmScreenTitle">
+		<Text class="mdmTitle" text="Marketing" />
+		<Text class="mdmSubTitle" text="Choose among the available functions ..." />
+	</VBox>
+
+	<TileContainer>
+	
+		<!-- Campaign -->
+		<CustomTile class="mdmTile" press="onCustomerPerCountry">
+			<VBox>
+				<l:HorizontalLayout>
+					<core:Icon class="mdmTileIcon" src="sap-icon://map-2" />
+					<VBox class="mdmTileHeader">
+						<Text class="mdmTileHeaderTitle" text="Customers per Country" />
+						<Text class="mdmTileHeaderSub" text="Visualizes Customers per Country" />
+					</VBox>
+				</l:HorizontalLayout>
+			</VBox>
+		</CustomTile>
+
+		<!-- Own Analysis -->
+		<CustomTile class="mdmTile">
+			<VBox>
+				<l:HorizontalLayout>
+					<core:Icon class="mdmTileIcon" src="sap-icon://add" />
+					<VBox class="mdmTileHeader">
+						<Text class="mdmTileHeaderTitle" text="Custom Analysis" />
+						<Text class="mdmTileHeaderSub" text="Create Your Own Analysis" />
+					</VBox>
+				</l:HorizontalLayout>
+				<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
+					densityAware="false" />
+			</VBox>
+		</CustomTile>
+	</TileContainer>
+	
+</mvc:View>

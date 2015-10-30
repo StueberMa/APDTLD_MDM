@@ -53,15 +53,15 @@
 		<!-- Analysis -->
 		<CustomTile class="mdmTile">
 			<VBox>
-				<l:HorizontalLayout>
-					<core:Icon class="mdmTileIcon" src="sap-icon://bar-chart" />
-					<VBox class="mdmTileHeader">
-						<Text class="mdmTileHeaderTitle" text="Analysis" />
-						<Text class="mdmTileHeaderSub" text="Advanced Analysis with Rich Visualizations" />
-					</VBox>
-				</l:HorizontalLayout>
-				<Image src="./resources/img/coming_soon.png" class="mdmTileUnderDevImage"
-					densityAware="false" />
+				<CustomTile press="onAnalysisOverview">
+					<l:HorizontalLayout>
+						<core:Icon class="mdmTileIcon" src="sap-icon://bar-chart" />
+						<VBox class="mdmTileHeader">
+							<Text class="mdmTileHeaderTitle" text="Analysis" />
+							<Text class="mdmTileHeaderSub" text="Advanced Analysis with Rich Visualizations" />
+						</VBox>
+					</l:HorizontalLayout>
+				</CustomTile>
 			</VBox>
 		</CustomTile>
 

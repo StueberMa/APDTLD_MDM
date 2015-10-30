@@ -1,6 +1,14 @@
 sap.ui.controller("uni.mannheim.mdm.controller.Overview", {
 	
 	/**
+	 * Method onAnalysisOverview
+	 */
+	onAnalysisOverview : function() {
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("analysis.Overview", false);
+	},
+	
+	/**
 	 * Method onCampaignOverview
 	 */
 	onCampaignOverview : function() {

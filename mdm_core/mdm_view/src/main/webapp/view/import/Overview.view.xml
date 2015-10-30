@@ -63,8 +63,6 @@
 						<Text class="mdmTileHeaderSub" text="Import Data from CSV Sheets" />
 					</VBox>
 				</l:HorizontalLayout>
-				<Image src="./resources/img/no_image.png" class="mdmTileImage"
-					densityAware="false" />
 			</VBox>
 		</CustomTile>
 	</TileContainer>
