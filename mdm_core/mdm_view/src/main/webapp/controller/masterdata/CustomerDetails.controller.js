@@ -50,7 +50,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 	 */
 	onDialogConfirmed : function(oEvent) {
 		this._dialog.destroy();
-		this._model.remove("/Customers(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+		this._model.remove("/Customers('" + this._id + "')", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
 	},
 	
 	/**
@@ -130,10 +130,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			var msgArea = this.getView().byId("messageArea");
 			msgArea.removeAllContent();
 			
+			return;
+		}
+		
 		// edit
-		} else if (oEvent.getParameter("name") === "masterdata.CustomerDetails") {
+		if (oEvent.getParameter("name") === "masterdata.CustomerDetails") {
 			this._id = oEvent.getParameter("arguments").id;
-			this.getView().bindElement("/Customers(" + this._id + ")");
+			this.getView().bindElement("/Customers('" + this._id + "')");
 
 			if(this._mode != "CREATE") {
 				var msgArea = this.getView().byId("messageArea");
@@ -145,15 +148,18 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerDetails", {
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(true);
 			
-		// leave
-		} else {
-			
-			// skip if edit
-			if ( this._mode !== "CREATE")
-				return;
-			
+			return;
+		}
+		
+		// leave	
+		if(this._mode == "CREATE") {
 			var context = this.getView().getBindingContext();
 			this._model.deleteCreatedEntry(context);
+			this._mode = undefined;
+		}
+			
+		if(this._mode == "EDIT") {
+			this._model.resetChanges();
 			this._mode = undefined;
 		}
 	},

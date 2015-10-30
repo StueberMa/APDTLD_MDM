@@ -150,6 +150,9 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 			// do nothing
 		}
 		
+		if(bodyTxt == null)
+			return request;
+		
 		body = (JsonObject) parser.parse(bodyTxt);
 		metadata = body.getAsJsonObject("__metadata");
 		

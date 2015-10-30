@@ -29,7 +29,7 @@
 					<f:formElements>
 						<f:FormElement label="Customer">
 							<f:fields>
-								<MultiInput id="CustomerIdInput" placeholder="Name"
+								<MultiInput id="CustomerIdHelper" placeholder="Name"
 									showValueHelp="false" tokenChange="onCustomerValidation"
 									suggestionItems="{
 										path: '/Customers',
@@ -67,7 +67,7 @@
 					<f:formElements>
 						<f:FormElement label="Campaign">
 							<f:fields>
-								<MultiInput id="CampaignIdInput" placeholder="Name"
+								<MultiInput id="CampaignIdHelper" placeholder="Name"
 									showValueHelp="false" tokenChange="onCampaignValidation"
 									suggestionItems="{
 										path: '/Campaigns',
@@ -92,7 +92,7 @@
 						</f:FormElement>
 						<f:FormElement label="Product">
 							<f:fields>
-								<MultiInput id="ProductIdInput" placeholder="Name"
+								<MultiInput id="ProductIdHelper" placeholder="Name"
 									showValueHelp="false" tokenChange="onProductValidation"
 									suggestionItems="{
 										path: '/Products',

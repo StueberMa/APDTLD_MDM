@@ -49,7 +49,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 	 */
 	onDialogConfirmed : function(oEvent) {
 		this._dialog.destroy();
-		this._model.remove("/Campaigns(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+		this._model.remove("/Campaigns('" + this._id + "')", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
 	},
 	
 	/**
@@ -129,10 +129,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 			var msgArea = this.getView().byId("messageArea");
 			msgArea.removeAllContent();
 			
+			return;
+		}
+		
 		// edit
-		} else if (oEvent.getParameter("name") === "marketing.CampaignDetails") {
+		if (oEvent.getParameter("name") === "marketing.CampaignDetails") {
 			this._id = oEvent.getParameter("arguments").id;
-			this.getView().bindElement("/Campaigns(" + this._id + ")");
+			this.getView().bindElement("/Campaigns('" + this._id + "')");
 			
 			if(this._mode != "CREATE") {
 				var msgArea = this.getView().byId("messageArea");
@@ -144,15 +147,18 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(true);
 			
+			return;
+		}
+		
 		// leave
-		} else {
-			
-			// skip if edit
-			if ( this._mode !== "CREATE")
-				return;
-			
+		if(this._mode == "CREATE") {
 			var context = this.getView().getBindingContext();
 			this._model.deleteCreatedEntry(context);
+			this._mode = undefined;
+		}
+			
+		if(this._mode == "EDIT") {
+			this._model.resetChanges();
 			this._mode = undefined;
 		}
 	},

@@ -23,7 +23,7 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name="ID")
-	private int id;
+	private String id;
 	private String name;
 	private String description;
 	private String unitOfMeasure;
@@ -48,7 +48,7 @@ public class Product implements Serializable {
 	 * 
 	 * @return
 	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 	
@@ -57,7 +57,7 @@ public class Product implements Serializable {
 	 * 
 	 * @param id
 	 */
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
