@@ -95,9 +95,46 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Uploader", {
 			}
 			
 			setTimeout($.proxy(function() {
-				console.log(filesParam);
+				this.reset();
 				this.getOwnerComponent().getRouter().navTo("import.FieldMapper", {files: filesParam});
 			}, this), 1000);
 		}, this), 1000);
+	},
+	
+	reset: function() {
+		this.fileProgesses={};
+		this.fileCount=0;
+		this.lastProgressUpdateCall=0;
+		this.fileCountFinished=0;
+		this.files="";
+		/*var uploadCollection = this.getView().byId("UploadCollection");
+		this.getView().removeContent(uploadCollection);
+		uploadCollection.removeAllItems();
+		this.getView().addContent(uploadCollection);
+		/*uploadCollection.destroy();
+		uploadCollection = new sap.m.UploadCollection({
+			id: this.getView().createId("UploadCollection"),
+			uploadUrl:"upload",
+			maximumFilenameLength:55,
+			maximumFileSize:10240,
+			multiple: true,
+			sameFilenameAllowed: true,
+			instantUpload: false,
+			showSeparators: "All",
+			change: [this.onChange, this],
+			fileDeleted: [this.onFileDeleted, this],
+			filenameLengthExceed: [this.onFilenameLengthExceed, this],
+			fileSizeExceed: [this.onFileSizeExceed, this],
+			typeMissmatch: [this.onTypeMissmatch, this],
+			uploadComplete: [this.onUploadComplete, this],
+			beforeUploadStarts: [this.onBeforeUploadStarts, this]
+		});
+		uploadCollection.addItem(null);
+		this.getView().insertContent(uploadCollection);*/
+		var oUploadButton = this.getView().byId("UploadButton");
+		oUploadButton.setText("Upload now");
+		oUploadButton.attachPress(this.onStartUpload, this);
+		oUploadButton.detachPress(this.onAbortUpload, this);
+		this.getView().byId("UploadProgressIndicator").setVisible(false);
 	}
 });

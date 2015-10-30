@@ -1,13 +1,19 @@
 sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 
-	oPersonalizationDialog: null,
 	file:"",
 	remainingFiles:[],
 	
-	onInit : function (evt) {
+	onInit: function (evt) {
+		var oRouter = this.getOwnerComponent().getRouter();
+		oRouter.getRoute("import.FieldMapper").attachMatched(this.initModel, this);
+	/*	var parts = window.location.href.split('/');
+		var files = parts[parts.length-1];
+		this.initModel(files)*/
+	},
+	
+	initModel: function(event) {
+		var files = event.getParameter("arguments").files.split(';')
 		var oModel = new sap.ui.model.json.JSONModel();
-		var parts = window.location.href.split('/');
-		var files = parts[parts.length-1].split(';');
 		console.log(files);
 		this.file = decodeURIComponent(files[0]);
 		files.splice(0,1);
@@ -15,8 +21,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		oModel.loadData("/mdm_view/fileanalyser?file=" + this.file);
 		this.getView().setModel(oModel);
 		
-		this.oPersonalizationDialog = sap.ui.xmlfragment("uni.mannheim.mdm.controller.import.FieldMapperAdd", this);
-		this.getView().addDependent(this.oPersonalizationDialog);
 	},
 	
 	onDBNameChange: function(evt) {
@@ -122,6 +126,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 					} else {
 						this.getOwnerComponent().getRouter().navTo("masterdata.Overview");
 					}
+					this.destroy();
 				}, this), 2000);
 			}, this),
 			error: function(data, textStatus, jqXHR) {
