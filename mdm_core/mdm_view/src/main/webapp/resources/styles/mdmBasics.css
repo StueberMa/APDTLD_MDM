@@ -177,18 +177,6 @@
 	color: #FFFFFF;
 }
 
-.mdmTile .mdmTileQuickAction {
-	position:absolute;
-	bottom:0;
-	margin-bottom: 15px;
-}
-
-.mdmTile .mdmTileQuickAction .sapMText {
-	font-weight: bold !important;
-	font-size: 1.0rem !important;
-	margin-bottom: 5px;
-}
-
 .mdmTile .mdmTileLinkEnum {
 	margin-top: 5px;
 	margin-left: 10px;
@@ -210,8 +198,8 @@
 }
 
 .mdmTileImage {
-	width: 6.5rem !important;
-	margin-top: 25px;
+	width: 100% !important;
+	margin-top: 15px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;

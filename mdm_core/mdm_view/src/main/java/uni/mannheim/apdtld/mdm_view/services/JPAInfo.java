@@ -53,7 +53,7 @@ public class JPAInfo extends HttpServlet {
 			return;
 		}
 
-		// handle dispatcher path
+		// count obj.
 		if (req.getPathInfo().equals("/count")) {
 
 			// local declaration
@@ -79,8 +79,11 @@ public class JPAInfo extends HttpServlet {
 			out.close();
 
 			return;
-			
-		} else if (req.getPathInfo().equals("/active")) {
+
+		}
+
+		// active marketing obj.
+		if (req.getPathInfo().equals("/active")) {
 
 			// local declaration
 			JsonObject locObj = null;
@@ -91,8 +94,9 @@ public class JPAInfo extends HttpServlet {
 			locObj = new JsonObject();
 			total = (Long) em.createQuery("SELECT count(distinct c) FROM Campaign c").getSingleResult();
 			locObj.addProperty("total", total);
-			
-			active = (Long) em.createQuery("SELECT count(distinct c) FROM Campaign c WHERE c.status = 'ACTIVE'").getSingleResult();
+
+			active = (Long) em.createQuery("SELECT count(distinct c) FROM Campaign c WHERE c.status = 'ACTIVE'")
+					.getSingleResult();
 			locObj.addProperty("active", active);
 			json.add("campaign", locObj);
 
@@ -100,24 +104,52 @@ public class JPAInfo extends HttpServlet {
 			locObj = new JsonObject();
 			total = (Long) em.createQuery("SELECT count(distinct l) FROM Lead l").getSingleResult();
 			locObj.addProperty("total", total);
-			
-			active = (Long) em.createQuery("SELECT count(distinct l) FROM Lead l WHERE l.status = 'OPEN'").getSingleResult();
+
+			active = (Long) em.createQuery("SELECT count(distinct l) FROM Lead l WHERE l.status = 'OPEN'")
+					.getSingleResult();
 			locObj.addProperty("active", active);
 			json.add("lead", locObj);
 
 			out.print(json.toString());
 			out.close();
-		} else if (req.getPathInfo().equals("/debugLeads")) {
+
+			return;
+		}
+
+		// customers geo.
+		if (req.getPathInfo().equals("/customerGeo")) {
+
+			// local declaration
+			long value = 0;
+			
+			// countries
+			value = (Long) em.createQuery("SELECT count(distinct c.address.country) FROM Customer c").getSingleResult();
+			json.addProperty("countries", value);
+
+			// customers
+			value = (Long) em.createQuery("SELECT count(distinct c) FROM Customer c").getSingleResult();
+			json.addProperty("customers", value);
+
+			out.print(json.toString());
+			out.close();
+
+			return;
+		}
+
+		// debug
+		if (req.getPathInfo().equals("/debugLeads")) {
 
 			// local declaration
 			Object result = null;
 			Gson gson = null;
-			
+
 			gson = new Gson();
 			result = em.createQuery("SELECT l FROM Lead l").getResultList();
-			
+
 			out.print(gson.toJson(result));
 			out.close();
+
+			return;
 		}
 
 		// no handler found

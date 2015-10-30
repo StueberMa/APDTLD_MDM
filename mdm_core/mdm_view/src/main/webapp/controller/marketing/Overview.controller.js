@@ -11,14 +11,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.Overview", {
 	},
 	
 	/**
-	 * Method onExit
-	 */
-	onExit : function() {
-		var oRouter = this.getOwnerComponent().getRouter();
-		oRouter.detachRouteMatched(this.onRequest, this);
-	},
-	
-	/**
 	 * Method onCampaignOverview
 	 */
 	onCampaignOverview : function() {

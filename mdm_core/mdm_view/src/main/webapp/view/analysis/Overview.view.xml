@@ -19,6 +19,7 @@
 						<Text class="mdmTileHeaderSub" text="Visualizes Customers per Country" />
 					</VBox>
 				</l:HorizontalLayout>
+				<ObjectNumber number="{customerGeo>/customers} / {customerGeo>/countries}" unit="Customer per Country" />
 			</VBox>
 		</CustomTile>
 
