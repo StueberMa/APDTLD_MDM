@@ -4,7 +4,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductOverview", {
 	 * Method onInit
 	 */
 	onInit : function() {
-		// register event for selection
+		
+		// model
+		this._model = this.getOwnerComponent().getModel();
+		
+		// event for selection
 		var table = this.getView().byId("productTable");
 		table.setMode(sap.m.ListMode.SingleSelectMaster);
 		table.attachEvent("selectionChange", this.onSelectionChange, this);
@@ -16,6 +20,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductOverview", {
 	onNewProduct : function() {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("masterdata.ProductCreate", false);
+	},
+	
+	/**
+	 * Method onRefresh
+	 */
+	onRefresh : function() {
+		this._model.refresh(true);
 	},
 	
 	/**
@@ -58,13 +69,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductOverview", {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("masterdata.ProductDetails", {id: id}, false);
 		
-	},
-	
-	/**
-	 * Method onRefresh
-	 */
-	onRefresh : function() {
-		var model = this.getView().getModel();
-		model.refresh(true);
 	}
+	
 });

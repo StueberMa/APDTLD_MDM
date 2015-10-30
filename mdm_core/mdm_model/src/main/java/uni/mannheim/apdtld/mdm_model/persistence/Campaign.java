@@ -26,7 +26,7 @@ public class Campaign implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name="ID")
-	private int id;
+	private String id;
 	private String name;
 	private String type;
 	private String description;
@@ -44,7 +44,7 @@ public class Campaign implements Serializable {
 	private int numberReceived;
 	private int numberLeads;
 	private int numberOpport;
-	private int valueOpport;
+	private double valueOpport;
 	
 	/**
 	 * Constructor
@@ -58,7 +58,7 @@ public class Campaign implements Serializable {
 	 * 
 	 * @return
 	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 	
@@ -67,7 +67,7 @@ public class Campaign implements Serializable {
 	 * 
 	 * @param id
 	 */
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
@@ -309,7 +309,7 @@ public class Campaign implements Serializable {
 	 * 
 	 * @return
 	 */
-	public int getValueOpport() {
+	public double getValueOpport() {
 		return valueOpport;
 	}
 
@@ -317,7 +317,7 @@ public class Campaign implements Serializable {
 	 * SET valueOpport
 	 * @param valueOpport
 	 */
-	public void setValueOpport(int valueOpport) {
+	public void setValueOpport(double valueOpport) {
 		this.valueOpport = valueOpport;
 	}
 }

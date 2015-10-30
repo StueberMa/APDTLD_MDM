@@ -4,16 +4,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	 * Method onInit
 	 */
 	onInit : function() {
+		
+		// model
+		this._model = this.getOwnerComponent().getModel();
+		
+		// router
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.onRequest, this);
-	},
-
-	/**
-	 * Method onExit
-	 */
-	onExit : function() {
-		var oRouter = this.getOwnerComponent().getRouter();
-		oRouter.detachRouteMatched(this.onRequest, this);
 	},
 	
 	/**
@@ -37,11 +34,21 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	 */
 	onCampaignValidation : function(oEvent) {
 		
-		if(oEvent.mParameters.type != "added")
+		// ensure added or removed
+		if(oEvent.mParameters.type != "added" && oEvent.mParameters.type != "removed")
 			return;
 		
-		// validate token
-		this.validateToken(oEvent, "CampaignIdInput", "CampaignId");
+		// get id
+		var id = oEvent.mParameters.token.mProperties.key;
+		
+		// field is actually initial
+		if(id == this._id) {
+			this.resetMultiInput("CampaignIdHelper");
+			return;
+		}
+		
+		if(oEvent.mParameters.type == "added")
+			this.validateToken(id, "CampaignIdHelper", "CampaignId");
 	},
 	
 	/**
@@ -49,11 +56,21 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	 */
 	onCustomerValidation : function(oEvent) {
 		
-		if(oEvent.mParameters.type != "added")
+		// ensure added or removed
+		if(oEvent.mParameters.type != "added" && oEvent.mParameters.type != "removed")
 			return;
 		
-		// validate token
-		this.validateToken(oEvent, "CustomerIdInput", "CustomerId");
+		// get id
+		var id = oEvent.mParameters.token.mProperties.key;
+		
+		// field is actually initial
+		if(id == this._id) {
+			this.resetMultiInput("CustomerIdHelper");
+			return;
+		}
+		
+		if(oEvent.mParameters.type == "added")
+			this.validateToken(id, "CustomerIdHelper", "CustomerId");
 	},
 
 	/**
@@ -68,9 +85,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	 */
 	onDialogConfirmed : function(oEvent) {
 		this._dialog.destroy();
-		
-		var model = this.getView().getModel();
-		model.remove("/Leads(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+		this._model.remove("/Leads('" + this._id + "')", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
 	},
 	
 	/**
@@ -137,11 +152,21 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	 */
 	onProductValidation : function(oEvent) {
 		
-		if(oEvent.mParameters.type != "added")
+		// ensure added or removed
+		if(oEvent.mParameters.type != "added" && oEvent.mParameters.type != "removed")
 			return;
 		
-		// validate token
-		this.validateToken(oEvent, "ProductIdInput", "ProductId");
+		// get id
+		var id = oEvent.mParameters.token.mProperties.key;
+		
+		// field is actually initial
+		if(id == this._id) {
+			this.resetMultiInput("ProductIdHelper");
+			return;
+		}
+		
+		if(oEvent.mParameters.type == "added")
+			this.validateToken(id, "ProductIdHelper", "ProductId");
 	},
 	
 	/**
@@ -151,10 +176,12 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		
 		// create
 		if (oEvent.getParameter("name") === "marketing.LeadCreate") {
-			var model = this.getView().getModel();
-			var context = model.createEntry("/Leads");
-			this.getView().unbindElement();
-			this.getView().setBindingContext(context);
+			
+			this._model.metadataLoaded().then(jQuery.proxy(function() {
+				var context = this._model.createEntry("/Leads", "expand:CampaignDetails,CustomerDetails,ProductDetails");
+				this.getView().unbindElement();
+				this.getView().setBindingContext(context);	
+			}, this));
 			this._mode = "CREATE";
 			
 			var button = this.getView().byId("deleteButton");
@@ -163,36 +190,43 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			var msgArea = this.getView().byId("messageArea");
 			msgArea.removeAllContent();
 			
-			this.getView().byId("CampaignIdInput").removeAllTokens();
-			this.getView().byId("CustomerIdInput").removeAllTokens();
-			this.getView().byId("ProductIdInput").removeAllTokens();
+			this.getView().byId("CampaignIdHelper").removeAllTokens();
+			this.getView().byId("CustomerIdHelper").removeAllTokens();
+			this.getView().byId("ProductIdHelper").removeAllTokens();
+			
+			return;
+		}
 			
 		// edit
-		} else if (oEvent.getParameter("name") === "marketing.LeadDetails") {
-			var model = this.getView().getModel();
+		if (oEvent.getParameter("name") === "marketing.LeadDetails") {
 			this._id = oEvent.getParameter("arguments").id;
-			this.getView().bindElement("/Leads(" + this._id + ")", {"expand": "ProductDetails"});
+			this.getView().bindElement("/Leads('" + this._id + "')");
 			
-			if(this._mode != "CREATE")
+			
+			if(this._mode != "CREATE") {
+				var msgArea = this.getView().byId("messageArea");
+				msgArea.removeAllContent();
+				
 				this.setValueSuggestions();
+			}
 			
 			this._mode = "EDIT";
 			
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(true);
 			
-			var msgArea = this.getView().byId("messageArea");
-			msgArea.removeAllContent();
-			
-		// leave
-		} else {
-			
-			// skip if edit
-			if ( this._mode !== "CREATE")
-				return;
-			
+			return;
+		}
+		
+		// leave	
+		if(this._mode == "CREATE") {
 			var context = this.getView().getBindingContext();
-			this.getView().getModel().deleteCreatedEntry(context);
+			this._model.deleteCreatedEntry(context);
+			this._mode = undefined;
+		}
+			
+		if(this._mode == "EDIT") {
+			this._model.resetChanges();
 			this._mode = undefined;
 		}
 	},
@@ -201,8 +235,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	 * Method onSave
 	 */
 	onSave : function() {
-		var model = this.getView().getModel();
-		model.submitChanges({success : jQuery.proxy(this.onSaveSuccess, this), error: jQuery.proxy(this.onSaveError, this)});
+		this._model.submitChanges({success : jQuery.proxy(this.onSaveSuccess, this), error: jQuery.proxy(this.onSaveError, this)});
 	},
 	
 	/**
@@ -258,39 +291,38 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	},
 	
 	/**
+	 * Method resetMultiInput
+	 */
+	resetMultiInput : function(fieldId) {
+		var field = this.getView().byId(fieldId);
+		field.removeAllTokens();
+	},
+	
+	/**
 	 * Method setValueSuggestions
 	 */
 	setValueSuggestions : function() {
 		
-		var model = this.getView().getModel();
-		
 		// campaign
-		var campaignId = model.getProperty("/Leads(" + this._id + ")/CampaignDetails/Id");
-		var campaignName = model.getProperty("/Leads(" + this._id + ")/CampaignDetails/Name");
-		
-		var token = new sap.m.Token({key: campaignId, text: campaignName});
-		this.getView().byId("CampaignIdInput").addToken(token);
+		var token = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.CampaignSuggestion");
+		token.bindElement("/Leads('" + this._id + "')/CampaignDetails");
+		this.getView().byId("CampaignIdHelper").addToken(token);
 		
 		// customer
-		var customerId = model.getProperty("/Leads(" + this._id + ")/CustomerDetails/Id");
-		var customerFirstName = model.getProperty("/Leads(" + this._id + ")/CustomerDetails/FirstName");
-		var customerLastName = model.getProperty("/Leads(" + this._id + ")/CustomerDetails/LastName");
-		
-		token = new sap.m.Token({key: customerId, text: customerFirstName + " " + customerLastName});
-		this.getView().byId("CustomerIdInput").addToken(token);
+		token = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.CustomerSuggestion");
+		token.bindElement("/Leads('" + this._id + "')/CustomerDetails");
+		this.getView().byId("CustomerIdHelper").addToken(token);
 		
 		// product
-		var productId = model.getProperty("/Leads(" + this._id + ")/ProductDetails/Id");
-		var productName = model.getProperty("/Leads(" + this._id + ")/ProductDetails/Name");
-		
-		token = new sap.m.Token({key: productId, text: productName});
-		this.getView().byId("ProductIdInput").addToken(token); 
+		token = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.ProductSuggestion");
+		token.bindElement("/Leads('" + this._id + "')/ProductDetails");
+		this.getView().byId("ProductIdHelper").addToken(token); 
 	},
 	
 	/**
 	 * Method validateToken
 	 */
-	validateToken : function(oEvent, fieldId, attribute) {
+	validateToken : function(id, fieldId, attribute) {
 		
 		// ensure 1:1 relationship
 		var field = this.getView().byId(fieldId);
@@ -299,8 +331,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		}
 		
 		// set id
-		var id = parseInt(oEvent.mParameters.token.mProperties.key);
-		this.getView().getModel().setProperty(attribute, id, this.getView().getBindingContext());
+		this._model.setProperty(attribute, id, this.getView().getBindingContext());
 	}
 	
 });

@@ -28,18 +28,18 @@ public class Lead implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name="ID")
-	private int id;
+	private String id;
 	private String description;
 	@Column(name="CUSTOMERID")
-	private int customerId;
+	private String customerId;
 	@Temporal(TemporalType.DATE)
 	private Calendar contactOn;
 	private String status;
 	@Column(name="CAMPAIGNID")
-	private int campaignId;
+	private String campaignId;
 	@Column(name="PRODUCTID")
-	private int productId;
-	private int amount;
+	private String productId;
+	private double amount;
 
 	@ManyToOne
 	@JoinColumn(name="CUSTOMERID", referencedColumnName="ID", insertable=false, updatable=false)
@@ -49,7 +49,7 @@ public class Lead implements Serializable {
 	@JoinColumn(name="CAMPAIGNID", referencedColumnName="ID", insertable=false, updatable=false)
 	private Campaign campaign;
 	
-	@ManyToOne
+	@ManyToOne 
 	@JoinColumn(name="PRODUCTID", referencedColumnName="ID", insertable=false, updatable=false)
 	private Product product;
 
@@ -65,7 +65,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @return
 	 */ 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -74,7 +74,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @param id
 	 */
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
@@ -83,7 +83,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @return
 	 */
-	public int getCampaignId() {
+	public String getCampaignId() {
 		return campaignId;
 	}
 
@@ -92,7 +92,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @param campaignId
 	 */
-	public void setCampaignId(int campaignId) {
+	public void setCampaignId(String campaignId) {
 		this.campaignId = campaignId;
 	}
 
@@ -155,7 +155,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @return
 	 */
-	public int getProductId() {
+	public String getProductId() {
 		return productId;
 	}
 
@@ -164,7 +164,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @param productId
 	 */
-	public void setProductId(int productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 
@@ -173,7 +173,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @return
 	 */
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
@@ -182,7 +182,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @param amount
 	 */
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	
@@ -191,7 +191,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @return
 	 */
-	public int getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 
@@ -200,7 +200,7 @@ public class Lead implements Serializable {
 	 * 
 	 * @param customerId
 	 */
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
 

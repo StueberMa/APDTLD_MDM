@@ -150,12 +150,22 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 			// do nothing
 		}
 		
+		if(bodyTxt == null)
+			return request;
+		
 		body = (JsonObject) parser.parse(bodyTxt);
 		metadata = body.getAsJsonObject("__metadata");
 		
 		// ensure associations available
 		if(!metadata.get("type").getAsString().equals("data_model.Lead"))
 			return request;
+		
+		// Campaign
+		if(body.get("CampaignId") != null) {
+			details = new JsonObject();
+			details.add("Id", body.get("CampaignId"));
+			body.add("CampaignDetails", details);
+		}
 		
 		// Customer
 		if(body.get("CustomerId") != null) {
@@ -169,13 +179,6 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 			details = new JsonObject();
 			details.add("Id", body.get("ProductId"));
 			body.add("ProductDetails", details);
-		}
-		
-		// Campaign
-		if(body.get("CampaignId") != null) {
-			details = new JsonObject();
-			details.add("Id", body.get("CampaignId"));
-			body.add("CampaignDetails", details);
 		}
 		
 		// create new Request

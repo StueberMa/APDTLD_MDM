@@ -4,16 +4,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 	 * Method onInit.
 	 */
 	onInit : function() {
+		
+		// model
+		this._model = this.getOwnerComponent().getModel();
+		
+		// router
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.onRequest, this);
-	},
-
-	/**
-	 * Method onExit
-	 */
-	onExit : function() {
-		var oRouter = this.getOwnerComponent().getRouter();
-		oRouter.detachRouteMatched(this.onRequest, this);
 	},
 	
 	/**
@@ -44,11 +41,8 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 	 */
 	onDialogConfirmed : function(oEvent) {
 		this._dialog.destroy();
-		
-		var model = this.getView().getModel();
-		model.remove("/Products(" + this._id + ")", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+		this._model.remove("/Products('" + this._id + "')", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
 	},
-	
 	
 	/**
 	 * Method onDelete
@@ -116,9 +110,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 		
 		// create
 		if (oEvent.getParameter("name") === "masterdata.ProductCreate") {
-			var context = this.getView().getModel().createEntry("/Products", {});
-			this.getView().unbindElement();
-			this.getView().setBindingContext(context);
+			this._model.metadataLoaded().then(jQuery.proxy(function() {
+				var context = this._model.createEntry("/Products");
+				this.getView().unbindElement();
+				this.getView().setBindingContext(context);	
+			}, this));
 			this._mode = "CREATE";
 			
 			var button = this.getView().byId("deleteButton");
@@ -127,27 +123,35 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 			var msgArea = this.getView().byId("messageArea");
 			msgArea.removeAllContent();
 			
+			return;
+		}
+		
 		// edit
-		} else if (oEvent.getParameter("name") === "masterdata.ProductDetails") {
+		if (oEvent.getParameter("name") === "masterdata.ProductDetails") {
 			this._id = oEvent.getParameter("arguments").id;
-			this.getView().bindElement("/Products(" + this._id + ")");
+			this.getView().bindElement("/Products('" + this._id + "')");
+			
+			// nav. create to edit
+			if(this._mode != "CREATE") {
+				var msgArea = this.getView().byId("messageArea");
+				msgArea.removeAllContent();
+			}
+			
 			this._mode = "EDIT";
 			
 			var button = this.getView().byId("deleteButton");
 			button.setVisible(true);
-			
-			var msgArea = this.getView().byId("messageArea");
-			msgArea.removeAllContent();
-			
+		}
+		
 		// leave
-		} else {
-			
-			// skip if edit
-			if ( this._mode !== "CREATE")
-				return;
-			
+		if(this._mode == "CREATE") {
 			var context = this.getView().getBindingContext();
-			this.getView().getModel().deleteCreatedEntry(context);
+			this._model.deleteCreatedEntry(context);
+			this._mode = undefined;
+		}
+			
+		if(this._mode == "EDIT") {
+			this._model.resetChanges();
 			this._mode = undefined;
 		}
 	},
@@ -156,8 +160,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 	 * Method onSave.
 	 */
 	onSave : function() {
-		var model = this.getView().getModel();
-		model.submitChanges({success : jQuery.proxy(this.onSaveSuccess, this), error: jQuery.proxy(this.onSaveError, this)});
+		this._model.submitChanges({success : jQuery.proxy(this.onSaveSuccess, this), error: jQuery.proxy(this.onSaveError, this)});
 	},
 
 	/**
@@ -211,4 +214,5 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 			router.navTo("masterdata.ProductDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, true);
 		}
 	}
+	
 });

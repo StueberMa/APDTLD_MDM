@@ -68,7 +68,16 @@
                     "name": "Overview",
                     "view": "Overview"
                 },
-                
+                {
+                    "pattern": "analysis/customersPerCountry",
+                    "name": "analysis.CustomersPerCountry",
+                    "view": "analysis.CustomersPerCountry"
+                },
+                {
+                    "pattern": "analysis/overview",
+                    "name": "analysis.Overview",
+                    "view": "analysis.Overview"
+                },
                 {
                     "pattern": "import/overview",
                     "name": "import.Overview",

@@ -5,14 +5,29 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 	 */
 	onInit : function() {
 		
+		// model
+		this._model = this.getOwnerComponent().getModel();
+		
 		// filter model
 		var filterModel = new sap.ui.model.json.JSONModel();
 		this.getView().setModel(filterModel, "filter");
 		
-		// register event for selection
+		// event for selection
 		var table = this.getView().byId("leadTable");
 		table.setMode(sap.m.ListMode.SingleSelectMaster);
 		table.attachEvent("selectionChange", this.onSelectionChange, this);
+		
+		// router
+		var oRouter = this.getOwnerComponent().getRouter();
+		oRouter.attachRouteMatched(this.onRequest, this);
+	},
+
+	/**
+	 * Method onExit
+	 */
+	onExit : function() {
+		var oRouter = this.getOwnerComponent().getRouter();
+		oRouter.detachRouteMatched(this.onRequest, this);
 	},
 	
 	/**
@@ -45,6 +60,23 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 		
 		if(oEvent.mParameters.type == "added")
 			this.validateToken(oEvent, "ProductIdInput", "/ProductId");
+	},
+	
+	/**
+	 * Method onRefresh
+	 */
+	onRefresh : function() {
+		this._model.refresh(true);
+	},
+	
+	/**
+	 * Method onRequest
+	 */
+	onRequest : function(oEvent) {
+		
+		if (oEvent.getParameter("name") === "marketing.LeadOverview") {
+			this.onRefresh()
+		}
 	},
 	
 	/**
@@ -100,14 +132,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 	},
 	
 	/**
-	 * Method onRefresh
-	 */
-	onRefresh : function() {
-		var model = this.getView().getModel();
-		model.refresh(true);
-	},
-	
-	/**
 	 * Method removeToken
 	 */
 	removeToken : function (oEvent, attribute) {
@@ -129,4 +153,5 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 		var id = parseInt(oEvent.mParameters.token.mProperties.key);
 		this.getView().getModel("filter").setProperty(attribute, id);
 	}
+	
 });
