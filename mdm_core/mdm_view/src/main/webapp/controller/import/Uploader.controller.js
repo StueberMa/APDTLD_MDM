@@ -7,13 +7,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Uploader", {
 	files:"",
 	
 	onChange: function(oEvent) {
-		console.log("change");
 		var oUploadButton = this.getView().byId("UploadButton");
 		oUploadButton.setEnabled(true);
 	},
 
 	onFileDeleted: function(oEvent) {
-		console.log("test");
 		var oUploadCollection = this.getView().byId("UploadCollection");
 		var oUploadButton = this.getView().byId("UploadButton");
 		console.log("on change " + oUploadCollection.getItems().length);
