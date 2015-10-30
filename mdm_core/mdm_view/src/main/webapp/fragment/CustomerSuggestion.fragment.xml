@@ -1,0 +1,7 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	
+	<Token text="{FirstName} {LastName}" key="{Id}" />   
+	     
+</core:FragmentDefinition>

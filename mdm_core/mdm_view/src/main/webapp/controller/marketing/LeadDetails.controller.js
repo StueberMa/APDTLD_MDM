@@ -267,25 +267,18 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	setValueSuggestions : function() {
 		
 		// campaign
-		var campaignId = this._model.getProperty("/Leads(" + this._id + ")/CampaignDetails/Id");
-		var campaignName = this._model.getProperty("/Leads(" + this._id + ")/CampaignDetails/Name");
-		
-		var token = new sap.m.Token({key: campaignId, text: campaignName});
+		var token = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.CampaignSuggestion");
+		token.bindElement("/Leads(" + this._id + ")/CampaignDetails");
 		this.getView().byId("CampaignIdInput").addToken(token);
 		
 		// customer
-		var customerId = this._model.getProperty("/Leads(" + this._id + ")/CustomerDetails/Id");
-		var customerFirstName = this._model.getProperty("/Leads(" + this._id + ")/CustomerDetails/FirstName");
-		var customerLastName = this._model.getProperty("/Leads(" + this._id + ")/CustomerDetails/LastName");
-		
-		token = new sap.m.Token({key: customerId, text: customerFirstName + " " + customerLastName});
+		token = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.CustomerSuggestion");
+		token.bindElement("/Leads(" + this._id + ")/CustomerDetails");
 		this.getView().byId("CustomerIdInput").addToken(token);
 		
 		// product
-		var productId = this._model.getProperty("/Leads(" + this._id + ")/ProductDetails/Id");
-		var productName = this._model.getProperty("/Leads(" + this._id + ")/ProductDetails/Name");
-		
-		token = new sap.m.Token({key: productId, text: productName});
+		token = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.ProductSuggestion");
+		token.bindElement("/Leads(" + this._id + ")/ProductDetails");
 		this.getView().byId("ProductIdInput").addToken(token); 
 	},
 	
