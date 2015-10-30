@@ -26,9 +26,9 @@
 		<CustomTile class="mdmTile">
 			<VBox>
 				<l:HorizontalLayout>
-					<core:Icon class="mdmTileIcon" src="sap-icon://add" />
+					<core:Icon class="mdmTileIcon" src="sap-icon://collections-management" />
 					<VBox class="mdmTileHeader">
-						<Text class="mdmTileHeaderTitle" text="Custom Analysis" />
+						<Text class="mdmTileHeaderTitle" text="Generic Analyzer" />
 						<Text class="mdmTileHeaderSub" text="Create Your Own Analysis" />
 					</VBox>
 				</l:HorizontalLayout>
