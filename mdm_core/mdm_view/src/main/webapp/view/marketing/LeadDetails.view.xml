@@ -110,19 +110,6 @@
 						</f:FormElement>
 					</f:formElements>
 				</f:FormContainer>
-
-				<!-- IDs -->
-				<f:FormContainer visible="false" title="IDs">
-					<f:formElements>
-						<f:FormElement label="IDs">
-							<f:fields>
-								<Input value="{CustomerId}" placeholder="Customer ID" />						
-								<Input value="{CampaignId}" placeholder="Campaign ID" />
-								<Input value="{ProductId}" placeholder="Product ID" />
-							</f:fields>
-						</f:FormElement>
-					</f:formElements>
-				</f:FormContainer>
 			</f:formContainers>
 		</f:Form>
 

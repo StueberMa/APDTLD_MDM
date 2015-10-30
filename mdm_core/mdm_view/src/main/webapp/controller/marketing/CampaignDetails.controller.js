@@ -12,14 +12,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.onRequest, this);
 	},
-
-	/**
-	 * Method onExit
-	 */
-	onExit : function() {
-		var oRouter = this.getOwnerComponent().getRouter();
-		oRouter.detachRouteMatched(this.onRequest, this);
-	},
 	
 	/**
 	 * Method onCancel
@@ -118,9 +110,12 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 		
 		// create
 		if (oEvent.getParameter("name") === "marketing.CampaignCreate") {
-			var context = this._model.createEntry("/Campaigns", {});
-			this.getView().unbindElement();
-			this.getView().setBindingContext(context);
+			
+			this._model.metadataLoaded().then(jQuery.proxy(function() {
+				var context = this._model.createEntry("/Campaigns");
+				this.getView().unbindElement();
+				this.getView().setBindingContext(context);	
+			}, this));
 			this._mode = "CREATE";
 			
 			var button = this.getView().byId("deleteButton");

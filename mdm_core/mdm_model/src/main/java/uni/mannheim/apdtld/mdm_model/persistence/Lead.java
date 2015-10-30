@@ -49,7 +49,7 @@ public class Lead implements Serializable {
 	@JoinColumn(name="CAMPAIGNID", referencedColumnName="ID", insertable=false, updatable=false)
 	private Campaign campaign;
 	
-	@ManyToOne
+	@ManyToOne 
 	@JoinColumn(name="PRODUCTID", referencedColumnName="ID", insertable=false, updatable=false)
 	private Product product;
 

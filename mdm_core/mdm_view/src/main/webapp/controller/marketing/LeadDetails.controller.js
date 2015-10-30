@@ -12,14 +12,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.onRequest, this);
 	},
-
-	/**
-	 * Method onExit
-	 */
-	onExit : function() {
-		var oRouter = this.getOwnerComponent().getRouter();
-		oRouter.detachRouteMatched(this.onRequest, this);
-	},
 	
 	/**
 	 * Method onCancel
@@ -93,9 +85,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	 */
 	onDialogConfirmed : function(oEvent) {
 		this._dialog.destroy();
-		
-		var model = this.getView().getModel();
-		model.remove("/Leads('" + this._id + "')", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
+		this._model.remove("/Leads('" + this._id + "')", {success: jQuery.proxy(this.onDeleteSuccess, this), error: jQuery.proxy(this.onDeleteError, this)});
 	},
 	
 	/**
@@ -186,9 +176,12 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		
 		// create
 		if (oEvent.getParameter("name") === "marketing.LeadCreate") {
-			var context = this._model.createEntry("/Leads");
-			this.getView().unbindElement();
-			this.getView().setBindingContext(context);
+			
+			this._model.metadataLoaded().then(jQuery.proxy(function() {
+				var context = this._model.createEntry("/Leads", "expand:CampaignDetails,CustomerDetails,ProductDetails");
+				this.getView().unbindElement();
+				this.getView().setBindingContext(context);	
+			}, this));
 			this._mode = "CREATE";
 			
 			var button = this.getView().byId("deleteButton");
@@ -298,6 +291,14 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	},
 	
 	/**
+	 * Method resetMultiInput
+	 */
+	resetMultiInput : function(fieldId) {
+		var field = this.getView().byId(fieldId);
+		field.removeAllTokens();
+	},
+	
+	/**
 	 * Method setValueSuggestions
 	 */
 	setValueSuggestions : function() {
@@ -316,14 +317,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		token = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.ProductSuggestion");
 		token.bindElement("/Leads('" + this._id + "')/ProductDetails");
 		this.getView().byId("ProductIdHelper").addToken(token); 
-	},
-	
-	/**
-	 * Method resetMultiInput
-	 */
-	resetMultiInput : function(fieldId) {
-		var field = this.getView().byId(fieldId);
-		field.removeAllTokens();
 	},
 	
 	/**

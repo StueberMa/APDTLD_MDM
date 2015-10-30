@@ -12,14 +12,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.onRequest, this);
 	},
-
-	/**
-	 * Method onExit
-	 */
-	onExit : function() {
-		var oRouter = this.getOwnerComponent().getRouter();
-		oRouter.detachRouteMatched(this.onRequest, this);
-	},
 	
 	/**
 	 * Method onCancel
@@ -118,9 +110,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.ProductDetails", {
 		
 		// create
 		if (oEvent.getParameter("name") === "masterdata.ProductCreate") {
-			var context = this._model.createEntry("/Products", {});
-			this.getView().unbindElement();
-			this.getView().setBindingContext(context);
+			this._model.metadataLoaded().then(jQuery.proxy(function() {
+				var context = this._model.createEntry("/Products");
+				this.getView().unbindElement();
+				this.getView().setBindingContext(context);	
+			}, this));
 			this._mode = "CREATE";
 			
 			var button = this.getView().byId("deleteButton");
