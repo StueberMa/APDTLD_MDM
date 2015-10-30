@@ -16,7 +16,7 @@
 					<contentRight>
 						<l:HorizontalLayout>
 							<Text class="mdmHeaderWelcome" text="Account: " />
-							<Link text="Max Mustermann" />
+							<Link text="Torsten Münch" />
 							<Button class="mdmHeaderLogout" icon="sap-icon://log"
 								tooltip="Logout" />
 						</l:HorizontalLayout>
