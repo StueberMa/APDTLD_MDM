@@ -177,18 +177,6 @@
 	color: #FFFFFF;
 }
 
-.mdmTile .mdmTileLinkEnum {
-	margin-top: 5px;
-	margin-left: 10px;
-}
-
-.mdmTile .mdmTileLinkEnum .sapMText {
-	font-weight: bold !important;
-	font-size: 0.875rem !important;
-	margin-right: 10px;
-	margin-bottom: 0px;
-}
-
 .mdmTileUnderDevImage {
 	width: 6.5rem !important;
 	margin-top: 25px;
@@ -204,7 +192,6 @@
 	margin-left: auto;
 	margin-right: auto;
 }
-
 
 /**
  *  MDM others
