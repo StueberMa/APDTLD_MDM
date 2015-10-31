@@ -12,8 +12,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -101,7 +104,8 @@ public class FileAnalyser extends HttpServlet {
 			String[] header = reader.readNext();
 
 			while ((nextLine = reader.readNext()) != null) {
-				HashMap<String, Object> typeObjectMap = new HashMap<String, Object>();
+				HashMap<String, Object> typeEntityMap = new HashMap<String, Object>();
+				HashMap<String, Object> typeEmebeddableMap = new HashMap<String, Object>();
 				int column = 0;
 				for(String attribute:nextLine) {
 					HashSet<Mapping> attributeMappings = mappings.get(header[column]);
@@ -112,25 +116,69 @@ public class FileAnalyser extends HttpServlet {
 					for(Mapping mapping:attributeMappings){
 						String[] dbNameParticles = mapping.dbName.split("\\."); // table.attribute
 						Object object;
-						if(!typeObjectMap.containsKey(dbNameParticles[0])) {
-							Class<?> prototype = Class.forName("uni.mannheim.apdtld.mdm_model.persistence." + dbNameParticles[0]);
+						String className = null;
+						String parentName = null;
+						String attributeName = null;
+						HashMap<String, Object> store = null;
+						if(dbNameParticles.length==2) {
+							className = dbNameParticles[0];
+							attributeName = dbNameParticles[1];
+							store = typeEntityMap;
+						} else if(dbNameParticles.length==3) {
+							parentName = dbNameParticles[0];
+							className = dbNameParticles[1];
+							attributeName = dbNameParticles[2];
+							store = typeEmebeddableMap;
+						}
+						if(!store.containsKey(className)) {
+							Class<?> prototype = Class.forName("uni.mannheim.apdtld.mdm_model.persistence." + className);
 							Constructor<?> ctor = prototype.getConstructor();
 							object = ctor.newInstance();
-							typeObjectMap.put(dbNameParticles[0], object);
+							store.put(className, object);
+							if(dbNameParticles.length==3) {
+								Object parentObject = null;
+								if(typeEntityMap.containsKey(parentName)) {
+									parentObject = typeEntityMap.get(parentName);
+								}
+								if(parentObject==null) {
+									Class<?> parentPrototype = Class.forName("uni.mannheim.apdtld.mdm_model.persistence." + parentName);
+									Constructor<?> parentCtor = parentPrototype.getConstructor();
+									parentObject = parentCtor.newInstance();
+									typeEntityMap.put(parentName, parentObject);
+								}
+								
+								char c[] = className.toCharArray();
+								c[0] = Character.toLowerCase(c[0]);
+								Field f = parentObject.getClass().getDeclaredField(new String(c));
+								boolean acc = f.isAccessible();
+								f.setAccessible(true);
+								f.set(parentObject, object);
+								f.setAccessible(acc);
+							}
 						} else {
-							object = typeObjectMap.get(dbNameParticles[0]);
+							object = store.get(className);
 						}
 						
-						Field f = object.getClass().getDeclaredField(dbNameParticles[1]);
+						Object attributeObject = null;
+						if(mapping.fType.equals("Text")) {
+							attributeObject = attribute;
+						} else if(mapping.fType.equals("Number")) {
+							attributeObject = Double.parseDouble(attribute);
+						} else if(mapping.fType.equals("Date")) {
+							Calendar cal = new GregorianCalendar();
+							cal.setTime((new SimpleDateFormat("dd.MM.yyyy")).parse(attribute));
+							attributeObject = cal;
+						}
+						Field f = object.getClass().getDeclaredField(attributeName);
 						boolean acc = f.isAccessible();
 						f.setAccessible(true);
-						f.set(object, attribute);
+						f.set(object, attributeObject);
 						f.setAccessible(acc);
 					}
 					column++;
 				}
 				
-				for(Object object:typeObjectMap.values()) {
+				for(Object object:typeEntityMap.values()) {
 					EntityTransaction ext = em.getTransaction();
 					ext.begin();
 					em.persist(object);
@@ -171,7 +219,10 @@ public class FileAnalyser extends HttpServlet {
 				String dbTableName = table.getName();
 				HashMap<String, AttributeTupel> attributesAndTypes = table.getAttributeInfo();
 				for(Entry<String, AttributeTupel> attributeAndType:attributesAndTypes.entrySet()) {
-					if(StringUtils.getLevenshteinDistance(attributeAndType.getKey(), fileColumnHeader) < 3 && 
+					String name = attributeAndType.getKey();
+					String[] parts = name.split("\\.");
+					name = parts[parts.length-1];
+					if(StringUtils.getLevenshteinDistance(name, fileColumnHeader) < 3 && 
 							this.attributeTypeMap.get(fileColumnHeader).equals(attributeAndType.getValue().type)) {
 						 
 						String attributeName = column.get(0);
@@ -287,8 +338,52 @@ public class FileAnalyser extends HttpServlet {
 	private void analyseDatabaseStructure() {
 		this.tables = new HashSet<Table>();
 		
+		HashMap<String, Table> embedables = new HashMap<>();
+		
 		try {
 			EntityManagerFactory fac = JpaEntityManagerFactory.getEntityManagerFactory("data_model");
+			
+			Set<EmbeddableType<?>> embeddables = fac.getMetamodel().getEmbeddables();
+			Iterator<EmbeddableType<?>> it2 = embeddables.iterator();
+			while(it2.hasNext()) {
+				EmbeddableType<?> o = it2.next();
+				String[] fullyQualifiedNameParts = o.getJavaType().getName().split("\\.");
+				String name = fullyQualifiedNameParts[fullyQualifiedNameParts.length-1];
+				Table table = new Table(name);
+				for(Attribute<?,?> attr : o.getAttributes()) {
+					String type = attr.getJavaType().getName();
+					if(type.indexOf("String")>0) {
+						type = "Text";
+					} else if(type.indexOf("int")>=0 || type.indexOf("float")>=0 || type.indexOf("double")>=0) {
+						type = "Number";
+					} else if(type.equals("java.util.Calendar")) {
+						type = "Date";
+					} else {
+						type = "ref";
+					}
+					
+					String sample = "";
+					/*List<?> rows = fac.createEntityManager()
+							.createQuery("Select t From " + o.getName() + " t")
+							//.setMaxResults(10)
+							.getResultList();
+
+					for(Object row:rows) {
+						Class<?> c = row.getClass();
+						Field f = c.getDeclaredField(attr.getName());
+						boolean acc = f.isAccessible();
+						f.setAccessible(true);
+						sample += f.get(row) + "; ";
+						f.setAccessible(acc);
+					}*/
+					
+					if(!type.equals("ref")) {
+						table.addAttribute(attr.getName(), type, sample);
+					}
+				}
+				embedables.put(name, table);
+			}
+			
 			//EntityManager em = fac.createEntityManager();
 			Set<EntityType<?>> entities = fac.getMetamodel().getEntities();
 			Iterator<EntityType<?>> it = entities.iterator();
@@ -304,16 +399,17 @@ public class FileAnalyser extends HttpServlet {
 					} else if(type.equals("java.util.Calendar")) {
 						type = "Date";
 					} else {
+						String[] fullyQualifiedNameParts = type.split("\\.");
+						String name = fullyQualifiedNameParts[fullyQualifiedNameParts.length-1];
+						if(embedables.containsKey(name)) {
+							Table embeddedTable = embedables.get(name);
+							for(AttributeTupel attribute:embeddedTable.getAttributeInfo().values()) {
+								table.addAttribute(name + "." + attribute.name, attribute.type, attribute.sample);
+							}
+						}
 						type = "ref";
 					}
-					
-				
-					/*CriteriaBuilder em = fac.getCriteriaBuilder();
-					CriteriaQuery<Customer> cq = em.createQuery(Customer.class);
-					Root<Customer> rootEntry = cq.from(Customer.class);
-					CriteriaQuery<Customer> all = cq.select(rootEntry);
-					TypedQuery<Customer> allQuery = em.createQuery(all);
-					allQuery.getResultList();*/
+
 					String sample = "";
 					List<?> rows = fac.createEntityManager()
 							.createQuery("Select t From " + o.getName() + " t")
@@ -335,22 +431,6 @@ public class FileAnalyser extends HttpServlet {
 				}
 				this.tables.add(table);
 			}
-			
-			/*Set<EmbeddableType<?>> embeddables = fac.getMetamodel().getEmbeddables();
-			Iterator<EmbeddableType<?>> it2 = embeddables.iterator();
-			while(it2.hasNext()) {
-				EmbeddableType<?> o = it2.next();
-				out.write(o.toString() + " + ");
-			}
-			
-			Set<ManagedType<?>> manageds = fac.getMetamodel().getManagedTypes();
-			Iterator<ManagedType<?>> it3 = manageds.iterator();
-			while(it3.hasNext()) {
-				ManagedType<?> o = it3.next();
-				out.write(o.toString() + " + ");
-			}*/
-			//Object o = q.getSingleResult();
-			//out.write(o.toString());
 		} catch (NamingException e) {
 		} catch (SQLException e) {
 		} catch (Exception e) {
@@ -372,7 +452,7 @@ public class FileAnalyser extends HttpServlet {
 	
 	private boolean isDate(String str) {
 		try {
-			DateFormat.getInstance().parse(str);
+			(new SimpleDateFormat("dd.MM.yyyy")).parse(str);
 		} catch(ParseException pe) {
 			return false;
 		}
@@ -388,5 +468,4 @@ public class FileAnalyser extends HttpServlet {
 			return "";
 		}
 	}
-
 }
