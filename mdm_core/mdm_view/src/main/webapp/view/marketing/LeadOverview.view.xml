@@ -73,7 +73,7 @@
 					<Text text="Contact on" />
 				</Column>
 				<Column>
-					<Text text="Status" />
+					<Text text="Status"/>
 				</Column>
 			</columns>
 			<items>
@@ -85,7 +85,7 @@
 						<Text
 							text="{path:'ContactOn', type:'sap.ui.model.type.Date',
 									formatOptions: { style: 'medium', strictParsing: true}}" />
-						<Text text="{Status}" />
+						<Text text="{path:'Status', formatter : '.leadStatus'}" />
 					</cells>
 				</ColumnListItem>
 			</items>
