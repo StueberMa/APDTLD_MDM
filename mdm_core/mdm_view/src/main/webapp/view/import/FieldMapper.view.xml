@@ -60,7 +60,7 @@
 						<Label text="{fName}" />
 					</VBox>
 					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<Select selectedKey="str">
+						<Select selectedKey="{fType}">
 							<core:Item key="Number" text="Number" />
 							<core:Item key="Text" text="Text" />
 							<core:Item key="Date" text="Date" />

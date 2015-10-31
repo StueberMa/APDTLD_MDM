@@ -1,15 +1,19 @@
 sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 
-	oPersonalizationDialog: null,
 	file:"",
 	remainingFiles:[],
 	
-	onInit : function (evt) {
-		// set explored app's demo model on this sample
-		
+	onInit: function (evt) {
+		var oRouter = this.getOwnerComponent().getRouter();
+		oRouter.getRoute("import.FieldMapper").attachMatched(this.initModel, this);
+	/*	var parts = window.location.href.split('/');
+		var files = parts[parts.length-1];
+		this.initModel(files)*/
+	},
+	
+	initModel: function(event) {
+		var files = event.getParameter("arguments").files.split(';')
 		var oModel = new sap.ui.model.json.JSONModel();
-		var parts = window.location.href.split('/');
-		var files = parts[parts.length-1].split(';');
 		console.log(files);
 		this.file = decodeURIComponent(files[0]);
 		files.splice(0,1);
@@ -17,31 +21,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		oModel.loadData("/mdm_view/fileanalyser?file=" + this.file);
 		this.getView().setModel(oModel);
 		
-		this.oPersonalizationDialog = sap.ui.xmlfragment("uni.mannheim.mdm.controller.import.FieldMapperAdd", this);
-		this.getView().addDependent(this.oPersonalizationDialog);
 	},
-	
-	/*updateSelects: function(evt) {
-		var _this = this;
-		var oList = this.getView().byId("mappingList");
-		var aListItems = oList.getItems();
-		var oModel = this.getView().getModel();
-		aListItems.forEach(function(oListItem, index){
-			var oHbox0 = oListItem.getContent()[0];
-			var oHbox0_0 = oHbox0.getItems()[0];
-			var oVbox1 = oHbox0_0.getItems()[1];
-			var oFTypeSelect = oVbox1.getItems()[0];
-			var oHbox0_1 = oHbox0.getItems()[1];
-			var oVbox0 = oHbox0_1.getItems()[0];
-			var oDBNameSelect = oVbox0.getItems()[0];
-			
-			var oMappings = oModel.getObject("/mappings");
-			oFTypeSelect.setSelectedKey(oMappings[index].fType);
-			oDBNameSelect.setSelectedKey(oMappings[index].dbName);
-			console.log(oDBNameSelect);
-			oDBNameSelect.attachChange(oListItem, $.proxy(_this.onDBNameChange, _this));
-		});
-	},*/
 	
 	onDBNameChange: function(evt) {
 		var oHbox0 = evt.getSource().getParent().getParent().getParent();
@@ -73,12 +53,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		this.getView().getModel().refresh();
 	},
 	
-	/*onAdd: function(evt) {
-		// toggle compact style
-		jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this.oPersonalizationDialog);
-		this.oPersonalizationDialog.open();
-	},*/
-	
 	onAdd: function(evt) {
 		var _this = this;
 		var mappingsArray = this.getView().getModel().getObject('/mappings');
@@ -93,8 +67,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		mappingsArray.push(newMapping);
 		this.getView().getModel().refresh();
 		this.resetAddRow();
-		//this.oPersonalizationDialog.close();
-		//this.resetPopover();
 	},
 	
 	resetAddRow: function() {
@@ -105,12 +77,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		this.getView().byId("addrowDbType").setText("-");
 		this.getView().byId("addrowDbSample").setText("-");
 	},
-	
-	handleCloseCancel: function() {
-		this.oPersonalizationDialog.close();
-		this.resetPopover();
-	},
-	
+		
 	onAddrowFileNameChange: function(evt) {
 		var _this = this;
 		var selectedText = evt.getSource().getSelectedItem().getText();
@@ -137,15 +104,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		});
 	},
 	
-	resetPopover: function() {
-		sap.ui.getCore().byId("addrowFileName").setSelectedKey('');
-		sap.ui.getCore().byId("addrowFileType").setSelectedKey('Text'),
-		sap.ui.getCore().byId("addrowFileSample").setText(''),
-		sap.ui.getCore().byId("addrowDbName").setSelectedKey(''),
-		sap.ui.getCore().byId("addrowDbType").setText(''),
-		sap.ui.getCore().byId("addrowDbSample").setText('')
-	},
-	
 	onAnalyseRows: function() {
 		var jsonModel = this.getView().getModel().getJSON();
 		$.ajax({
@@ -168,6 +126,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 					} else {
 						this.getOwnerComponent().getRouter().navTo("masterdata.Overview");
 					}
+					this.destroy();
 				}, this), 2000);
 			}, this),
 			error: function(data, textStatus, jqXHR) {
