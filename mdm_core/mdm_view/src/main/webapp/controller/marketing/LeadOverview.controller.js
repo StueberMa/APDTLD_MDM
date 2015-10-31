@@ -1,5 +1,5 @@
 sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
-
+	
 	/**
 	 * Method onInit
 	 */
@@ -20,14 +20,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 		// router
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.onRequest, this);
-	},
-
-	/**
-	 * Method onExit
-	 */
-	onExit : function() {
-		var oRouter = this.getOwnerComponent().getRouter();
-		oRouter.detachRouteMatched(this.onRequest, this);
 	},
 	
 	/**
@@ -128,7 +120,18 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 		// navigate to details
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("marketing.LeadDetails", {id: id}, false);
+	},
+	
+	/**
+	 * Method formatStatus
+	 */
+	leadStatus : function(status) {	
 		
+		if(status == "OPEN")
+			return "Open";
+			
+		if(status == "CLOSED")
+			return "Closed"
 	},
 	
 	/**
