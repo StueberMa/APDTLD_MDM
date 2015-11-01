@@ -57,13 +57,13 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	<!-- Uploader service -->
 	<!-- ============================================================== -->
 	<servlet>
-		<servlet-name>Upload</servlet-name>
+		<servlet-name>Uploader</servlet-name>
 		<servlet-class>uni.mannheim.apdtld.mdm_view.services.Uploader</servlet-class>
 		<load-on-startup>3</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>Upload</servlet-name>
+		<servlet-name>Uploader</servlet-name>
 		<url-pattern>/upload</url-pattern>
 	</servlet-mapping>
 	
@@ -76,6 +76,17 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	<servlet-mapping>
 		<servlet-name>FileAnalyser</servlet-name>
 		<url-pattern>/fileanalyser</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Exporter</servlet-name>
+		<servlet-class>uni.mannheim.apdtld.mdm_view.services.Exporter</servlet-class>
+		<load-on-startup>5</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Exporter</servlet-name>
+		<url-pattern>/export</url-pattern>
 	</servlet-mapping>
 
 	<context-param>

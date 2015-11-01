@@ -1,0 +1,78 @@
+<mvc:View height="100%" controllerName="uni.mannheim.mdm.controller.import.Exporter"
+	xmlns="sap.m" 
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:html="http://www.w3.org/1999/xhtml" 
+	xmlns:u="sap.ui.unified" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:t="sap.ui.table" 
+	xmlns:vbm="sap.ui.vbm">
+	<HBox class="mdmImportFilenameHeader">
+		<VBox width="100%" alignItems="Center" justifyContent="Center">
+			<Title level="H1" text="Export Database Tables" />
+		</VBox> 
+	</HBox>
+	<ScrollContainer
+		height="90%"
+		width="100%"
+		horizontal="true"
+		vertical="true"
+		focusable="false">
+		<List items="{/database_tables/}" id="mappingList">
+			<CustomListItem focusable="false">
+				<VBox>
+					<HBox alignItems="Center" justifyContent="Center">
+						<CheckBox text="{name}" selected="true" focusable="false" select="onEntitySelect" />
+					</HBox>
+					<HBox>
+						<VBox width="25%">
+							<List items="{attributes_0/}">
+								<CustomListItem focusable="false">
+									<CheckBox text="{name}" selected="{selected}" focusable="false" select="onAttributeSelect" />
+								</CustomListItem>
+							</List>
+						</VBox>
+						<VBox width="25%">
+							<List items="{attributes_1/}">
+								<CustomListItem focusable="false">
+									<CheckBox text="{name}" selected="{selected}" focusable="false" select="onAttributeSelect" />
+								</CustomListItem>
+							</List>
+						</VBox>
+						<VBox width="25%">
+							<List items="{attributes_2/}">
+								<CustomListItem focusable="false">
+									<CheckBox text="{name}" selected="{selected}" focusable="false" select="onAttributeSelect" />
+								</CustomListItem>
+							</List>
+						</VBox>
+						<VBox width="25%">
+							<List items="{attributes_3/}">
+								<CustomListItem focusable="false">
+									<CheckBox text="{name}" selected="{selected}" focusable="false" select="onAttributeSelect" />
+								</CustomListItem>
+							</List>
+						</VBox>
+					</HBox>
+				</VBox>
+			</CustomListItem>
+		</List>
+	</ScrollContainer>
+	<HBox>
+		<Button text="Reset"
+				press="onReset"
+				ariaDescribedBy="defaultButtonDescription genericButtonDescription">
+			<layoutData>
+				<FlexItemData growFactor="1" />
+			</layoutData>
+		</Button>
+		<Button type="Accept"
+				text="Analyse Rows"
+				press="onAnalyseRows"
+				ariaDescribedBy="acceptButtonDescription genericButtonDescription">
+			<layoutData>
+				<FlexItemData growFactor="1" />
+			</layoutData>
+		</Button>
+	</HBox>
+</mvc:View>

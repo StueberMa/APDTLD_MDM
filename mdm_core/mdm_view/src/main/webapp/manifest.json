@@ -94,6 +94,11 @@
                     "view": "import.Uploader"
                 },
                 {
+                    "pattern": "import/Exporter",
+                    "name": "import.Exporter",
+                    "view": "import.Exporter"
+                },
+                {
                     "pattern": "marketing/campaign/create",
                     "name": "marketing.CampaignCreate",
                     "view": "marketing.CampaignDetails"

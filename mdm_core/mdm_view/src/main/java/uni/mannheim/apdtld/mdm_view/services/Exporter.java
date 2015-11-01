@@ -60,28 +60,21 @@ import uni.mannheim.apdtld.mdm_view.odata.ODataJPAServiceFactory;
 import uni.mannheim.apdtld.mdm_view.services.gsonmodel.Mapping;
 import uni.mannheim.apdtld.mdm_view.services.gsonmodel.MappingArray;
 
-public class FileAnalyser extends HttpServlet {
+public class Exporter extends HttpServlet {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String filePath;
-	private ArrayList<ArrayList<String>> sampleList = null;
-	private HashMap<String, String> attributeTypeMap = null;
-	private boolean headerrowDetected = false;
 	private Set<Table> tables = null;
 	
 	public void init() {
-		// Get the file location where it would be stored.
-		filePath = getServletContext().getInitParameter("file-upload");
-		new File(filePath).mkdirs();
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	
-		Writer out = response.getWriter();
+		/*Writer out = response.getWriter();
 		
 		StringBuffer jb = new StringBuffer();
 		String line = null;
@@ -89,7 +82,7 @@ public class FileAnalyser extends HttpServlet {
 			BufferedReader reader = request.getReader();
 			while ((line = reader.readLine()) != null)
 				jb.append(line);
-		} catch (Exception e) { /*report an error*/ }
+		} catch (Exception e) {  }
 
 		MappingArray mappingsArray = new GsonBuilder().create().fromJson(jb.toString(), MappingArray.class);
 		HashMap<String, HashSet<Mapping>> mappings = mappingsArray.getMappingMap();
@@ -194,7 +187,7 @@ public class FileAnalyser extends HttpServlet {
 			out.write(e.getMessage());
 			// Please don't :)
 		}
-		out.write("{}");
+		out.write("{}");*/
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -204,135 +197,34 @@ public class FileAnalyser extends HttpServlet {
 		JsonObject json = new JsonObject();
 		Writer out = response.getWriter();
 		
-		String filename = request.getParameter("file");
-		this.parseFile(filePath + filename);
-		
-		if(!this.headerrowDetected) return;
-		
 		this.analyseDatabaseStructure();
-				
-		JsonArray jsonMappings = new JsonArray();
-		for(ArrayList<String> column:sampleList) {
-			
-			String fileColumnHeader = column.get(0);
-			for(Table table:this.tables) {
-				String dbTableName = table.getName();
-				HashMap<String, AttributeTupel> attributesAndTypes = table.getAttributeInfo();
-				for(Entry<String, AttributeTupel> attributeAndType:attributesAndTypes.entrySet()) {
-					String name = attributeAndType.getKey();
-					String[] parts = name.split("\\.");
-					name = parts[parts.length-1];
-					if(StringUtils.getLevenshteinDistance(name, fileColumnHeader) < 3 && 
-							this.attributeTypeMap.get(fileColumnHeader).equals(attributeAndType.getValue().type)) {
-						 
-						String attributeName = column.get(0);
-						 
-						JsonObject item = new JsonObject();
-						item.addProperty("fName", attributeName);
 						
-						item.addProperty("fType", attributeTypeMap.get(attributeName));
-						 
-						String sample = "";
-						for(int rowIndex=1; rowIndex<column.size(); rowIndex++) {
-							sample += column.get(rowIndex) + ", ";
-						}
-						sample = this.shortenSample(sample);
-						item.addProperty("fSample", sample);
-						
-						item.addProperty("dbName", dbTableName + "." + attributeAndType.getKey());
-						item.addProperty("dbType", attributeAndType.getValue().type);
-						item.addProperty("dbSample", this.shortenSample(attributeAndType.getValue().sample));
-						 
-						jsonMappings.add(item);
-					}
-				}
-			}	 
-		}
-		
-		JsonArray jsonAttributesDB = new JsonArray();
+		JsonArray jsonTables = new JsonArray();
 		for(Table table:this.tables) {
+			JsonObject jsonTable = new JsonObject();
+			jsonTable.addProperty("name", table.getName());
+			JsonArray[] jsonAttributes = new JsonArray[4];
+			jsonAttributes[0] = new JsonArray();
+			jsonAttributes[1] = new JsonArray();
+			jsonAttributes[2] = new JsonArray();
+			jsonAttributes[3] = new JsonArray();
+			int i=0;
 			for(Map.Entry<String, AttributeTupel> entry:table.getAttributeInfo().entrySet()) {
 				JsonObject jsonAttribute = new JsonObject();
-				jsonAttribute.addProperty("name", table.getName() + "." + entry.getKey());
-				jsonAttribute.addProperty("type", entry.getValue().type);
-				jsonAttribute.addProperty("sample", this.shortenSample(entry.getValue().sample));
-				jsonAttributesDB.add(jsonAttribute);
+				jsonAttribute.addProperty("name", entry.getKey());
+				jsonAttribute.addProperty("selected", "true");
+				jsonAttributes[i++%4].add(jsonAttribute);
 			}
-			
+			jsonTable.add("attributes_0", jsonAttributes[0]);
+			jsonTable.add("attributes_1", jsonAttributes[1]);
+			jsonTable.add("attributes_2", jsonAttributes[2]);
+			jsonTable.add("attributes_3", jsonAttributes[3]);
+			jsonTables.add(jsonTable);
 		}
 		
-		JsonArray jsonAttributesFile = new JsonArray();
-		for(ArrayList<String> column:sampleList) {
-			JsonObject jsonAttribute = new JsonObject();
-			jsonAttribute.addProperty("name", column.get(0));
-			jsonAttribute.addProperty("type", this.attributeTypeMap.get(column.get(0)));
-			String sample = "";
-			for(int rowIndex=1; rowIndex<column.size(); rowIndex++) {
-				sample += column.get(rowIndex) + ", ";
-			}
-			sample = this.shortenSample(sample);
-			jsonAttribute.addProperty("sample", sample);
-			jsonAttributesFile.add(jsonAttribute);
-		}
-		
-		json.add("mappings", jsonMappings);
-		json.add("attributes_database", jsonAttributesDB);
-		json.add("attributes_file", jsonAttributesFile);
-		json.addProperty("filename", filename);
+		json.add("database_tables", jsonTables);
 		out.write(json.toString());
 		
-	}
-	
-	private void parseFile(String filePath) throws IOException {
-		CSVReader reader = new CSVReader(new FileReader(filePath), ';');
-		String[] nextLine;
-		this.sampleList = new ArrayList<ArrayList<String>>();
-		int rowIndex = 0;
-		while ((nextLine = reader.readNext()) != null && rowIndex < 10) {
-			for(int columnIndex = 0; columnIndex < nextLine.length; columnIndex++) {
-				if(sampleList.size() <= columnIndex) {
-					sampleList.add(new ArrayList<String>());
-				}
-				sampleList.get(columnIndex).add(nextLine[columnIndex]);
-			}
-			rowIndex++;
-		}
-		reader.close();
-		
-		int headerIsTextAndBodyIsNotTextCount = 0;
-		int headerIsNotTextCount = 0;
-		
-		attributeTypeMap = new HashMap<String, String>();
-		for(ArrayList<String> column:sampleList) {
-			String attributeName = column.get(0);
-			boolean headerIsText = isText(attributeName);
-			boolean bodyIsDate = true;
-			boolean bodyIsNumber = true;
-			for(rowIndex = 1; rowIndex < column.size(); rowIndex++) {
-				String row = column.get(rowIndex);
-				bodyIsDate &= this.isDate(row);
-				bodyIsNumber &= this.isNumber(row);
-			}
-			
-			boolean bodyIsText = bodyIsDate || bodyIsNumber;
-			
-			if(bodyIsDate) {
-				attributeTypeMap.put(attributeName, "Date");
-			} else if(bodyIsNumber) {
-				attributeTypeMap.put(attributeName, "Number");
-			} else {
-				attributeTypeMap.put(attributeName, "Text");
-			}
-			
-			if(headerIsText && !bodyIsText) {
-				headerIsTextAndBodyIsNotTextCount++;
-			}
-			if(!headerIsText) {
-				headerIsNotTextCount++;
-			}
-		}
-		
-		this.headerrowDetected = !(headerIsNotTextCount>0 || headerIsTextAndBodyIsNotTextCount==0);
 	}
 	
 	private void analyseDatabaseStructure() {
@@ -435,28 +327,6 @@ public class FileAnalyser extends HttpServlet {
 		} catch (SQLException e) {
 		} catch (Exception e) {
 		}
-	}
-	
-	private boolean isText(String str) {
-		return !isNumber(str) && !isDate(str);
-	}
-	
-	private boolean isNumber(String str) {
-		try {  
-			Double.parseDouble(str);  
-		} catch(NumberFormatException nfe) {  
-			return false;  
-		}  
-		return true;  
-	}
-	
-	private boolean isDate(String str) {
-		try {
-			(new SimpleDateFormat("dd.MM.yyyy")).parse(str);
-		} catch(ParseException pe) {
-			return false;
-		}
-		return true;
 	}
 	
 	private String shortenSample(String sample) {
