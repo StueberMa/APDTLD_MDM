@@ -92,6 +92,33 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("marketing.CampaignDetails", {id: id}, false);
 		
+	},
+	
+	/**
+	 * Method formatStatus
+	 */
+	formatStatus : function(status) {	
+		
+		if(status == "ACTIVE")
+			return "Active";
+			
+		if(status == "FINISH")
+			return "Finished";
+	},
+	
+	/**
+	 * Method formatType
+	 */
+	formatType : function(type) {	
+		
+		if(type == "EMAIL")
+			return "E-Mail";
+			
+		if(type == "PARTNER")
+			return "Partner";
+		
+		if(type == "SOCMEDIA")
+			return "Social Media";
 	}
 	
 });

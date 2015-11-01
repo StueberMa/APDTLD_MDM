@@ -85,7 +85,7 @@
 						<Text
 							text="{path:'ContactOn', type:'sap.ui.model.type.Date',
 									formatOptions: { style: 'medium', strictParsing: true}}" />
-						<Text text="{path:'Status', formatter : '.leadStatus'}" />
+						<Text text="{path:'Status', formatter : '.formatStatus'}" />
 					</cells>
 				</ColumnListItem>
 			</items>

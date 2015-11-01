@@ -125,13 +125,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 	/**
 	 * Method formatStatus
 	 */
-	leadStatus : function(status) {	
+	formatStatus : function(status) {	
 		
 		if(status == "OPEN")
 			return "Open";
 			
 		if(status == "CLOSED")
-			return "Closed"
+			return "Closed";
 	},
 	
 	/**
