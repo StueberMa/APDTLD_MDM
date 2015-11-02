@@ -30,7 +30,7 @@
 						<f:FormElement label="Customer">
 							<f:fields>
 								<ComboBox id="CustomerIdHelper" placeholder="Name"
-									selectionChange="onCustomerValidation"
+									selectedKey="{CustomerId}"
 									items="{
 										path: '/Customers',
 										sorter: { path: 'LastName' }
@@ -68,7 +68,7 @@
 						<f:FormElement label="Campaign">
 							<f:fields>
 								<ComboBox id="CampaignIdHelper" placeholder="Name"
-									selectionChange="onCampaignValidation"
+									selectedKey="{CampaignId}"
 									items="{
 										path: '/Campaigns',
 										sorter: { path: 'Name' }
@@ -93,7 +93,7 @@
 						<f:FormElement label="Product">
 							<f:fields>
 								<ComboBox id="ProductIdHelper" placeholder="Name"
-									selectionChange="onProductValidation"
+									selectedKey="{ProductId}"
 									items="{
 										path: '/Products',
 										sorter: { path: 'Name' }

@@ -28,51 +28,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			router.navTo("marketing.LeadOverview", false);
 		}
 	},
-	
-	/**
-	 * Method onCampaignValidation
-	 */
-	onCampaignValidation : function(oEvent) {
-		
-		var item = oEvent.mParameters.selectedItem;
-		
-		if(item)
-			var key = item.getKey();
-		
-		this._model.setProperty("CampaignId", key), this.getView().getBindingContext();
-	},
-	
-	/**
-	 * Method onCustomerValidation
-	 */
-	onCustomerValidation : function(oEvent) {
-		
-		var item = oEvent.mParameters.selectedItem;
-		
-		if(item)
-			var key = item.getKey();
-		
-		this._model.setProperty("CustomerId", key, this.getView().getBindingContext());	
-	},
-	
-	/**
-	 * Method onDataLoaded
-	 */
-	onDataLoaded : function(oEvent) {
-		
-		// set value helper
-		var campaignHelper = this.getView().byId("CampaignIdHelper");
-		campaignHelper.setSelectedKey(this._model.getProperty("/Leads('" + this._id + "')/CampaignId"));
-		
-		var customerHelper = this.getView().byId("CustomerIdHelper");
-		customerHelper.setSelectedKey(this._model.getProperty("/Leads('" + this._id + "')/CustomerId"));
-		
-		var productHelper = this.getView().byId("ProductIdHelper");
-		productHelper.setSelectedKey(this._model.getProperty("/Leads('" + this._id + "')/ProductId")); 
-		
-		// unbind listener
-		this._model.detachBatchRequestCompleted(this.onDataLoaded, this)
-	},
 
 	/**
 	 * Method onDialogCanceled
@@ -149,19 +104,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	},
 	
 	/**
-	 * Method onProductValidation
-	 */
-	onProductValidation : function(oEvent) {
-		
-		var item = oEvent.mParameters.selectedItem;
-		
-		if(item)
-			var key = item.getKey();
-		
-		this._model.setProperty("ProductId", key, this.getView().getBindingContext());
-	},
-	
-	/**
 	 * Method onRequest
 	 */
 	onRequest : function(oEvent) {
@@ -185,10 +127,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			var msgArea = this.getView().byId("messageArea");
 			msgArea.removeAllContent();
 			
-			this.getView().byId("CampaignIdHelper").setSelectedKey(undefined);
-			this.getView().byId("CustomerIdHelper").setSelectedKey(undefined);
-			this.getView().byId("ProductIdHelper").setSelectedKey(undefined);
-			
 			return;
 		}
 			
@@ -201,9 +139,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			if(this._mode != "CREATE") {
 				var msgArea = this.getView().byId("messageArea");
 				msgArea.removeAllContent();
-				
-				// wait until data loaded
-				this._model.attachRequestCompleted(this.onDataLoaded, this);
 			}
 			
 			this._mode = "EDIT";
