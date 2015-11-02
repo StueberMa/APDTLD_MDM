@@ -29,14 +29,14 @@
 					<f:formElements>
 						<f:FormElement label="Customer">
 							<f:fields>
-								<MultiInput id="CustomerIdHelper" placeholder="Name"
-									showValueHelp="false" tokenChange="onCustomerValidation"
-									suggestionItems="{
+								<ComboBox id="CustomerIdHelper" placeholder="Name"
+									selectionChange="onCustomerValidation"
+									items="{
 										path: '/Customers',
 										sorter: { path: 'LastName' }
 									}">
 									<core:Item key="{Id}" text="{FirstName} {LastName}" />
-								</MultiInput>
+								</ComboBox>
 							</f:fields>
 						</f:FormElement>
 					</f:formElements>
@@ -67,14 +67,14 @@
 					<f:formElements>
 						<f:FormElement label="Campaign">
 							<f:fields>
-								<MultiInput id="CampaignIdHelper" placeholder="Name"
-									showValueHelp="false" tokenChange="onCampaignValidation"
-									suggestionItems="{
+								<ComboBox id="CampaignIdHelper" placeholder="Name"
+									selectionChange="onCampaignValidation"
+									items="{
 										path: '/Campaigns',
 										sorter: { path: 'Name' }
 									}">
 									<core:Item key="{Id}" text="{Name}" />
-								</MultiInput>
+								</ComboBox>
 							</f:fields>
 						</f:FormElement>
 					</f:formElements>
@@ -92,14 +92,14 @@
 						</f:FormElement>
 						<f:FormElement label="Product">
 							<f:fields>
-								<MultiInput id="ProductIdHelper" placeholder="Name"
-									showValueHelp="false" tokenChange="onProductValidation"
-									suggestionItems="{
+								<ComboBox id="ProductIdHelper" placeholder="Name"
+									selectionChange="onProductValidation"
+									items="{
 										path: '/Products',
 										sorter: { path: 'Name' }
 									}">
 									<core:Item key="{Id}" text="{Name}" />
-								</MultiInput>
+								</ComboBox>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Amount">

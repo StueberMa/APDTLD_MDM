@@ -15,26 +15,26 @@
 			<fb:filterItems>
 				<fb:FilterItem name="Customer" label="Customer">
 					<fb:control>
-						<MultiInput id="CustomerIdInput" placeholder="Name"
-									showValueHelp="false" tokenChange="onCustomerValidation"
-									suggestionItems="{
+						<ComboBox id="CustomerIdInput" placeholder="Name"
+									showValueHelp="false" selectionChange="onCustomerValidation"
+									items="{
 										path: '/Customers',
 										sorter: { path: 'LastName' }
 									}">
 									<core:Item key="{Id}" text="{FirstName} {LastName}" />
-						</MultiInput>
+						</ComboBox>
 					</fb:control>
 				</fb:FilterItem>
 				<fb:FilterItem name="ProductName" label="Product">
 					<fb:control>
-						<MultiInput id="ProductIdInput" placeholder="Name"
-									showValueHelp="false" tokenChange="onProductValidation"
-									suggestionItems="{
+						<ComboBox id="ProductIdInput" placeholder="Name"
+									showValueHelp="false" selectionChange="onProductValidation"
+									items="{
 										path: '/Products',
 										sorter: { path: 'Name' }
 									}">
 									<core:Item key="{Id}" text="{Name}" />
-						</MultiInput>
+						</ComboBox>
 					</fb:control>
 				</fb:FilterItem>
 				<fb:FilterItem name="Status" label="Status">
