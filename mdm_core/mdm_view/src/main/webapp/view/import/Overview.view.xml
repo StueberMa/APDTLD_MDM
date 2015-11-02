@@ -60,9 +60,10 @@
 					<core:Icon class="mdmTileIcon" src="sap-icon://upload" />
 					<VBox class="mdmTileHeader">
 						<Text class="mdmTileHeaderTitle" text="File Upload" />
-						<Text class="mdmTileHeaderSub" text="Import Data from CSV Sheets" />
+						<Text class="mdmTileHeaderSub" text="Import Data from Flat Files" />
 					</VBox>
 				</l:HorizontalLayout>
+				<ObjectNumber number="CSV" unit="Formats" />
 			</VBox>
 		</CustomTile>
 	</TileContainer>

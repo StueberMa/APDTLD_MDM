@@ -34,9 +34,8 @@
 						<Text class="mdmTileHeaderSub" text="Examine Your Products" />
 					</VBox>
 				</l:HorizontalLayout>
-				<ObjectNumber class="mdmTileObjCount" number="{masterdata>/products}"
-					unit="Products" />
-				<ObjectStatus class="mdmTileObjStatus" text="No issues detected"
+				<ObjectNumber number="{masterdata>/products}" unit="Products" />
+				<ObjectStatus text="No issues detected"
 					state="Success" icon="sap-icon://sys-enter" />
 			</VBox>
 		</CustomTile>
