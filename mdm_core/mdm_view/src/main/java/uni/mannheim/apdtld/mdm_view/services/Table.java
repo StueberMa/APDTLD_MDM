@@ -3,7 +3,7 @@ package uni.mannheim.apdtld.mdm_view.services;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class Table {
+public class Table implements Comparable<Table> {
 	
 	private String name;
 	private HashMap<String, AttributeTupel> attibuteInfoMap = new HashMap<String, AttributeTupel>();
@@ -27,5 +27,10 @@ public class Table {
 
 	public HashMap<String, AttributeTupel> getAttributeInfo() {
 		return this.attibuteInfoMap;
+	}
+
+	@Override
+	public int compareTo(Table o) {
+		return this.name.compareTo(o.name);
 	}
 }

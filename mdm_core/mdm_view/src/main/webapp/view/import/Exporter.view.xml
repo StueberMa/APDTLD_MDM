@@ -18,7 +18,7 @@
 		horizontal="true"
 		vertical="true"
 		focusable="false">
-		<List items="{/database_tables/}" id="mappingList">
+		<List items="{/database_tables/}" id="tablesList">
 			<CustomListItem focusable="false">
 				<VBox>
 					<HBox alignItems="Center" justifyContent="Center">
@@ -67,8 +67,8 @@
 			</layoutData>
 		</Button>
 		<Button type="Accept"
-				text="Analyse Rows"
-				press="onAnalyseRows"
+				text="Export Data"
+				press="onExport"
 				ariaDescribedBy="acceptButtonDescription genericButtonDescription">
 			<layoutData>
 				<FlexItemData growFactor="1" />

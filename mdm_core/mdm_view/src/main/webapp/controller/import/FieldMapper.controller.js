@@ -132,8 +132,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 			error: function(data, textStatus, jqXHR) {
 				alert("no!");
 			}
-		});
-		
+		});		
 	}
 	
 });

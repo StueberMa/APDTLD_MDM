@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -53,10 +54,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 
 import uni.mannheim.apdtld.mdm_model.persistence.Customer;
 import uni.mannheim.apdtld.mdm_view.odata.JpaEntityManagerFactory;
 import uni.mannheim.apdtld.mdm_view.odata.ODataJPAServiceFactory;
+import uni.mannheim.apdtld.mdm_view.services.gsonmodel.DatabaseTables;
+import uni.mannheim.apdtld.mdm_view.services.gsonmodel.JsonTable;
 import uni.mannheim.apdtld.mdm_view.services.gsonmodel.Mapping;
 import uni.mannheim.apdtld.mdm_view.services.gsonmodel.MappingArray;
 
@@ -66,132 +70,113 @@ public class Exporter extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Set<Table> tables = null;
+	private static HashMap<Long, String> requests = new HashMap<>();
+	private HashSet<Table> tables = null;
 	
 	public void init() {
+		requests.put(1L, "{'database_tables':[{'name':'Campaign','attributes_0':[{'name':'costs','selected':'true'},{'name':'name','selected':'true'},{'name':'numberSend','selected':'true'},{'name':'status','selected':'true'}],'attributes_1':[{'name':'description','selected':'true'},{'name':'numberLeads','selected':'true'},{'name':'plannedCosts','selected':'true'},{'name':'type','selected':'true'}],'attributes_2':[{'name':'endDate','selected':'true'},{'name':'numberOpport','selected':'true'},{'name':'plannedReceived','selected':'true'},{'name':'valueOpport','selected':'true'}],'attributes_3':[{'name':'id','selected':'true'},{'name':'numberReceived','selected':'true'},{'name':'startDate','selected':'true'}]},{'name':'Customer','attributes_0':[{'name':'Address.city','selected':'true'},{'name':'Address.zipCode','selected':'true'},{'name':'ContactDetails.mobile','selected':'true'},{'name':'PaymentDetails.iban','selected':'true'},{'name':'id','selected':'true'}],'attributes_1':[{'name':'Address.country','selected':'true'},{'name':'ContactDetails.email','selected':'true'},{'name':'ContactDetails.phone','selected':'true'},{'name':'birthDate','selected':'true'},{'name':'lastName','selected':'true'}],'attributes_2':[{'name':'Address.houseNo','selected':'true'},{'name':'ContactDetails.facebook','selected':'true'},{'name':'PaymentDetails.bankAccount','selected':'true'},{'name':'firstName','selected':'true'},{'name':'title','selected':'true'}],'attributes_3':[{'name':'Address.street','selected':'true'},{'name':'ContactDetails.fax','selected':'true'},{'name':'PaymentDetails.bic','selected':'true'},{'name':'gender','selected':'true'}]},{'name':'Lead','attributes_0':[{'name':'amount','selected':'true'},{'name':'description','selected':'true'}],'attributes_1':[{'name':'campaignId','selected':'true'},{'name':'id','selected':'true'}],'attributes_2':[{'name':'contactOn','selected':'true'},{'name':'productId','selected':'true'}],'attributes_3':[{'name':'customerId','selected':'true'},{'name':'status','selected':'true'}]},{'name':'Product','attributes_0':[{'name':'Procurement.procurementTime','selected':'true'},{'name':'color','selected':'true'},{'name':'id','selected':'true'},{'name':'size','selected':'true'}],'attributes_1':[{'name':'Procurement.procurementType','selected':'true'},{'name':'currency','selected':'true'},{'name':'name','selected':'true'},{'name':'unitOfMeasure','selected':'true'}],'attributes_2':[{'name':'Procurement.safetyStock','selected':'true'},{'name':'description','selected':'true'},{'name':'netWeight','selected':'true'},{'name':'weightUnit','selected':'true'}],'attributes_3':[{'name':'Procurement.totalStock','selected':'true'},{'name':'grossWeight','selected':'true'},{'name':'price','selected':'true'}]}]}");
 	}
-	
+		
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	
-		/*Writer out = response.getWriter();
-		
 		StringBuffer jb = new StringBuffer();
 		String line = null;
 		try {
 			BufferedReader reader = request.getReader();
 			while ((line = reader.readLine()) != null)
 				jb.append(line);
-		} catch (Exception e) {  }
-
-		MappingArray mappingsArray = new GsonBuilder().create().fromJson(jb.toString(), MappingArray.class);
-		HashMap<String, HashSet<Mapping>> mappings = mappingsArray.getMappingMap();
+		} catch (Exception e) { /*report an error*/ }
 		
-		EntityManagerFactory fac;
-		try {
-			fac = JpaEntityManagerFactory.getEntityManagerFactory("data_model");
-			EntityManager em = fac.createEntityManager();
-			
-			CSVReader reader = new CSVReader(new FileReader(filePath + request.getParameter("file")), ';');
-			String[] nextLine;
-			String[] header = reader.readNext();
-
-			while ((nextLine = reader.readNext()) != null) {
-				HashMap<String, Object> typeEntityMap = new HashMap<String, Object>();
-				HashMap<String, Object> typeEmebeddableMap = new HashMap<String, Object>();
-				int column = 0;
-				for(String attribute:nextLine) {
-					HashSet<Mapping> attributeMappings = mappings.get(header[column]);
-					if(attributeMappings==null) {
-						column++;
-						continue; //mapping for attribute in file was not specified
-					}
-					for(Mapping mapping:attributeMappings){
-						String[] dbNameParticles = mapping.dbName.split("\\."); // table.attribute
-						Object object;
-						String className = null;
-						String parentName = null;
-						String attributeName = null;
-						HashMap<String, Object> store = null;
-						if(dbNameParticles.length==2) {
-							className = dbNameParticles[0];
-							attributeName = dbNameParticles[1];
-							store = typeEntityMap;
-						} else if(dbNameParticles.length==3) {
-							parentName = dbNameParticles[0];
-							className = dbNameParticles[1];
-							attributeName = dbNameParticles[2];
-							store = typeEmebeddableMap;
-						}
-						if(!store.containsKey(className)) {
-							Class<?> prototype = Class.forName("uni.mannheim.apdtld.mdm_model.persistence." + className);
-							Constructor<?> ctor = prototype.getConstructor();
-							object = ctor.newInstance();
-							store.put(className, object);
-							if(dbNameParticles.length==3) {
-								Object parentObject = null;
-								if(typeEntityMap.containsKey(parentName)) {
-									parentObject = typeEntityMap.get(parentName);
-								}
-								if(parentObject==null) {
-									Class<?> parentPrototype = Class.forName("uni.mannheim.apdtld.mdm_model.persistence." + parentName);
-									Constructor<?> parentCtor = parentPrototype.getConstructor();
-									parentObject = parentCtor.newInstance();
-									typeEntityMap.put(parentName, parentObject);
-								}
-								
-								char c[] = className.toCharArray();
-								c[0] = Character.toLowerCase(c[0]);
-								Field f = parentObject.getClass().getDeclaredField(new String(c));
-								boolean acc = f.isAccessible();
-								f.setAccessible(true);
-								f.set(parentObject, object);
-								f.setAccessible(acc);
-							}
-						} else {
-							object = store.get(className);
-						}
-						
-						Object attributeObject = null;
-						if(mapping.fType.equals("Text")) {
-							attributeObject = attribute;
-						} else if(mapping.fType.equals("Number")) {
-							attributeObject = Double.parseDouble(attribute);
-						} else if(mapping.fType.equals("Date")) {
-							Calendar cal = new GregorianCalendar();
-							cal.setTime((new SimpleDateFormat("dd.MM.yyyy")).parse(attribute));
-							attributeObject = cal;
-						}
-						Field f = object.getClass().getDeclaredField(attributeName);
-						boolean acc = f.isAccessible();
-						f.setAccessible(true);
-						f.set(object, attributeObject);
-						f.setAccessible(acc);
-					}
-					column++;
-				}
-				
-				for(Object object:typeEntityMap.values()) {
-					EntityTransaction ext = em.getTransaction();
-					ext.begin();
-					em.persist(object);
-					em.flush();
-					ext.commit();
-				}				
-			}
-			em.close();
-			reader.close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			out.write(e.getMessage());
-			// Please don't :)
-		}
-		out.write("{}");*/
+		response.setContentType("application/json");
+		
+		JsonObject json = new JsonObject();
+		Writer out = response.getWriter();
+		
+		Long id = (long)(Math.random() * System.currentTimeMillis());
+		requests.put(id, jb.toString());
+		
+		json.addProperty("id", id);
+		
+		out.write(json.toString());
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		if(request.getParameter("download")!=null) {
+			this.processExportToFileReqeust(request, response);
+		} else {
+			this.processGetExportTablesRequest(request, response);
+		}
+	}
+	
+	private void processExportToFileReqeust(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		Long id = Long.parseLong(request.getParameter("download"));
+		String jsonRequest = requests.get(id);
+		Writer out = response.getWriter();
+        response.setContentType("plain/text");
+        response.setHeader("Content-disposition","attachment; filename=export.csv");
+        
+        DatabaseTables root = new GsonBuilder().create().fromJson(jsonRequest, DatabaseTables.class);
+        
+        CSVWriter writer = new CSVWriter(out);
+        
+        EntityManagerFactory fac;
+		try {
+			fac = JpaEntityManagerFactory.getEntityManagerFactory("data_model");
+			EntityManager em = fac.createEntityManager();
+			
+			for(JsonTable table:root.database_tables) {
+				
+				writer.writeNext(new String[]{table.name});
+				ArrayList<String> strrow = new ArrayList<>();
+				table.getAttributes();
+				for(uni.mannheim.apdtld.mdm_view.services.gsonmodel.Attribute attr:table.getAttributes()) {
+					if(!attr.selected) {
+						continue;
+					}
+					strrow.add(attr.name);
+				}
+				writer.writeNext(strrow.toArray(new String[]{}));
+					
+
+				
+				List<?> rows = em.createQuery("Select t From " + table.name + " t")
+						.getResultList();
+
+				for(Object row:rows) {
+					strrow = new ArrayList<>();
+					Class<?> c = row.getClass();
+					for(uni.mannheim.apdtld.mdm_view.services.gsonmodel.Attribute attr:table.getAttributes()) {
+						if(!attr.selected) {
+							continue;
+						}
+						Field f = c.getDeclaredField(attr.name);
+						boolean acc = f.isAccessible();
+						f.setAccessible(true);
+						if(f.get(row)!=null) {
+							strrow.add(f.get(row).toString());
+						} else {
+							strrow.add("");
+						}
+						f.setAccessible(acc);
+					}
+					writer.writeNext(strrow.toArray(new String[]{}));
+				}
+				writer.writeNext(new String[]{});
+			}
+		} catch(Exception ex) {
+			out.write("error");
+			out.write(ex.getMessage());
+			out.write(ex.getStackTrace().toString());
+		}
+				
+		writer.close();
+	}
+	
+	private void processGetExportTablesRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 		
 		JsonObject json = new JsonObject();
@@ -200,7 +185,8 @@ public class Exporter extends HttpServlet {
 		this.analyseDatabaseStructure();
 						
 		JsonArray jsonTables = new JsonArray();
-		for(Table table:this.tables) {
+		List<Table> sortedTables = asSortedList(this.tables);
+		for(Table table:sortedTables) {
 			JsonObject jsonTable = new JsonObject();
 			jsonTable.addProperty("name", table.getName());
 			JsonArray[] jsonAttributes = new JsonArray[4];
@@ -209,9 +195,10 @@ public class Exporter extends HttpServlet {
 			jsonAttributes[2] = new JsonArray();
 			jsonAttributes[3] = new JsonArray();
 			int i=0;
-			for(Map.Entry<String, AttributeTupel> entry:table.getAttributeInfo().entrySet()) {
+			List<String> sortedKeys = asSortedList(table.getAttributeInfo().keySet());
+			for(String key:sortedKeys) {
 				JsonObject jsonAttribute = new JsonObject();
-				jsonAttribute.addProperty("name", entry.getKey());
+				jsonAttribute.addProperty("name", key);
 				jsonAttribute.addProperty("selected", "true");
 				jsonAttributes[i++%4].add(jsonAttribute);
 			}
@@ -224,7 +211,6 @@ public class Exporter extends HttpServlet {
 		
 		json.add("database_tables", jsonTables);
 		out.write(json.toString());
-		
 	}
 	
 	private void analyseDatabaseStructure() {
@@ -337,5 +323,11 @@ public class Exporter extends HttpServlet {
 		} else {
 			return "";
 		}
+	}
+	
+	public static 	<T extends Comparable<? super T>> List<T> asSortedList(Collection<T> c) {
+		List<T> list = new ArrayList<T>(c);
+		java.util.Collections.sort(list);
+		return list;
 	}
 }

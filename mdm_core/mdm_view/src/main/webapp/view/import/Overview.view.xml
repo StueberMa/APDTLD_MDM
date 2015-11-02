@@ -65,6 +65,18 @@
 				</l:HorizontalLayout>
 			</VBox>
 		</CustomTile>
+		
+		<CustomTile class="mdmTile" press="onExport">
+			<VBox>
+				<l:HorizontalLayout>
+					<core:Icon class="mdmTileIcon" src="sap-icon://download" />
+					<VBox class="mdmTileHeader">
+						<Text class="mdmTileHeaderTitle" text="Eport" />
+						<Text class="mdmTileHeaderSub" text="Export Data to CSV Sheets" />
+					</VBox>
+				</l:HorizontalLayout>
+			</VBox>
+		</CustomTile>
 	</TileContainer>
 
 </mvc:View>
