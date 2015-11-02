@@ -85,13 +85,16 @@ public class SimpleCustomerAnalysis extends HttpServlet {
 		if (req.getPathInfo().equals("/perCountry")) {
 			
 			// local declaration
-			Object result = null;
 			JsonArray countries = null;
-			JsonArray attributes = null;
+			JsonArray output = null;
+			JsonObject row = null;
+			Object result = null;
 			long totalCust = 0;
 			long value = 0;
 
-
+			// initialization
+			output = new JsonArray();
+			
 			// countries
 			result = em.createQuery("SELECT c.address.country, count(distinct c) FROM Customer c GROUP BY c.address.country").getResultList();
 			countries = (JsonArray) parser.parse(gson.toJson(result));
@@ -102,15 +105,16 @@ public class SimpleCustomerAnalysis extends HttpServlet {
 			// compute rel. customer ratio per country
 			for (int i = 0; i < countries.size(); i++) {
 				
-				attributes = (JsonArray) countries.get(i);
+				row = new JsonObject();
+				row.add("code", ((JsonArray) countries.get(i)).get(0));
 				
-				value = attributes.get(1).getAsInt();
-				attributes.set(1, new JsonPrimitive(value / totalCust));
-	
-				countries.set(i, attributes);
+				value = ((JsonArray) countries.get(i)).get(1).getAsInt();
+				row.add("percentage", new JsonPrimitive(value / totalCust));
+				
+				output.add(row);
 			}
 			
-			out.print(countries.toString());
+			out.print(output.toString());
 			out.close();
 
 			return;

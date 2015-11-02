@@ -25,7 +25,7 @@ sap.ui.define([
 				
 				// add regions
 				data.forEach(function(entry) {
-					map.addRegion(sap.ui.vbm.Region({color: "rgba(5,71,102, " + entry[1] + ")", code: entry[0]}));
+					map.addRegion(sap.ui.vbm.Region({color: "rgba(5,71,102, " + entry.percentage + ")", code: entry.code}));
 				});
 			}
 			
