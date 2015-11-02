@@ -1,9 +1,60 @@
-<mvc:View height="100%"
-	controllerName="uni.mannheim.mdm.controller.analysis.CustomersPerCountry" xmlns="sap.m"
-	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout">
+<mvc:View 	height="100%"
+			controllerName="uni.mannheim.mdm.controller.analysis.CustomersPerCountry" 
+			xmlns="sap.m"
+			xmlns:core="sap.ui.core" 
+			xmlns:mvc="sap.ui.core.mvc" 
+			xmlns:l="sap.ui.layout"
+			xmlns:vbm="sap.ui.vbm"
+			displayBlock="true">
 
 	<VBox class="mdmScreenTitle">
 		<Text class="mdmTitle" text="Customers per Country" />
 	</VBox>
+	
+   <Page
+       showHeader = "false"
+       enableScrolling="false">
+	<vbm:AnalyticMap 
+	    id="vbi"
+	    width="100%"
+	    height="100%"
+	    regionClick="onRegionClick"
+		regionContextMenu="onRegionContextMenu">
+	    <vbm:regions>
+			<vbm:Region 
+			    code="EU" 
+			    color="rgba(184,225,245,1.0)"/>
+			<vbm:Region 
+			    code="NA" 
+			    color="rgba(5,71,102,1.0)"/>
+			<vbm:Region 
+			    code="OC" 
+			    color="rgba(0,125,192,1.0)"/>
+			</vbm:regions>
+	</vbm:AnalyticMap>
+	<footer>
+      <Toolbar>
+        <ToolbarSpacer/>
+        <Button 
+	        id="AddButton"
+			icon="sap-icon://add"
+			tooltip="Add new Region to the AnalyticMap"
+			enabled="true"
+			press="onAddItem" />
+        <Button 
+	        id="ZoomIn"
+			icon="sap-icon://zoom-in"
+			tooltip="Zoom in to South America"
+			enabled="true"
+			press="onZoomIn" />
+        <Button
+	        id="RemoveAllButton"
+			icon="sap-icon://delete"
+			tooltip="Remove all Regions from the AnalyticMap"
+			enabled="true"
+			press="onRemoveAllItems" />
+      </Toolbar>
+	    </footer>
+  	</Page>
 
 </mvc:View>
