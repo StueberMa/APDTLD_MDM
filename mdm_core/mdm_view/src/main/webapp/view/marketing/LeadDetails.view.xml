@@ -9,7 +9,7 @@
 		<OverflowToolbar>
 			<Button icon="sap-icon://save" text="Save" press="onSave" />
 			<Button icon="sap-icon://delete" text="Delete" press="onDelete"
-				id="deleteButton" />
+				id="deleteButtonTop" />
 			<ToolbarSpacer />
 			<Text class="mdmDetailScreenTitle" text="Lead Details"></Text>
 			<ToolbarSpacer />
@@ -113,8 +113,15 @@
 			</f:formContainers>
 		</f:Form>
 
-		<l:VerticalLayout class="sapUiContentPadding" id="messageArea"
-			width="100%" />
+		<l:VerticalLayout class="mdmMessageArea" id="messageArea" />
+		
+		<OverflowToolbar class="mdmToolbarBottom">
+			<Button icon="sap-icon://save" text="Save" press="onSave" />
+			<Button icon="sap-icon://delete" text="Delete" id="deleteButtonBottom" press="onDelete"/>
+			<ToolbarSpacer />
+			<ToolbarSpacer />
+			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
+		</OverflowToolbar>
 
 	</ScrollContainer>
 </core:View>

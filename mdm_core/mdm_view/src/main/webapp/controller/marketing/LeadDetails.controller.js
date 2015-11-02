@@ -176,7 +176,10 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			}, this));
 			this._mode = "CREATE";
 			
-			var button = this.getView().byId("deleteButton");
+			var button = this.getView().byId("deleteButtonTop");
+			button.setVisible(false);
+			
+			var button = this.getView().byId("deleteButtonBottom");
 			button.setVisible(false);
 			
 			var msgArea = this.getView().byId("messageArea");
@@ -205,7 +208,10 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			
 			this._mode = "EDIT";
 			
-			var button = this.getView().byId("deleteButton");
+			var button = this.getView().byId("deleteButtonTop");
+			button.setVisible(true);
+			
+			var button = this.getView().byId("deleteButtonBottom");
 			button.setVisible(true);
 			
 			return;
