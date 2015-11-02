@@ -28,50 +28,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			router.navTo("marketing.LeadOverview", false);
 		}
 	},
-	
-	/**
-	 * Method onCampaignValidation
-	 */
-	onCampaignValidation : function(oEvent) {
-		
-		// ensure added or removed
-		if(oEvent.mParameters.type != "added" && oEvent.mParameters.type != "removed")
-			return;
-		
-		// get id
-		var id = oEvent.mParameters.token.mProperties.key;
-		
-		// field is actually initial
-		if(id == this._id) {
-			this.resetMultiInput("CampaignIdHelper");
-			return;
-		}
-		
-		if(oEvent.mParameters.type == "added")
-			this.validateToken(id, "CampaignIdHelper", "CampaignId");
-	},
-	
-	/**
-	 * Method onCustomerValidation
-	 */
-	onCustomerValidation : function(oEvent) {
-		
-		// ensure added or removed
-		if(oEvent.mParameters.type != "added" && oEvent.mParameters.type != "removed")
-			return;
-		
-		// get id
-		var id = oEvent.mParameters.token.mProperties.key;
-		
-		// field is actually initial
-		if(id == this._id) {
-			this.resetMultiInput("CustomerIdHelper");
-			return;
-		}
-		
-		if(oEvent.mParameters.type == "added")
-			this.validateToken(id, "CustomerIdHelper", "CustomerId");
-	},
 
 	/**
 	 * Method onDialogCanceled
@@ -148,28 +104,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 	},
 	
 	/**
-	 * Method onProductValidation
-	 */
-	onProductValidation : function(oEvent) {
-		
-		// ensure added or removed
-		if(oEvent.mParameters.type != "added" && oEvent.mParameters.type != "removed")
-			return;
-		
-		// get id
-		var id = oEvent.mParameters.token.mProperties.key;
-		
-		// field is actually initial
-		if(id == this._id) {
-			this.resetMultiInput("ProductIdHelper");
-			return;
-		}
-		
-		if(oEvent.mParameters.type == "added")
-			this.validateToken(id, "ProductIdHelper", "ProductId");
-	},
-	
-	/**
 	 * Method onRequest
 	 */
 	onRequest : function(oEvent) {
@@ -184,15 +118,14 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			}, this));
 			this._mode = "CREATE";
 			
-			var button = this.getView().byId("deleteButton");
+			var button = this.getView().byId("deleteButtonTop");
+			button.setVisible(false);
+			
+			var button = this.getView().byId("deleteButtonBottom");
 			button.setVisible(false);
 			
 			var msgArea = this.getView().byId("messageArea");
 			msgArea.removeAllContent();
-			
-			this.getView().byId("CampaignIdHelper").removeAllTokens();
-			this.getView().byId("CustomerIdHelper").removeAllTokens();
-			this.getView().byId("ProductIdHelper").removeAllTokens();
 			
 			return;
 		}
@@ -206,13 +139,14 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			if(this._mode != "CREATE") {
 				var msgArea = this.getView().byId("messageArea");
 				msgArea.removeAllContent();
-				
-				this.setValueSuggestions();
 			}
 			
 			this._mode = "EDIT";
 			
-			var button = this.getView().byId("deleteButton");
+			var button = this.getView().byId("deleteButtonTop");
+			button.setVisible(true);
+			
+			var button = this.getView().byId("deleteButtonBottom");
 			button.setVisible(true);
 			
 			return;
@@ -288,50 +222,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 			var router = sap.ui.core.UIComponent.getRouterFor(this);
 			router.navTo("marketing.LeadDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, true);
 		}
-	},
-	
-	/**
-	 * Method resetMultiInput
-	 */
-	resetMultiInput : function(fieldId) {
-		var field = this.getView().byId(fieldId);
-		field.removeAllTokens();
-	},
-	
-	/**
-	 * Method setValueSuggestions
-	 */
-	setValueSuggestions : function() {
-		
-		// campaign
-		var token = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.CampaignSuggestion");
-		token.bindElement("/Leads('" + this._id + "')/CampaignDetails");
-		this.getView().byId("CampaignIdHelper").addToken(token);
-		
-		// customer
-		token = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.CustomerSuggestion");
-		token.bindElement("/Leads('" + this._id + "')/CustomerDetails");
-		this.getView().byId("CustomerIdHelper").addToken(token);
-		
-		// product
-		token = sap.ui.xmlfragment("uni.mannheim.mdm.fragment.ProductSuggestion");
-		token.bindElement("/Leads('" + this._id + "')/ProductDetails");
-		this.getView().byId("ProductIdHelper").addToken(token); 
-	},
-	
-	/**
-	 * Method validateToken
-	 */
-	validateToken : function(id, fieldId, attribute) {
-		
-		// ensure 1:1 relationship
-		var field = this.getView().byId(fieldId);
-		if(field.getTokens().length > 1) {
-			field.removeToken(field.getTokens()[0]);
-		}
-		
-		// set id
-		this._model.setProperty(attribute, id, this.getView().getBindingContext());
 	}
 	
 });

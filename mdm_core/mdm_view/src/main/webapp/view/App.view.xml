@@ -37,7 +37,7 @@
 					<Button text="Worklist" ariaDescribedBy="Worklist" />
 					<Button text="Marketing" press="onMarketingOverview"
 						ariaDescribedBy="Marketing" />
-					<Button text="Analysis" ariaDescribedBy="Analysis" />
+					<Button text="Analysis" ariaDescribedBy="Analysis" press="onAnalysisOverview" />
 					<Button text="Master Data" press="onMasterDataOverview"
 						ariaDescribedBy="Master Data" />
 					<Button text="Data Import" press="onDataImportOverview"

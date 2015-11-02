@@ -22,7 +22,7 @@ import uni.mannheim.apdtld.mdm_view.odata.JpaEntityManagerFactory;
  * @author APDTLD_MDM @ Uni Mannheim
  * @version 22.10.2015
  */
-public class JPAInfo extends HttpServlet {
+public class SimpleJPAInfo extends HttpServlet {
 
 	// constants
 	private static final long serialVersionUID = 1L;
@@ -116,28 +116,8 @@ public class JPAInfo extends HttpServlet {
 			return;
 		}
 
-		// customers geo.
-		if (req.getPathInfo().equals("/customerGeo")) {
-
-			// local declaration
-			long value = 0;
-			
-			// countries
-			value = (Long) em.createQuery("SELECT count(distinct c.address.country) FROM Customer c").getSingleResult();
-			json.addProperty("countries", value);
-
-			// customers
-			value = (Long) em.createQuery("SELECT count(distinct c) FROM Customer c").getSingleResult();
-			json.addProperty("customers", value);
-
-			out.print(json.toString());
-			out.close();
-
-			return;
-		}
-
 		// debug
-		if (req.getPathInfo().equals("/debugLeads")) {
+		if (req.getPathInfo().equals("/debug")) {
 
 			// local declaration
 			Object result = null;

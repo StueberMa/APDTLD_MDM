@@ -42,7 +42,7 @@
 						<Text class="mdmBoldTxt" text="{LastName}" />
 						<Text text="{FirstName}" />
 						<Text text="{Address/City}" />
-						<Text text="{Address/Country}" />
+						<Text text="{path:'Address/Country', formatter : '.formatCountry'}" />
 					</cells>
 				</ColumnListItem>
 			</items>

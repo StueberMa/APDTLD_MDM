@@ -8,7 +8,7 @@
 		
 		<OverflowToolbar>
 			<Button icon="sap-icon://save" text="Save" press="onSave" />
-			<Button icon="sap-icon://delete" text="Delete" press="onDelete" id="deleteButton"/>
+			<Button icon="sap-icon://delete" text="Delete" press="onDelete" id="deleteButtonTop"/>
 			<ToolbarSpacer />
 				<Text class="mdmDetailScreenTitle" text="Customer Details"></Text>
 			<ToolbarSpacer />
@@ -28,7 +28,7 @@
 					<f:formElements>
 						<f:FormElement label="Title">
 							<f:fields>
-								<Select id="titleFieldId" selectedKey="{Title}" width="30%">
+								<Select id="title" selectedKey="{Title}" width="30%">
 									<items>
 										<core:Item text="" key="" />
 										<core:Item text="Mr." key="MR" />
@@ -41,7 +41,7 @@
 					<f:formElements>
 						<f:FormElement label="Name">
 							<f:fields>
-								<Input id="firstNameFieldId" value="{FirstName}"
+								<Input id="firstName" value="{FirstName}"
 									placeholder="First name">
 								</Input>
 								<Input id="lastNameFieldId" value="{LastName}"
@@ -53,7 +53,7 @@
 					<f:formElements>
 						<f:FormElement label="Date of Birth">
 							<f:fields>
-								<DatePicker id="birthDateFieldId" value="{path:'BirthDate', type:'sap.ui.model.type.Date',
+								<DatePicker id="birthDate" value="{path:'BirthDate', type:'sap.ui.model.type.Date',
 									formatOptions: { style: 'medium', strictParsing: true}}" placeholder="Birth date" width="30%">
 								</DatePicker>
 							</f:fields>
@@ -77,29 +77,40 @@
 					<f:formElements>
 						<f:FormElement label="Street / Number">
 							<f:fields>
-								<Input id="addressStreetFieldId" value="{Address/Street}"
+								<Input id="addressStreet" value="{Address/Street}"
 									placeholder="Street">
 								</Input>
-								<Input id="addressHouseNoFieldId" value="{Address/HouseNo}"
+								<Input id="addressHouseNo" value="{Address/HouseNo}"
 									placeholder="No" width="20%">
 								</Input>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="City / Zip Code">
 							<f:fields>
-								<Input id="addressCityFieldId" value="{Address/City}"
+								<Input id="addressCity" value="{Address/City}"
 									placeholder="City">
 								</Input>
-								<Input id="addressZipCodeFieldId" value="{Address/ZipCode}"
+								<Input id="addressZipCode" value="{Address/ZipCode}"
 									placeholder="Zip code" width="40%">
 								</Input>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Country">
 							<f:fields>
-								<Input id="addressCountryFieldId" value="{Address/Country}"
-									placeholder="Country">
-								</Input>
+								<ComboBox id="addressCountry" selectedKey="{Address/Country}">
+									<items>
+										<core:Item text="" key="" />
+										<core:Item text="Austria" key="AT" />
+										<core:Item text="Belgium" key="BL" />
+										<core:Item text="China" key="CN" />
+										<core:Item text="France" key="FR" />
+										<core:Item text="Germany" key="DE" />
+										<core:Item text="Great Britain" key="GB" />
+										<core:Item text="Italy" key="IT" />
+										<core:Item text="Netherland" key="NL" />
+										<core:Item text="United States" key="US" />
+									</items>
+								</ComboBox>
 							</f:fields>
 						</f:FormElement>
 					</f:formElements>
@@ -110,21 +121,21 @@
 					<f:formElements>
 						<f:FormElement label="E-Mail Address">
 							<f:fields>
-								<Input id="contactDetailsEmailFieldId" type="Email"
+								<Input id="contactDetailsEmail" type="Email"
 									value="{ContactDetails/Email}" placeholder="E-Mail address">
 								</Input>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Phone">
 							<f:fields>
-								<Input id="contactDetailsPhoneFieldId" type="Tel"
+								<Input id="contactDetailsPhone" type="Tel"
 									value="{ContactDetails/Phone}" placeholder="Phone number">
 								</Input>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Mobile">
 							<f:fields>
-								<Input id="contactDetailsMobileFieldId" type="Tel"
+								<Input id="contactDetailsMobile" type="Tel"
 									value="{ContactDetails/Mobile}" placeholder="Mobile number">
 								</Input>
 							</f:fields>
@@ -134,7 +145,15 @@
 			</f:formContainers>
 		</f:Form>
 		
-		<l:VerticalLayout class="sapUiContentPadding" id="messageArea" width="100%" />
+		<l:VerticalLayout class="mdmMessageArea" id="messageArea" />
+		
+		<OverflowToolbar class="mdmToolbarBottom">
+			<Button icon="sap-icon://save" text="Save" press="onSave" />
+			<Button icon="sap-icon://delete" text="Delete" id="deleteButtonBottom" press="onDelete"/>
+			<ToolbarSpacer />
+			<ToolbarSpacer />
+			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
+		</OverflowToolbar>
 		
 	</ScrollContainer>
 </core:View>

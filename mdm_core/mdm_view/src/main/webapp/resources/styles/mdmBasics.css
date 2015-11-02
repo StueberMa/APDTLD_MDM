@@ -177,6 +177,11 @@
 	color: #FFFFFF;
 }
 
+.mdmTile .mdmSecondObject {
+	float: left !important;
+	margin-top: 10px !important;
+}
+
 .mdmTileUnderDevImage {
 	width: 6.5rem !important;
 	margin-top: 25px;
@@ -194,7 +199,7 @@
 }
 
 /**
- *  MDM others
+ *  MDM other
  */
 .mdmScreenTitle {
 	margin-top: 15px;
@@ -226,6 +231,24 @@
 	border-bottom: 1px solid #dddddd;
 }
  
+.mdmToolbarBottom {
+	border-top: 1px solid #cdcdcd;
+	border-bottom: none;
+} 
+
+.mdmMessageArea {
+	background-color: rgba(255,255,255,0.8);
+	width: 100%;
+	display:block;
+}
+
+.mdmMessageArea .sapMMsgStrip {
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 .mdmNewEntityContainer {
 	padding: 10px !important;
 	background-color: #FCFCFC;
@@ -245,6 +268,18 @@
 	padding: 15px !important;
 }
 
+/**
+ *  MDM analysis
+ */
+.mdmAnalysisMap {
+	width: 100% !important;
+	height: 100% !important;
+	margin-top: 15px;
+}
+
+/**
+ * MDM Data Import
+ */
 .mdmImportFilenameHeader {
 	border-bottom: 1px rgba(0,0,0,0.5) solid;
 }

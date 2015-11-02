@@ -27,17 +27,19 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 	 */
 	onCustomerValidation : function(oEvent) {
 		
-		if(oEvent.mParameters.type == "removed")
-			this.removeToken(oEvent, "/CustomerId");
+		var item = oEvent.mParameters.selectedItem;
 		
-		if(oEvent.mParameters.type == "added")
-			this.validateToken(oEvent, "CustomerIdInput", "/CustomerId");
+		if(item)
+			var key = item.getKey();
+		
+		this.getView().getModel("filter").setProperty("/CustomerId", key);
 	},
 
 	/**
 	 * Method onNewLead
 	 */
 	onNewLead : function() {
+		
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("marketing.LeadCreate", false);
 	},
@@ -47,11 +49,12 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 	 */
 	onProductValidation : function(oEvent) {
 		
-		if(oEvent.mParameters.type == "removed")
-			this.removeToken(oEvent, "/ProductId");
+		var item = oEvent.mParameters.selectedItem;
 		
-		if(oEvent.mParameters.type == "added")
-			this.validateToken(oEvent, "ProductIdInput", "/ProductId");
+		if(item)
+			var key = item.getKey();
+		
+		this.getView().getModel("filter").setProperty("/ProductId", key);
 	},
 	
 	/**
@@ -125,36 +128,13 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 	/**
 	 * Method formatStatus
 	 */
-	leadStatus : function(status) {	
+	formatStatus : function(status) {	
 		
 		if(status == "OPEN")
 			return "Open";
 			
 		if(status == "CLOSED")
-			return "Closed"
-	},
-	
-	/**
-	 * Method removeToken
-	 */
-	removeToken : function (oEvent, attribute) {
-		this.getView().getModel("filter").setProperty(attribute, undefined);
-	},
-	
-	/**
-	 * Method validateToken
-	 */
-	validateToken : function(oEvent, fieldId, attribute) {
-		
-		// ensure 1:1 relationship
-		var field = this.getView().byId(fieldId);
-		if(field.getTokens().length > 1) {
-			field.removeToken(field.getTokens()[0]);
-		}
-		
-		// set id
-		var id = parseInt(oEvent.mParameters.token.mProperties.key);
-		this.getView().getModel("filter").setProperty(attribute, id);
+			return "Closed";
 	}
 	
 });

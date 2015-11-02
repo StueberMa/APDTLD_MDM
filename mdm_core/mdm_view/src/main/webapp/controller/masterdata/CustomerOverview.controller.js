@@ -68,6 +68,39 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 		// navigate to details
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("masterdata.CustomerDetails", {id: id}, false);
+	},
+	
+	/**
+	 * Method formatCountry
+	 */
+	formatCountry : function(status) {	
 		
+		if(status == "AT")
+			return "Austria";
+			
+		if(status == "BL")
+			return "Belgium";
+		
+		if(status == "CN")
+			return "China";
+		
+		if(status == "FR")
+			return "France";
+		
+		if(status == "DE")
+			return "Germany";
+		
+		if(status == "GB")
+			return "Great Britain";
+		
+		if(status == "IT")
+			return "Italy";
+		
+		if(status == "NL")
+			return "Netherland";
+		
+		if(status == "US")
+			return "United State";
 	}
+	
 });

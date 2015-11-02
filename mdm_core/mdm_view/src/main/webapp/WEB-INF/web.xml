@@ -36,21 +36,34 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>ODataServlet</servlet-name>
 		<url-pattern>/services/data.svc/*</url-pattern>
 	</servlet-mapping>
+
 	
+	<!-- ============================================================== -->
+	<!-- Services -->
+	<!-- ============================================================== -->
 	<servlet>
-		<servlet-name>JPAInfo</servlet-name>
-		<servlet-class>uni.mannheim.apdtld.mdm_view.services.JPAInfo</servlet-class>
+		<servlet-name>SimpleJPAInfo</servlet-name>
+		<servlet-class>uni.mannheim.apdtld.mdm_view.services.SimpleJPAInfo</servlet-class>
 		<load-on-startup>3</load-on-startup>
 	</servlet>
-
 	<servlet-mapping>
-		<servlet-name>JPAInfo</servlet-name>
+		<servlet-name>SimpleJPAInfo</servlet-name>
 		<url-pattern>/services/info/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SimpleCustomerAnalysis</servlet-name>
+		<servlet-class>uni.mannheim.apdtld.mdm_view.services.SimpleCustomerAnalysis</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>SimpleCustomerAnalysis</servlet-name>
+		<url-pattern>/services/analysis/customer/*</url-pattern>
 	</servlet-mapping>
 	
 	<!-- ============================================================== -->
@@ -61,7 +74,6 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		<servlet-class>uni.mannheim.apdtld.mdm_view.services.Uploader</servlet-class>
 		<load-on-startup>3</load-on-startup>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>Uploader</servlet-name>
 		<url-pattern>/upload</url-pattern>
@@ -72,7 +84,6 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		<servlet-class>uni.mannheim.apdtld.mdm_view.services.FileAnalyser</servlet-class>
 		<load-on-startup>4</load-on-startup>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>FileAnalyser</servlet-name>
 		<url-pattern>/fileanalyser</url-pattern>
@@ -83,7 +94,6 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		<servlet-class>uni.mannheim.apdtld.mdm_view.services.Exporter</servlet-class>
 		<load-on-startup>5</load-on-startup>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>Exporter</servlet-name>
 		<url-pattern>/export</url-pattern>
@@ -96,4 +106,5 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 			./mdm-file-upload-tmp/
 		</param-value>
 	</context-param>
+	
 </web-app>

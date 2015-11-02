@@ -9,7 +9,7 @@
 		<OverflowToolbar>
 			<Button icon="sap-icon://save" text="Save" press="onSave" />
 			<Button icon="sap-icon://delete" text="Delete" press="onDelete"
-				id="deleteButton" />
+				id="deleteButtonTop" />
 			<ToolbarSpacer />
 			<Text class="mdmDetailScreenTitle" text="Lead Details"></Text>
 			<ToolbarSpacer />
@@ -29,14 +29,14 @@
 					<f:formElements>
 						<f:FormElement label="Customer">
 							<f:fields>
-								<MultiInput id="CustomerIdHelper" placeholder="Name"
-									showValueHelp="false" tokenChange="onCustomerValidation"
-									suggestionItems="{
+								<ComboBox id="CustomerIdHelper" placeholder="Name"
+									selectedKey="{CustomerId}"
+									items="{
 										path: '/Customers',
 										sorter: { path: 'LastName' }
 									}">
 									<core:Item key="{Id}" text="{FirstName} {LastName}" />
-								</MultiInput>
+								</ComboBox>
 							</f:fields>
 						</f:FormElement>
 					</f:formElements>
@@ -67,14 +67,14 @@
 					<f:formElements>
 						<f:FormElement label="Campaign">
 							<f:fields>
-								<MultiInput id="CampaignIdHelper" placeholder="Name"
-									showValueHelp="false" tokenChange="onCampaignValidation"
-									suggestionItems="{
+								<ComboBox id="CampaignIdHelper" placeholder="Name"
+									selectedKey="{CampaignId}"
+									items="{
 										path: '/Campaigns',
 										sorter: { path: 'Name' }
 									}">
 									<core:Item key="{Id}" text="{Name}" />
-								</MultiInput>
+								</ComboBox>
 							</f:fields>
 						</f:FormElement>
 					</f:formElements>
@@ -92,14 +92,14 @@
 						</f:FormElement>
 						<f:FormElement label="Product">
 							<f:fields>
-								<MultiInput id="ProductIdHelper" placeholder="Name"
-									showValueHelp="false" tokenChange="onProductValidation"
-									suggestionItems="{
+								<ComboBox id="ProductIdHelper" placeholder="Name"
+									selectedKey="{ProductId}"
+									items="{
 										path: '/Products',
 										sorter: { path: 'Name' }
 									}">
 									<core:Item key="{Id}" text="{Name}" />
-								</MultiInput>
+								</ComboBox>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="Amount">
@@ -113,8 +113,15 @@
 			</f:formContainers>
 		</f:Form>
 
-		<l:VerticalLayout class="sapUiContentPadding" id="messageArea"
-			width="100%" />
+		<l:VerticalLayout class="mdmMessageArea" id="messageArea" />
+		
+		<OverflowToolbar class="mdmToolbarBottom">
+			<Button icon="sap-icon://save" text="Save" press="onSave" />
+			<Button icon="sap-icon://delete" text="Delete" id="deleteButtonBottom" press="onDelete"/>
+			<ToolbarSpacer />
+			<ToolbarSpacer />
+			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
+		</OverflowToolbar>
 
 	</ScrollContainer>
 </core:View>
