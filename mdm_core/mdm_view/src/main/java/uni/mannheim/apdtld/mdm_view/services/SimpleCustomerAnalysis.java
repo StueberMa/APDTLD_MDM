@@ -3,7 +3,6 @@ package uni.mannheim.apdtld.mdm_view.services;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -14,7 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import uni.mannheim.apdtld.mdm_view.odata.JpaEntityManagerFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 
 /**
  * Servlet for simple customer anaylsis.
@@ -34,11 +36,13 @@ public class SimpleCustomerAnalysis extends HttpServlet {
 
 		// declaration
 		EntityManager em = null;
-		JsonObject json = null;
+		JsonParser parser = null;
 		PrintWriter out = null;
+		Gson gson = null;
 
 		// initialization
-		json = new JsonObject();
+		gson = new Gson();
+		parser = new JsonParser();
 		out = resp.getWriter();
 
 		// set response
@@ -57,7 +61,11 @@ public class SimpleCustomerAnalysis extends HttpServlet {
 		if (req.getPathInfo().equals("/overview")) {
 
 			// local declaration
+			JsonObject json = null;
 			long value = 0;
+			
+			// initialization
+			json = new JsonObject();
 
 			// countries
 			value = (Long) em.createQuery("SELECT count(distinct c.address.country) FROM Customer c").getSingleResult();
@@ -75,18 +83,34 @@ public class SimpleCustomerAnalysis extends HttpServlet {
 
 		// customers geo.
 		if (req.getPathInfo().equals("/perCountry")) {
-
+			
 			// local declaration
 			Object result = null;
-			Gson gson = null;
+			JsonArray countries = null;
+			JsonArray attributes = null;
+			long totalCust = 0;
+			long value = 0;
 
-			// initialization
-			gson = new Gson();
 
 			// countries
 			result = em.createQuery("SELECT c.address.country, count(distinct c) FROM Customer c GROUP BY c.address.country").getResultList();
-
-			out.print(gson.toJson(result));
+			countries = (JsonArray) parser.parse(gson.toJson(result));
+			
+			// customers
+			totalCust = (Long) em.createQuery("SELECT count(distinct c) FROM Customer c").getSingleResult();
+			
+			// compute rel. customer ratio per country
+			for (int i = 0; i < countries.size(); i++) {
+				
+				attributes = (JsonArray) countries.get(i);
+				
+				value = attributes.get(1).getAsInt();
+				attributes.set(1, new JsonPrimitive(value / totalCust));
+	
+				countries.set(i, attributes);
+			}
+			
+			out.print(countries.toString());
 			out.close();
 
 			return;

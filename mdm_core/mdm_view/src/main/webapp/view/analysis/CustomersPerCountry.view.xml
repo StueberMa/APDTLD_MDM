@@ -7,12 +7,6 @@
 		<Text class="mdmTitle" text="Customers per Country" />
 	</VBox>
 
-	<vbm:AnalyticMap class="mdmAnalysisMap" regionClick="onRegionClick">
-		<vbm:regions>
-			<vbm:Region code="DE" color="rgba(184,225,245,1.0)" />
-			<vbm:Region code="US" color="rgba(5,71,102,1.0)" />
-			<vbm:Region code="CN" color="rgba(0,125,192,1.0)" />
-		</vbm:regions>
-	</vbm:AnalyticMap>
+	<vbm:AnalyticMap class="mdmAnalysisMap" id="customerMap" />
 
 </mvc:View>

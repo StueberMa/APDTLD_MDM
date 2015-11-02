@@ -10,38 +10,24 @@ sap.ui.define([
 	
 		return Controller.extend("uni.mannheim.mdm.controller.analysis.CustomersPerCountry", {
 		
-			onRegionClick: function (e)
-			{
-				sap.m.MessageToast.show( "onRegionClick " + e.getParameter( "code" ) );
+			/**
+			 * Method onInit
+			 */
+			onInit : function() {
+				var model = new sap.ui.model.json.JSONModel("./services/analysis/customer/perCountry");
+				model.attachRequestCompleted(this.onDataLoaded, this);
 			},
-	
-			onRegionContextMenu: function ( e )
-			{
-				sap.m.MessageToast.show( "onRegionContextMenu " + e.getParameter( "code" ) );
-			},
-		
-			onAddItem: function (evt)
-			{
-				var item = new sap.ui.vbm.Region({ code: 'SA', color: 'rgba(198,225,125,1.0)', tooltip: 'South America'});
-				this.byId("vbi").insertRegion(item, 0);
 			
-				this.byId("AddButton").setEnabled(false);
-				this.byId("RemoveAllButton").setEnabled(true);
-			},
-		
-			onRemoveAllItems: function (evt)
-			{	
-				this.byId("vbi").removeAllRegions();
-	
-				this.byId("AddButton").setEnabled(true);
-				this.byId("RemoveAllButton").setEnabled(false);
-			},
-		
-			onZoomIn : function() 
-			{
-				this.byId("vbi").zoomToRegions( ["SA"] );		
-				this.byId("ZoomOut").setEnabled(true);
-				this.byId("ZoomIn").setEnabled(false);
+			onDataLoaded : function(oEvent) {
+				
+				var data = oEvent.getSource().oData;
+				var map = this.getView().byId("customerMap");
+				
+				// add regions
+				data.forEach(function(entry) {
+					map.addRegion(sap.ui.vbm.Region({color: "rgba(5,71,102, " + entry[1] + ")", code: entry[0]}));
+				});
 			}
+			
 		});
 	}, true);
