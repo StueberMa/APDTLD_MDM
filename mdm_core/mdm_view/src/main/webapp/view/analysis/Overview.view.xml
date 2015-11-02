@@ -16,10 +16,11 @@
 					<core:Icon class="mdmTileIcon" src="sap-icon://map-2" />
 					<VBox class="mdmTileHeader">
 						<Text class="mdmTileHeaderTitle" text="Customers per Country" />
-						<Text class="mdmTileHeaderSub" text="Visualizes Customers per Country" />
+						<Text class="mdmTileHeaderSub" text="Geographical Distribution of Your Customers" />
 					</VBox>
 				</l:HorizontalLayout>
-				<ObjectNumber number="{customerGeo>/customers} / {customerGeo>/countries}" unit="Customer per Country" />
+				<ObjectNumber number="{customerGeo>/countries}" unit="Customers" />
+				<ObjectNumber class="mdmSecondObject" number="{customerGeo>/countries}" unit="Countries" />
 			</VBox>
 		</CustomTile>
 

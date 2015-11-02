@@ -177,6 +177,11 @@
 	color: #FFFFFF;
 }
 
+.mdmTile .mdmSecondObject {
+	float: left !important;
+	margin-top: 10px !important;
+}
+
 .mdmTileUnderDevImage {
 	width: 6.5rem !important;
 	margin-top: 25px;
