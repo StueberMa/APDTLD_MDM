@@ -26,8 +26,8 @@ sap.ui.controller("uni.mannheim.mdm.controller.analysis.Overview", {
 		if (oEvent.getParameter("name") === "analysis.Overview") {
 			
 			// count objects
-			var jsonModel = new sap.ui.model.json.JSONModel("./services/info/customerGeo")
-			this.getView().setModel(jsonModel, "customerGeo");
+			var jsonModel = new sap.ui.model.json.JSONModel("./services/analysis/customer/overview")
+			this.getView().setModel(jsonModel, "custOverview");
 		}
 	}
 
