@@ -28,6 +28,17 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 			router.navTo("marketing.CampaignOverview", false);
 		}
 	},
+	
+	/**
+	 * Method onDataLoaded
+	 */
+	onDataLoaded : function(oEvent) {
+		
+		var customerIds = this._model.getProperty("/Campaigns('" + this._id + "')/CustomerIds");
+		this._model.setProperty("/Campaigns('" + this._id + "')/CustomerIds", customerIds.split(","));
+		
+		this._model.detachBatchRequestCompleted(this.dataLoaded);
+	},
 
 	/**
 	 * Method onDialogCanceled
@@ -133,6 +144,8 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 		// edit
 		if (oEvent.getParameter("name") === "marketing.CampaignDetails") {
 			this._id = oEvent.getParameter("arguments").id;
+			this._model.attachBatchRequestCompleted(this.onDataLoaded, this);
+			
 			this.getView().bindElement("/Campaigns('" + this._id + "')");
 			
 			if(this._mode != "CREATE") {
