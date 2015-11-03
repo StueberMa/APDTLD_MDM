@@ -35,9 +35,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 	onDataLoaded : function(oEvent) {
 		
 		var customerIds = this._model.getProperty("/Campaigns('" + this._id + "')/CustomerIds");
-		this._model.setProperty("/Campaigns('" + this._id + "')/CustomerIds", customerIds.split(","));
 		
-		this._model.detachBatchRequestCompleted(this.dataLoaded);
+		if(customerIds)
+			this._model.setProperty("/Campaigns('" + this._id + "')/CustomerIds", customerIds.split(","));
+		
+		this._model.detachBatchRequestCompleted(this.onDataLoaded);
 	},
 
 	/**
