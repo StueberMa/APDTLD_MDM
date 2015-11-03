@@ -15,19 +15,7 @@ sap.ui.define([
 			 */
 			onInit : function() {
 				var model = new sap.ui.model.json.JSONModel("./services/analysis/customer/perCountry");
-				model.attachRequestCompleted(this.onDataLoaded, this);
-			},
-			
-			onDataLoaded : function(oEvent) {
-				
-				var data = oEvent.getSource().oData;
-				var map = this.getView().byId("customerMap");
-				
-				// add regions
-				data.forEach(function(entry) {
-					map.addRegion(sap.ui.vbm.Region({color: "rgba(5,71,102, " + entry.percentage + ")", code: entry.code}));
-				});
+				this.getView().setModel(model, "perCountry")
 			}
-			
 		});
 	}, true);

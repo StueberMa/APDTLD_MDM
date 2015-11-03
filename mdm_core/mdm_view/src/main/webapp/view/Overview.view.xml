@@ -31,7 +31,7 @@
 					<core:Icon class="mdmTileIcon" src="sap-icon://marketing-campaign" />
 					<VBox class="mdmTileHeader">
 						<Text class="mdmTileHeaderTitle" text="Marketing" />
-						<Text class="mdmTileHeaderSub" text="All Your Campaigns at a Glanze" />
+						<Text class="mdmTileHeaderSub" text="All Your Campaigns at a Glance" />
 					</VBox>
 				</l:HorizontalLayout>
 				<Image src="./resources/img/marketing.png" class="mdmTileImage"

@@ -6,7 +6,13 @@
 	<VBox class="mdmScreenTitle">
 		<Text class="mdmTitle" text="Customers per Country" />
 	</VBox>
-
-	<vbm:AnalyticMap class="mdmAnalysisMap" id="customerMap" />
-
+	
+	<vbm:AnalyticMap class="mdmAnalysisMap" id="customerMap"
+		regions="{path: 'perCountry>/countries'}">
+		<vbm:regions>
+			<vbm:Region 
+			    code="{perCountry>code}" 
+			    color="rgba(5,71,102, {perCountry>percentage})" />
+		</vbm:regions>
+	</vbm:AnalyticMap>
 </mvc:View>
