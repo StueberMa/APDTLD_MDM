@@ -32,14 +32,14 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 	/**
 	 * Method onDataLoaded
 	 */
-	onDataLoaded : function(oEvent) {
+	onDataLoaded : function() {
 		
 		var customerIds = this._model.getProperty("/Campaigns('" + this._id + "')/CustomerIds");
 		
 		if(customerIds)
 			this._model.setProperty("/Campaigns('" + this._id + "')/CustomerIds", customerIds.split(","));
 		
-		this._model.detachBatchRequestCompleted(this.onDataLoaded);
+		this._model.detachBatchRequestCompleted(this.onDataLoaded, this);
 	},
 
 	/**
@@ -146,7 +146,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 		// edit
 		if (oEvent.getParameter("name") === "marketing.CampaignDetails") {
 			this._id = oEvent.getParameter("arguments").id;
-			this._model.attachBatchRequestCompleted(this.onDataLoaded, this);
+			
+			if(!this._model.getProperty("/Campaigns('" + this._id + "')"))
+				this._model.attachBatchRequestCompleted(this.onDataLoaded, this);
+			else
+				this.onDataLoaded();
 			
 			this.getView().bindElement("/Campaigns('" + this._id + "')");
 			
