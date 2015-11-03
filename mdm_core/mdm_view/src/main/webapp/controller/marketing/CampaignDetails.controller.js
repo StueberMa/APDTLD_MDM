@@ -33,7 +33,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 	 * Method onDataLoaded
 	 */
 	onDataLoaded : function() {
-		
+
 		var customerIds = this._model.getProperty("/Campaigns('" + this._id + "')/CustomerIds");
 		
 		if(customerIds)
@@ -239,6 +239,8 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignDetails", {
 		if(this._mode === "CREATE" && !error) {
 			var router = sap.ui.core.UIComponent.getRouterFor(this);
 			router.navTo("marketing.CampaignDetails", {id: oData.__batchResponses[0].__changeResponses[0].data.Id}, true);
+		} else if (this._mode === "EDIT" && !error) {
+			this._model.attachBatchRequestCompleted(this.onDataLoaded, this);
 		}
 	}
 	
