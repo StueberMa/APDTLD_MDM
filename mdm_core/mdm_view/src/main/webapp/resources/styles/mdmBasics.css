@@ -200,6 +200,10 @@
 	margin-right: auto;
 }
 
+.mdmTile .sapMText{
+	padding-right: 5px;
+}
+
 /**
  *  MDM other
  */
@@ -275,8 +279,12 @@
  */
 .mdmAnalysisMap {
 	width: 100% !important;
-	height: 100% !important;
-	margin-top: 15px;
+	margin-top: 5px;
+}
+
+.mdmAnalysisTable {
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 /**

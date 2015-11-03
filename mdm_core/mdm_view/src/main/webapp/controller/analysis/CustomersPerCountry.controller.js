@@ -14,19 +14,56 @@ sap.ui.define([
 			 * Method onInit
 			 */
 			onInit : function() {
-				var model = new sap.ui.model.json.JSONModel("./services/analysis/customer/perCountry");
-				model.attachRequestCompleted(this.onDataLoaded, this);
+				// router
+				var oRouter = this.getOwnerComponent().getRouter();
+				oRouter.attachRouteMatched(this.onRequest, this);
 			},
 			
-			onDataLoaded : function(oEvent) {
+			/**
+			 * Method onRequest
+			 */
+			onRequest : function(oEvent) {
 				
-				var data = oEvent.getSource().oData;
-				var map = this.getView().byId("customerMap");
+				if (oEvent.getParameter("name") === "analysis.CustomersPerCountry") {
+					
+					var model = new sap.ui.model.json.JSONModel("./services/analysis/customer/perCountry");
+					this.getView().setModel(model, "perCountry")
+					
+					return;
+				}
+			},
+			
+			/**
+			 * Method formatCountry
+			 */
+			formatCountry : function(status) {	
 				
-				// add regions
-				data.forEach(function(entry) {
-					map.addRegion(sap.ui.vbm.Region({color: "rgba(5,71,102, " + entry.percentage + ")", code: entry.code}));
-				});
+				if(status == "AT")
+					return "Austria";
+					
+				if(status == "BL")
+					return "Belgium";
+				
+				if(status == "CN")
+					return "China";
+				
+				if(status == "FR")
+					return "France";
+				
+				if(status == "DE")
+					return "Germany";
+				
+				if(status == "GB")
+					return "Great Britain";
+				
+				if(status == "IT")
+					return "Italy";
+				
+				if(status == "NL")
+					return "Netherland";
+				
+				if(status == "US")
+					return "United State";
 			}
 			
 		});

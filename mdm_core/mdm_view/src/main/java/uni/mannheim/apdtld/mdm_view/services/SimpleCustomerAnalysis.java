@@ -37,12 +37,14 @@ public class SimpleCustomerAnalysis extends HttpServlet {
 		// declaration
 		EntityManager em = null;
 		JsonParser parser = null;
+		JsonObject json = null;
 		PrintWriter out = null;
 		Gson gson = null;
 
 		// initialization
 		gson = new Gson();
 		parser = new JsonParser();
+		json = new JsonObject();
 		out = resp.getWriter();
 
 		// set response
@@ -61,11 +63,7 @@ public class SimpleCustomerAnalysis extends HttpServlet {
 		if (req.getPathInfo().equals("/overview")) {
 
 			// local declaration
-			JsonObject json = null;
 			long value = 0;
-			
-			// initialization
-			json = new JsonObject();
 
 			// countries
 			value = (Long) em.createQuery("SELECT count(distinct c.address.country) FROM Customer c").getSingleResult();
@@ -85,36 +83,40 @@ public class SimpleCustomerAnalysis extends HttpServlet {
 		if (req.getPathInfo().equals("/perCountry")) {
 			
 			// local declaration
+			JsonArray resultJson = null;
 			JsonArray countries = null;
-			JsonArray output = null;
-			JsonObject row = null;
+			JsonObject country = null;
 			Object result = null;
 			long totalCust = 0;
 			long value = 0;
 
 			// initialization
-			output = new JsonArray();
+			countries = new JsonArray();
 			
 			// countries
 			result = em.createQuery("SELECT c.address.country, count(distinct c) FROM Customer c GROUP BY c.address.country").getResultList();
-			countries = (JsonArray) parser.parse(gson.toJson(result));
+			resultJson = (JsonArray) parser.parse(gson.toJson(result));
 			
 			// customers
 			totalCust = (Long) em.createQuery("SELECT count(distinct c) FROM Customer c").getSingleResult();
 			
 			// compute rel. customer ratio per country
-			for (int i = 0; i < countries.size(); i++) {
+			for (int i = 0; i < resultJson.size(); i++) {
 				
-				row = new JsonObject();
-				row.add("code", ((JsonArray) countries.get(i)).get(0));
+				country = new JsonObject();
+				country.add("code", ((JsonArray) resultJson.get(i)).get(0));
 				
-				value = ((JsonArray) countries.get(i)).get(1).getAsInt();
-				row.add("percentage", new JsonPrimitive(value / totalCust));
+				value = ((JsonArray) resultJson.get(i)).get(1).getAsInt();
+				country.add("count", new JsonPrimitive(value));
+				country.add("percentage", new JsonPrimitive((double) value / totalCust));
+				country.add("total", new JsonPrimitive(totalCust));
 				
-				output.add(row);
+				countries.add(country);
 			}
 			
-			out.print(output.toString());
+			json.add("countries", countries);
+			
+			out.print(json.toString());
 			out.close();
 
 			return;
