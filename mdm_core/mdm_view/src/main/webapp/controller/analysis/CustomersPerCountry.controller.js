@@ -14,8 +14,23 @@ sap.ui.define([
 			 * Method onInit
 			 */
 			onInit : function() {
-				var model = new sap.ui.model.json.JSONModel("./services/analysis/customer/perCountry");
-				this.getView().setModel(model, "perCountry")
+				// router
+				var oRouter = this.getOwnerComponent().getRouter();
+				oRouter.attachRouteMatched(this.onRequest, this);
+			},
+			
+			/**
+			 * Method onRequest
+			 */
+			onRequest : function(oEvent) {
+				
+				if (oEvent.getParameter("name") === "analysis.CustomersPerCountry") {
+					
+					var model = new sap.ui.model.json.JSONModel("./services/analysis/customer/perCountry");
+					this.getView().setModel(model, "perCountry")
+					
+					return;
+				}
 			},
 			
 			/**
