@@ -172,7 +172,11 @@ public class FileAnalyser extends HttpServlet {
 						Field f = object.getClass().getDeclaredField(attributeName);
 						boolean acc = f.isAccessible();
 						f.setAccessible(true);
-						f.set(object, attributeObject);
+						try {
+							f.set(object, attributeObject);
+						} catch(Exception ex) {
+							f.set(object, ((Number)attributeObject).intValue());
+						}
 						f.setAccessible(acc);
 					}
 					column++;

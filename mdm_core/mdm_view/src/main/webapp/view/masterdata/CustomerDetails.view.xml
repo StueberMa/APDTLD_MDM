@@ -60,7 +60,7 @@
 						</f:FormElement>
 						<f:FormElement label="Gender">
 							<f:fields>
-								<RadioButtonGroup id="genderFieldId" columns="2">
+								<RadioButtonGroup id="genderFieldId" columns="2" selectedIndex="{Gender}">
 									<!-- selectedIndex="{customerModel>Gender}" -->
 									<buttons>
 										<RadioButton text="Male" />
