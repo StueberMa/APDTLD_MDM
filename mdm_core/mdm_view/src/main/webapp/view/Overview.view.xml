@@ -78,7 +78,7 @@
 					<VBox class="mdmTileHeader">
 						<Text class="mdmTileHeaderTitle" text="Data Import / Export" />
 						<Text class="mdmTileHeaderSub"
-							text="Monitor Data Integration, Easily Load New Data or Export Integrated Data" />
+							text="Monitor Data Integration or Export Integrated Data" />
 					</VBox>
 				</l:HorizontalLayout>
 				<Image src="./resources/img/data_import.png" class="mdmTileImage"

@@ -102,7 +102,21 @@
 					</f:formElements>
 				</f:FormContainer>
 				
-				<!-- Planned Data -->
+				<!-- Customer assignment -->
+				<f:FormContainer title="Customers">
+					<f:formElements>
+						<f:FormElement label="Customers">
+							<f:fields>
+								<MultiComboBox selectedKeys="{CustomerIds}"
+									items="{ path: '/Customers', sorter: { path: 'LastName' }}">
+									<core:Item key="{Id}" text="{FirstName} {LastName}" />
+								</MultiComboBox>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+				
+				<!-- Statisctics -->
 				<f:FormContainer title="Statistics">
 					<f:formElements>
 						<f:FormElement label="No. Received">

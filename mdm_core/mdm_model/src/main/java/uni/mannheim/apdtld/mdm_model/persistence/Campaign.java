@@ -41,6 +41,9 @@ public class Campaign implements Serializable {
 	private int numberSend;
 	private int plannedReceived;
 	
+	@Column(name="CUSTOMERIDS")
+	private String customerIds;
+	
 	private int numberReceived;
 	private int numberLeads;
 	private int numberOpport;
@@ -215,6 +218,24 @@ public class Campaign implements Serializable {
 		this.costs = costs;
 	}
 	
+	/**
+	 * GET customerIds
+	 * 
+	 * @return
+	 */
+	public String getCustomerIds() {
+		return customerIds;
+	}
+
+	/**
+	 *  SET customerIds
+	 * 
+	 * @param customerIds
+	 */
+	public void setCustomerIds(String customerIds) {
+		this.customerIds = customerIds;
+	}
+
 	/**
 	 * GET numberSend
 	 * @return
