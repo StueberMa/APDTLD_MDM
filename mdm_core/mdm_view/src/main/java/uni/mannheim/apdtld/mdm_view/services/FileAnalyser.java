@@ -425,7 +425,12 @@ public class FileAnalyser extends HttpServlet {
 						Field f = c.getDeclaredField(attr.getName());
 						boolean acc = f.isAccessible();
 						f.setAccessible(true);
-						sample += f.get(row) + "; ";
+						if(f.get(row) instanceof GregorianCalendar) {
+							Calendar cal = (GregorianCalendar)f.get(row);
+							sample += new SimpleDateFormat("dd.MM.yyyy").format(cal.getTime()) + "; ";
+						} else {
+							sample += f.get(row) + "; ";
+						}
 						f.setAccessible(acc);
 					}
 					
