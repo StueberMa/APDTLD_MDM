@@ -3,16 +3,52 @@
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:vbm="sap.ui.vbm" displayBlock="true">
 
-	<VBox class="mdmScreenTitle">
-		<Text class="mdmTitle" text="Customers per Country" />
-	</VBox>
+
+	<OverflowToolbar>
+		<ToolbarSpacer />
+		<Text class="mdmDetailScreenTitle" text="Customers per Country"></Text>
+		<ToolbarSpacer />
+	</OverflowToolbar>
+
+	<ScrollContainer class="mdmScreenContent" height="100%"
+		width="100%" horizontal="true" vertical="true" focusable="false">
+		<Table class="mdmAnalysisTable" height="30%"
+			items="{path: 'perCountry>/countries', sorter: {
+				path: 'perCountry>percentage'
+			}}">
+			<columns>
+				<Column>
+					<Text text="Country" />
+				</Column>
+				<Column>
+					<Text text="Share" />
+				</Column>
+				<Column>
+					<Text text="Count" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text class="mdmBoldTxt"
+							text="{path:'perCountry>code', formatter : '.formatCountry'}" />
+						<Text text="{perCountry>
+							percentage}" />
+						<Text text="{perCountry>count}" />
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		
+		<Text text="Visualization" class="mdmBoldTxt"></Text>
 	
-	<vbm:AnalyticMap class="mdmAnalysisMap" id="customerMap"
-		regions="{path: 'perCountry>/countries'}">
-		<vbm:regions>
-			<vbm:Region 
-			    code="{perCountry>code}" 
-			    color="rgba(5,71,102,{perCountry>percentage})" />
-		</vbm:regions>
-	</vbm:AnalyticMap>
+		<vbm:AnalyticMap class="mdmAnalysisMap"
+			regions="{path: 'perCountry>/countries'}">
+			<vbm:regions>
+				<vbm:Region code="{perCountry>code}" color="rgba(5,71,102,{perCountry>percentage})" />
+			</vbm:regions>
+		</vbm:AnalyticMap>
+		
+	</ScrollContainer>
+
 </mvc:View>
