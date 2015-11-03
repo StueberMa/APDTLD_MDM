@@ -198,6 +198,10 @@
 	margin-right: auto;
 }
 
+.mdmTile .sapMText{
+	padding-right: 5px;
+}
+
 /**
  *  MDM other
  */
