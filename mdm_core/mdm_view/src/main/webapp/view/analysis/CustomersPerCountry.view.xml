@@ -12,7 +12,7 @@
 		<vbm:regions>
 			<vbm:Region 
 			    code="{perCountry>code}" 
-			    color="rgba(5,71,102, {perCountry>percentage})" />
+			    color="rgba(5,71,102,{perCountry>percentage})" />
 		</vbm:regions>
 	</vbm:AnalyticMap>
 </mvc:View>
