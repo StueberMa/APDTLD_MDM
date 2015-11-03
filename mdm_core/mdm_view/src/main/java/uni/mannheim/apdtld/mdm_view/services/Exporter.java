@@ -157,7 +157,16 @@ public class Exporter extends HttpServlet {
 						boolean acc = f.isAccessible();
 						f.setAccessible(true);
 						if(f.get(row)!=null) {
-							strrow.add(f.get(row).toString());
+							Object o = f.get(row);
+							if(o instanceof GregorianCalendar) {
+								GregorianCalendar greg = (GregorianCalendar)o;
+								SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
+							    fmt.setCalendar(greg);
+							    String dateFormatted = fmt.format(greg.getTime());
+								strrow.add(dateFormatted);
+							} else {
+								strrow.add(f.get(row).toString());
+							}
 						} else {
 							strrow.add("");
 						}

@@ -2,37 +2,43 @@
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:u="sap.ui.unified">
 
 	<!-- Content -->
-
-		<UploadCollection
-			id="UploadCollection"
-			uploadUrl="upload"
-			maximumFilenameLength="55"
-			maximumFileSize="10240"
-			multiple="true"
-			sameFilenameAllowed="true"
-			instantUpload="false"
-			showSeparators="All"
-			change="onChange"
-			fileDeleted="onFileDeleted"
-			filenameLengthExceed="onFilenameLengthExceed"
-			fileSizeExceed="onFileSizeExceed"
-			typeMissmatch="onTypeMissmatch"
-			uploadComplete="onUploadComplete"
-			beforeUploadStarts="onBeforeUploadStarts">
-		</UploadCollection>
-		<Button
-			id="UploadButton"
-			text="Upload Now"
-			enabled="false"
-			press="onStartUpload">
-		</Button>
-		<ProgressIndicator
-			id="UploadProgressIndicator"
-			class="sapUiSmallMarginBottom" 
-			visible="false"
-			percentValue="0"
-			displayValue="0%"
-			showValue="true"
-			state="None" />
+	<VBox class="mdmScreenTitle">
+		<Text class="mdmTitle" text="File Upload" />
+		<Text class="mdmSubTitle"
+			text="Upload a CSV File that is integrated into the database in the following steps" />
+	</VBox>
+	<VBox height="10px"></VBox>
+	<UploadCollection
+		id="UploadCollection"
+		uploadUrl="upload"
+		maximumFilenameLength="55"
+		maximumFileSize="10240"
+		fileType="csv,CSV"
+		multiple="true"
+		sameFilenameAllowed="true"
+		instantUpload="false"
+		showSeparators="All"
+		change="onChange"
+		fileDeleted="onFileDeleted"
+		filenameLengthExceed="onFilenameLengthExceed"
+		fileSizeExceed="onFileSizeExceed"
+		typeMissmatch="onTypeMissmatch"
+		uploadComplete="onUploadComplete"
+		beforeUploadStarts="onBeforeUploadStarts">
+	</UploadCollection>
+	<Button
+		id="UploadButton"
+		text="Upload Now"
+		enabled="false"
+		press="onStartUpload">
+	</Button>
+	<ProgressIndicator
+		id="UploadProgressIndicator"
+		class="sapUiSmallMarginBottom" 
+		visible="false"
+		percentValue="0"
+		displayValue="0%"
+		showValue="true"
+		state="None" />
 
 </mvc:View>

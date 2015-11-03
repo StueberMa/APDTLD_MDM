@@ -31,6 +31,10 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Exporter", {
 		this.getView().getModel().refresh();
 	},
 	
+	onCancel: function() {
+		this.getOwnerComponent().getRouter().navTo("/");
+	},
+	
 	onAttributeSelect: function(evt) {
 		var selected = evt.getParameter("selected");
 		var attributeCheckbox = sap.ui.getCore().byId(evt.getParameter("id"));
@@ -70,7 +74,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Exporter", {
 				window.open("/mdm_view/export?download=" + data.id, "_blank", "height=100,left=100,menubar=no,resizable=no,status=no,top=100,width=100");
 				sap.m.MessageToast.show("Download selected data.");
 				setTimeout($.proxy(function() {
-					//this.getOwnerComponent().getRouter().navTo("/");
+					this.getOwnerComponent().getRouter().navTo("/");
 				}, this), 2000);
 			}, this),
 			error: function(data, textStatus, jqXHR) {

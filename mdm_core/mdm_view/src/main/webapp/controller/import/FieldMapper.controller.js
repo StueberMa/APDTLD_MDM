@@ -91,6 +91,11 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.FieldMapper", {
 		});
 	},
 	
+	onCancel: function() {
+		this.resetAddRow();
+		this.getOwnerComponent().getRouter().navTo("/");
+	},
+	
 	onAddrowDBNameChange: function(evt) {
 		var _this = this;
 		var selectedText = evt.getSource().getSelectedItem().getText();

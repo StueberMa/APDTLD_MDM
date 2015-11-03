@@ -6,9 +6,25 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Uploader", {
 	fileCountFinished:0,
 	files:"",
 	
+	onAfterRendering: function() {
+		this.setSelectButton();
+	},
+	
 	onChange: function(oEvent) {
 		var oUploadButton = this.getView().byId("UploadButton");
 		oUploadButton.setEnabled(true);
+		
+		setTimeout($.proxy(function() {
+			this.setSelectButton();
+		}, this), 100);
+	},
+	
+	setSelectButton: function() {
+		console.log($('[title="Add"]'));
+		$('[title="Add"]').each(function(index, item){
+			console.log(item);
+			$(item).prev().html("Select CSV File for Upload");
+		});
 	},
 
 	onFileDeleted: function(oEvent) {

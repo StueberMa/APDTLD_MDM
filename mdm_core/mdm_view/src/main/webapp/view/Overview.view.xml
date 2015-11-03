@@ -76,9 +76,9 @@
 				<l:HorizontalLayout>
 					<core:Icon class="mdmTileIcon" src="sap-icon://database" />
 					<VBox class="mdmTileHeader">
-						<Text class="mdmTileHeaderTitle" text="Data Import" />
+						<Text class="mdmTileHeaderTitle" text="Data Import / Export" />
 						<Text class="mdmTileHeaderSub"
-							text="Monitor Data Integration and Easily Load New Data" />
+							text="Monitor Data Integration, Easily Load New Data or Export Integrated Data" />
 					</VBox>
 				</l:HorizontalLayout>
 				<Image src="./resources/img/data_import.png" class="mdmTileImage"

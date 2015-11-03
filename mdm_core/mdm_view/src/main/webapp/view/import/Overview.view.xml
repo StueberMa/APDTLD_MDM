@@ -72,10 +72,11 @@
 				<l:HorizontalLayout>
 					<core:Icon class="mdmTileIcon" src="sap-icon://download" />
 					<VBox class="mdmTileHeader">
-						<Text class="mdmTileHeaderTitle" text="Eport" />
+						<Text class="mdmTileHeaderTitle" text="Eport Data" />
 						<Text class="mdmTileHeaderSub" text="Export Data to CSV Sheets" />
 					</VBox>
 				</l:HorizontalLayout>
+				<ObjectNumber number="CSV" unit="Formats" />
 			</VBox>
 		</CustomTile>
 	</TileContainer>

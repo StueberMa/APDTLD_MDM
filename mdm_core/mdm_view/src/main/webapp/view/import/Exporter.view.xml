@@ -7,22 +7,27 @@
 	xmlns:l="sap.ui.layout" 
 	xmlns:t="sap.ui.table" 
 	xmlns:vbm="sap.ui.vbm">
-	<HBox class="mdmImportFilenameHeader">
-		<VBox width="100%" alignItems="Center" justifyContent="Center">
-			<Title level="H1" text="Export Database Tables" />
-		</VBox> 
-	</HBox>
-	<ScrollContainer
-		height="90%"
-		width="100%"
-		horizontal="true"
-		vertical="true"
-		focusable="false">
+	<VBox class="mdmScreenTitle">
+		<Text class="mdmTitle" text="Export Database Entities" />
+		<Text class="mdmSubTitle"
+			text="Select entities from database that are exported to CSV file" />
+	</VBox>
+	<VBox height="10px"></VBox>
+	
+	<OverflowToolbar>
+		<Button icon="sap-icon://download" text="Export Data Now" press="onExport" />
+		<ToolbarSpacer />
+			<Text class="mdmDetailScreenTitle" text="Export Database Entities"></Text>
+		<ToolbarSpacer />
+		<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
+	</OverflowToolbar>
+	
+	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" vertical="true">
 		<List items="{/database_tables/}" id="tablesList">
 			<CustomListItem focusable="false">
 				<VBox>
-					<HBox alignItems="Center" justifyContent="Center">
-						<CheckBox text="{name}" selected="true" focusable="false" select="onEntitySelect" />
+					<HBox alignItems="Left" justifyContent="Left">
+						<CheckBox text="{name}" selected="true" focusable="false" select="onEntitySelect" class="mdmExportCategory" />
 					</HBox>
 					<HBox>
 						<VBox width="25%">
@@ -55,24 +60,8 @@
 						</VBox>
 					</HBox>
 				</VBox>
+				<VBox height="10px"></VBox>
 			</CustomListItem>
 		</List>
 	</ScrollContainer>
-	<HBox>
-		<Button text="Reset"
-				press="onReset"
-				ariaDescribedBy="defaultButtonDescription genericButtonDescription">
-			<layoutData>
-				<FlexItemData growFactor="1" />
-			</layoutData>
-		</Button>
-		<Button type="Accept"
-				text="Export Data"
-				press="onExport"
-				ariaDescribedBy="acceptButtonDescription genericButtonDescription">
-			<layoutData>
-				<FlexItemData growFactor="1" />
-			</layoutData>
-		</Button>
-	</HBox>
 </mvc:View>

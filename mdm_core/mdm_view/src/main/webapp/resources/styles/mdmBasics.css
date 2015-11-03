@@ -114,7 +114,7 @@
 	display: inline-block;
 	height: 14rem !important;
 	margin: 0.5rem !important;
-	width: 16rem !important;
+	width: 17rem !important;
 	padding: 15px !important;
 	cursor: pointer;
 	color: #666666;
@@ -131,7 +131,7 @@
 
 .mdmTileHeader {
 	padding-left: 20px !important;
-	width: 11rem !important;
+	width: 12rem !important;
 }
 
 .mdmTileHeaderTitle {
@@ -140,6 +140,8 @@
 }
 
 .mdmTileHeaderSub {
+	text-align: justify !important;
+    width: 11rem;
 	font-style: italic;
 	font-size: 0.75rem !important;
 }
@@ -299,4 +301,18 @@
 
 .mdmImportRowParticle {
 	border-right: 1px rgba(0,0,0,0.5) solid;
+}
+
+.mdmImportHeader {
+	background-color: #e5e5e5;
+}
+
+.mdmImportCategory {
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.mdmExportCategory>label {
+	font-size: 1rem;
+	font-weight: bold;
 }

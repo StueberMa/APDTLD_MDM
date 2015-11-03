@@ -7,146 +7,137 @@
 	xmlns:l="sap.ui.layout" 
 	xmlns:t="sap.ui.table" 
 	xmlns:vbm="sap.ui.vbm">
-	<HBox class="mdmImportFilenameHeader">
-		<VBox width="100%" alignItems="Center" justifyContent="Center">
-			<Title level="H1" text="Mappings for {/filename}" />
-		</VBox> 
-	</HBox>
-	<HBox>	
-		<HBox width="47%" class="mdmImportMetaheader">
-			<VBox width="100%" alignItems="Center" justifyContent="Center">
-				<Title level="H1" text="File" />
-			</VBox>
-		</HBox>
-		<HBox width="47%">
-			<VBox width="100%" alignItems="Center" justifyContent="Center">
-				<Title level="H1" text="Database" />
-			</VBox>
-		</HBox>
-		<HBox width="6%">
-		</HBox>
-	</HBox>
-	<HBox>
-		<HBox width="47%" class="mdmImportAttributeHeaderLeft">
-			<VBox width="33%" alignItems="Center" justifyContent="Center">
-				<Title level="H3" text="Field Name" />
-			</VBox>
-			<VBox width="33%" alignItems="Center" justifyContent="Center">
-				<Title level="H3" text="Field Type" />
-			</VBox>
-			<VBox width="33%" alignItems="Center" justifyContent="Center">
-				<Title level="H3" text="Field Sample" />
-			</VBox>
-		</HBox>
-		<HBox width="47%" class="mdmImportAttributeHeaderRight">
-			<VBox width="33%" alignItems="Center" justifyContent="Center">
-				<Title level="H3" text="Field Name" />
-			</VBox>
-			<VBox width="33%" alignItems="Center" justifyContent="Center">
-				<Title level="H3" text="Field Type" />
-			</VBox>
-			<VBox width="33%" alignItems="Center" justifyContent="Center">
-				<Title level="H3" text="Field Sample" />
-			</VBox>
-		</HBox>
-		<HBox width="6%" class="mdmImportAttributeHeaderRight">
-		</HBox>
-	</HBox>
-	<List items="{/mappings/}" id="mappingList">
-		<CustomListItem>
-			<HBox>
-				<HBox width="47%" class="mdmImportRowParticle">
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<Label text="{fName}" />
-					</VBox>
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<Select selectedKey="{fType}">
-							<core:Item key="Number" text="Number" />
-							<core:Item key="Text" text="Text" />
-							<core:Item key="Date" text="Date" />
-						</Select>
-					</VBox>
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<Label text="{fSample}" />
-					</VBox>
-				</HBox>
-				<HBox width="47%">
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<ComboBox selectedKey="{dbName}" items="{/attributes_database/}" selectionChange="onDBNameChange">
-							<core:Item key="{name}" text="{name}" />
-						</ComboBox>
-					</VBox>
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<Label text="{dbType}" />
-					</VBox>
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<Label text="{dbSample}" />
-					</VBox>
-				</HBox>
-				<HBox width="6%">
-					<VBox width="100%" alignItems="Center" justifyContent="Center">
-						<Button icon="sap-icon://delete" press="onDelete" />
-					</VBox>
-				</HBox>
+	
+	<VBox class="mdmScreenTitle">
+		<Text class="mdmTitle" text="Create File Attribute Mappings" />
+		<Text class="mdmSubTitle"
+			text="Create mappings between file and database structure" />
+	</VBox>
+	<VBox height="10px"></VBox>
+	
+	<OverflowToolbar>
+		<Button icon="sap-icon://add-process" text="Integrate Data Now" press="onAnalyseRows" />
+		<ToolbarSpacer />
+			<Text class="mdmDetailScreenTitle" text="Mappings for {/filename}"></Text>
+		<ToolbarSpacer />
+		<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
+	</OverflowToolbar>
+	
+	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
+		vertical="true" focusable="false">		
+		<HBox class="mdmImportHeader">	
+			<HBox width="47%" class="mdmImportMetaheader">
+				<VBox width="100%" alignItems="Center" justifyContent="Center">
+					<Title level="H1" class="mdmImportCategory" text="File" />
+				</VBox>
 			</HBox>
-		</CustomListItem>
-	</List>
-	<List>
-		<CustomListItem>
-			<HBox>
-				<HBox width="47%" class="mdmImportRowParticle">
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<ComboBox id="addrowFileName" items="{/attributes_file/}" selectionChange="onAddrowFileNameChange">
-							<core:Item key="{name}" text="{name}" />
-						</ComboBox>
-					</VBox>
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<Select selectedKey="str" id="addrowFileType">
-							<core:Item key="Number" text="Number" />
-							<core:Item key="Text" text="Text" />
-							<core:Item key="Date" text="Date" />
-						</Select>
-					</VBox>
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<Label id="addrowFileSample" text="" />
-					</VBox>
-				</HBox>
-				<HBox width="47%">
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<ComboBox id="addrowDbName" selectedKey="" items="{/attributes_database/}" selectionChange="onAddrowDBNameChange">
-							<core:Item key="{name}" text="{name}" />
-						</ComboBox>
-					</VBox>
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<Label id="addrowDbType" text="" />
-					</VBox>
-					<VBox width="33%" alignItems="Center" justifyContent="Center">
-						<Label id="addrowDbSample" text="" />
-					</VBox>
-				</HBox>
-				<HBox width="6%">
-					<VBox width="100%" alignItems="Center" justifyContent="Center">
-						<Button icon="sap-icon://add" press="onAdd" />
-					</VBox>
-				</HBox>
+			<HBox width="47%">
+				<VBox width="100%" alignItems="Center" justifyContent="Center">
+					<Title level="H1" class="mdmImportCategory" text="Database" />
+				</VBox>
 			</HBox>
-		</CustomListItem>
-	</List>
-	<HBox>
-		<Button text="Reset"
-				press="onReset"
-				ariaDescribedBy="defaultButtonDescription genericButtonDescription">
-			<layoutData>
-				<FlexItemData growFactor="1" />
-			</layoutData>
-		</Button>
-		<Button type="Accept"
-				text="Analyse Rows"
-				press="onAnalyseRows"
-				ariaDescribedBy="acceptButtonDescription genericButtonDescription">
-			<layoutData>
-				<FlexItemData growFactor="1" />
-			</layoutData>
-		</Button>
-	</HBox>
+			<HBox width="6%">
+			</HBox>
+		</HBox>
+		<HBox class="mdmImportHeader">
+			<HBox width="47%" class="mdmImportAttributeHeaderLeft">
+				<VBox width="33%" alignItems="Center" justifyContent="Center">
+					<Title level="H3" text="Field Name" />
+				</VBox>
+				<VBox width="33%" alignItems="Center" justifyContent="Center">
+					<Title level="H3" text="Field Type" />
+				</VBox>
+				<VBox width="33%" alignItems="Center" justifyContent="Center">
+					<Title level="H3" text="Field Sample" />
+				</VBox>
+			</HBox>
+			<HBox width="47%" class="mdmImportAttributeHeaderRight">
+				<VBox width="33%" alignItems="Center" justifyContent="Center">
+					<Title level="H3" text="Field Name" />
+				</VBox>
+				<VBox width="33%" alignItems="Center" justifyContent="Center">
+					<Title level="H3" text="Field Type" />
+				</VBox>
+				<VBox width="33%" alignItems="Center" justifyContent="Center">
+					<Title level="H3" text="Field Sample" />
+				</VBox>
+			</HBox>
+			<HBox width="6%" class="mdmImportAttributeHeaderRight">
+			</HBox>
+		</HBox>
+		<List items="{/mappings/}" id="mappingList">
+			<CustomListItem>
+				<HBox>
+					<HBox width="47%" class="mdmImportRowParticle">
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<Label text="{fName}" />
+						</VBox>
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<Label text="{fType}" />
+						</VBox>
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<Label text="{fSample}" />
+						</VBox>
+					</HBox>
+					<HBox width="47%">
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<Label text="{dbName}" />
+						</VBox>
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<Label text="{dbType}" />
+						</VBox>
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<Label text="{dbSample}" />
+						</VBox>
+					</HBox>
+					<HBox width="6%">
+						<VBox width="100%" alignItems="Center" justifyContent="Center">
+							<Button icon="sap-icon://delete" press="onDelete" />
+						</VBox>
+					</HBox>
+				</HBox>
+			</CustomListItem>
+		</List>
+		<List>
+			<CustomListItem>
+				<HBox>
+					<HBox width="47%" class="mdmImportRowParticle">
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<ComboBox id="addrowFileName" items="{/attributes_file/}" selectionChange="onAddrowFileNameChange">
+								<core:Item key="{name}" text="{name}" />
+							</ComboBox>
+						</VBox>
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<Select selectedKey="str" id="addrowFileType">
+								<core:Item key="Number" text="Number" />
+								<core:Item key="Text" text="Text" />
+								<core:Item key="Date" text="Date" />
+							</Select>
+						</VBox>
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<Label id="addrowFileSample" text="" />
+						</VBox>
+					</HBox>
+					<HBox width="47%">
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<ComboBox id="addrowDbName" selectedKey="" items="{/attributes_database/}" selectionChange="onAddrowDBNameChange">
+								<core:Item key="{name}" text="{name}" />
+							</ComboBox>
+						</VBox>
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<Label id="addrowDbType" text="" />
+						</VBox>
+						<VBox width="33%" alignItems="Center" justifyContent="Center">
+							<Label id="addrowDbSample" text="" />
+						</VBox>
+					</HBox>
+					<HBox width="6%">
+						<VBox width="100%" alignItems="Center" justifyContent="Center">
+							<Button icon="sap-icon://add" press="onAdd" />
+						</VBox>
+					</HBox>
+				</HBox>
+			</CustomListItem>
+		</List>
+	</ScrollContainer>
 </mvc:View>
