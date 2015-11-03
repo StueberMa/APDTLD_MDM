@@ -24,6 +24,7 @@ import org.apache.olingo.odata2.core.ODataRequestImpl;
 import org.apache.olingo.odata2.jpa.processor.api.ODataJPAContext;
 import org.apache.olingo.odata2.jpa.processor.core.ODataJPAProcessorDefault;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -97,14 +98,14 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 		// declaration
 		List<ODataResponse> responses = null;
 		List<ODataResponse> errorResponses = null;
-		ODataResponse response = null;	
+		ODataResponse response = null;
 
 		// initialization
 		responses = new ArrayList<ODataResponse>();
 
 		// process request
 		for (ODataRequest request : requests) {
-			
+
 			request = resolveAssociations(request);
 			response = handler.handleRequest(request);
 
@@ -120,14 +121,14 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 
 		return BatchResponsePart.responses(responses).changeSet(true).build();
 	}
-	
+
 	/**
 	 * Method to resolveAssociations
 	 * 
 	 * @param request
 	 */
 	private ODataRequest resolveAssociations(ODataRequest request) {
-		
+
 		// declaration
 		BufferedReader br = null;
 		InputStream is = null;
@@ -135,13 +136,15 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 		JsonObject body = null;
 		JsonObject metadata = null;
 		JsonObject details = null;
-		String bodyTxt = ""; 
-		
+		JsonArray ids = null;
+		String bodyTxt = "";
+		String content = "";
+
 		// initialization
 		parser = new JsonParser();
 		is = request.getBody();
 		br = new BufferedReader(new InputStreamReader(is));
-		
+
 		try {
 			bodyTxt = br.readLine();
 			br.close();
@@ -149,38 +152,59 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 		} catch (IOException e) {
 			// do nothing
 		}
-		
-		if(bodyTxt == null)
+
+		if (bodyTxt == null)
 			return request;
-		
+
 		body = (JsonObject) parser.parse(bodyTxt);
 		metadata = body.getAsJsonObject("__metadata");
-		
+
 		// ensure associations available
-		if(!metadata.get("type").getAsString().equals("data_model.Lead"))
+		if (!metadata.get("type").getAsString().equals("data_model.Lead")
+				&& !metadata.get("type").getAsString().equals("data_model.Campaign"))
 			return request;
-		
-		// Campaign
-		if(body.get("CampaignId") != null) {
-			details = new JsonObject();
-			details.add("Id", body.get("CampaignId"));
-			body.add("CampaignDetails", details);
+
+		// lead
+		if (metadata.get("type").getAsString().equals("data_model.Lead")) {
+			// Campaign
+			if (body.get("CampaignId") != null) {
+				details = new JsonObject();
+				details.add("Id", body.get("CampaignId"));
+				body.add("CampaignDetails", details);
+			}
+
+			// Customer
+			if (body.get("CustomerId") != null) {
+				details = new JsonObject();
+				details.add("Id", body.get("CustomerId"));
+				body.add("CustomerDetails", details);
+			}
+
+			// Product
+			if (body.get("ProductId") != null) {
+				details = new JsonObject();
+				details.add("Id", body.get("ProductId"));
+				body.add("ProductDetails", details);
+			}
 		}
-		
-		// Customer
-		if(body.get("CustomerId") != null) {
-			details = new JsonObject();
-			details.add("Id", body.get("CustomerId"));
-			body.add("CustomerDetails", details);
+
+		// campaign
+		if (metadata.get("type").getAsString().equals("data_model.Campaign")) {
+			// Customer
+			if (body.get("CustomerIds") != null) {
+				ids = body.get("CustomerIds").getAsJsonArray();
+
+				for (int i = 0; i < ids.size(); i++) {
+					if (content.length() == 0)
+						content = ids.get(i).getAsString();
+					else
+						content = content + "," + ids.get(i).getAsString();
+				}
+
+				body.addProperty("CustomerIds", content);
+			}
 		}
-		
-		// Product
-		if(body.get("ProductId") != null) {
-			details = new JsonObject();
-			details.add("Id", body.get("ProductId"));
-			body.add("ProductDetails", details);
-		}
-		
+
 		// create new Request
 		ODataRequestBuilder req = ODataRequestImpl.newBuilder();
 		req.acceptableLanguages(request.getAcceptableLanguages());
@@ -192,7 +216,7 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 		req.pathInfo(request.getPathInfo());
 		req.queryParameters(request.getQueryParameters());
 		req.requestHeaders(request.getRequestHeaders());
-		
+
 		return req.build();
 	}
 }
