@@ -135,7 +135,6 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 		JsonParser parser = null;
 		JsonObject body = null;
 		JsonObject metadata = null;
-		JsonObject details = null;
 		JsonArray ids = null;
 		String bodyTxt = "";
 		String content = "";
@@ -165,32 +164,42 @@ public class ODataBatchProcessor extends ODataJPAProcessorDefault {
 			return request;
 
 		// lead
-		if (metadata.get("type").getAsString().equals("data_model.Lead")) {
-			// Campaign
+		/*if (metadata.get("type").getAsString().equals("data_model.Lead")) {
+			// campaign
 			if (body.get("CampaignId") != null) {
+				if(body.get("CampaignId").getAsString().equals(""))
+					body.addProperty("CampaignId", nullValue);
+				
 				details = new JsonObject();
 				details.add("Id", body.get("CampaignId"));
 				body.add("CampaignDetails", details);
 			}
 
-			// Customer
+			// customer
 			if (body.get("CustomerId") != null) {
-				details = new JsonObject();
-				details.add("Id", body.get("CustomerId"));
-				body.add("CustomerDetails", details);
+				if(body.get("CustomerId").getAsString().equals("")) {
+					body.addProperty("CustomerId", nullValue);
+				} else {
+					details = new JsonObject();
+					details.add("Id", body.get("CustomerId"));
+					body.add("CustomerDetails", details);
+				}
 			}
 
-			// Product
+			// product
 			if (body.get("ProductId") != null) {
+				if(body.get("ProductId").getAsString().equals(""))
+					body.addProperty("ProductId", nullValue);
+				
 				details = new JsonObject();
 				details.add("Id", body.get("ProductId"));
 				body.add("ProductDetails", details);
 			}
-		}
+		}*/
 
 		// campaign
 		if (metadata.get("type").getAsString().equals("data_model.Campaign")) {
-			// Customer
+			// customer
 			if (body.get("CustomerIds") != null) {
 				ids = body.get("CustomerIds").getAsJsonArray();
 

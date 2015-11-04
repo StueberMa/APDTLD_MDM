@@ -16,24 +16,24 @@
 				<fb:FilterItem name="Customer" label="Customer">
 					<fb:control>
 						<ComboBox id="CustomerIdInput" placeholder="Name"
-									showValueHelp="false" selectionChange="onCustomerValidation"
-									items="{
+							showValueHelp="false" selectionChange="onCustomerValidation"
+							items="{
 										path: '/Customers',
 										sorter: { path: 'LastName' }
 									}">
-									<core:Item key="{Id}" text="{FirstName} {LastName}" />
+							<core:Item key="{Id}" text="{FirstName} {LastName}" />
 						</ComboBox>
 					</fb:control>
 				</fb:FilterItem>
 				<fb:FilterItem name="ProductName" label="Product">
 					<fb:control>
 						<ComboBox id="ProductIdInput" placeholder="Name"
-									showValueHelp="false" selectionChange="onProductValidation"
-									items="{
+							showValueHelp="false" selectionChange="onProductValidation"
+							items="{
 										path: '/Products',
 										sorter: { path: 'Name' }
 									}">
-									<core:Item key="{Id}" text="{Name}" />
+							<core:Item key="{Id}" text="{Name}" />
 						</ComboBox>
 					</fb:control>
 				</fb:FilterItem>
@@ -53,7 +53,7 @@
 
 
 		<Table id="leadTable"
-			items="{path: '/Leads', parameters: {expand: 'CampaignDetails,CustomerDetails,ProductDetails'}, sorter: {
+			items="{path: '/Leads', sorter: {
 				path: 'Id', descending: false
 			}}">
 			<headerToolbar>
@@ -73,15 +73,25 @@
 					<Text text="Contact on" />
 				</Column>
 				<Column>
-					<Text text="Status"/>
+					<Text text="Status" />
 				</Column>
 			</columns>
 			<items>
 				<ColumnListItem>
 					<cells>
-						<Text class="mdmBoldTxt"
-							text="{CustomerDetails/FirstName} {CustomerDetails/LastName}" />
-						<Text text="{ProductDetails/Name}" />
+						<ComboBox class="mdmHiddenComboBox mdmBoldTxt" enabled="false" selectedKey="{CustomerId}"
+							items="{ path: '/Customers',
+									 sorter: { path: 'LastName' }
+									}">
+							<core:Item key="{Id}" text="{FirstName} {LastName}" />
+						</ComboBox>
+						<ComboBox class="mdmHiddenComboBox" enabled="false"  selectedKey="{ProductId}"
+							items="{
+										path: '/Products',
+										sorter: { path: 'Name' }
+									}">
+							<core:Item key="{Id}" text="{Name}" />
+						</ComboBox>
 						<Text
 							text="{path:'ContactOn', type:'sap.ui.model.type.Date',
 									formatOptions: { style: 'medium', strictParsing: true}}" />
