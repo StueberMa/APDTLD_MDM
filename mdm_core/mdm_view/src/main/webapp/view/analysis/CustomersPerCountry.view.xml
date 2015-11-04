@@ -14,7 +14,8 @@
 
 		<Table class="mdmAnalysisTable" height="30%"
 			items="{path: 'perCountry>/countries', sorter: {
-				path: 'perCountry>percentage'
+				path: 'perCountry>percentage',
+				descending: 'false'
 			}}">
 			<columns>
 				<Column>

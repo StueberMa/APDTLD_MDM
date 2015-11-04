@@ -236,6 +236,23 @@
 	border-top: 1px solid #dddddd;
 	border-bottom: 1px solid #dddddd;
 }
+
+.mdmHiddenComboBox {
+	padding: 0px;
+	height: 1.0rem;
+	opacity: 1;
+}
+
+.mdmHiddenComboBox input {
+	height: 1.0rem;
+	border: none;
+	padding: 0px;
+	background-color: transparent;
+} 
+
+.mdmHiddenComboBox button {
+	display: none;
+} 
  
 .mdmToolbarBottom {
 	border-top: 1px solid #cdcdcd;
@@ -295,6 +312,7 @@
 }
 
 .mdmImportMetaheader {
+	padding-top: 5px;
 	border-right: 1px rgba(0,0,0,0.5) solid;
 }
 

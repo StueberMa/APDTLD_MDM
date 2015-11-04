@@ -3,7 +3,7 @@
 	xmlns:l="sap.ui.layout">
 
 	<VBox class="mdmScreenTitle">
-		<Text class="mdmTitle" text="Data Import" />
+		<Text class="mdmTitle" text="Data Import / Export" />
 		<Text class="mdmSubTitle" text="Choose among the available functions ..." />
 	</VBox>
 

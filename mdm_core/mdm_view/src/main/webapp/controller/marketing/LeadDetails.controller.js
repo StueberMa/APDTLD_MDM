@@ -112,7 +112,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadDetails", {
 		if (oEvent.getParameter("name") === "marketing.LeadCreate") {
 			
 			this._model.metadataLoaded().then(jQuery.proxy(function() {
-				var context = this._model.createEntry("/Leads", "expand:CampaignDetails,CustomerDetails,ProductDetails");
+				var context = this._model.createEntry("/Leads");
 				this.getView().unbindElement();
 				this.getView().setBindingContext(context);	
 			}, this));

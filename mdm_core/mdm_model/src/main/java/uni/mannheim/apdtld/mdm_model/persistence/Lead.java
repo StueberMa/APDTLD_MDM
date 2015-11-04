@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -40,18 +38,6 @@ public class Lead implements Serializable {
 	@Column(name="PRODUCTID")
 	private String productId;
 	private double amount;
-
-	@ManyToOne
-	@JoinColumn(name="CUSTOMERID", referencedColumnName="ID", insertable=false, updatable=false)
-	private Customer customer;
-	
-	@ManyToOne
-	@JoinColumn(name="CAMPAIGNID", referencedColumnName="ID", insertable=false, updatable=false)
-	private Campaign campaign;
-	
-	@ManyToOne 
-	@JoinColumn(name="PRODUCTID", referencedColumnName="ID", insertable=false, updatable=false)
-	private Product product;
 
 	/**
 	 * Constructor
@@ -202,60 +188,6 @@ public class Lead implements Serializable {
 	 */
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
-	}
-
-	/**
-	 * GET customer
-	 * 
-	 * @return
-	 */
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	/**
-	 * SET customer
-	 * 
-	 * @param customer
-	 */
-	public void setCustomer(Customer customer) {
-	    this.customer = customer;
-	}
-
-	/**
-	 * GET campaign
-	 * 
-	 * @return
-	 */
-	public Campaign getCampaign() {
-		return campaign;
-	}
-
-	/**
-	 * SET campaign
-	 * 
-	 * @param campaign
-	 */
-	public void setCampaign(Campaign campaign) {
-		this.campaign = campaign;
-	}
-
-	/**
-	 * GET product
-	 * 
-	 * @return
-	 */
-	public Product getProduct() {
-		return product;
-	}
-
-	/**
-	 * SET product
-	 * 
-	 * @param product
-	 */
-	public void setProduct(Product product) {
-		this.product = product;
 	}
 	
 }
