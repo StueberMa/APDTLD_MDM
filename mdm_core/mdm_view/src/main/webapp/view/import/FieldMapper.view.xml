@@ -1,31 +1,31 @@
-<mvc:View height="100%" controllerName="uni.mannheim.mdm.controller.import.FieldMapper"
-	xmlns="sap.m" 
-	xmlns:core="sap.ui.core" 
-	xmlns:mvc="sap.ui.core.mvc" 
-	xmlns:html="http://www.w3.org/1999/xhtml" 
-	xmlns:u="sap.ui.unified" 
-	xmlns:l="sap.ui.layout" 
-	xmlns:t="sap.ui.table" 
+<mvc:View height="100%"
+	controllerName="uni.mannheim.mdm.controller.import.FieldMapper" xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout" xmlns:t="sap.ui.table"
 	xmlns:vbm="sap.ui.vbm">
-	
-	<VBox class="mdmScreenTitle">
-		<Text class="mdmTitle" text="Create File Attribute Mappings" />
-		<Text class="mdmSubTitle"
-			text="Create mappings between file and database structure" />
-	</VBox>
-	<VBox height="10px"></VBox>
-	
-	<OverflowToolbar>
-		<Button icon="sap-icon://add-process" text="Integrate Data Now" press="onAnalyseRows" />
-		<ToolbarSpacer />
+
+
+	<ScrollContainer class="mdmScreenContent" height="100%"
+		width="100%" horizontal="true" vertical="true" focusable="false">
+
+		<VBox class="mdmScreenTitle">
+			<Text class="mdmTitle" text="Create File Attribute Mappings" />
+			<Text class="mdmSubTitle"
+				text="Create mappings between file and database structure" />
+		</VBox>
+		<VBox height="10px"></VBox>
+
+		<OverflowToolbar>
+			<Button icon="sap-icon://add-process" text="Integrate Data Now"
+				press="onAnalyseRows" />
+			<ToolbarSpacer />
 			<Text class="mdmDetailScreenTitle" text="Mappings for {/filename}"></Text>
-		<ToolbarSpacer />
-		<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
-	</OverflowToolbar>
-	
-	<ScrollContainer class="mdmScreenContent" height="100%" width="100%" horizontal="true"
-		vertical="true" focusable="false">		
-		<HBox class="mdmImportHeader">	
+			<ToolbarSpacer />
+			<Button icon="sap-icon://sys-cancel" text="Cancel" press="onCancel" />
+		</OverflowToolbar>
+
+
+		<HBox class="mdmImportHeader">
 			<HBox width="47%" class="mdmImportMetaheader">
 				<VBox width="100%" alignItems="Center" justifyContent="Center">
 					<Title level="H1" class="mdmImportCategory" text="File" />
@@ -80,10 +80,10 @@
 						</VBox>
 					</HBox>
 					<HBox width="47%">
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<VBox width="47%" alignItems="Center" justifyContent="Center">
 							<Label text="{dbName}" />
 						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<VBox width="26%" alignItems="Center" justifyContent="Center">
 							<Label text="{dbType}" />
 						</VBox>
 						<VBox width="33%" alignItems="Center" justifyContent="Center">
@@ -103,7 +103,8 @@
 				<HBox>
 					<HBox width="47%" class="mdmImportRowParticle">
 						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<ComboBox id="addrowFileName" items="{/attributes_file/}" selectionChange="onAddrowFileNameChange">
+							<ComboBox id="addrowFileName" items="{/attributes_file/}"
+								selectionChange="onAddrowFileNameChange">
 								<core:Item key="{name}" text="{name}" />
 							</ComboBox>
 						</VBox>
@@ -119,12 +120,13 @@
 						</VBox>
 					</HBox>
 					<HBox width="47%">
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
-							<ComboBox id="addrowDbName" selectedKey="" items="{/attributes_database/}" selectionChange="onAddrowDBNameChange">
+						<VBox width="40%" alignItems="Center" justifyContent="Center">
+							<ComboBox id="addrowDbName" selectedKey=""
+								items="{/attributes_database/}" selectionChange="onAddrowDBNameChange">
 								<core:Item key="{name}" text="{name}" />
 							</ComboBox>
 						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<VBox width="26%" alignItems="Center" justifyContent="Center">
 							<Label id="addrowDbType" text="" />
 						</VBox>
 						<VBox width="33%" alignItems="Center" justifyContent="Center">
