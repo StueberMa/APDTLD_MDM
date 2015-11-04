@@ -81,11 +81,10 @@ public class Uploader extends HttpServlet {
 				FileItem fi = (FileItem) i.next();
 				//if (!fi.isFormField()) {
 					// Get the uploaded file parameters
-					String fieldName = fi.getFieldName();
 					String fileName = fi.getName();
-					String contentType = fi.getContentType();
-					boolean isInMemory = fi.isInMemory();
-					long sizeInBytes = fi.getSize();
+					if(fileName==null) {
+						continue;
+					}
 					// Write the file
 					if (fileName.lastIndexOf("\\") >= 0) {
 						file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\")));
