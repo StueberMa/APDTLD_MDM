@@ -312,6 +312,7 @@
 }
 
 .mdmImportMetaheader {
+	padding-top: 5px;
 	border-right: 1px rgba(0,0,0,0.5) solid;
 }
 

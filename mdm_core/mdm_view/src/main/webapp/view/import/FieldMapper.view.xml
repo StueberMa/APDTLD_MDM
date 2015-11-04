@@ -120,7 +120,7 @@
 						</VBox>
 					</HBox>
 					<HBox width="47%">
-						<VBox width="40%" alignItems="Center" justifyContent="Center">
+						<VBox width="47%" alignItems="Center" justifyContent="Center">
 							<ComboBox id="addrowDbName" selectedKey=""
 								items="{/attributes_database/}" selectionChange="onAddrowDBNameChange">
 								<core:Item key="{name}" text="{name}" />
