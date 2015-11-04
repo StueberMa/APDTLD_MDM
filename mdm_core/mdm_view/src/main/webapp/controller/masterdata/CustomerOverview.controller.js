@@ -100,7 +100,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 			return "Netherland";
 		
 		if(status == "US")
-			return "United State";
+			return "United States";
 	}
 	
 });
