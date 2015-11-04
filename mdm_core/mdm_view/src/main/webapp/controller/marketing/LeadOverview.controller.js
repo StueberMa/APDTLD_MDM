@@ -133,7 +133,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 		if(status == "OPEN")
 			return "Open";
 			
-		if(status == "CLOSED")
+		if(status == "CLOSE")
 			return "Closed";
 	}
 	
