@@ -16,7 +16,10 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 		var table = this.getView().byId("campaignTable");
 		table.setMode(sap.m.ListMode.SingleSelectMaster);
 		table.attachEvent("selectionChange", this.onSelectionChange, this);
-	
+		
+		// router
+		var oRouter = this.getOwnerComponent().getRouter();
+		oRouter.attachRouteMatched(this.onRequest, this);
 	},
 		
 
@@ -33,6 +36,16 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 	 */
 	onRefresh : function() {
 		this._model.refresh(true);
+	},
+	
+	/**
+	 * Method onRequest
+	 */
+	onRequest : function(oEvent) {
+		
+		if (oEvent.getParameter("name") === "marketing.CampaignOverview") {
+			this.onRefresh();
+		}
 	},
 	
 	/**

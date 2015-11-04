@@ -12,6 +12,10 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 		var table = this.getView().byId("customerTable");
 		table.setMode(sap.m.ListMode.SingleSelectMaster);
 		table.attachEvent("selectionChange", this.onSelectionChange, this);
+		
+		// routing
+		var oRouter = this.getOwnerComponent().getRouter();
+		oRouter.attachRouteMatched(this.onRequest, this);
 	},
 
 	/**
@@ -27,6 +31,17 @@ sap.ui.controller("uni.mannheim.mdm.controller.masterdata.CustomerOverview", {
 	 */
 	onRefresh : function() {
 		this._model.refresh(true);
+	},
+	
+	/**
+	 * Method onRequest
+	 */
+	onRequest : function(oEvent) {
+		
+		// create
+		if (oEvent.getParameter("name") === "masterdata.CustomerOverview") {
+			this.onRefresh();
+		}
 	},
 	
 	/**

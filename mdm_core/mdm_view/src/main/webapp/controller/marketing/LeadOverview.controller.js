@@ -70,7 +70,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.LeadOverview", {
 	onRequest : function(oEvent) {
 		
 		if (oEvent.getParameter("name") === "marketing.LeadOverview") {
-			this.onRefresh()
+			this.onRefresh();
 		}
 	},
 	
