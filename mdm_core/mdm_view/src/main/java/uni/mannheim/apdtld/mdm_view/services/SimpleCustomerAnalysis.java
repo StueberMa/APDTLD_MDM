@@ -108,6 +108,7 @@ public class SimpleCustomerAnalysis extends HttpServlet {
 				
 				value = ((JsonArray) resultJson.get(i)).get(1).getAsInt();
 				country.add("count", new JsonPrimitive(value));
+				country.add("displayPercentage", new JsonPrimitive(String.format("%.4f",((double) value / totalCust)*100) + "%"));
 				country.add("percentage", new JsonPrimitive((double) value / totalCust));
 				country.add("total", new JsonPrimitive(totalCust));
 				

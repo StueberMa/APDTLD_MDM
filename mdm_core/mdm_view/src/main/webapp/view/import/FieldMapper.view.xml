@@ -41,24 +41,24 @@
 		</HBox>
 		<HBox class="mdmImportHeader">
 			<HBox width="47%" class="mdmImportAttributeHeaderLeft">
-				<VBox width="33%" alignItems="Center" justifyContent="Center">
+				<VBox width="50%" alignItems="Center" justifyContent="Center">
 					<Title level="H3" text="Field Name" />
 				</VBox>
-				<VBox width="33%" alignItems="Center" justifyContent="Center">
+				<VBox width="20%" alignItems="Center" justifyContent="Center">
 					<Title level="H3" text="Field Type" />
 				</VBox>
-				<VBox width="33%" alignItems="Center" justifyContent="Center">
+				<VBox width="30%" alignItems="Center" justifyContent="Center">
 					<Title level="H3" text="Field Sample" />
 				</VBox>
 			</HBox>
 			<HBox width="47%" class="mdmImportAttributeHeaderRight">
-				<VBox width="33%" alignItems="Center" justifyContent="Center">
+				<VBox width="50%" alignItems="Center" justifyContent="Center">
 					<Title level="H3" text="Field Name" />
 				</VBox>
-				<VBox width="33%" alignItems="Center" justifyContent="Center">
+				<VBox width="20%" alignItems="Center" justifyContent="Center">
 					<Title level="H3" text="Field Type" />
 				</VBox>
-				<VBox width="33%" alignItems="Center" justifyContent="Center">
+				<VBox width="30%" alignItems="Center" justifyContent="Center">
 					<Title level="H3" text="Field Sample" />
 				</VBox>
 			</HBox>
@@ -69,24 +69,24 @@
 			<CustomListItem>
 				<HBox>
 					<HBox width="47%" class="mdmImportRowParticle">
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<VBox width="50%" alignItems="Center" justifyContent="Center">
 							<Label text="{fName}" />
 						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<VBox width="20%" alignItems="Center" justifyContent="Center">
 							<Label text="{fType}" />
 						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<VBox width="30%" alignItems="Center" justifyContent="Center">
 							<Label text="{fSample}" />
 						</VBox>
 					</HBox>
 					<HBox width="47%">
-						<VBox width="47%" alignItems="Center" justifyContent="Center">
+						<VBox width="50%" alignItems="Center" justifyContent="Center">
 							<Label text="{dbName}" />
 						</VBox>
-						<VBox width="26%" alignItems="Center" justifyContent="Center">
+						<VBox width="20%" alignItems="Center" justifyContent="Center">
 							<Label text="{dbType}" />
 						</VBox>
-						<VBox width="33%" alignItems="Center" justifyContent="Center">
+						<VBox width="30%" alignItems="Center" justifyContent="Center">
 							<Label text="{dbSample}" />
 						</VBox>
 					</HBox>

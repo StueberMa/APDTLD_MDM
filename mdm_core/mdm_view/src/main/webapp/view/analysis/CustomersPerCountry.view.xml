@@ -33,7 +33,7 @@
 					<cells>
 						<Text class="mdmBoldTxt"
 							text="{path:'perCountry>code', formatter : '.formatCountry'}" />
-						<Text text="{perCountry>percentage}" />
+						<Text text="{perCountry>displayPercentage}" />
 						<Text text="{perCountry>count}" />
 					</cells>
 				</ColumnListItem>
