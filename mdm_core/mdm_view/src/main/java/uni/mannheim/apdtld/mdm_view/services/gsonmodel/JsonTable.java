@@ -8,6 +8,7 @@ import java.util.List;
 public class JsonTable {
 	
 	public String name;
+	public boolean selected;
 	public List<Attribute> all;
 	public List<Attribute> attributes_0;
 	public List<Attribute> attributes_1;

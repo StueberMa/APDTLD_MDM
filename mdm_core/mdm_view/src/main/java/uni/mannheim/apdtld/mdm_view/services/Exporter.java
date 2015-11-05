@@ -72,11 +72,7 @@ public class Exporter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static HashMap<Long, String> requests = new HashMap<>();
 	private HashSet<Table> tables = null;
-	
-	public void init() {
-		requests.put(1L, "{'database_tables':[{'name':'Campaign','attributes_0':[{'name':'costs','selected':'true'},{'name':'name','selected':'true'},{'name':'numberSend','selected':'true'},{'name':'status','selected':'true'}],'attributes_1':[{'name':'description','selected':'true'},{'name':'numberLeads','selected':'true'},{'name':'plannedCosts','selected':'true'},{'name':'type','selected':'true'}],'attributes_2':[{'name':'endDate','selected':'true'},{'name':'numberOpport','selected':'true'},{'name':'plannedReceived','selected':'true'},{'name':'valueOpport','selected':'true'}],'attributes_3':[{'name':'id','selected':'true'},{'name':'numberReceived','selected':'true'},{'name':'startDate','selected':'true'}]},{'name':'Customer','attributes_0':[{'name':'Address.city','selected':'true'},{'name':'Address.zipCode','selected':'true'},{'name':'ContactDetails.mobile','selected':'true'},{'name':'PaymentDetails.iban','selected':'true'},{'name':'id','selected':'true'}],'attributes_1':[{'name':'Address.country','selected':'true'},{'name':'ContactDetails.email','selected':'true'},{'name':'ContactDetails.phone','selected':'true'},{'name':'birthDate','selected':'true'},{'name':'lastName','selected':'true'}],'attributes_2':[{'name':'Address.houseNo','selected':'true'},{'name':'ContactDetails.facebook','selected':'true'},{'name':'PaymentDetails.bankAccount','selected':'true'},{'name':'firstName','selected':'true'},{'name':'title','selected':'true'}],'attributes_3':[{'name':'Address.street','selected':'true'},{'name':'ContactDetails.fax','selected':'true'},{'name':'PaymentDetails.bic','selected':'true'},{'name':'gender','selected':'true'}]},{'name':'Lead','attributes_0':[{'name':'amount','selected':'true'},{'name':'description','selected':'true'}],'attributes_1':[{'name':'campaignId','selected':'true'},{'name':'id','selected':'true'}],'attributes_2':[{'name':'contactOn','selected':'true'},{'name':'productId','selected':'true'}],'attributes_3':[{'name':'customerId','selected':'true'},{'name':'status','selected':'true'}]},{'name':'Product','attributes_0':[{'name':'Procurement.procurementTime','selected':'true'},{'name':'color','selected':'true'},{'name':'id','selected':'true'},{'name':'size','selected':'true'}],'attributes_1':[{'name':'Procurement.procurementType','selected':'true'},{'name':'currency','selected':'true'},{'name':'name','selected':'true'},{'name':'unitOfMeasure','selected':'true'}],'attributes_2':[{'name':'Procurement.safetyStock','selected':'true'},{'name':'description','selected':'true'},{'name':'netWeight','selected':'true'},{'name':'weightUnit','selected':'true'}],'attributes_3':[{'name':'Procurement.totalStock','selected':'true'},{'name':'grossWeight','selected':'true'},{'name':'price','selected':'true'}]}]}");
-	}
-		
+			
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	
@@ -129,7 +125,9 @@ public class Exporter extends HttpServlet {
 			EntityManager em = fac.createEntityManager();
 			
 			for(JsonTable table:root.database_tables) {
-				
+				if(!table.selected) {
+					continue;
+				}
 				writer.writeNext(new String[]{table.name});
 				ArrayList<String> strrow = new ArrayList<>();
 				table.getAttributes();
@@ -198,6 +196,7 @@ public class Exporter extends HttpServlet {
 		for(Table table:sortedTables) {
 			JsonObject jsonTable = new JsonObject();
 			jsonTable.addProperty("name", table.getName());
+			jsonTable.addProperty("selected", "true");
 			JsonArray[] jsonAttributes = new JsonArray[4];
 			jsonAttributes[0] = new JsonArray();
 			jsonAttributes[1] = new JsonArray();

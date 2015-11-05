@@ -27,7 +27,7 @@
 			<CustomListItem focusable="false">
 				<VBox>
 					<HBox alignItems="Left" justifyContent="Left">
-						<CheckBox text="{name}" selected="true" focusable="false" select="onEntitySelect" class="mdmExportCategory" />
+						<CheckBox text="{name}" selected="{selected}" focusable="false" select="onEntitySelect" class="mdmExportCategory" />
 					</HBox>
 					<HBox>
 						<VBox width="25%">

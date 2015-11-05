@@ -99,7 +99,7 @@ public class FileAnalyser extends HttpServlet {
 			fac = JpaEntityManagerFactory.getEntityManagerFactory("data_model");
 			EntityManager em = fac.createEntityManager();
 			
-			CSVReader reader = new CSVReader(new FileReader(filePath + request.getParameter("file")), ';');
+			CSVReader reader = new CSVReader(new FileReader(filePath + request.getParameter("file")), ',');
 			String[] nextLine;
 			String[] header = reader.readNext();
 

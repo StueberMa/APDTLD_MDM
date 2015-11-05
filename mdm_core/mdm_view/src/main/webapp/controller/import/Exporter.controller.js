@@ -54,7 +54,7 @@ sap.ui.controller("uni.mannheim.mdm.controller.import.Exporter", {
 					attribute.selected?selectedCount++:null;
 				});
 			}
-			entityCheckbox.setSelected(selectedCount>0);
+			table.enabled = (selectedCount>0);
 		});
 		this.getView().getModel().refresh();
 	},
