@@ -21,7 +21,6 @@ sap.ui.controller("uni.mannheim.mdm.controller.marketing.CampaignOverview", {
 		var oRouter = this.getOwnerComponent().getRouter();
 		oRouter.attachRouteMatched(this.onRequest, this);
 	},
-		
 
 	/**
 	 * Method onNewCampaign
