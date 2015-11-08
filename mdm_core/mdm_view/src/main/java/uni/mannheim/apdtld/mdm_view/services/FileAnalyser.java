@@ -4,18 +4,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Serializable;
 import java.io.Writer;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,36 +25,24 @@ import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.Attribute;
 import javax.persistence.metamodel.EmbeddableType;
 import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.ManagedType;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transaction;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.opencsv.CSVReader;
-
-import uni.mannheim.apdtld.mdm_model.persistence.Customer;
 import uni.mannheim.apdtld.mdm_view.odata.JpaEntityManagerFactory;
-import uni.mannheim.apdtld.mdm_view.odata.ODataJPAServiceFactory;
 import uni.mannheim.apdtld.mdm_view.services.gsonmodel.Mapping;
 import uni.mannheim.apdtld.mdm_view.services.gsonmodel.MappingArray;
+
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.opencsv.CSVReader;
 
 public class FileAnalyser extends HttpServlet {
 
@@ -99,7 +83,7 @@ public class FileAnalyser extends HttpServlet {
 			fac = JpaEntityManagerFactory.getEntityManagerFactory("data_model");
 			EntityManager em = fac.createEntityManager();
 			
-			CSVReader reader = new CSVReader(new FileReader(filePath + request.getParameter("file")), ',');
+			CSVReader reader = new CSVReader(new FileReader(filePath + request.getParameter("file")), ';');
 			String[] nextLine;
 			String[] header = reader.readNext();
 

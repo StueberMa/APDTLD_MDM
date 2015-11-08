@@ -14,9 +14,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 public class Uploader extends HttpServlet {
 
 	/**
