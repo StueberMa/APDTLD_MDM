@@ -1,6 +1,11 @@
 /**
  *  MDM page
  */
+ .mdmPage section {
+	background-color: #FCFCFC !important;
+	background-image: none !important;
+}
+ 
 .mdmPage .sapMShellGlobalOuterBackground {
 	background-color: #FCFCFC;
 	background-image: none;
@@ -102,7 +107,6 @@
 .mdmFooter .mdmCopyright {
 	padding-right: 15px !important;
 }
-
 
 /**
  * MDM tile
@@ -235,6 +239,10 @@
 	margin-top: 15px;
 	border-top: 1px solid #dddddd;
 	border-bottom: 1px solid #dddddd;
+}
+
+.mdmFilterBar section {
+	background-color: #F3F3F3 !important;
 }
 
 .mdmHiddenComboBox {

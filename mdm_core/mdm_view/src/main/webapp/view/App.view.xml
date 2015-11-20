@@ -2,7 +2,7 @@
 	xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout">
 
 	<App>
-		<Page id="main" title="SolveIT" class="sapUiContentPadding">
+		<Page id="main" title="SolveIT" style="background-color:#FCFCFC" class="sapUiContentPadding">
 			<!-- Header -->
 			<customHeader>
 				<Bar class="mdmHeader">
@@ -26,8 +26,7 @@
 
 			<!-- Content -->
 			<content>
-				<NavContainer id="navContainer" width="100%"
-					class="navContainerControl" />
+				<NavContainer id="navContainer" width="100%" />
 			</content>
 
 			<!-- Footer -->
